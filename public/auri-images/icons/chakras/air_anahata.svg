@@ -1,0 +1,22 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke="white" stroke-width="2">
+    <!-- Petals -->
+    <path d="M50,15 Q55,35 50,55 Q45,35 50,15" transform="rotate(0, 50, 50)"/>
+    <path d="M50,15 Q55,35 50,55 Q45,35 50,15" transform="rotate(30, 50, 50)"/>
+    <path d="M50,15 Q55,35 50,55 Q45,35 50,15" transform="rotate(60, 50, 50)"/>
+    <path d="M50,15 Q55,35 50,55 Q45,35 50,15" transform="rotate(90, 50, 50)"/>
+    <path d="M50,15 Q55,35 50,55 Q45,35 50,15" transform="rotate(120, 50, 50)"/>
+    <path d="M50,15 Q55,35 50,55 Q45,35 50,15" transform="rotate(150, 50, 50)"/>
+    <path d="M50,15 Q55,35 50,55 Q45,35 50,15" transform="rotate(180, 50, 50)"/>
+    <path d="M50,15 Q55,35 50,55 Q45,35 50,15" transform="rotate(210, 50, 50)"/>
+    <path d="M50,15 Q55,35 50,55 Q45,35 50,15" transform="rotate(240, 50, 50)"/>
+    <path d="M50,15 Q55,35 50,55 Q45,35 50,15" transform="rotate(270, 50, 50)"/>
+    <path d="M50,15 Q55,35 50,55 Q45,35 50,15" transform="rotate(300, 50, 50)"/>
+    <path d="M50,15 Q55,35 50,55 Q45,35 50,15" transform="rotate(330, 50, 50)"/>
+    <!-- Star Hexagram -->
+    <path d="M50,38 L60,55 L40,55 Z" />
+    <path d="M50,55 L40,38 L60,38 Z" />
+    <!-- Center Point -->
+    <circle cx="50" cy="46.5" r="1" fill="white"/>
+  </g>
+</svg>

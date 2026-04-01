@@ -1,0 +1,270 @@
+/* Divine Process Flow Section - Dark Mode */
+.divine-flow-section {
+    padding: 100px 0;
+    /* Rich dark gradient to match benefits section */
+    background: linear-gradient(135deg, #111 0%, #222 50%, #111 100%);
+    background-size: 400% 400%;
+    animation: darkGradientAnim 15s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Reusing animation from benefits */
+@keyframes darkGradientAnim {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Background floating elements */
+.divine-flow-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: url('../images/pattern_bg.png');
+    /* Assuming a subtle pattern exists */
+    opacity: 0.05;
+    /* Slightly increased for dark mode */
+    pointer-events: none;
+    animation: rotateBg 120s linear infinite;
+}
+
+@keyframes rotateBg {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Update text colors for dark mode */
+.divine-flow-section .section-title {
+    color: #fff !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.divine-flow-section .section-subtitle {
+    color: #ddd !important;
+}
+
+.divine-flow-section .title-decoration-line {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+}
+
+.process-flow-container {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-top: 50px;
+    position: relative;
+}
+
+.process-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+    position: relative;
+}
+
+/* Connecting Line - Brighter for Dark Mode */
+.process-row::after {
+    content: '';
+    position: absolute;
+    top: 50px;
+    /* Center of the circle icon */
+    left: 10%;
+    /* Start after first item */
+    right: 10%;
+    /* End before last item */
+    height: 2px;
+    background: linear-gradient(90deg,
+            rgba(194, 24, 91, 0.1) 0%,
+            rgba(194, 24, 91, 0.8) 50%,
+            rgba(194, 24, 91, 0.1) 100%);
+    z-index: 0;
+    box-shadow: 0 0 10px rgba(194, 24, 91, 0.4);
+    /* Glow effect */
+}
+
+.process-step {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    transition: transform 0.4s ease;
+}
+
+.process-step:hover {
+    transform: translateY(-10px);
+}
+
+/* Updated Icon Box for Dark Mode */
+.step-icon-box {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 25px;
+    background: var(--icon-gradient);
+    /* Pink Gradient */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+}
+.step-icon-box i {
+    display: flex;
+}
+
+/* Golden Orbit Animation - More visible */
+.step-icon-box::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    animation: spinOrbit 4s linear infinite paused;
+    box-shadow: 0 0 15px rgba(194, 24, 91, 0.4);
+}
+
+.process-step:hover .step-icon-box::before {
+    opacity: 1;
+    animation-play-state: running;
+}
+
+.process-step:hover .step-icon-box {
+    box-shadow: 0 0 30px rgba(194, 24, 91, 0.3);
+    border-color: #fff;
+    background: #333;
+}
+
+@keyframes spinOrbit {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Icons */
+.step-icon {
+    font-size: 32px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;   /* Important fix */
+}
+
+
+.process-step:hover .step-icon {
+    transform: scale(1.1);
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+/* Step Number Badge */
+.step-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #2a2a2a;
+    /* Match container bg */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Text Colors */
+.step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    /* White title */
+    margin-bottom: 10px;
+    font-family: var(--font-heading);
+}
+
+.step-desc {
+    font-size: 14px;
+    color: #aaa;
+    /* Lighter grey for description */
+    line-height: 1.6;
+    padding: 0 10px;
+}
+
+/* Different Layout for Mobile */
+@media (max-width: 991px) {
+    .process-flow-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px 20px;
+    }
+
+    .process-row {
+        display: contents;
+    }
+
+    .process-row::after {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .process-flow-container {
+        gap: 30px 15px;
+    }
+
+    .step-icon-box {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 15px;
+        border-width: 2px;
+    }
+
+    .step-icon {
+        font-size: 20px;
+    }
+
+    .step-title {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .step-desc {
+        font-size: 11px;
+        padding: 0 5px;
+    }
+}

@@ -1,0 +1,250 @@
+/* Premium Benefits Section - Divine Gems */
+.benefits-section {
+    padding: 100px 0;
+    position: relative;
+    /* Dark animated background based on Footer/Navbar colors */
+    background: linear-gradient(135deg, #111 0%, #222 50%, #111 100%);
+    background-size: 400% 400%;
+    animation: darkGradientAnim 15s ease infinite;
+    overflow: hidden;
+}
+
+@keyframes darkGradientAnim {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Background Ornament - Gold Mandala Faint */
+.benefits-bg-ornament {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(194, 24, 91, 0.1) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+    animation: pulseGlow 8s infinite alternate;
+}
+
+/* Override Text Colors for Dark Background */
+.benefits-section .section-title {
+    color: #fff !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.benefits-section .section-subtitle {
+    color: #ddd !important;
+}
+
+.benefits-section .title-decoration-line {
+    border-color: var(--primary-color);
+    /* Ensure lines are pink */
+    background: var(--primary-color);
+}
+
+@keyframes pulseGlow {
+    0% {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+
+    100% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+.premium-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+    margin-top: 50px;
+}
+
+/* 3D Card Effect */
+.divine-benefit-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 25px 15px;
+    text-align: center;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(194, 24, 91, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    /* Stronger shadow for dark bg */
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.divine-benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-color), #a0134a);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease;
+}
+
+.divine-benefit-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 50px rgba(194, 24, 91, 0.2);
+    border-color: rgba(194, 24, 91, 0.4);
+}
+
+.divine-benefit-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* Inner Glow Circle */
+.benefit-icon-box {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: var(--icon-gradient);
+    /* Vibrant pink gradient */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.5s ease;
+    box-shadow: 0 8px 15px rgba(194, 24, 91, 0.2);
+}
+
+.benefit-icon {
+    font-size: 24px;
+    color: #fff;
+    transition: all 0.5s ease;
+}
+
+/* Floating animation for icon */
+@keyframes floatIcon {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.divine-benefit-card:hover .benefit-icon-box {
+    background: var(--primary-color);
+    box-shadow: 0 0 20px rgba(194, 24, 91, 0.4);
+    transform: rotateY(180deg);
+    /* 3D Flip */
+}
+
+/* Fix icon orientation after flip */
+.divine-benefit-card:hover .benefit-icon {
+    color: #fff;
+    transform: rotateY(-180deg) scale(1.2);
+}
+
+.benefit-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+    font-family: var(--font-heading);
+    transition: color 0.3s;
+}
+
+.divine-benefit-card:hover .benefit-title {
+    color: var(--primary-color);
+}
+
+.benefit-desc {
+    font-size: 14px;
+    color: #777;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    height: 0;
+    /* Hidden by default */
+    overflow: hidden;
+}
+
+/* Expand card on hover to show description */
+.divine-benefit-card:hover .benefit-desc {
+    opacity: 1;
+    transform: translateY(0);
+    height: auto;
+    margin-top: 15px;
+}
+
+/* Decorative sparkles */
+.sparkle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, var(--primary-color), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.divine-benefit-card:hover .sparkle {
+    opacity: 1;
+    animation: sparkleAnim 1s infinite;
+}
+
+@media (max-width: 991px) {
+    .premium-benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .premium-benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .divine-benefit-card {
+        padding: 15px 10px;
+    }
+
+    .benefit-icon-box {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 10px;
+    }
+
+    .benefit-icon {
+        font-size: 16px;
+    }
+
+    .benefit-title {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+    
+    .benefit-desc {
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+    .divine-benefit-card:hover {
+        transform: translateY(-2px);
+    }
+}
