@@ -2,6 +2,7 @@
 
 @section('page_title', 'Blogs Management')
 
+
 @section('styles')
 <style>
     /* File Upload Styles from Category Page */
