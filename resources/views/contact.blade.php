@@ -15,7 +15,7 @@
     <div class="container">
         <div class="grid-2">
             <div class="contact-info-card">
-                <img src="{{ asset('images/logo_final.png') }}" alt="Bogar Siddha Peedam - Bogar Alchemist LLP" style="width: 150px; display: block; margin: 0 auto 20px auto;">
+                <img src="{{ asset('auri-images/logo.png') }}" alt="Bogar Siddha Peedam - Bogar Alchemist LLP" style="width: 150px; display: block; margin: 0 auto 20px auto;">
                 <h3 class="mt-0" style="font-weight: 700 !important; font-size: 22px !important;">Reach Us</h3>
                 <p style="color: #666; line-height: 1.8;">Share your questions, rituals, or product inquiries and our team will respond shortly.</p>
                 <div class="contact-details mt-4">

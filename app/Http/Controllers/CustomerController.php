@@ -69,21 +69,29 @@ class CustomerController extends Controller
 
     public function updateAddress(Request $request)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
         
         $data = $request->validate([
-            'phone' => ['nullable', 'string', 'max:50'],
+            'phone' => ['required', 'string', 'max:15'],
             'address_line1' => ['required', 'string', 'max:255'],
             'address_line2' => ['nullable', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:100'],
             'state' => ['required', 'string', 'max:100'],
-            'postal_code' => ['required', 'string', 'max:20'],
+            'postal_code' => ['required', 'string', 'max:10'],
             'country' => ['required', 'string', 'max:100'],
         ]);
 
+        // Sync to User table
         $user->update($data);
 
-        return redirect()->route('customer.address')->with('success', 'Address updated successfully.');
+        // Also sync to UserAddress for checkout selection
+        $user->addresses()->updateOrCreate(
+            ['is_default' => true],
+            $data
+        );
+
+        return redirect()->route('customer.address')->with('success', 'Your billing and shipping address has been updated successfully.');
     }
 
     public function accountDetails()

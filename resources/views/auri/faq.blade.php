@@ -5,11 +5,11 @@
 
 @section('content')
     <!-- FAQ Hero -->
-    <section class="faq-hero">
-        <div class="container">
-            <span class="sub-title">How can we help?</span>
-            <h1 class="sec-title">Frequently Asked Questions</h1>
-            <p class="p-text">Find answers to common questions about our products, shipping, and Ayurvedic practices.</p>
+    <section class="faq-hero" style="background-image: linear-gradient(rgba(0, 66, 0, 0.6), rgba(0, 66, 0, 0.6)), url('{{ asset('auri-images/headers/faq_v2.jpg') }}'); background-size: cover; background-position: center; min-height: 300px; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff;">
+        <div class="container hero-inner">
+            <span class="sub-title" style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 10px;">How can we help?</span>
+            <h1 class="sec-title" style="font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1.2;">Frequently Asked Questions</h1>
+            <p class="p-text" style="max-width: 800px; margin: 15px auto 0; opacity: 0.9; font-size: 1.1rem;">Find answers to common questions about our products, shipping, and Ayurvedic practices.</p>
         </div>
     </section>
 

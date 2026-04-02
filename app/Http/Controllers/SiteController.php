@@ -18,7 +18,7 @@ class SiteController extends Controller
         $featuredProducts = Product::active()
             ->featured()
             ->orderByDesc('created_at')
-            ->take(8)
+            ->take(4)
             ->with('category_rel')
             ->get();
 
@@ -38,7 +38,9 @@ class SiteController extends Controller
             ->orderByDesc('created_at')
             ->get();
 
-        return view('auri.home', compact('featuredProducts', 'newArrivals', 'latestBlogs', 'testimonials'));
+        $categories = Category::where('status', 'active')->get();
+
+        return view('auri.home', compact('featuredProducts', 'newArrivals', 'latestBlogs', 'testimonials', 'categories'));
     }
 
     public function about()

@@ -8,7 +8,7 @@
         
         <!-- Header with Gradient -->
         <div style="background: linear-gradient(135deg, #FF9100 0%, #F44336 50%, #D81B60 100%); padding: 40px 20px; text-align: center; color: white;">
-            <img src="{{ $message->embed(public_path('images/logo_final.png')) }}" alt="Navapashanam Logo" style="max-width: 150px; height: auto; margin-bottom: 15px;">
+            <img src="{{ $message->embed(public_path('auri-images/logo.png')) }}" alt="Navapashanam Logo" style="max-width: 150px; height: auto; margin-bottom: 15px;">
             <h1 style="margin: 0; font-size: 24px; font-weight: 600; color: #ffffff;">New Order Alert!</h1>
             <p style="color: rgba(255,255,255,0.9); margin-top: 5px; font-size: 14px;">Order #{{ $order->order_number }}</p>
         </div>

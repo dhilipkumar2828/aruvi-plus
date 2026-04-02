@@ -95,7 +95,7 @@
 
         </div>
 
-        <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px; padding-top: 30px; border-top: 1px solid rgba(194, 24, 91, 0.1);">
+        <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px; padding-top: 30px; border-top: 1px solid rgba(0, 66, 0, 0.1);">
             {{-- <a href="{{ route('admin.coupons') }}" class="admin-btn admin-btn-ghost">Cancel</a> --}}
             <button type="submit" class="admin-btn admin-btn-primary">
                 <i class="fas fa-save"></i> Update Coupon
@@ -116,7 +116,7 @@
     }
     .select2-container--default.select2-container--focus .select2-selection--multiple {
         border-color: var(--primary);
-        box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.1);
+        box-shadow: 0 0 0 4px rgba(0, 66, 0, 0.1);
         outline: none;
     }
     .select2-container--default .select2-selection--multiple .select2-selection__choice {
@@ -130,7 +130,7 @@
         padding: 0 !important;
         height: 32px !important;
         overflow: hidden !important;
-        box-shadow: 0 3px 8px rgba(255, 152, 0, 0.2);
+        box-shadow: 0 3px 8px rgba(0, 66, 0, 0.2);
         position: relative !important;
     }
     .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {

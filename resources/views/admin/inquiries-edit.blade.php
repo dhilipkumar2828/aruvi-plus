@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px; padding-top: 30px; border-top: 1px solid rgba(194, 24, 91, 0.1);">
+        <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px; padding-top: 30px; border-top: 1px solid rgba(0, 66, 0, 0.1);">
             {{-- <a href="{{ route('admin.inquiries') }}" class="admin-btn admin-btn-ghost">Discard Changes</a> --}}
             <button type="submit" class="admin-btn admin-btn-primary">
                 <i class="fas fa-save"></i> Update Inquiry

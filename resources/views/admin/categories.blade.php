@@ -13,8 +13,8 @@
             font-size: 11px !important;
             font-weight: 800 !important;
             background: #fff !important;
-            color: #ff6d00 !important;
-            border: 1px solid #ff6d00 !important;
+            color: var(--primary) !important;
+            border: 1px solid var(--primary) !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -27,14 +27,14 @@
         }
         
         .categories-management-page .admin-btn:hover {
-            background: #ff6d00 !important;
+            background: var(--primary) !important;
             color: #fff !important;
             transform: translateY(-1px) !important;
             box-shadow: 0 4px 12px rgba(255, 109, 0, 0.2) !important;
         }
 
         .categories-management-page .admin-btn-primary {
-            background: linear-gradient(135deg, #ff6d00 0%, #ff9100 100%) !important;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary) 100%) !important;
             border: none !important;
             color: #fff !important;
         }
@@ -78,9 +78,9 @@
             <thead>
                 <tr>
                     <th>S.No</th>
-                    {{-- <th>Image</th> --}}
+                    <th>Image</th>
                     <th>Category Name</th>
-                    {{-- <th>Slug</th> --}}
+                    <th>Slug</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -89,7 +89,7 @@
                 @forelse ($categories as $category)
                     <tr>
                         <td>{{ ($categories->currentPage() - 1) * $categories->perPage() + $loop->iteration }}</td>
-                        {{-- <td>
+                        <td>
                             <div style="width: 40px; height: 40px; border-radius: 8px; overflow: hidden; background: var(--glass); display: flex; align-items: center; justify-content: center; color: var(--primary);">
                                 @if($category->image)
                                     @if(Str::startsWith($category->image, 'uploads/'))
@@ -101,11 +101,11 @@
                                     <i class="fas fa-folder-open"></i>
                                 @endif
                             </div>
-                        </td> --}}
+                        </td>
                         <td class="text-nowrap">
                             <div style="font-weight: 600;">{{ $category->name }}</div>
                         </td>
-                        {{-- <td>{{ $category->slug }}</td> --}}
+                        <td>{{ $category->slug }}</td>
                         <td>
                             @if ($category->status === 'active')
                                 <span class="status-badge status-success">Active</span>
@@ -151,7 +151,7 @@
         </table>
     </div>
 
-    <div style="padding: 20px 30px; border-top: 1px solid rgba(194, 24, 91, 0.05); display: flex; justify-content: space-between; align-items: center;">
+    <div style="padding: 20px 30px; border-top: 1px solid rgba(0, 66, 0, 0.05); display: flex; justify-content: space-between; align-items: center;">
         <div style="color: var(--text-muted); font-size: 14px;">
             Showing {{ $categories->firstItem() ?? 0 }} to {{ $categories->lastItem() ?? 0 }} of {{ $categories->total() }} entries
         </div>

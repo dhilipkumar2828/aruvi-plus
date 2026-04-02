@@ -30,7 +30,7 @@
     <div class="content-card" style="overflow: auto">
         <div class="card-header">
             <h3>Recent Orders</h3>
-            <a href="{{ route('admin.orders') }}" style="color: #D81B60; text-decoration: none; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; transition: all 0.3s;">
+            <a href="{{ route('admin.orders') }}" style="color: var(--secondary); text-decoration: none; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; transition: all 0.3s;">
                 View All <i class="fas fa-chevron-right" style="font-size: 11px;"></i>
             </a>
         </div>
@@ -91,7 +91,7 @@
             </tbody>
             </table>
         </div>
-        <div style="padding: 20px 30px; border-top: 1px solid rgba(194, 24, 91, 0.05); display: flex; justify-content: space-between; align-items: center;">
+        <div style="padding: 20px 30px; border-top: 1px solid rgba(0, 66, 0, 0.05); display: flex; justify-content: space-between; align-items: center;">
             <div style="color: var(--text-muted); font-size: 14px;">
                 Showing {{ $recentOrders->firstItem() }} to {{ $recentOrders->lastItem() }} of {{ $recentOrders->total() }} entries
             </div>

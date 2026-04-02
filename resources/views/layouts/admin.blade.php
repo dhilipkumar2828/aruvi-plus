@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Panel - Bogar Siddha Peedam - Bogar Alchemist LLP</title>
+    <title>Admin Panel - Auvri Plus</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -21,13 +21,13 @@
     
     <!-- Flatpickr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_orange.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_green.css">
     
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logo_final.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('auri-images/logo.png') }}">
     
     <style>
         * {
@@ -35,23 +35,25 @@
         }
         
         :root {
-            --primary: #ff9800;
-            --primary-light: #ffe0b2;
-            --primary-dark: #e65100;
+            --primary: #004200; /* Luxury Green */
+            --primary-light: #e8f5e9;
+            --primary-dark: #004200;
+            --secondary: #d4af37; /* Luxury Gold */
             --dark: #121212;
-            --theme-bg-light: #fff3e0;
-            --theme-yellow-light: #fff9c499;
-            --theme-gradient: linear-gradient(180deg, #fff3e0 0%, #fff8e1 100%);
-            --icon-gradient: linear-gradient(135deg, #FF9100 0%, #FF6D00 50%, #FF3D00 100%);
-            --icon-gradient-hover: linear-gradient(135deg, #FF9100 0%, #FF3D00 100%);
+            --theme-bg-light: #f9f7f2;
+            --theme-yellow-light: rgba(212, 175, 55, 0.05);
+            --theme-gradient: linear-gradient(180deg, #f9f7f2 0%, #f1ede2 100%);
+            --icon-gradient: linear-gradient(135deg, #004200 0%, #006400 50%, #004200 100%);
+            --icon-gradient-hover: linear-gradient(135deg, #006400 0%, #004200 100%);
             --text-dark: #333;
             --text-muted: #6b6f7a;
             --card-bg: #fff;
             --card-border: #e0e0e0;
-            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            --card-shadow: 0 10px 25px rgba(0, 66, 0, 0.05);
             --card-shadow-soft: 0 5px 15px rgba(0, 0, 0, 0.03);
             --text-gold: #d4af37;
             --gold-gradient: linear-gradient(135deg, #d4af37, #f9d976);
+            --luxury-green-soft: rgba(0, 66, 0, 0.05);
             --glass: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
@@ -60,7 +62,7 @@
             margin: 0;
             font-family: 'Outfit', sans-serif;
             color: var(--text-dark);
-            background: #f4f6f9; /* Clean neutral background */
+            background: #f8faf8; /* Subtle green-tinted neutral */
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -150,12 +152,13 @@
             width: 25px;
             margin-right: 15px;
             font-size: 18px;
-            color: var(--primary-dark);
+            color: var(--primary);
+            pointer-events: none;
         }
 
         .menu-link:hover, .menu-link.active {
             color: var(--primary);
-            background: rgba(255, 152, 0, 0.08);
+            background: var(--luxury-green-soft);
             border-left-color: var(--primary);
         }
 
@@ -186,7 +189,7 @@
             list-style: none;
             padding: 0;
             margin: 0;
-            background: rgba(255, 152, 0, 0.02);
+            background: var(--luxury-green-soft);
             display: none;
         }
 
@@ -207,19 +210,21 @@
 
         .submenu-link:hover, .submenu-link.active {
             color: var(--primary);
-            background: rgba(255, 152, 0, 0.05);
+            background: var(--luxury-green-soft);
         }
 
         .submenu-link i {
             font-size: 10px;
             margin-right: 10px;
-            color: #ff9800;
+            color: var(--primary);
+            pointer-events: none;
         }
 
         .menu-link .arrow {
             margin-left: auto;
             font-size: 12px;
             transition: transform 0.3s ease;
+            pointer-events: none;
         }
 
         .has-submenu.open .menu-link .arrow {
@@ -267,9 +272,10 @@
 
         .page-title h1 {
             margin: 0;
-            font-size: 28px;
-            font-weight: 600;
-            color: var(--primary-dark);
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
             text-shadow: none;
         }
 
@@ -384,8 +390,10 @@
 
         .card-header h3 {
             margin: 0;
-            font-size: 20px;
-            color: var(--primary-dark);
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
         }
 
         @media (max-width: 576px) {
@@ -425,7 +433,7 @@
         }
 
         .admin-table thead tr {
-            background: linear-gradient(90deg, #ff9800, #c2185b);
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
             color: #ffffff;
             border-radius: 8px; /* Tries to round row if browser supports */
         }
@@ -939,7 +947,7 @@
             background: var(--primary);
             color: #fff;
             border-color: var(--primary);
-            box-shadow: 0 4px 12px rgba(194, 24, 91, 0.2);
+            box-shadow: 0 4px 12px var(--luxury-green-soft);
         }
 
         .page-item.disabled .page-link {
@@ -967,7 +975,7 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: rgba(194, 24, 91, 0.03);
+            background: var(--beige-light);
             border-radius: 10px;
         }
 
@@ -1015,7 +1023,7 @@
         }
         
         #toast-container > .toast-success { 
-            background: linear-gradient(135deg, #FF9100 0%, #F44336 50%, #D81B60 100%) !important;
+            background: linear-gradient(135deg, var(--primary) 0%, #006400 50%, var(--primary-dark) 100%) !important;
         }
         #toast-container > .toast-error { 
             background: linear-gradient(135deg, #FF5252 0%, #D32F2F 100%) !important;
@@ -1024,7 +1032,7 @@
             background: linear-gradient(135deg, #448AFF 0%, #1976D2 100%) !important;
         }
         #toast-container > .toast-warning { 
-            background: linear-gradient(135deg, #FFC107 0%, #FFA000 100%) !important;
+            background: linear-gradient(135deg, var(--secondary) 0%, #B8860B 100%) !important;
         }
         
         #toast-container > .toast i {
@@ -1069,7 +1077,7 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <a href="{{ route('admin.dashboard') }}" class="sidebar-brand">
-                    <img src="{{ asset('images/logo_final.png') }}" alt="Bogar Siddha Peedam - Bogar Alchemist LLP" class="sidebar-logo">
+                    <img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus" class="sidebar-logo">
                 </a>
             </div>
             <ul class="sidebar-menu">
@@ -1081,7 +1089,7 @@
                 </li>
                 <li class="menu-item has-submenu {{ Route::is('admin.categories*') || Route::is('admin.products*') || Route::is('admin.shipping_info*') ? 'open' : '' }}">
                     <a href="javascript:void(0)" class="menu-link {{ Route::is('admin.categories*') || Route::is('admin.products*') || Route::is('admin.shipping_info*') ? 'active' : '' }}">
-                        <i class="fas fa-gem"></i>
+                        <i class="fas fa-layer-group"></i>
                         <span>Catalogs</span>
                         <i class="fas fa-chevron-right arrow"></i>
                     </a>
@@ -1254,9 +1262,15 @@
                 $(this).removeClass('active');
             });
 
-            $('.has-submenu > .menu-link').on('click', function(e) {
+            // Sidebar Submenu Toggle
+            $(document).on('click', '.has-submenu > .menu-link', function(e) {
                 e.preventDefault();
+                e.stopPropagation(); // Prevent bubbling issues
                 var $parent = $(this).parent();
+                
+                // Close other submenus (Accordion style)
+                $('.has-submenu').not($parent).removeClass('open');
+                
                 $parent.toggleClass('open');
             });
 
@@ -1299,7 +1313,7 @@
                     }
                     .select2-container.active-filter .select2-selection--single {
                         border-color: var(--primary) !important;
-                        background: rgba(255, 152, 0, 0.02) !important;
+                        background: var(--luxury-green-soft) !important;
                     }
                     .select2-container--default .select2-selection--single .select2-selection__rendered {
                         line-height: 40px !important;
@@ -1364,7 +1378,7 @@
                     }
                     .header-search-input:focus {
                         border-color: var(--primary) !important;
-                        box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.1) !important;
+                        box-shadow: 0 0 0 4px var(--luxury-green-soft) !important;
                     }
                     .header-search-wrap i {
                         position: absolute;
@@ -1527,13 +1541,13 @@
                     text: `You are about to delete "${itemName}". This action cannot be undone!`,
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#c2185b',
+                    confirmButtonColor: '#004200',
                     cancelButtonColor: '#6b6f7a',
                     confirmButtonText: 'Yes, delete it!',
                     cancelButtonText: 'Cancel',
                     background: '#ffffff',
                     color: '#333',
-                    iconColor: '#ff9800',
+                    iconColor: '#d4af37',
                     borderRadius: '1.25rem',
                     customClass: {
                         popup: 'swal2-premium-popup'
@@ -1611,7 +1625,7 @@
                 
                 // Add a small loading spinner icon if not present
                 if (!$input.parent().find('.search-spinner').length) {
-                    $input.parent().append('<i class="fas fa-circle-notch fa-spin search-spinner" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #ff6d00; display:none; font-size: 14px;"></i>');
+                    $input.parent().append('<i class="fas fa-circle-notch fa-spin search-spinner" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--primary); display:none; font-size: 14px;"></i>');
                     $input.css('padding-right', '40px');
                 }
 

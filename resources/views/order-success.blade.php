@@ -2,37 +2,45 @@
 
 @section('title', 'Order Successful | Bogar Siddha Peedam - Bogar Alchemist LLP')
 
-@section('styles')
+@section('extra_css')
 <style>
+    :root {
+        --primary: #004200;
+        --accent: #d4af37;
+    }
+
     .success-section {
-        padding: 150px 0 80px; /* Increased top padding to clear sticky header */
+        padding: 120px 0 80px;
         text-align: center;
-        background: #fff;
+        background: #f8faf8;
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
     }
 
     .success-container {
-        max-width: 800px; /* Increased card width */
+        max-width: 600px;
         margin: 0 auto;
         padding: 60px 40px;
-        border-radius: 30px;
+        border-radius: 32px;
         background: #ffffff;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.05);
-        border: 1px solid #f0f0f0;
+        box-shadow: 0 20px 60px rgba(0, 66, 0, 0.06);
+        border: 1px solid rgba(0, 66, 0, 0.05);
     }
 
     .success-icon {
         width: 100px;
         height: 100px;
-        background: linear-gradient(135deg, #2ecc71, #27ae60);
-        color: white;
+        background: var(--primary);
+        color: var(--accent);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 50px;
         margin: 0 auto 30px;
-        box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2);
-        animation: scaleUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 20px rgba(0, 66, 0, 0.15);
+        animation: scaleUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     @keyframes scaleUp {
@@ -41,102 +49,102 @@
     }
 
     .success-title {
-        font-family: 'Outfit', sans-serif;
-        font-size: 32px;
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
         font-weight: 800;
-        color: #1a1a1a;
+        color: var(--primary);
         margin-bottom: 15px;
     }
 
     .success-message {
-        font-size: 18px;
-        color: #666;
+        font-size: 1.1rem;
+        color: #555;
         line-height: 1.6;
-        margin-bottom: 30px;
+        margin-bottom: 35px;
     }
 
     .order-info {
-        background: #f9f9f9;
-        padding: 20px;
+        background: #f0f4f0;
+        padding: 25px;
         border-radius: 20px;
         margin-bottom: 40px;
-        border: 1px dashed #ddd;
+        border: 1px dashed rgba(0, 66, 0, 0.2);
     }
 
     .order-info-item {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 10px;
-        font-size: 15px;
-    }
-
-    .order-info-item:last-child {
-        margin-bottom: 0;
+        margin-bottom: 12px;
+        font-size: 1rem;
     }
 
     .order-info-label {
-        color: #888;
+        color: #666;
         font-weight: 500;
     }
 
     .order-info-value {
-        color: #333;
+        color: var(--primary);
         font-weight: 700;
     }
 
-    .btn-continue-shop {
+    .btn-continue-shop, .btn-view-order {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 12px;
-        padding: 16px 35px;
+        min-width: 240px;
+        padding: 18px 25px;
         border-radius: 50px;
-        background: linear-gradient(135deg, #C2185B, #880E4F);
-        color: white;
         font-weight: 700;
         text-decoration: none;
         transition: all 0.3s ease;
-        box-shadow: 0 10px 20px rgba(194, 24, 91, 0.2);
+        box-shadow: 0 10px 20px rgba(0, 66, 0, 0.2);
+        letter-spacing: 1px;
     }
 
     .btn-continue-shop:hover {
         transform: translateY(-3px);
-        box-shadow: 0 15px 30px rgba(194, 24, 91, 0.3);
-        color: white;
+        box-shadow: 0 15px 30px rgba(0, 66, 0, 0.3);
+        background: #003300;
     }
 
     .btn-view-order {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        padding: 16px 35px;
-        border-radius: 50px;
-        background: #f0f0f0;
-        color: #333;
-        font-weight: 700;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        margin-left: 15px;
+        background: #fff;
+        color: var(--primary) !important;
+        border: 1px solid var(--primary);
+        box-shadow: none; /* Secondary action */
     }
 
     .btn-view-order:hover {
-        background: #e0e0e0;
-        color: #000;
+        background: var(--primary);
+        color: #fff !important;
+        box-shadow: 0 10px 20px rgba(0, 66, 0, 0.2);
+    }
+
+    .actions {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 30px;
     }
 
     @media (max-width: 640px) {
-        .success-section {
-            padding: 110px 0 60px; /* Adjusted for mobile header/space */
-        }
         .success-container {
             margin: 0 15px;
             padding: 40px 20px;
         }
         
+        .actions {
+            flex-direction: column;
+            gap: 15px;
+        }
+
         .btn-continue-shop, .btn-view-order {
             display: flex;
             margin: 10px 0;
             width: 100%;
-            justify-content: center;
+            min-width: unset;
         }
 
         .btn-view-order {

@@ -1,212 +1,458 @@
 @extends('layouts.auri')
 
-@section('title', 'Addresses | Bogar Siddha Peedam - Bogar Alchemist LLP')
+@section('title', 'My Address | Auvri Plus')
 
 @section('content')
-<section class="hero-small" style="background-image: url('{{ asset('images/sage_bg_full.jpg') }}'); margin-bottom: 0;">
-    <div class="hero-overlay"></div>
+<div class="luxury-account-page">
     <div class="container">
-        <h1 class="page-title" style="color: #fff; position: relative; z-index: 2;">My Account</h1>
-        <div class="breadcrumb" style="position: relative; z-index: 2;">
-            <a href="{{ url('/') }}" style="color: #eee;">Home</a> <span style="color: #ccc;">/</span> <strong style="color: #fff;">Addresses</strong>
+        <!-- Page Header -->
+        <div class="account-page-header">
+            <h1 class="account-title">My Address</h1>
+            <div class="account-breadcrumb">
+                <a href="{{ route('home') }}">Home</a>
+                <i class="fas fa-chevron-right separator"></i>
+                <a href="{{ route('customer.dashboard') }}">Account</a>
+                <i class="fas fa-chevron-right separator"></i>
+                <span>Address</span>
+            </div>
         </div>
-    </div>
-</section>
 
-<main class="main-content" style="padding-top: 0;">
-
-    <div class="container account-container">
-        <div class="account-layout">
-            <div class="account-sidebar-col">
+        <div class="account-grid">
+            <!-- Sidebar -->
+            <aside class="account-sidebar-col">
                 @include('customer.sidebar')
-            </div>
+            </aside>
+
+            <!-- Main Content -->
             <div class="account-main-content">
-                <h3 class="account-section-title">
-                    <i class="fas fa-map-marked-alt"></i> My Addresses
-                </h3>
-                
-                <p class="mb-3" style="color: #555;">The following addresses will be used on the checkout page by default.</p>
+                <div class="section-card">
+                    <div class="section-header-flex">
+                        <h3 class="premium-section-title">Saved Addresses</h3>
+                        <p class="section-subtitle">Manage your default shipping and billing information.</p>
+                    </div>
 
-                <div class="grid-2">
-                    <div class="address-col">
-                        <div class="account-card">
-                            <h4 class="account-section-title" style="font-size: 18px; border-bottom: none; margin-bottom: 15px;">
-                                <i class="fas fa-file-invoice"></i> Billing Address
-                            </h4>
-                            <div class="address-content" style="color: #555; line-height: 1.6; font-size: 15px;">
+                    <div class="address-cards-grid">
+                        <!-- Billing Address -->
+                        <div class="premium-address-card">
+                            <div class="card-type-badge"><i class="fas fa-file-invoice"></i> Billing</div>
+                            <div class="address-details">
                                 @if($user->address_line1)
-                                    <strong style="color: var(--primary-color); font-size: 16px; display: block; margin-bottom: 5px;">{{ $user->name }}</strong>
-                                    {{ $user->phone }}<br>
-                                    {{ $user->address_line1 }}<br>
-                                    @if($user->address_line2) {{ $user->address_line2 }}<br> @endif
-                                    {{ $user->city }}, {{ $user->state }}<br>
-                                    {{ $user->postal_code }}<br>
-                                    {{ $user->country }}
+                                    <h4 class="recipient-name">{{ $user->name }}</h4>
+                                    <p class="phone-number"><i class="fas fa-phone-alt"></i> {{ $user->phone }}</p>
+                                    <p class="full-address">
+                                        {{ $user->address_line1 }}<br>
+                                        @if($user->address_line2) {{ $user->address_line2 }}<br> @endif
+                                        {{ $user->city }}, {{ $user->state }} - {{ $user->postal_code }}<br>
+                                        {{ $user->country }}
+                                    </p>
                                 @else
-                                    <p>You have not set up this type of address yet.</p>
+                                    <p class="no-address">No billing address set yet.</p>
                                 @endif
                             </div>
-                            <button onclick="document.getElementById('edit-address-form').style.display='block'; window.location.href='#edit-address-form'" class="btn-premium btn-premium-sm" style="margin-top: 15px;">
+                            <button onclick="toggleAddressForm()" class="edit-btn">
+                                <i class="fas fa-edit"></i> Edit Address
+                            </button>
+                        </div>
+
+                        <!-- Shipping Address -->
+                        <div class="premium-address-card">
+                            <div class="card-type-badge"><i class="fas fa-truck"></i> Shipping</div>
+                            <div class="address-details">
+                                @if($user->address_line1)
+                                    <h4 class="recipient-name">{{ $user->name }}</h4>
+                                    <p class="phone-number"><i class="fas fa-phone-alt"></i> {{ $user->phone }}</p>
+                                    <p class="full-address">
+                                        {{ $user->address_line1 }}<br>
+                                        @if($user->address_line2) {{ $user->address_line2 }}<br> @endif
+                                        {{ $user->city }}, {{ $user->state }} - {{ $user->postal_code }}<br>
+                                        {{ $user->country }}
+                                    </p>
+                                @else
+                                    <p class="no-address">No shipping address set yet.</p>
+                                @endif
+                            </div>
+                            <button onclick="toggleAddressForm()" class="edit-btn">
                                 <i class="fas fa-edit"></i> Edit Address
                             </button>
                         </div>
                     </div>
-                    
-                    <div class="address-col">
-                        <div class="account-card">
-                            <h4 class="account-section-title" style="font-size: 18px; border-bottom: none; margin-bottom: 15px;">
-                                <i class="fas fa-truck"></i> Shipping Address
-                            </h4>
-                            <div class="address-content" style="color: #555; line-height: 1.6; font-size: 15px;">
-                                @if($user->address_line1)
-                                    <strong style="color: var(--primary-color); font-size: 16px; display: block; margin-bottom: 5px;">{{ $user->name }}</strong>
-                                    {{ $user->phone }}<br>
-                                    {{ $user->address_line1 }}<br>
-                                    @if($user->address_line2) {{ $user->address_line2 }}<br> @endif
-                                    {{ $user->city }}, {{ $user->state }}<br>
-                                    {{ $user->postal_code }}<br>
-                                    {{ $user->country }}
-                                @else
-                                    <p>You have not set up this type of address yet.</p>
-                                @endif
-                            </div>
-                            <button onclick="document.getElementById('edit-address-form').style.display='block'; window.location.href='#edit-address-form'" class="btn-premium btn-premium-sm" style="margin-top: 15px;">
-                                <i class="fas fa-edit"></i> Edit Address
-                            </button>
-                        </div>
-                    </div>
-                </div>
 
-                <div id="edit-address-form" class="account-card" style="display: none; margin-top: 30px;">
-                    <h3 class="account-section-title">
-                        <i class="fas fa-edit"></i> Edit Address
-                    </h3>
-                    <form action="{{ route('customer.address.update') }}" method="POST" id="addressForm" novalidate>
-                        @csrf
-                        <div class="grid-2">
-                            <div class="form-group">
-                                <label>Phone <span style="color: red;">*</span></label>
-                                <input type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}" class="form-control" placeholder="e.g. 9876543210" required maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                            </div>
-                            <div class="form-group">
-                                <label>Country / Region <span style="color: red;">*</span></label>
-                                <input type="text" name="country" id="country" value="{{ old('country', $user->country) }}" class="form-control" placeholder="India" required oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
-                            </div>
+                    <!-- Edit Address Form (Hidden by default) -->
+                    <div id="edit-address-container" class="edit-address-form-wrapper" style="display: none;">
+                        <div class="form-header">
+                            <h3 class="form-title">Update Address Details</h3>
+                            <button onclick="toggleAddressForm()" class="close-form-btn"><i class="fas fa-times"></i></button>
                         </div>
-                        <div class="form-group">
-                            <label>Street Address <span style="color: red;">*</span></label>
-                            <input type="text" name="address_line1" id="address_line1" value="{{ old('address_line1', $user->address_line1) }}" placeholder="House number and street name" class="form-control mb-3" required>
-                            <input type="text" name="address_line2" id="address_line2" value="{{ old('address_line2', $user->address_line2) }}" placeholder="Apartment, suite, unit, etc. (optional)" class="form-control">
-                        </div>
-                        <div class="grid-3">
-                            <div class="form-group">
-                                <label>Town / City <span style="color: red;">*</span></label>
-                                <input type="text" name="city" id="city" value="{{ old('city', $user->city) }}" class="form-control" required oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
+                        
+                        <form action="{{ route('customer.address.update') }}" method="POST" id="addressForm" class="premium-form">
+                            @csrf
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Phone Number <span>*</span></label>
+                                    <div class="input-with-icon">
+                                        <i class="fas fa-phone"></i>
+                                        <input type="text" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="10-digit mobile number" maxlength="10">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Country <span>*</span></label>
+                                    <div class="input-with-icon">
+                                        <i class="fas fa-globe"></i>
+                                        <input type="text" name="country" value="{{ old('country', $user->country) }}" placeholder="e.g. India">
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="form-group">
-                                <label>State <span style="color: red;">*</span></label>
-                                <input type="text" name="state" id="state" value="{{ old('state', $user->state) }}" class="form-control" required oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
+                                <label>Street Address <span>*</span></label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <input type="text" name="address_line1" value="{{ old('address_line1', $user->address_line1) }}" placeholder="House No, Building Name, Street" class="mb-3">
+                                </div>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-building"></i>
+                                    <input type="text" name="address_line2" value="{{ old('address_line2', $user->address_line2) }}" placeholder="Area, Landmark (Optional)">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>PIN Code <span style="color: red;">*</span></label>
-                                <input type="text" name="postal_code" id="postal_code" value="{{ old('postal_code', $user->postal_code) }}" class="form-control" required maxlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Town / City <span>*</span></label>
+                                    <input type="text" name="city" value="{{ old('city', $user->city) }}" placeholder="City">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>State <span>*</span></label>
+                                    <input type="text" name="state" value="{{ old('state', $user->state) }}" placeholder="State">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>PIN Code <span>*</span></label>
+                                    <input type="text" name="postal_code" value="{{ old('postal_code', $user->postal_code) }}" placeholder="6-digit PIN" maxlength="6">
+                                </div>
                             </div>
-                        </div>
-                        <button type="submit" class="btn-premium" style="margin-top: 20px;">
-                            <i class="fas fa-save"></i> Save Address
-                        </button>
-                    </form>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-luxury-submit">Update My Address</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</main>
-@endsection
+</div>
 
-@section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<style>
+    /* Premium Address Page Styles */
+    :root {
+        --primary: #004200;
+        --accent: #d4af37;
+        --bg-light: #f8faf8;
+        --card-bg: #ffffff;
+        --border-soft: rgba(0, 66, 0, 0.1);
+    }
+
+    .luxury-account-page {
+        background-color: var(--bg-light);
+        padding: 60px 0 100px;
+        min-height: 100vh;
+    }
+
+    .account-page-header {
+        margin-bottom: 40px;
+        border-bottom: 2px solid var(--border-soft);
+        padding-bottom: 20px;
+    }
+
+    .account-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 10px;
+    }
+
+    .account-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .account-breadcrumb a {
+        color: var(--primary);
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .account-breadcrumb .separator {
+        opacity: 0.3;
+        font-size: 0.7rem;
+    }
+
+    /* Grid Layout */
+    .account-grid {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 50px;
+        align-items: start;
+    }
+
+    @media (max-width: 992px) {
+        .account-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+    }
+
+    /* Content Area */
+    .section-card {
+        background: var(--card-bg);
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: 0 10px 40px rgba(0, 66, 0, 0.04);
+        border: 1px solid var(--border-soft);
+    }
+
+    .premium-section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem;
+        color: var(--primary);
+        margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+        color: #555;
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    /* Address Cards */
+    .address-cards-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+
+    .premium-address-card {
+        background: #fdfdfd;
+        border-radius: 20px;
+        padding: 30px;
+        border: 1px solid #eee;
+        position: relative;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .premium-address-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 66, 0, 0.05);
+    }
+
+    .card-type-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--primary);
+        color: var(--accent);
+        padding: 6px 15px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 20px;
+        width: fit-content;
+    }
+
+    .recipient-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.4rem;
+        color: var(--primary);
+        margin-bottom: 12px;
+        font-weight: 700;
+    }
+
+    .phone-number {
+        color: #666;
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .full-address {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #444;
+        margin-bottom: 25px;
+        flex-grow: 1;
+    }
+
+    .edit-btn {
+        width: 100%;
+        padding: 14px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 50px;
+        color: var(--primary);
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .edit-btn:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+    }
+
+    /* Form Styling - FIXED ALIGNMENT */
+    .edit-address-form-wrapper {
+        background: #fcfcfc;
+        border-radius: 24px;
+        padding: 40px;
+        border: 1px solid var(--border-soft);
+        animation: slideDown 0.4s ease;
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+    }
+
+    .form-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        color: var(--primary);
+    }
+
+    .close-form-btn {
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        color: #999;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .close-form-btn:hover { color: #cc0000; }
+
+    .premium-form .form-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 25px;
+        margin-bottom: 25px;
+    }
+
+    .premium-form .form-group {
+        margin-bottom: 25px;
+    }
+
+    .premium-form label {
+        display: block;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 10px;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .premium-form label span { color: #cc0000; }
+
+    /* Input Icon Fix */
+    .input-with-icon {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .input-with-icon i {
+        position: absolute;
+        left: 20px;
+        color: var(--primary);
+        opacity: 0.7;
+        pointer-events: none;
+        font-size: 1.1rem;
+    }
+
+    .premium-form input {
+        width: 100%;
+        padding: 15px 20px 15px 55px !important; /* Force left padding for icon */
+        border-radius: 14px;
+        border: 1px solid #e0e0e0;
+        background: #fff;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        color: #333;
+    }
+
+    /* Regular inputs without icon */
+    .premium-form .form-group:not(.input-with-icon) > input,
+    .premium-form .form-row .form-group > input:not(.input-with-icon input) {
+         padding: 15px 20px;
+    }
+
+    .premium-form input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(0, 66, 0, 0.05);
+        outline: none;
+    }
+
+    .btn-luxury-submit {
+        background: var(--primary);
+        color: var(--accent) !important;
+        width: 100%;
+        padding: 18px;
+        border-radius: 50px;
+        border: none;
+        font-weight: 800;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: 0.4s;
+        box-shadow: 0 10px 25px rgba(0, 66, 0, 0.2);
+    }
+
+    .btn-luxury-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 66, 0, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        .address-cards-grid { grid-template-columns: 1fr; }
+        .premium-form .form-row { grid-template-columns: 1fr; }
+    }
+</style>
+
 <script>
-    $(document).ready(function() {
-        // Add custom method for letters only
-        $.validator.addMethod("lettersOnly", function(value, element) {
-            return this.optional(element) || /^[a-zA-Z\s]+$/.test(value);
-        }, "Please enter only letters.");
-
-        // Add custom method for exactly 10 digits
-        $.validator.addMethod("exactLength", function(value, element, param) {
-            return this.optional(element) || value.length == param;
-        }, "Please enter exactly {0} digits.");
-
-        // Add custom method for numeric only
-        $.validator.addMethod("numericOnly", function(value, element) {
-            return this.optional(element) || /^[0-9]+$/.test(value);
-        }, "Please enter only numbers.");
-
-        $("#addressForm").validate({
-            ignore: [], 
-            rules: {
-                phone: {
-                    required: true,
-                    numericOnly: true,
-                    exactLength: 10
-                },
-                country: {
-                    required: true,
-                    lettersOnly: true
-                },
-                address_line1: {
-                    required: true
-                },
-                city: {
-                    required: true,
-                    lettersOnly: true
-                },
-                state: {
-                    required: true,
-                    lettersOnly: true
-                },
-                postal_code: {
-                    required: true,
-                    numericOnly: true,
-                    exactLength: 6
-                }
-            },
-            messages: {
-                phone: {
-                    required: "Please enter your phone number",
-                    numericOnly: "Phone number must contain only digits",
-                    exactLength: "Phone number must be exactly 10 digits"
-                },
-                country: {
-                    required: "Please enter your country",
-                    lettersOnly: "Country name cannot contain numbers"
-                },
-                address_line1: {
-                    required: "Please enter your street address"
-                },
-                city: {
-                    required: "Please enter your city",
-                    lettersOnly: "City name cannot contain numbers"
-                },
-                state: {
-                    required: "Please enter your state",
-                    lettersOnly: "State name cannot contain numbers"
-                },
-                postal_code: {
-                    required: "Please enter your PIN code",
-                    numericOnly: "PIN code must contain only digits",
-                    exactLength: "PIN code must be exactly 6 digits"
-                }
-            },
-            errorElement: "div",
-            errorPlacement: function(error, element) {
-                error.css({"color": "#d32f2f", "font-size": "13px", "margin-top": "6px", "font-weight": "400", "display": "block", "text-align": "left"});
-                error.insertAfter(element);
-            },
-            submitHandler: function(form) {
-                form.submit();
-            }
-        });
-    });
+function toggleAddressForm() {
+    const form = document.getElementById('edit-address-container');
+    if (form.style.display === 'none') {
+        form.style.display = 'block';
+        setTimeout(() => {
+            form.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    } else {
+        form.style.display = 'none';
+    }
+}
 </script>
 @endsection

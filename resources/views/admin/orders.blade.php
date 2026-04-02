@@ -13,8 +13,8 @@
             font-size: 11px !important;
             font-weight: 800 !important;
             background: #fff !important;
-            color: #ff6d00 !important;
-            border: 1px solid #ff6d00 !important;
+            color: var(--primary) !important;
+            border: 1px solid var(--primary) !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -27,7 +27,7 @@
         }
         
         .orders-management-page .admin-btn:hover {
-            background: #ff6d00 !important;
+            background: var(--primary) !important;
             color: #fff !important;
             transform: translateY(-1px) !important;
             box-shadow: 0 4px 12px rgba(255, 109, 0, 0.2) !important;
@@ -178,7 +178,7 @@
     </table>
     </div>
 
-    <div style="padding: 20px 30px; border-top: 1px solid rgba(194, 24, 91, 0.05); display: flex; justify-content: space-between; align-items: center;">
+    <div style="padding: 20px 30px; border-top: 1px solid rgba(0, 66, 0, 0.05); display: flex; justify-content: space-between; align-items: center;">
         <div style="color: var(--text-muted); font-size: 14px;">
             Showing {{ $orders->firstItem() ?? 0 }} to {{ $orders->lastItem() ?? 0 }} of {{ $orders->total() }} entries
         </div>

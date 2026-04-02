@@ -15,7 +15,7 @@
         }
 
         .shipping-management-page .admin-table thead tr {
-            background: linear-gradient(135deg, #ff6d00 0%, #ffb200 100%) !important;
+            background: linear-gradient(135deg, var(--primary) 0%, #ffb200 100%) !important;
         }
 
         .shipping-management-page .admin-table th {
@@ -69,7 +69,7 @@
         }
 
         .shipping-management-page .admin-input:focus {
-            border-color: #ff6d00 !important;
+            border-color: var(--primary) !important;
             box-shadow: 0 0 0 4px rgba(255, 109, 0, 0.15) !important;
             outline: none !important;
             transform: translateY(-1px);
@@ -92,8 +92,8 @@
             font-size: 11px !important;
             font-weight: 800 !important;
             background: #fff !important;
-            color: #ff6d00 !important;
-            border: 1.5px solid #ff6d00 !important;
+            color: var(--primary) !important;
+            border: 1.5px solid var(--primary) !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -105,14 +105,14 @@
         }
 
         .shipping-management-page .admin-btn:hover {
-            background: #ff6d00 !important;
+            background: var(--primary) !important;
             color: #fff !important;
             transform: translateY(-2px) !important;
             box-shadow: 0 6px 15px rgba(255, 109, 0, 0.2) !important;
         }
 
         .shipping-management-page .admin-btn-primary {
-            background: linear-gradient(135deg, #ff6d00 0%, #ff9100 100%) !important;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary) 100%) !important;
             border: none !important;
             color: #fff !important;
         }
@@ -176,7 +176,7 @@
             </table>
         </div>
 
-        <div style="padding: 30px; border-top: 1px solid rgba(194, 24, 91, 0.05); text-align: right;">
+        <div style="padding: 30px; border-top: 1px solid rgba(0, 66, 0, 0.05); text-align: right;">
             <button type="submit" class="admin-btn admin-btn-primary">
                 <i class="fas fa-save"></i> Save Changes
             </button>

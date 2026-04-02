@@ -16,6 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <!-- Auri Styles -->
     <link rel="stylesheet" href="{{ asset('auri-style.css') }}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     @yield('extra_css')
 </head>
 <body>
@@ -39,15 +41,32 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="header-icons">
-                @auth
-                    <a href="{{ route('customer.dashboard') }}"><i class="far fa-user"></i></a>
-                @else
-                    <a href="{{ route('login') }}"><i class="far fa-user"></i></a>
-                @endauth
-                <a href="{{ route('cart.index') }}" class="cart-widget">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">{{ session('cart') ? array_sum(array_column(session('cart'), 'quantity')) : 0 }}</span>
+
+                <a href="{{ route('wishlist.index') }}" class="wishlist-widget" style="color: #fff; position: relative; margin-right: 15px;">
+                    <i class="far fa-heart" style="font-size: 1.2rem;"></i>
+                    <span class="wishlist-count" style="position: absolute; top: -8px; right: -8px; background: #d4af37; color: #000; font-size: 0.7rem; font-weight: 700; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        {{ Auth::check() ? App\Models\Wishlist::where('user_id', Auth::id())->count() : 0 }}
+                    </span>
                 </a>
+                <a href="{{ route('cart.index') }}" class="cart-widget" style="position: relative;">
+                    <i class="fas fa-shopping-cart" style="font-size: 1.2rem;"></i>
+                    <span class="cart-count" style="position: absolute; top: -8px; right: -8px; background: #d4af37; color: #000; font-size: 0.7rem; font-weight: 700; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        {{ session('cart') ? array_sum(array_column(session('cart'), 'quantity')) : 0 }}
+                    </span>
+                </a>
+                <div class="auth-box" style="display: flex; align-items: center; gap: 15px; margin-left: 10px; font-size: 0.95rem; font-weight: 500;">
+                    @auth
+                        <a href="{{ route('customer.dashboard') }}" style="color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                            <i class="far fa-user-circle" style="font-size: 1.2rem;"></i>
+                            <span>{{ Auth::user()->name }}</span>
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" style="color: #fff; text-decoration: none;">Login</a>
+                        <span style="color: rgba(255,255,255,0.4);">|</span>
+                        <a href="{{ route('register') }}" style="color: #fff; text-decoration: none;">Register</a>
+                    @endauth
+                </div>
+                
             </div>
         </div>
     </header>
@@ -138,6 +157,11 @@
         </div>
     </div>
 
+    <!-- Core Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <!-- Auri Scripts -->
     <script src="{{ asset('auri-script.js') }}"></script>
     <script>
@@ -177,6 +201,59 @@
         document.querySelectorAll('section, .sense-card, .radial-container, .dosha-strip, .about-split').forEach(el => {
             el.classList.add('reveal-on-scroll');
             observer.observe(el);
+        });
+    </script>
+    <!-- Toastr & jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000"
+        };
+
+        // Global Wishlist AJAX
+        $(document).on('submit', '.wishlist-overlay-form', function(e) {
+            e.preventDefault();
+            const $form = $(this);
+            const $btn = $form.find('button');
+            const url = $form.attr('action');
+            const data = $form.serialize();
+
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: data,
+                success: function(response) {
+                    if (response.status === 'success') {
+                        toastr.success(response.message);
+                        
+                        // Update Wishlist Count Badge Instantly
+                        const $countBadge = $('.wishlist-count');
+                        let currentCount = parseInt($countBadge.text()) || 0;
+
+                        if (response.action === 'added') {
+                            $btn.find('i').removeClass('far').addClass('fas').css('color', '#d4145a');
+                            $countBadge.text(currentCount + 1);
+                        } else {
+                            $btn.find('i').removeClass('fas').addClass('far').css('color', 'var(--primary)');
+                            $countBadge.text(Math.max(0, currentCount - 1));
+                        }
+                    } else {
+                        toastr.info(response.message);
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.status === 401) {
+                        toastr.warning('Please login to manage your wishlist.');
+                        setTimeout(() => window.location.href = "{{ route('login') }}", 1500);
+                    } else {
+                        toastr.error('Something went wrong. Please try again.');
+                    }
+                }
+            });
         });
     </script>
     @yield('extra_js')

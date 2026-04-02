@@ -83,7 +83,7 @@
     .field input:focus {
         outline: none;
         border-color: var(--primary);
-        box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.1);
+        box-shadow: 0 0 0 4px rgba(0, 66, 0, 0.1);
     }
 
     .field input[readonly] {
@@ -140,8 +140,8 @@
     }
 
     .upload-btn {
-        border: 1px solid #ff9800;
-        color: #ff9800;
+        border: 1px solid var(--primary);
+        color: var(--primary);
         background-color: #fff;
         padding: 10px 25px;
         border-radius: 50px;
@@ -149,11 +149,11 @@
         font-weight: 700;
         cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(255, 152, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 66, 0, 0.1);
     }
 
     .upload-btn:hover {
-        background-color: #ff9800;
+        background-color: var(--primary);
         color: #fff;
         transform: translateY(-2px);
     }
@@ -198,11 +198,11 @@
     }
 
     .tab-btn.active {
-        color: #ff9800;
+        color: var(--primary);
     }
 
     .tab-btn.active i {
-        color: #ff9800;
+        color: var(--primary);
     }
 
     .tab-btn.active::after {
@@ -212,7 +212,7 @@
         left: 0;
         right: 0;
         height: 3px;
-        background: #ff9800;
+        background: var(--primary);
         border-radius: 10px 10px 0 0;
     }
 
@@ -390,7 +390,7 @@
                         <label for="password">New Password</label>
                         <div style="position: relative;">
                             <input type="password" id="password" name="password" required placeholder="Minimum 8 characters" style="padding-right: 45px;">
-                            <i class="fas fa-eye toggle-pass" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #ff9800; opacity: 0.6;" data-target="password"></i>
+                            <i class="fas fa-eye toggle-pass" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--primary); opacity: 0.6;" data-target="password"></i>
                         </div>
                         @error('password') <div class="error-msg">{{ $message }}</div> @enderror
                     </div>
@@ -399,12 +399,12 @@
                         <label for="password_confirmation">Confirm New Password</label>
                         <div style="position: relative;">
                             <input type="password" id="password_confirmation" name="password_confirmation" required placeholder="Confirm your new password" style="padding-right: 45px;">
-                            <i class="fas fa-eye toggle-pass" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #ff9800; opacity: 0.6;" data-target="password_confirmation"></i>
+                            <i class="fas fa-eye toggle-pass" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--primary); opacity: 0.6;" data-target="password_confirmation"></i>
                         </div>
                     </div>
 
                     <div style="margin-top: 10px; padding: 12px; background: #fff8e1; border-radius: 12px; font-size: 12px; color: #666; display: flex; gap: 10px; align-items: flex-start;">
-                        <i class="fas fa-info-circle" style="color: #ff9800; margin-top: 2px;"></i>
+                        <i class="fas fa-info-circle" style="color: var(--primary); margin-top: 2px;"></i>
                         <span>Passwords must be at least 8 characters long and match the confirmation.</span>
                     </div>
                 </section>

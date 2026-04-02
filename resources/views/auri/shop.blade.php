@@ -5,11 +5,11 @@
 
 @section('content')
     <!-- Shop Hero -->
-    <section class="shop-hero">
-        <div class="container hero-inner" style="text-align: center;">
-            <span class="sub-title">Our Collection</span>
-            <h1 class="sec-title">Authentic Ayurvedic Solutions</h1>
-            <p class="p-text" style="max-width: 800px; margin: 0 auto;">Cared for by nature, crafted with wisdom. Explore our full range of herbal remedies designed for your holistic well-being.</p>
+    <section class="shop-hero" style="background-image: linear-gradient(rgba(0, 66, 0, 0.6), rgba(0, 66, 0, 0.6)), url('{{ asset('auri-images/headers/shop_v2.jpg') }}'); background-size: cover; background-position: center; min-height: 350px; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; margin-bottom: 30px;">
+        <div class="container hero-inner">
+            <span class="sub-title" style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 10px;">Our Collection</span>
+            <h1 class="sec-title" style="font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1.2;">Authentic Ayurvedic Solutions</h1>
+            <p class="p-text" style="max-width: 800px; margin: 15px auto 0; opacity: 0.9;">Cared for by nature, crafted with wisdom. Explore our full range of herbal remedies designed for your holistic well-being.</p>
         </div>
     </section>
 
@@ -29,14 +29,14 @@
                     <option value="low-high" {{ ($selectedSort ?? '') == 'low-high' ? 'selected' : '' }}>Price: Low to High</option>
                     <option value="high-low" {{ ($selectedSort ?? '') == 'high-low' ? 'selected' : '' }}>Price: High to Low</option>
                 </select>
-                @if(isset($categories) && $categories->count())
+                {{-- @if(isset($categories) && $categories->count())
                     <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                         <a href="{{ route('shop') }}" class="filter-pill {{ !isset($category) ? 'active' : '' }}">All</a>
                         @foreach($categories as $cat)
                             <a href="{{ route('category.show', $cat->slug) }}" class="filter-pill {{ isset($category) && $category->id == $cat->id ? 'active' : '' }}">{{ $cat->name }}</a>
                         @endforeach
                     </div>
-                @endif
+                @endif --}}
             </form>
         </div>
     </section>
@@ -61,12 +61,25 @@
                                 <img src="https://via.placeholder.com/300?text={{ urlencode($product->name) }}" alt="{{ $product->name }}">
                             @endif
                         </a>
+                        
+                        <!-- Wishlist Overlay -->
+                        @php
+                            $isInWishlist = Auth::check() && Auth::user()->wishlist->contains('product_id', $product->id);
+                        @endphp
+                        <form action="{{ route('wishlist.toggle') }}" method="POST" class="wishlist-overlay-form" style="position: absolute; top: 15px; right: 15px; z-index: 5;">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <button type="submit" style="width: 40px; height: 40px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; color: {{ $isInWishlist ? '#d4145a' : 'var(--primary)' }}; transition: all 0.3s ease;">
+                                <i class="{{ $isInWishlist ? 'fas' : 'far' }} fa-heart"></i>
+                            </button>
+                        </form>
+
                         <a href="{{ route('product.show', $product->slug) }}" class="quick-view-btn">Quick View</a>
                     </div>
                     <div class="p-info">
                         <div class="p-rating">
                             @for($i = 1; $i <= 5; $i++)
-                                @if($i <= round($product->rating ?? 5))★@else☆@endif
+                                <i class="{{ $i <= round($product->rating ?? 5) ? 'fas' : 'far' }} fa-star" style="color: #ffd700; font-size: 0.8rem;"></i>
                             @endfor
                         </div>
                         <h4 class="p-title">{{ $product->name }}</h4>
@@ -79,7 +92,7 @@
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="add-btn"><i class="fas fa-plus"></i></button>
+                                <button type="submit" class="add-btn" title="Add to Cart"><i class="fas fa-plus"></i></button>
                             </form>
                         </div>
                     </div>
@@ -90,8 +103,7 @@
                     <p style="font-size: 1.2rem;">No products available yet.</p>
                     <a href="{{ route('home') }}" class="btn btn-primary" style="margin-top: 20px;">Back to Home</a>
                 </div>
-                @endforelse
-            </div>
+                @endforelse</div>
         </div>
     </section>
 @endsection

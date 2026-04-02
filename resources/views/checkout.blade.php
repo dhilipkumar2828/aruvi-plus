@@ -2,46 +2,236 @@
 
 @section('title', 'Secure Checkout | Bogar Siddha Peedam - Bogar Alchemist LLP')
 
-@section('styles')
-    <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/checkout.css') }}">
+@section('extra_css')
     <style>
+        :root {
+            --primary: #004200;
+            --accent: #d4af37;
+            --bg-light: #f8faf8;
+            --border: rgba(0, 66, 0, 0.1);
+        }
+
+        .checkout-page-wrapper {
+            background-color: var(--bg-light);
+            padding-bottom: 80px;
+            min-height: 100vh;
+        }
+
+        /* Hero Banner */
+        .checkout-hero {
+            background: linear-gradient(rgba(0, 66, 0, 0.75), rgba(0, 66, 0, 0.75)), url('{{ asset('auri-images/headers/shop_v2.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0 50px;
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .checkout-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--accent) !important;
+            margin-bottom: 10px;
+        }
+
+        /* Layout Grid */
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 992px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cards */
+        .checkout-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0, 66, 0, 0.04);
+            border: 1px solid var(--border);
+        }
+
+        .checkout-title {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .checkout-title i {
+            color: var(--accent);
+        }
+
+        /* Form Controls */
+        .form-label {
+            display: block;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 14px;
+            border: 1px solid #e0e0e0;
+            background: #fdfdfd;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(0, 66, 0, 0.05);
+        }
+
+        .form-control:disabled {
+            background: #f5f5f5;
+            color: #888;
+            cursor: not-allowed;
+        }
+
+        .form-group-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .three-col {
+            grid-template-columns: 1fr 1.5fr 1fr;
+        }
+
+        @media (max-width: 576px) {
+            .form-group-grid, .three-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Checkbox Fix */
+        .custom-checkbox-wrapper {
+            background: #fff9fc;
+            border: 1px dashed #e91e63;
+            padding: 15px 20px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .custom-checkbox-wrapper:hover {
+            background: #fff0f6;
+        }
+
+        /* Order Summary Mini */
+        .summary-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 35px;
+            border: 1px solid var(--border);
+            position: sticky;
+            top: 100px;
+            box-shadow: 0 15px 50px rgba(0, 66, 0, 0.06);
+        }
+
+        .checkout-item-row {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .summary-total {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px dashed #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        /* Complete Order Button */
         .btn-complete-order {
             width: 100%;
-            padding: 18px 10px;
-            border-radius: 18px;
-            font-size: 16px;
+            background: var(--primary);
+            color: white !important;
+            padding: 20px;
+            border-radius: 50px;
             font-weight: 800;
-            letter-spacing: 0.5px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            white-space: nowrap;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 66, 0, 0.25);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             margin-top: 30px;
+            text-transform: uppercase;
+        }
+
+        .btn-complete-order:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 66, 0, 0.35);
+            background: #003300;
         }
     </style>
 @endsection
 
 @section('content')
-    <!-- Page Title / Hero -->
-    <section class="hero-small" style="background-image: url('{{ asset('images/hero_bg.jpg') }}');">
-        <div class="hero-overlay"></div>
+<div class="checkout-page-wrapper">
+    <!-- Hero Banner -->
+    <div class="checkout-hero">
         <div class="container">
-            <h1>Checkout</h1>
-            <p>Complete your purchase and begin your spiritual path.</p>
+            <h1>Secure Checkout</h1>
+            <p>Your journey towards wellness is just one step away from completion.</p>
         </div>
-    </section>
+    </div>
 
-    <section class="checkout-section">
-        <div class="checkout-container">
-
-            <div class="checkout-layout">
-                <!-- Delivery Information -->
-                <div class="checkout-card">
-                    <h3 class="checkout-title">
-                        <i class="fas fa-shipping-fast"></i> Delivery Information
-                    </h3>
+    <div class="container">
+        <div class="checkout-grid">
+            <!-- Left: Shipping Info -->
+            <div class="checkout-card">
+                <h3 class="checkout-title">
+                    <i class="fas fa-truck-loading"></i> Shipping Details
+                </h3>
 
                     @if ($errors->any())
                         <div
@@ -68,15 +258,68 @@
                             </div>
                         </div>
 
-                        <div
-                            style="margin: 5px 0 20px 0; background: #fdf2f2; border: 1px dashed #f8bbd0; padding: 12px 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px;">
-                            <input type="checkbox" id="use_stored_address"
-                                style="width: 20px; height: 20px; cursor: pointer; accent-color: #c2185b;">
-                            <label for="use_stored_address"
-                                style="font-size: 14px; font-weight: 700; color: #c2185b; cursor: pointer; margin: 0;">
-                                <i class="fas fa-home"></i> Use my previously stored shipping address
-                            </label>
+                        <!-- Previously Saved Address Section -->
+                        <div class="saved-address-trigger-card" id="savedAddressTrigger" style="background: #fff9fb; border: 1px dashed #e91e63; border-radius: 12px; padding: 18px; margin-bottom: 25px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: space-between; gap: 15px;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="width: 40px; height: 40px; background: rgba(233, 30, 99, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #e91e63;">
+                                    <i class="fas fa-history" style="font-size: 1.1rem;"></i>
+                                </div>
+                                <div>
+                                    <h5 style="margin: 0; font-size: 0.95rem; font-weight: 700; color: var(--primary); letter-spacing: 0.5px;">USE PREVIOUSLY SAVED ADDRESS</h5>
+                                    <p style="margin: 0; font-size: 0.75rem; color: #888;">Select from your stored shipping addresses</p>
+                                </div>
+                            </div>
+                            <div style="background: #e91e63; color: white; padding: 6px 12px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; letter-spacing: 1px;">SELECT</div>
                         </div>
+
+                        <!-- Address Selection Modal -->
+                        <div id="addressSelectionModal" class="auri-custom-modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center;">
+                            <div class="modal-content-auri" style="background: white; border-radius: 20px; width: 90%; max-width: 500px; max-height: 80vh; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.15); animation: modalFadeIn 0.3s ease;">
+                                <div class="modal-header-auri" style="padding: 20px 25px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; background: #fdfdfd;">
+                                    <h4 style="margin: 0; font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.4rem;">Select Shipping Address</h4>
+                                    <span class="close-modal-auri" onclick="toggleAddressModal(false)" style="font-size: 1.5rem; cursor: pointer; color: #999;">&times;</span>
+                                </div>
+                                <div class="modal-body-auri" style="padding: 20px 25px; overflow-y: auto; max-height: 50vh;">
+                                    @if ($addresses->count() > 0)
+                                        <div class="address-options-list" style="display: flex; flex-direction: column; gap: 12px;">
+                                            @foreach ($addresses as $index => $addr)
+                                                <div class="address-card-option" onclick="selectStoredAddress({{ $index }})" 
+                                                     style="border: 1.5px solid #f0f0f0; border-radius: 12px; padding: 15px; cursor: pointer; transition: 0.2s; position: relative; background: #fff;">
+                                                    @if($addr->is_default)
+                                                        <span style="position: absolute; top: 12px; right: 12px; background: var(--primary); color: white; font-size: 9px; font-weight: 800; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.5px;">DEFAULT</span>
+                                                    @endif
+                                                    <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                                        <div style="margin-top: 2px;"><i class="fas fa-map-marker-alt" style="color: #e91e63;"></i></div>
+                                                        <div>
+                                                            <div style="font-weight: 700; color: #333; font-size: 0.95rem; margin-bottom: 4px;">{{ $addr->address_line1 }}</div>
+                                                            <div style="font-size: 0.85rem; color: #666; line-height: 1.5;">
+                                                                {{ $addr->address_line2 ? $addr->address_line2 . ',' : '' }} {{ $addr->city }}, {{ $addr->state }}<br>
+                                                                {{ $addr->postal_code }}, {{ $addr->country }}<br>
+                                                                <span style="color: var(--primary); font-weight: 600;"><i class="fas fa-phone-alt" style="font-size: 0.7rem;"></i> {{ $addr->phone }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <div style="text-align: center; padding: 30px 0;">
+                                            <i class="fas fa-search-location" style="font-size: 3rem; color: #eee; margin-bottom: 15px;"></i>
+                                            <p style="color: #999;">No saved addresses found in your account.</p>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="modal-footer-auri" style="padding: 15px 25px; border-top: 1px solid #f0f0f0; background: #fdfdfd; display: flex; justify-content: flex-end;">
+                                    <button type="button" onclick="toggleAddressModal(false)" style="background: #f5f5f5; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; color: #666; cursor: pointer;">CANCEL</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <style>
+                            .saved-address-trigger-card:hover { border-color: #004200; background: #f0f4f0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transform: translateY(-2px); }
+                            .address-card-option:hover { border-color: #e91e63; background: #fff9fb; transform: scale(1.01); box-shadow: 0 5px 15px rgba(233, 30, 99, 0.08); }
+                            @keyframes modalFadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+                        </style>
 
                         <div class="form-group-grid">
                             <div>
@@ -110,9 +353,52 @@
                                     class="form-control" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
                             </div>
                             <div>
-                                <label class="form-label">State<span style="color: red;">*</span></label>
-                                <input type="text" name="state" id="state" value="{{ old('state') }}" required
-                                    class="form-control" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
+                                <label class="form-label">State <span style="color: red;">*</span></label>
+                                <select name="state" id="state" required class="form-control" style="cursor: pointer; appearance: auto;">
+                                    <option value="" disabled selected>Select State</option>
+                                    <optgroup label="Popular">
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                        <option value="Puducherry">Puducherry</option>
+                                    </optgroup>
+                                    <optgroup label="Other States">
+                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                        <option value="Assam">Assam</option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Chhattisgarh">Chhattisgarh</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Gujarat">Gujarat</option>
+                                        <option value="Haryana">Haryana</option>
+                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                        <option value="Jharkhand">Jharkhand</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Manipur">Manipur</option>
+                                        <option value="Meghalaya">Meghalaya</option>
+                                        <option value="Mizoram">Mizoram</option>
+                                        <option value="Nagaland">Nagaland</option>
+                                        <option value="Odisha">Odisha</option>
+                                        <option value="Punjab">Punjab</option>
+                                        <option value="Rajasthan">Rajasthan</option>
+                                        <option value="Sikkim">Sikkim</option>
+                                        <option value="Telangana">Telangana</option>
+                                        <option value="Tripura">Tripura</option>
+                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                        <option value="Uttarakhand">Uttarakhand</option>
+                                        <option value="West Bengal">West Bengal</option>
+                                    </optgroup>
+                                    <optgroup label="Union Territories">
+                                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                        <option value="Chandigarh">Chandigarh</option>
+                                        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                        <option value="Ladakh">Ladakh</option>
+                                        <option value="Lakshadweep">Lakshadweep</option>
+                                    </optgroup>
+                                </select>
                             </div>
                             <div>
                                 <label class="form-label">Postal Code <span style="color: red;">*</span></label>
@@ -184,7 +470,7 @@
                     </div>
 
                     @if ($coupon)
-                        <div class="applied-coupon" style="padding: 10px 15px; margin: 15px 0;">
+                        {{-- <div class="applied-coupon" style="padding: 10px 15px; margin: 15px 0;">
                             <div class="coupon-info">
                                 <i class="fas fa-tag"></i>
                                 <div>
@@ -192,33 +478,27 @@
                                     <small style="color: #166534;">Coupon Code Applied</small>
                                 </div>
                             </div>
-                        </div>
-                        <div class="summary-row discount">
-                            <span>Coupon Discount</span>
-                            <strong>-{{ format_inr($discount) }}</strong>
-                        </div>
-                    @endif
-
-                    @if ($shipping_charges > 0)
-                        <div class="summary-row">
-                            <span>Shipping Charges</span>
-                            <strong id="summary-shipping-charges">{{ format_inr($shipping_charges) }}</strong>
-                        </div>
-                    @endif
-
-                    @if ($shipping_discount > 0)
+                        </div> --}}
                         <div class="summary-row" style="color: #2e7d32;">
-                            <span>Shipping Discount</span>
-                            <strong id="summary-shipping-discount">-{{ format_inr($shipping_discount) }}</strong>
+                            <span>Coupon Discount</span>
+                            <strong id="summary-coupon-discount">-{{ format_inr($discount) }}</strong>
                         </div>
                     @endif
 
-                    <div class="summary-row">
-                        <span>Shipping Amount</span>
-                        <strong id="summary-shipping-net"
-                            style="color: {{ $shipping_charges - $shipping_discount <= 0 ? '#2e7d32' : '#c2185b' }};">
-                            {{ $shipping_charges - $shipping_discount <= 0 ? 'FREE' : format_inr($shipping_charges - $shipping_discount) }}
-                        </strong>
+                    <div id="shipping-summary-wrapper" style="display: {{ old('state') ? 'block' : 'none' }};">
+                        @if ($shipping_discount > 0)
+                            <div class="summary-row" style="color: #2e7d32;">
+                                <span>Shipping Discount</span>
+                                <strong id="summary-shipping-discount">-{{ format_inr($shipping_discount) }}</strong>
+                            </div>
+                        @endif
+
+                        <div class="summary-row">
+                            <span>Shipping Amount</span>
+                            <strong id="summary-shipping-net" style="color: {{ $shipping_charges - $shipping_discount <= 0 ? '#2e7d32' : '#c2185b' }};">
+                                {{ $shipping_charges - $shipping_discount <= 0 ? 'FREE' : format_inr($shipping_charges - $shipping_discount) }}
+                            </strong>
+                        </div>
                     </div>
 
                     <div class="summary-total">
@@ -236,105 +516,100 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('cart.index') }}"
-                        style="display: block; text-align: center; margin-top: 20px; color: #666; font-size: 14px; font-weight: 600;">
-                        <i class="fas fa-edit"></i> Edit Cart
-                    </a>
+                    <div style="margin-top: 25px; text-align: center;">
+                        <img src="https://checkout.razorpay.com/v1/checkout.js" alt="" style="display:none;">
+                        <div style="display: flex; justify-content: center; gap: 15px; opacity: 0.5;">
+                            <i class="fab fa-cc-visa" style="font-size: 24px;"></i>
+                            <i class="fab fa-cc-mastercard" style="font-size: 24px;"></i>
+                            <i class="fas fa-shield-alt" style="font-size: 20px;"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</div>
 @endsection
 
-@section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+@section('extra_js')    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const checkbox = document.getElementById('use_stored_address');
-
-            // Address data
-            const storedAddresses = @json($addresses);
-
             // Form fields mapping
-            const fields = {
-                phone: document.querySelector('input[name="phone"]'),
-                country: document.querySelector('input[name="country"]'),
-                address_line1: document.querySelector('input[name="address_line1"]'),
-                address_line2: document.querySelector('input[name="address_line2"]'),
-                city: document.querySelector('input[name="city"]'),
-                state: document.querySelector('input[name="state"]'),
-                postal_code: document.querySelector('input[name="postal_code"]')
+            const fieldSelectors = {
+                phone: 'input[name="phone"]',
+                country: 'input[name="country"]',
+                address_line1: 'input[name="address_line1"]',
+                address_line2: 'input[name="address_line2"]',
+                city: 'input[name="city"]',
+                state: 'input[name="state"]',
+                postal_code: 'input[name="postal_code"]'
             };
+
+            const fields = {};
+            for (const key in fieldSelectors) {
+                fields[key] = document.querySelector(fieldSelectors[key]);
+            }
+
+            // Stored Addresses Data
+            const storedAddresses = @json($addresses);
 
             // Update Shipping Summary UI via AJAX
             function updateShippingSummary(state) {
-                if (!state || state.length < 3) return;
+                if (!state || state.length < 3) {
+                    const wrapper = document.getElementById('shipping-summary-wrapper');
+                    if (wrapper) wrapper.style.display = 'none';
+                    
+                    // Reset total to base price (subtotal - discount)
+                    if (document.getElementById('summary-total')) {
+                        const baseTotal = {{ $subtotal - $discount }};
+                        document.getElementById('summary-total').innerText = '₹' + baseTotal.toLocaleString('en-IN');
+                    }
+                    return;
+                }
 
                 fetch("{{ route('cart.shipping.calc') }}", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute(
-                                'content')
+                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                         },
-                        body: JSON.stringify({
-                            state: state
-                        })
+                        body: JSON.stringify({ state: state })
                     })
                     .then(response => response.json())
                     .then(data => {
-                        // Update Summary Elements
-                        // Note: You need to add IDs to your summary elements in the HTML for this to work robustly,
-                        // but for now we might need to rely on existing structure or update HTML too.
-                        // Let's assume we will update the HTML structure below.
+                        const wrapper = document.getElementById('shipping-summary-wrapper');
+                        if (wrapper) wrapper.style.display = 'block';
 
-                        const shippingRow = document.querySelector(
-                            '.summary-row:has(span:contains("Shipping Charges")) strong');
-                        // Better to use IDs. I will update the HTML part as well.
-
-                        // For now, let's just log it. The user wants to avoid refresh.
-                        // Real update needs IDs.
                         if (document.getElementById('summary-shipping-charges'))
-                            document.getElementById('summary-shipping-charges').innerText = data
-                            .formatted_shipping_charges;
+                            document.getElementById('summary-shipping-charges').innerText = data.formatted_shipping_charges;
 
                         if (document.getElementById('summary-shipping-discount'))
-                            document.getElementById('summary-shipping-discount').innerText = data
-                            .formatted_shipping_discount;
+                            document.getElementById('summary-shipping-discount').innerText = data.formatted_shipping_discount;
 
                         if (document.getElementById('summary-shipping-net')) {
-                            document.getElementById('summary-shipping-net').innerText = data
-                                .formatted_shipping_net;
-                            if (data.shipping_net <= 0) {
-                                document.getElementById('summary-shipping-net').style.color = '#2e7d32';
-                            } else {
-                                document.getElementById('summary-shipping-net').style.color = '#c2185b';
-                            }
+                            document.getElementById('summary-shipping-net').innerText = data.formatted_shipping_net;
+                            document.getElementById('summary-shipping-net').style.color = data.shipping_net <= 0 ? '#2e7d32' : '#c2185b';
                         }
 
                         if (document.getElementById('summary-total'))
                             document.getElementById('summary-total').innerText = data.formatted_total;
-
                     })
                     .catch(error => console.error('Error calculating shipping:', error));
             }
 
             window.populateForm = function(address) {
                 for (const key in fields) {
-                    if (fields[key]) {
-                        if (address[key] !== null && address[key] !== undefined) {
-                            fields[key].value = address[key];
-                            // Manually trigger update if state
-                            if (key === 'state') {
-                                updateShippingSummary(address[key]);
-                            }
-
-                            fields[key].style.transition = 'background 0.3s';
-                            fields[key].style.background = '#fff9f0';
-                            setTimeout((el) => {
-                                el.style.background = '#f9f9f9';
-                            }, 1000, fields[key]);
+                    if (fields[key] && (address[key] !== null && address[key] !== undefined)) {
+                        fields[key].value = address[key];
+                        if (key === 'state') {
+                            updateShippingSummary(address[key]);
+                            const wrapper = document.getElementById('shipping-summary-wrapper');
+                            if (wrapper) wrapper.style.display = 'block';
                         }
+
+                        // Flash effect
+                        fields[key].style.background = '#fff9f0';
+                        setTimeout((el) => { el.style.background = '#fff'; }, 1000, fields[key]);
                     }
                 }
                 if (typeof toastr !== 'undefined') {
@@ -342,85 +617,50 @@
                 }
             };
 
-            window.selectAddress = (index) => {
-                window.populateForm(storedAddresses[index]);
-                if (typeof Swal !== 'undefined') {
-                    Swal.close();
-                    // Extra toastr message as requested
-                    // Delay slightly to appear after the popup closes visually
-                    setTimeout(() => {
-                        if (typeof toastr !== 'undefined') {
-                            toastr.success("Address selected successfully!");
-                        }
-                    }, 300);
+            window.toggleAddressModal = function(show) {
+                const modal = document.getElementById('addressSelectionModal');
+                if (modal) {
+                    modal.style.display = show ? 'flex' : 'none';
+                    document.body.style.overflow = show ? 'hidden' : 'auto';
                 }
             };
 
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
+            window.selectStoredAddress = function(index) {
+                const address = storedAddresses[index];
+                if (address) {
+                    window.populateForm(address);
+                    window.toggleAddressModal(false);
+                }
+            };
+
+            const triggerCard = document.getElementById('savedAddressTrigger');
+            if (triggerCard) {
+                triggerCard.addEventListener('click', function() {
                     if (storedAddresses.length === 0) {
                         if (typeof Swal !== 'undefined') {
                             Swal.fire({
                                 title: 'No Saved Addresses',
-                                text: 'You don\'t have any saved shipping addresses yet.',
+                                text: 'You dont have any saved shipping addresses yet.',
                                 icon: 'info',
-                                confirmButtonColor: '#C2185B'
+                                confirmButtonColor: '#004200'
                             });
                         } else {
-                            alert('You don\'t have any saved shipping addresses yet.');
+                            alert('No saved addresses found.');
                         }
-                        this.checked = false;
-                        return;
-                    }
-
-                    if (storedAddresses.length === 1) {
-                        // Auto-set the single address without popup
-                        const addr = storedAddresses[0];
-                        window.populateForm(addr);
-                        // The populateForm function handles the success toastr
+                    } else if (storedAddresses.length === 1) {
+                        window.populateForm(storedAddresses[0]);
                     } else {
-                        // Multiple addresses - show a selection list
-                        let optionsHtml = '';
-                        storedAddresses.forEach((addr, index) => {
-                            optionsHtml += `
-                        <div class="address-option" onclick="window.selectAddress(${index})" style="cursor: pointer; text-align: left; background: #fff; padding: 12px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 10px; transition: all 0.2s;">
-                            <div style="font-weight: 600; color: #c2185b; margin-bottom: 4px;">
-                                ${addr.is_default ? '<span style="font-size: 10px; background: #c2185b; color: #fff; padding: 2px 6px; border-radius: 4px; margin-right: 5px;">DEFAULT</span>' : ''}
-                                Address #${index + 1}
-                            </div>
-                            <div style="font-size: 13px; color: #666;">
-                                ${addr.address_line1}, ${addr.city}<br>
-                                ${addr.phone}
-                            </div>
-                        </div>
-                    `;
-                        });
+                        window.toggleAddressModal(true);
+                    }
+                });
+            }
 
-                        if (typeof Swal !== 'undefined') {
-                            Swal.fire({
-                                title: 'Select a Saved Address',
-                                html: `<div style="max-height: 300px; overflow-y: auto; padding: 5px;">${optionsHtml}</div>`,
-                                showConfirmButton: false,
-                                showCancelButton: true,
-                                cancelButtonText: 'Cancel'
-                            }).then((result) => {
-                                if (result.dismiss) {
-                                    this.checked = false;
-                                }
-                            });
-                        }
-                    }
-                } else {
-                    // Uncheck - Clear fields logic
-                    for (const key in fields) {
-                        if (fields[key]) {
-                            fields[key].value = '';
-                        }
-                    }
-                    if (typeof toastr !== 'undefined') {
-                        toastr.info("<i class='fas fa-eraser'></i> Form cleared.");
-                    }
-                }
+            // Close modal events
+            window.addEventListener('click', function(e) {
+                if (e.target === document.getElementById('addressSelectionModal')) window.toggleAddressModal(false);
+            });
+            window.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') window.toggleAddressModal(false);
             });
 
             // jQuery Validation logic
@@ -500,17 +740,12 @@
                 });
             }
 
-            // Dynamic Shipping Recalculation (AJAX)
+            // Dynamic Shipping Recalculation (AJAX) - Optimized for Dropdown
             const stateInput = document.getElementById('state');
-            let stateTimeout;
-
             if (stateInput) {
-                stateInput.addEventListener('input', function() {
-                    clearTimeout(stateTimeout);
-                    stateTimeout = setTimeout(() => {
-                        const state = this.value;
-                        updateShippingSummary(state);
-                    }, 1000);
+                stateInput.addEventListener('change', function() {
+                    const state = this.value;
+                    updateShippingSummary(state);
                 });
             }
         });

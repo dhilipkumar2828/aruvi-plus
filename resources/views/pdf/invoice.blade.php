@@ -102,7 +102,7 @@
         .total-amount {
             font-size: 16pt;
             font-weight: bold;
-            color: #c2185b;
+            color: #004200;
         }
         .footer {
             margin-top: 30px;
@@ -120,7 +120,7 @@
         <table width="100%">
             <tr>
                 <td width="100">
-                    <img src="{{ public_path('images/logo_final.png') }}" style="max-height: 70px;">
+                    <img src="{{ public_path('auri-images/logo.png') }}" style="max-height: 70px;">
                 </td>
                 <td>
                     <div style="font-size: 8pt; opacity: 0.6; margin-bottom: 2px;">TAX INVOICE</div>
@@ -128,9 +128,9 @@
                     <div style="font-size: 10pt; opacity: 0.8;">#{{ $order->order_number }}</div>
                 </td>
                 <td class="text-right">
-                    <div style="font-size: 16pt; font-weight: bold; color: #fff;">BOGAR SIDDHA PEEDAM - BOGAR ALCHEMIST LLP</div>
-                    <div style="font-size: 8pt; opacity: 0.7;">Mantra for Success</div>
-                    <div style="font-size: 7.5pt; opacity: 0.5; margin-top: 4px;">GSTIN: XXXXXXXXXXXXX</div>
+                    <div style="font-size: 16pt; font-weight: bold; color: #d4af37;">AUVRI PLUS</div>
+                    <div style="font-size: 8pt; opacity: 0.7;">DIVINE ESSENCE OF WELLNESS</div>
+                    <div style="font-size: 7.5pt; opacity: 0.5; margin-top: 4px;">Premium Authentic Siddha Heritage</div>
                 </td>
             </tr>
         </table>
@@ -189,7 +189,7 @@
                             </tr>
                             <tr>
                                 <td class="text-muted" style="padding-top: 5px; border-top: 1px dashed #e2e8f0; font-size: 8.5pt;">Net Total:</td>
-                                <td class="text-right" style="padding-top: 5px; border-top: 1px dashed #e2e8f0; font-weight: bold; color: #c2185b; font-size: 10.5pt;">₹{{ number_format($order->amount, 0) }}</td>
+                                <td class="text-right" style="padding-top: 5px; border-top: 1px dashed #e2e8f0; font-weight: bold; color: #004200; font-size: 10.5pt;">₹{{ number_format($order->amount, 0) }}</td>
                             </tr>
                         </table>
                     </div>
@@ -255,8 +255,8 @@
                 </tr>
                 @endif
                 <tr>
-                    <td class="text-muted">Shipping Amount</td>
-                    <td class="text-right" style="color: #c2185b; font-weight: bold;">₹{{ number_format($order->shipping_amount - $order->shipping_discount, 0) }}</td>
+                    <td class="text-muted">Total Shipping</td>
+                    <td class="text-right" style="color: #004200; font-weight: bold;">₹{{ number_format($order->shipping_amount - $order->shipping_discount, 0) }} @if($order->shipping_amount - $order->shipping_discount <= 0) (FREE) @endif</td>
                 </tr>
                 <tr>
                     <td colspan="2" style="border-top: 1px solid #f1f5f9; padding-top: 10px; margin-top: 5px;"></td>
@@ -281,7 +281,7 @@
                     <td width="30%" class="text-center">
                         <div style="border-bottom: 2px solid #1a1a1a; margin-bottom: 5px; width: 100px; margin-left: auto; margin-right: auto;"></div>
                         <div style="font-weight: bold; font-size: 8.5pt;">Authorized Signatory</div>
-                        <div style="font-size: 6.5pt; color: #94a3b8; text-transform: uppercase;">Bogar Siddha Peedam - Bogar Alchemist LLP</div>
+                        <div style="font-size: 6.5pt; color: #94a3b8; text-transform: uppercase;">Auvri Plus - Premium Wellness</div>
                     </td>
                 </tr>
             </table>

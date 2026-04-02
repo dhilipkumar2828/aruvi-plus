@@ -140,7 +140,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="{{ $message->embed(public_path('images/logo_final.png')) }}" alt="Navapashanam Logo" style="max-width: 150px; height: auto; margin-bottom: 10px;">
+            <img src="{{ $message->embed(public_path('auri-images/logo.png')) }}" alt="Navapashanam Logo" style="max-width: 150px; height: auto; margin-bottom: 10px;">
             <h1>We've Got Your Order!</h1>
             <p style="color: rgba(255,255,255,0.9); margin-top: 5px; font-size: 14px;">Order #{{ $order->order_number }}</p>
         </div>

@@ -38,6 +38,20 @@
                 </div>
                 <div class="main-img-luxury">
                     <img src="{{ $main_img ?: 'https://via.placeholder.com/500?text=' . urlencode($product->name) }}" id="main-product-img-luxury" alt="{{ $product->name }}">
+                    
+                    <div class="wishlist-overlay-badge-detail" style="position: absolute; top: 20px; right: 20px; z-index: 10;">
+                        @php
+                            $isInWishlist = Auth::check() && Auth::user()->wishlist->contains('product_id', $product->id);
+                        @endphp
+                        <form action="{{ route('wishlist.toggle') }}" method="POST" class="wishlist-overlay-form">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <button type="submit" style="width: 50px; height: 50px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15); cursor: pointer; display: flex; align-items: center; justify-content: center; color: {{ $isInWishlist ? '#d4145a' : 'var(--primary)' }}; transition: all 0.3s ease; font-size: 1.4rem;">
+                                <i class="{{ $isInWishlist ? 'fas' : 'far' }} fa-heart"></i>
+                            </button>
+                        </form>
+                    </div>
+                    
                     <div class="zoom-indicator"><i class="fas fa-search-plus"></i></div>
                 </div>
             </div>
@@ -77,26 +91,34 @@
                 </div>
 
                 <div class="luxury-actions">
-                    <form action="{{ route('cart.add') }}" method="POST">
+                    <form action="{{ route('cart.add') }}" method="POST" id="product-form">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-                            <label style="font-weight: 600; color: #555;">Qty:</label>
-                            <div style="display: flex; align-items: center; border: 1px solid #ddd; border-radius: 50px; overflow: hidden;">
-                                <button type="button" onclick="changeQty(-1)" style="padding: 10px 18px; border: none; background: #f5f5f5; cursor: pointer; font-size: 1.1rem;">−</button>
-                                <input type="number" name="quantity" id="qty-input" value="1" min="1" max="{{ $product->stock ?? 99 }}" style="width: 50px; text-align: center; border: none; font-weight: 600; font-size: 1rem;">
-                                <button type="button" onclick="changeQty(1)" style="padding: 10px 18px; border: none; background: #f5f5f5; cursor: pointer; font-size: 1.1rem;">+</button>
+                        
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                            <label style="font-weight: 700; color: var(--primary); text-transform: uppercase; font-size: 12px; letter-spacing: 1px;">Quantity:</label>
+                            <div class="container-qty-stepper">
+                                <button type="button" onclick="changeQty(-1)" class="stepper-btn">−</button>
+                                <input type="number" name="quantity" id="qty-input" value="1" min="1" max="{{ $product->stock ?? 99 }}" readonly>
+                                <button type="button" onclick="changeQty(1)" class="stepper-btn">+</button>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-premium-cart">
-                            <span>ADD TO CART</span>
-                            <i class="fas fa-shopping-bag"></i>
-                        </button>
+
+                        <div class="buy-now-wrapper-premium" style="display: flex; gap: 12px; margin-bottom: 25px;">
+                            <button type="submit" name="action" value="add" class="btn-premium-cart-lx">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>ADD TO CART</span>
+                            </button>
+                            <button type="submit" name="action" value="buy" class="btn-premium-buy-lx">
+                                <i class="fas fa-bolt"></i>
+                                <span>BUY NOW</span>
+                            </button>
+                        </div>
                     </form>
 
-                    <div class="contact-buttons-luxury" style="margin-top: 15px;">
-                        <a href="https://wa.me/919818299669" class="btn-lx-outline"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                        <a href="tel:+919818299669" class="btn-lx-outline"><i class="fas fa-phone-alt"></i> Consultation</a>
+                    <div class="contact-buttons-luxury" style="margin-top: 20px;">
+                        <a href="https://wa.me/919818299669?text=I'm interested in {{ urlencode($product->name) }}" target="_blank" class="btn-lx-outline"><i class="fab fa-whatsapp"></i> WhatsApp Inquiry</a>
+                        <a href="tel:+919818299669" class="btn-lx-outline"><i class="fas fa-phone-alt"></i> Consultation Call</a>
                     </div>
                 </div>
 
@@ -204,6 +226,17 @@
                                 <img src="https://via.placeholder.com/300?text={{ urlencode($related->name) }}" alt="{{ $related->name }}">
                             @endif
                         </a>
+                        <!-- Wishlist Overlay -->
+                        @php
+                            $isRelInWishlist = Auth::check() && Auth::user()->wishlist->contains('product_id', $related->id);
+                        @endphp
+                        <form action="{{ route('wishlist.toggle') }}" method="POST" class="wishlist-overlay-form" style="position: absolute; top: 15px; right: 15px; z-index: 5;">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $related->id }}">
+                            <button type="submit" style="width: 35px; height: 35px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; color: {{ $isRelInWishlist ? '#d4145a' : 'var(--primary)' }}; transition: all 0.3s ease; font-size: 0.9rem;">
+                                <i class="{{ $isRelInWishlist ? 'fas' : 'far' }} fa-heart"></i>
+                            </button>
+                        </form>
                     </div>
                     <div class="p-info">
                         <h4 class="p-title">{{ $related->name }}</h4>
@@ -247,7 +280,9 @@
 
     function changeQty(delta) {
         const input = document.getElementById('qty-input');
-        const newVal = Math.max(1, parseInt(input.value || 1) + delta);
+        const max = parseInt(input.getAttribute('max')) || 99;
+        let newVal = parseInt(input.value || 1) + delta;
+        newVal = Math.max(1, Math.min(max, newVal));
         input.value = newVal;
     }
 </script>
