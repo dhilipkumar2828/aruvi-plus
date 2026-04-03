@@ -647,6 +647,26 @@
             $('#product_slug').val(slug);
         });
 
+        $('#product_sku').on('input', function() {
+            let sku = $(this).val();
+            if (sku.length > 1) {
+                window.checkUnique('products', 'sku', sku, '#product_sku', {{ $product?->id ?? 'null' }});
+            } else {
+                $(this).css('border-color', '');
+                $(this).siblings('.error-msg').hide();
+            }
+        });
+
+        $('#product_slug').on('input', function() {
+            let slug = $(this).val();
+            if (slug.length > 1) {
+                window.checkUnique('products', 'slug', slug, '#product_slug', {{ $product?->id ?? 'null' }});
+            } else {
+                $(this).css('border-color', '');
+                $(this).siblings('.error-msg').hide();
+            }
+        });
+
         // Strict Numeric Input Validation
         $('#product_price, #product_compare, #product_stock, #product_low_stock').on('keypress', function(e) {
             let charCode = (e.which) ? e.which : e.keyCode;

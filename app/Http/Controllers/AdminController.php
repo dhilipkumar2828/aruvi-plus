@@ -19,6 +19,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -1192,5 +1193,28 @@ class AdminController extends Controller
         if (Storage::disk('public')->exists($path)) {
             Storage::disk('public')->delete($path);
         }
+    }
+
+    public function validateUnique(Request $request)
+    {
+        $table = $request->query('table');
+        $column = $request->query('column');
+        $value = $request->query('value');
+        $ignoreId = $request->query('ignore_id');
+
+        $allowedTables = ['categories', 'products', 'blogs', 'users'];
+        if (!in_array($table, $allowedTables)) {
+            return response()->json(['exists' => false]);
+        }
+
+        $query = DB::table($table)->where($column, $value);
+
+        if ($ignoreId) {
+            $query->where('id', '!=', $ignoreId);
+        }
+
+        $exists = $query->exists();
+
+        return response()->json(['exists' => $exists]);
     }
 }

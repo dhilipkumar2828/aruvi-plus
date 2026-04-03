@@ -258,9 +258,9 @@
         <button type="button" class="tab-btn {{ !session('active_tab') || session('active_tab') == 'personal' ? 'active' : '' }}" data-tab="personal">
             <i class="fas fa-user"></i> Personal Info
         </button>
-        <button type="button" class="tab-btn {{ session('active_tab') == 'address' ? 'active' : '' }}" data-tab="address">
+        {{-- <button type="button" class="tab-btn {{ session('active_tab') == 'address' ? 'active' : '' }}" data-tab="address">
             <i class="fas fa-map-marker-alt"></i> Address
-        </button>
+        </button> --}}
         <button type="button" class="tab-btn {{ session('active_tab') == 'security' ? 'active' : '' }}" data-tab="security">
             <i class="fas fa-shield-alt"></i> Security
         </button>
@@ -428,6 +428,51 @@
         $.validator.addMethod("validPhone", function(value, element) {
             return this.optional(element) || /^[0-9+\-\(\) ]+$/.test(value);
         }, "Phone number cannot contain letters");
+        
+        // Real-time format validation
+        $('#name').on('input', function() {
+            let val = $(this).val();
+            let clean = val.replace(/[^A-Za-z\s]/g, '');
+            if (val !== clean) $(this).val(clean);
+        });
+
+        $('#phone').on('input', function() {
+            let val = $(this).val();
+            let clean = val.replace(/\D/g, '');
+            if (clean.length > 10) clean = clean.substring(0, 10);
+            $(this).val(clean);
+            
+            let $el = $(this);
+            let $error = $el.siblings('.error-msg-realtime');
+            if ($error.length === 0) {
+                $error = $('<div class="error-msg-realtime" style="color: #dc3545; font-size: 11px; margin-top: 4px;"></div>');
+                $el.after($error);
+            }
+            if (clean.length > 0 && clean.length < 10) {
+                $error.text('Phone number must be 10 digits').show();
+            } else {
+                $error.hide();
+            }
+        });
+
+        $('#postal_code').on('input', function() {
+            let val = $(this).val();
+            let clean = val.replace(/\D/g, '');
+            if (clean.length > 6) clean = clean.substring(0, 6);
+            $(this).val(clean);
+
+            let $el = $(this);
+            let $error = $el.siblings('.error-msg-realtime');
+            if ($error.length === 0) {
+                $error = $('<div class="error-msg-realtime" style="color: #dc3545; font-size: 11px; margin-top: 4px;"></div>');
+                $el.after($error);
+            }
+            if (clean.length > 0 && clean.length < 6) {
+                $error.text('Postal code must be 6 digits').show();
+            } else {
+                $error.hide();
+            }
+        });
 
         // Validate Personal Info Form
         $("#personalForm").validate({

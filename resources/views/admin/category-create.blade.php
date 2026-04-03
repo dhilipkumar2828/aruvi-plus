@@ -270,6 +270,24 @@
                 .replace(/[^\w ]+/g, '')
                 .replace(/ +/g, '-');
             $('#slug').val(slug);
+
+            // Real-time uniqueness check
+            if (name.length > 1) {
+                window.checkUnique('categories', 'name', name, '#name', {{ $category?->id ?? 'null' }});
+            } else {
+                $(this).css('border-color', '');
+                $(this).siblings('.error-msg').hide();
+            }
+        });
+
+        $('#slug').on('input', function() {
+            let slug = $(this).val();
+            if (slug.length > 1) {
+                window.checkUnique('categories', 'slug', slug, '#slug', {{ $category?->id ?? 'null' }});
+            } else {
+                $(this).css('border-color', '');
+                $(this).siblings('.error-msg').hide();
+            }
         });
 
         // File Input Change Handler with Preview

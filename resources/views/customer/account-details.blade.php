@@ -66,14 +66,14 @@
                                     <div class="form-group col-md-6">
                                         <label>First Name <span>*</span></label>
                                         <div class="input-with-icon no-icon">
-                                            <input type="text" name="first_name" value="{{ old('first_name', explode(' ', $user->name)[0] ?? '') }}" placeholder="Enter first name">
+                                            <input type="text" name="first_name" value="{{ old('first_name', explode(' ', $user->name)[0] ?? '') }}" placeholder="Enter first name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
                                         </div>
                                         @error('first_name') <span class="error-msg">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Last Name</label>
                                         <div class="input-with-icon no-icon">
-                                            <input type="text" name="last_name" value="{{ old('last_name', explode(' ', $user->name)[1] ?? '') }}" placeholder="Enter last name">
+                                            <input type="text" name="last_name" value="{{ old('last_name', explode(' ', $user->name)[1] ?? '') }}" placeholder="Enter last name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
                                         </div>
                                         @error('last_name') <span class="error-msg">{{ $message }}</span> @enderror
                                     </div>
@@ -92,7 +92,7 @@
                                     <label>Phone Number</label>
                                     <div class="input-with-icon">
                                         <i class="fas fa-phone"></i>
-                                        <input type="text" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="10-digit mobile number">
+                                        <input type="text" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="10-digit mobile number" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                     </div>
                                     @error('phone') <span class="error-msg">{{ $message }}</span> @enderror
                                 </div>

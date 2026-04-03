@@ -16,6 +16,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <!-- Auri Styles -->
     <link rel="stylesheet" href="{{ asset('auri-style.css') }}">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('auri-images/logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('auri-images/logo.png') }}" type="image/x-icon">
     <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     @yield('extra_css')
@@ -32,6 +35,7 @@
                     <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
                     <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About Us</a></li>
                     <li><a href="{{ route('shop') }}" class="{{ request()->routeIs('shop') ? 'active' : '' }}">Products</a></li>
+                    <li><a href="{{ route('blogs.index') }}" class="{{ request()->routeIs('blogs.index') ? 'active' : '' }}">Blogs</a></li>
                     <li><a href="{{ route('faq') }}" class="{{ request()->routeIs('faq') ? 'active' : '' }}">FAQ</a></li>
                     <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
                 </ul>
@@ -102,6 +106,7 @@
                     <li><a href="{{ route('home') }}">Home</a></li>
                     <li><a href="{{ route('about') }}">About Us</a></li>
                     <li><a href="{{ route('shop') }}">Shop Now</a></li>
+                    <li><a href="{{ route('blogs.index') }}">Blogs</a></li>
                     <li><a href="{{ route('contact') }}">Contact Us</a></li>
                 </ul>
             </div>
@@ -135,7 +140,10 @@
             </div>
         </div>
         <div class="footer-copy">
-            &copy; {{ date('Y') }} Auvri Plus. All rights reserved.
+            <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <span>&copy; {{ date('Y') }} Auvri Plus. All rights reserved.</span>
+                <a href="{{ route('admin.login') }}" style="color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;">ADMIN LOGIN <i class="fas fa-lock" style="font-size: 0.65rem; margin-left: 5px;"></i></a>
+            </div>
         </div>
     </footer>
 

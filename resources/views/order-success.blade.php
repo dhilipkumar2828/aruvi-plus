@@ -170,11 +170,27 @@
             <div class="order-info">
                 <div class="order-info-item">
                     <span class="order-info-label">Order Number:</span>
-                    <span class="order-info-value">{{ $order->order_number }}</span>
+                    <span class="order-info-value">#{{ $order->order_number }}</span>
                 </div>
                 <div class="order-info-item">
-                    <span class="order-info-label">Order Total:</span>
-                    <span class="order-info-value">{{ format_inr($order->amount) }}</span>
+                    <span class="order-info-label">Items Subtotal:</span>
+                    <span class="order-info-value">{{ format_inr($order->items->sum('line_total')) }}</span>
+                </div>
+                @if($order->discount_amount > 0)
+                <div class="order-info-item" style="color: #2e7d32;">
+                    <span class="order-info-label">Coupon Savings @if($order->coupon_code) ({{ $order->coupon_code }}) @endif:</span>
+                    <span class="order-info-value">-{{ format_inr($order->discount_amount) }}</span>
+                </div>
+                @endif
+                @if($order->shipping_amount > 0)
+                <div class="order-info-item">
+                    <span class="order-info-label">Shipping:</span>
+                    <span class="order-info-value">{{ format_inr($order->shipping_amount - $order->shipping_discount) }}</span>
+                </div>
+                @endif
+                <div class="order-info-item" style="border-top: 1px dashed #ced4ce; padding-top: 10px; margin-top: 10px;">
+                    <span class="order-info-label" style="font-size: 1.2rem; color: var(--primary);">Final Payable:</span>
+                    <span class="order-info-value" style="font-size: 1.2rem;">{{ format_inr($order->amount) }}</span>
                 </div>
                 <div class="order-info-item">
                     <span class="order-info-label">Date:</span>

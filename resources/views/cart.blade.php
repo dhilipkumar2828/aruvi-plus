@@ -445,7 +445,7 @@
 
                         @if($discount > 0)
                         <div class="summary-row" style="color: #2e7d32;">
-                            <span>Coupon Discount</span>
+                            <span>Coupon Discount @if($coupon) ({{ $coupon->code }}) @endif</span>
                             <strong>-₹{{ number_format($discount) }}</strong>
                         </div>
                         @endif
@@ -471,10 +471,10 @@
                                 </form>
                             </div>
                         @else
-                            <form action="{{ route('cart.coupon.apply') }}" method="POST" style="display: flex; gap: 0; background: white; border-radius: 50px; border: 1px solid #e0dfd5; overflow: hidden; padding: 4px;">
+                            <form action="{{ route('cart.coupon.apply') }}" method="POST" style="display: flex; align-items: center; background: white; border-radius: 50px; border: 1px solid #e0dfd5; overflow: hidden; padding: 4px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);">
                                 @csrf
-                                <input type="text" name="code" placeholder="ENTER PROMO CODE" style="flex: 1; padding: 12px 20px; border: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; outline: none;" required>
-                                <button type="submit" style="background: var(--accent); color: white; border: none; padding: 0 25px; border-radius: 50px; font-weight: 800; font-size: 0.75rem; cursor: pointer; transition: all 0.3s ease; height: 44px; display: flex; align-items: center; justify-content: center;">APPLY</button>
+                                <input type="text" name="code" placeholder="ENTER PROMO CODE" style="flex: 1; min-width: 0; padding: 12px 18px; border: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; outline: none; background: transparent;" required>
+                                <button type="submit" style="background: var(--accent); color: white; border: none; padding: 0 30px; border-radius: 50px; font-weight: 800; font-size: 0.75rem; cursor: pointer; transition: all 0.3s ease; height: 44px; display: flex; align-items: center; justify-content: center; min-width: 100px; flex-shrink: 0;">APPLY</button>
                             </form>
                         @endif
                     </div>

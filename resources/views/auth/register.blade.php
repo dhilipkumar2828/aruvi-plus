@@ -171,12 +171,12 @@
                 <p>Join the Bogar Siddha Peedam - Bogar Alchemist LLP community.</p>
             </div>
 
-            @if ($errors->any())
+            {{-- @if ($errors->any())
                 <div class="error-box">
                     <i class="fas fa-exclamation-circle"></i>
                     <span>{{ $errors->first() }}</span>
                 </div>
-            @endif
+            @endif --}}
 
             <form method="POST" action="{{ route('register.submit') }}" id="registerForm" novalidate>
                 @csrf
@@ -184,24 +184,39 @@
                     <label class="form-label">Full Name</label>
                     <div class="input-wrap">
                         <i class="fas fa-user"></i>
-                        <input type="text" name="name" class="form-input" placeholder="Your full name" value="{{ old('name') }}" required autocomplete="name" oninput="this.value = this.value.replace(/[0-9]/g, '')">
+                        <input type="text" name="name" class="form-input" placeholder="Enter your full name" value="{{ old('name') }}" required autocomplete="name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
                     </div>
+                    @error('name')
+                        <div class="field-error" style="color: #dc3545; font-size: 12px; margin-top: 6px; padding-left: 10px; font-weight: 500;">
+                            <i class="fas fa-info-circle"></i> {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Email Address</label>
                     <div class="input-wrap">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" name="email" class="form-input" placeholder="name@example.com" value="{{ old('email') }}" required autocomplete="email">
+                        <input type="email" name="email" class="form-input" placeholder="Enter your email address" value="{{ old('email') }}" required autocomplete="email">
                     </div>
+                    @error('email')
+                        <div class="field-error" style="color: #dc3545; font-size: 12px; margin-top: 6px; padding-left: 10px; font-weight: 500;">
+                            <i class="fas fa-info-circle"></i> {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Phone Number</label>
                     <div class="input-wrap">
                         <i class="fas fa-phone-alt"></i>
-                        <input type="text" name="phone" class="form-input" placeholder="Your phone number" value="{{ old('phone') }}" required autocomplete="tel" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <input type="text" name="phone" id="reg_phone" class="form-input" placeholder="Enter your phone number" value="{{ old('phone') }}" required autocomplete="tel" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
+                    @error('phone')
+                        <div class="field-error" style="color: #dc3545; font-size: 12px; margin-top: 6px; padding-left: 10px; font-weight: 500;">
+                            <i class="fas fa-info-circle"></i> {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="input-row">
@@ -209,18 +224,28 @@
                         <label class="form-label">Password</label>
                         <div class="input-wrap">
                             <i class="fas fa-lock"></i>
-                            <input type="password" name="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="new-password">
+                            <input type="password" name="password" id="password" class="form-input" placeholder="Enter password" required autocomplete="new-password">
                             <i class="fas fa-eye toggle-password" data-target="password" style="position: absolute; right: 18px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--primary-color); opacity: 0.6; z-index: 10;"></i>
                         </div>
+                        @error('password')
+                            <div class="field-error" style="color: #dc3545; font-size: 12px; margin-top: 6px; padding-left: 10px; font-weight: 500;">
+                                <i class="fas fa-info-circle"></i> {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Confirm</label>
                         <div class="input-wrap">
                             <i class="fas fa-shield-alt"></i>
-                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-input" placeholder="••••••••" required autocomplete="new-password">
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-input" placeholder="Confirm password" required autocomplete="new-password">
                             <i class="fas fa-eye toggle-password" data-target="password_confirmation" style="position: absolute; right: 18px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--primary-color); opacity: 0.6; z-index: 10;"></i>
                         </div>
+                        @error('password_confirmation')
+                            <div class="field-error" style="color: #dc3545; font-size: 12px; margin-top: 6px; padding-left: 10px; font-weight: 500;">
+                                <i class="fas fa-info-circle"></i> {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
 
@@ -247,6 +272,10 @@
                     <i class="fas fa-user-plus"></i>
                 </button>
             </form>
+
+            <div class="auth-footer" style="margin-top: 25px; text-align: center; color: #666; font-size: 0.9rem;">
+                Already have an account? <a href="{{ route('login') }}" style="color: var(--primary); font-weight: 700; text-decoration: none; border-bottom: 2px solid rgba(0, 66, 0, 0.1);">Sign In</a>
+            </div>
         </div>
     </div>
 </section>

@@ -141,6 +141,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::post('/profile/personal', [AdminController::class, 'updatePersonalInfo'])->name('admin.profile.personal');
     Route::post('/profile/address', [AdminController::class, 'updateAddress'])->name('admin.profile.address');           
     Route::post('/profile/password', [AdminController::class, 'updatePassword'])->name('admin.profile.password');
+    Route::get('/validate-unique', [AdminController::class, 'validateUnique'])->name('admin.validate.unique');
 });
 
 // Auth Placeholders (If not using Breeze/Jetstream yet)

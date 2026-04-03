@@ -1735,6 +1735,65 @@
 
             // Call it on page load
             initDatePickers();
+
+            // Global Validation Helpers
+            window.checkUnique = function(table, column, value, element, ignoreId = null) {
+                if (!value || value.length < 2) {
+                    $(element).css('border-color', '');
+                    $(element).siblings('.error-msg').remove();
+                    return;
+                }
+                
+                $.ajax({
+                    url: "{{ route('admin.validate.unique') }}",
+                    method: 'GET',
+                    data: {
+                        table: table, column: column, value: value, ignore_id: ignoreId
+                    },
+                    success: function(response) {
+                        let $el = $(element);
+                        let $error = $el.siblings('.error-msg');
+                        if ($error.length === 0) {
+                            $error = $('<p class="error-msg" style="color: #dc3545; font-size: 11px; margin-top: 4px; font-weight: 600;"></p>');
+                            $el.after($error);
+                        }
+
+                        if (response.exists) {
+                            $el.css('border-color', '#dc3545');
+                            $error.text('This ' + column.replace('_', ' ') + ' already exists!').show();
+                        } else {
+                            $el.css('border-color', '');
+                            $error.hide();
+                        }
+                    }
+                });
+            };
+
+            window.validateFormat = function(type, value, element) {
+                let regex;
+                let msg;
+                
+                switch(type) {
+                    case 'name':
+                        regex = /^[A-Za-z\s]+$/;
+                        msg = 'Only alphabets are allowed!';
+                        break;
+                    case 'phone':
+                        regex = /^\d{0,10}$/; // Allow typing up to 10
+                        if (value.length > 10) {
+                            $(element).val(value.substring(0, 10));
+                            return;
+                        }
+                        return; // Logic handled in input event for better UX
+                    case 'zip':
+                        if (value.length > 6) {
+                            $(element).val(value.substring(0, 6));
+                        }
+                        return;
+                    default:
+                        return true;
+                }
+            };
         });
     </script>
     @yield('scripts')

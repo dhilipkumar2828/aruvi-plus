@@ -322,9 +322,18 @@
                         </style>
 
                         <div class="form-group-grid">
+                            <div style="grid-column: span 2;">
+                                <label class="form-label">Full Name (Recipient) <span style="color: red;">*</span></label>
+                                <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}" required
+                                    placeholder="Enter recipient's full name" class="form-control"
+                                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
+                            </div>
+                        </div>
+
+                        <div class="form-group-grid">
                             <div>
                                 <label class="form-label">Phone Number <span style="color: red;">*</span></label>
-                                <input type="text" name="phone" id="phone" value="{{ old('phone') }}" required
+                                <input type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}" required
                                     placeholder="e.g. 9876543210" class="form-control" maxlength="10"
                                     oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                             </div>
@@ -480,7 +489,7 @@
                             </div>
                         </div> --}}
                         <div class="summary-row" style="color: #2e7d32;">
-                            <span>Coupon Discount</span>
+                            <span>Coupon Discount @if($coupon) ({{ $coupon->code }}) @endif</span>
                             <strong id="summary-coupon-discount">-{{ format_inr($discount) }}</strong>
                         </div>
                     @endif
@@ -677,6 +686,11 @@
 
                 $("#checkoutForm").validate({
                     rules: {
+                        name: {
+                            required: true,
+                            lettersOnly: true,
+                            minlength: 2
+                        },
                         phone: {
                             required: true,
                             numericOnly: true,
@@ -692,8 +706,7 @@
                             lettersOnly: true
                         },
                         state: {
-                            required: true,
-                            lettersOnly: true
+                            required: true
                         },
                         postal_code: {
                             required: true,
@@ -702,6 +715,11 @@
                         }
                     },
                     messages: {
+                        name: {
+                            required: "Please enter recipient name",
+                            lettersOnly: "Name should only contain letters",
+                            minlength: "Name must be at least 2 characters"
+                        },
                         phone: {
                             required: "Please enter your phone number",
                             numericOnly: "Phone number should contain only digits",

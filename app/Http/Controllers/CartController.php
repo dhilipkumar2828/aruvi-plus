@@ -254,19 +254,25 @@ class CartController extends Controller
         }
 
         $shipping = $request->validate([
-            'phone' => ['required', 'string', 'max:50'],
+            'name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s]+$/'],
+            'phone' => ['required', 'string', 'regex:/^[0-9]{10}$/'],
             'address_line1' => ['required', 'string', 'max:255'],
             'address_line2' => ['nullable', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:100'],
             'state' => ['required', 'string', 'max:100'],
-            'postal_code' => ['required', 'string', 'max:20'],
+            'postal_code' => ['required', 'string', 'regex:/^[0-9]{6}$/'],
             'country' => ['required', 'string', 'max:100'],
             'notes' => ['nullable', 'string', 'max:500'],
             'save_address' => ['nullable', 'boolean'],
+        ], [
+            'name.regex' => 'Name should only contain alphabets and spaces.',
+            'phone.regex' => 'Phone number must be exactly 10 digits.',
+            'postal_code.regex' => 'Postal code must be exactly 6 digits.',
         ]);
 
         if ($user && $request->boolean('save_address')) {
             $user->addresses()->create([
+                'name' => $shipping['name'],
                 'phone' => $shipping['phone'],
                 'address_line1' => $shipping['address_line1'],
                 'address_line2' => $shipping['address_line2'] ?? null,
@@ -310,7 +316,7 @@ class CartController extends Controller
 
         $order = Order::create([
             'order_number' => $orderNumber,
-            'customer_name' => $user->name,
+            'customer_name' => $shipping['name'],
             'customer_email' => $user->email,
             'phone' => $shipping['phone'],
             'address_line1' => $shipping['address_line1'],

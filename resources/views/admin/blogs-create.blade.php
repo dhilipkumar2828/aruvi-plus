@@ -159,6 +159,23 @@
                 .replace(/[^\w ]+/g, '')
                 .replace(/ +/g, '-');
             $('#slug').val(slug);
+
+            if (name.length > 2) {
+                window.checkUnique('blogs', 'title', name, '#title', {{ isset($blog) ? $blog->id : 'null' }});
+            } else {
+                $(this).css('border-color', '');
+                $(this).siblings('.error-msg').hide();
+            }
+        });
+
+        $('#slug').on('input', function() {
+            let slug = $(this).val();
+            if (slug.length > 1) {
+                window.checkUnique('blogs', 'slug', slug, '#slug', {{ isset($blog) ? $blog->id : 'null' }});
+            } else {
+                $(this).css('border-color', '');
+                $(this).siblings('.error-msg').hide();
+            }
         });
 
         // File Input Change Handler with Preview
