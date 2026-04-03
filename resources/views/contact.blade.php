@@ -1,6 +1,6 @@
 @extends('layouts.auri')
 
-@section('title', 'Contact Us | Bogar Siddha Peedam - Bogar Alchemist LLP')
+@section('title', 'Contact Us | Auvri Plus')
 
 @section('content')
 <section class="hero-small" style="background-image: url('{{ asset('images/hero_bg.jpg') }}');">
@@ -15,7 +15,7 @@
     <div class="container">
         <div class="grid-2">
             <div class="contact-info-card">
-                <img src="{{ asset('auri-images/logo.png') }}" alt="Bogar Siddha Peedam - Bogar Alchemist LLP" style="width: 150px; display: block; margin: 0 auto 20px auto;">
+                <img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus" style="width: 150px; display: block; margin: 0 auto 20px auto;">
                 <h3 class="mt-0" style="font-weight: 700 !important; font-size: 22px !important;">Reach Us</h3>
                 <p style="color: #666; line-height: 1.8;">Share your questions, rituals, or product inquiries and our team will respond shortly.</p>
                 <div class="contact-details mt-4">
@@ -25,7 +25,7 @@
                         
                         // Default Static Data
                         $contactAddress = 'Palani, Tamil Nadu, India - 624601';
-                        $contactEmail = 'contact@bogarpeedam.com';
+                        $contactEmail = 'contact@Auvri Plus.com';
                         $contactPhone = '+91 98765 43210';
 
                         if ($admin) {

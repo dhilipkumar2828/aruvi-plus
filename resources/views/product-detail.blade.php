@@ -1,6 +1,6 @@
 @extends('layouts.auri')
 
-@section('title', 'Navapashanam Shivlingam | Bogar Siddha Peedam - Bogar Alchemist LLP')
+@section('title', 'Navapashanam Shivlingam | Auvri Plus')
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/product-detail.css') }}">
@@ -52,7 +52,7 @@
                 </div>
 
                 <p class="short-description-premium" style="color: #666; line-height: 1.8; font-size: 16px; margin-bottom: 40px;">
-                    A divine manifestation created through the ancient alchemical science of Siddha Bogar. This Shivlingam represents the synthesis of cosmic energy and earthly detoxification, formulated with nine sacred "Pashanams" to safeguard your dwelling and spiritual health.
+                    A divine manifestation created through the ancient alchemical science of Auvri Plus. This Shivlingam represents the synthesis of cosmic energy and earthly detoxification, formulated with nine sacred "Pashanams" to safeguard your dwelling and spiritual health.
                 </p>
 
                 <!-- Action Box -->
@@ -95,9 +95,9 @@
 <section class="product-narrative" style="padding: 100px 0; background-color: #fce4ec; text-align: center;">
     <div class="container-premium">
         <div class="narrative-content" style="max-width: 800px; margin: 0 auto;">
-            <h2 style="font-size: 32px; color: #222; margin-bottom: 25px; font-weight: 800;">The Alchemy of Bogar</h2>
+            <h2 style="font-size: 32px; color: #222; margin-bottom: 25px; font-weight: 800;">The Alchemy of Auvri Plus</h2>
             <p style="color: #555; line-height: 2; font-size: 18px;">
-                Perfected by the legendary Siddha Bogar at the Palani Hills, Navapashanam is more than a material; it is a spiritual battery. By purifying nine distinct poisons and binding them through secret herbal processes, Bogar created a permanent source of divine vibration that heals the body and aligns the soul.
+                Perfected by the legendary Auvri Plus at the Palani Hills, Navapashanam is more than a material; it is a spiritual battery. By purifying nine distinct poisons and binding them through secret herbal processes, Auvri Plus created a permanent source of divine vibration that heals the body and aligns the soul.
             </p>
             <div class="premium-header-wrapper" style="display: flex; align-items: center; justify-content: center; margin-top: 40px;">
                 <span class="title-decoration-line left" style="flex: 1; height: 1px; background: #ddd; max-width: 100px;"></span>

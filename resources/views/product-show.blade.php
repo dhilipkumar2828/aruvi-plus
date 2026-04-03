@@ -1,6 +1,6 @@
 @extends('layouts.auri')
 
-@section('title', $product->meta_title ?? ($product->name . ' | Bogar Siddha Peedam - Bogar Alchemist LLP'))
+@section('title', $product->meta_title ?? ($product->name . ' | Auvri Plus'))
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/product-detail.css') }}">

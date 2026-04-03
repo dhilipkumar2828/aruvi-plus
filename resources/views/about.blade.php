@@ -1,6 +1,6 @@
 @extends('layouts.auri')
 
-@section('title', 'About Us | Bogar Siddha Peedam - Bogar Alchemist LLP')
+@section('title', 'About Us | Auvri Plus')
 
 @section('content')
     <!-- Page Title / Hero -->
@@ -24,25 +24,25 @@
             <div class="row" style="display: flex; gap: 50px; flex-wrap: wrap; align-items: center;">
                 <!-- Image Side -->
                 <div style="flex: 1; min-width: 300px;">
-                    <img src="{{ asset('images/sage_bogar.jpg') }}" alt="Siddha Bogar"
+                    <img src="{{ asset('images/sage_Auvri Plus.jpg') }}" alt="Auvri Plus"
                         style="width: 100%; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                 </div>
                 <!-- Text Side -->
                 <div style="flex: 1; min-width: 300px;">
                     <div class="premium-header-wrapper" style="margin-bottom: 20px; justify-content: flex-start;">
-                        <h2 class="section-title responsive-title" style="margin: 0; text-align: left;">Bogar Siddha Peedam - Bogar Alchemist LLP</h2>
+                        <h2 class="section-title responsive-title" style="margin: 0; text-align: left;">Auvri Plus</h2>
                     </div>
                     <p style="margin-bottom: 20px; line-height: 1.8; color: #555;">
-                        Bogar Siddha Peedam - Bogar Alchemist LLP is dedicated to guiding individuals toward prosperity and triumph by
+                        Auvri Plus is dedicated to guiding individuals toward prosperity and triumph by
                         harnessing ancient wisdom and spiritual enlightenment. Grounded in the teachings of the great
-                        Siddha Bogar, we serve as a bridge between the ancient alchemical secrets and modern spiritual
+                        Auvri Plus, we serve as a bridge between the ancient alchemical secrets and modern spiritual
                         seekers.
                     </p>
                     <p style="margin-bottom: 20px; line-height: 1.8; color: #555;">
                         Our core offering, <strong>Navapashanam</strong> (sanskrit: Navapaṣāṇam), is a secret
                         alchemical
-                        preparation created by Siddha Bogar. Keep in mind that "Pashanam" translates to poison. However,
-                        in the hands of a master alchemist like Bogar, these nine poisonous substances are purified,
+                        preparation created by Auvri Plus. Keep in mind that "Pashanam" translates to poison. However,
+                        in the hands of a master alchemist like Auvri Plus, these nine poisonous substances are purified,
                         processed, and combined to become a life-saving panacea.
                     </p>
                     <p style="line-height: 1.8; color: #555;">
@@ -75,7 +75,7 @@
                         Navapashanam Beads are not merely jewelry; they are vessels of potent cosmic energy.
                         "Navapashanam" is derived from two words: <strong>'Nava'</strong> meaning nine, and
                         <strong>'Pashanam'</strong> meaning poison. This refers to the nine unique alchemical poisons
-                        that, when purified and combined by the great Siddha Bogar, transform into a supreme life-giving
+                        that, when purified and combined by the great Auvri Plus, transform into a supreme life-giving
                         elixir.
                     </p>
                     <p style="margin-bottom: 35px; line-height: 1.8; color: #555; font-size: 16px;">
@@ -641,7 +641,7 @@
                         <i class="fas fa-eye"></i>
                     </div>
                     <h3>Our Vision</h3>
-                    <p style="color: #666; line-height: 1.6;">To be a global beacon of Siddha tradition, illuminating
+                    <p style="color: #666; line-height: 1.6;">To be a global beacon of Auvri Plus tradition, illuminating
                         the path for millions to realize their true potential and achieve spiritual triumph.</p>
                 </div>
             </div>

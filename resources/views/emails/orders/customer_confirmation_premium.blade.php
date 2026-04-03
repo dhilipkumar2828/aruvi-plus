@@ -211,12 +211,12 @@
         </div>
         
         <div class="footer">
-            <p>&copy; {{ date('Y') }} <strong>Navapashanam | Bogar Siddha Peedam</strong>. All Rights Reserved.</p>
+            <p>&copy; {{ date('Y') }} <strong>Navapashanam | Auvri Plus</strong>. All Rights Reserved.</p>
             <p>Palani, Tamil Nadu, India</p>
             <div class="social-links">
                 <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">WhatsApp</a>
             </div>
-            <p style="margin-top: 20px;">If you have any questions, reply to this email or contact us at <a href="mailto:care@bogaralchemist.com" style="color: #F44336;">care@bogaralchemist.com</a></p>
+            <p style="margin-top: 20px;">If you have any questions, reply to this email or contact us at <a href="mailto:care@Auvri Plusalchemist.com" style="color: #F44336;">care@Auvri Plusalchemist.com</a></p>
         </div>
     </div>
 </body>

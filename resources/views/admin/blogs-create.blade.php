@@ -96,7 +96,7 @@
 
             <div class="admin-form-group">
                 <label class="admin-form-label">Author Name <span class="text-danger">*</span></label>
-                <input type="text" name="author" value="{{ old('author', 'Bogar Siddha Peedam - Bogar Alchemist LLP') }}" class="admin-input" required>
+                <input type="text" name="author" value="{{ old('author', 'Auvri Plus') }}" class="admin-input" required>
                 @error('author') <span class="text-danger" style="font-size: 13px;">{{ $message }}</span> @enderror
             </div>
 

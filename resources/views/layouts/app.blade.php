@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Navapashanam | Bogar Siddha Peedam - Bogar Alchemist LLP')</title>
+    <title>@yield('title', 'Navapashanam | Auvri Plus')</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -122,7 +122,7 @@
                 <!-- Left: Logo & Search -->
                 <div class="nav-left">
                     <a href="{{ url('/') }}" class="logo">
-                        <img src="{{ asset('auri-images/logo.png') }}" alt="Bogar Siddha Peedam - Bogar Alchemist LLP">
+                        <img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus">
                     </a>
                 </div>
 
@@ -202,7 +202,7 @@
                 <div class="mobile-nav-header">
                     <a href="{{ url('/') }}" class="logo">
                         <img src="{{ asset('auri-images/logo.png') }}"
-                            alt="Bogar Siddha Peedam - Bogar Alchemist LLP">
+                            alt="Auvri Plus">
                     </a>
                     <button class="close-menu" id="closeMenu">&times;</button>
                 </div>
@@ -241,8 +241,8 @@
             <div class="footer-columns">
                 <div class="footer-col footer-info">
                     <img src="{{ asset('auri-images/logo.png') }}"
-                        alt="Bogar Siddha Peedam - Bogar Alchemist LLP Logo" class="footer-logo">
-                    <p>Bogar Siddha Peedam - Bogar Alchemist LLP is dedicated to guiding individuals toward prosperity
+                        alt="Auvri Plus Logo" class="footer-logo">
+                    <p>Auvri Plus is dedicated to guiding individuals toward prosperity
                         and triumph by harnessing ancient wisdom and spiritual enlightenment.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -307,7 +307,7 @@
 
                             // Default Static Data
                             $contactAddress = 'Palani, Tamil Nadu, India - 624601';
-                            $contactEmail = 'contact@bogarpeedam.com';
+                            $contactEmail = 'contact@Auvri Plus.com';
                             $contactPhone = '+91 98765 43210';
 
                             if ($admin) {
@@ -361,7 +361,7 @@
                         <div class="footer-contact-item">
                             <span class="footer-icon-circle"><i class="fas fa-envelope"></i></span>
                             <span><a href="mailto:{{ $contactEmail }}"
-                                    style="color: inherit; text-decoration: none;">care@bogaralchemist.com</a></span>
+                                    style="color: inherit; text-decoration: none;">care@Auvri Plusalchemist.com</a></span>
                         </div>
                         <div class="footer-contact-item">
                             <span class="footer-icon-circle"><i class="fab fa-whatsapp"></i></span>
@@ -382,7 +382,7 @@
                     <a href="{{ route('terms') }}">Terms of Service</a>
                     <a href="{{ route('privacy') }}">Privacy</a>
                 </div>
-                <p class="footer-copy">&copy; {{ date('Y') }} Bogar Siddha Peedam - Bogar Alchemist LLP. All
+                <p class="footer-copy">&copy; {{ date('Y') }} Auvri Plus. All
                     Rights Reserved.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>

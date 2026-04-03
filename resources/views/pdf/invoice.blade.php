@@ -130,7 +130,7 @@
                 <td class="text-right">
                     <div style="font-size: 16pt; font-weight: bold; color: #d4af37;">AUVRI PLUS</div>
                     <div style="font-size: 8pt; opacity: 0.7;">DIVINE ESSENCE OF WELLNESS</div>
-                    <div style="font-size: 7.5pt; opacity: 0.5; margin-top: 4px;">Premium Authentic Siddha Heritage</div>
+                    <div style="font-size: 7.5pt; opacity: 0.5; margin-top: 4px;">Premium Authentic Auvri Plus Heritage</div>
                 </td>
             </tr>
         </table>

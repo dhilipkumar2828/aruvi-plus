@@ -1,6 +1,6 @@
 @extends('layouts.auri')
 
-@section('title', 'Shop Collections | Bogar Siddha Peedam - Bogar Alchemist LLP')
+@section('title', 'Shop Collections | Auvri Plus')
 
 @section('content')
 <!-- Page Title / Hero -->

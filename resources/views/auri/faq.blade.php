@@ -33,7 +33,7 @@
                         ];
                         @endphp
                         @foreach($faqs as $faq)
-                        <div class="acc-item" onclick="this.classList.toggle('active'); this.querySelector('.fas').classList.toggle('fa-chevron-down'); this.querySelector('.fas').classList.toggle('fa-chevron-up');">
+                        <div class="acc-item" onclick="this.classList.toggle('active')">
                             <div class="acc-head">
                                 {{ $faq['q'] }}
                                 <i class="fas fa-chevron-down"></i>
