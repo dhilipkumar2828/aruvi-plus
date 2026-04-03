@@ -1195,14 +1195,14 @@
                 </div>
                 <a href="{{ route('admin.profile') }}" class="user-profile" style="text-decoration: none; color: inherit;">
                     <div class="user-avatar" style="overflow: hidden;">
-                        @if(Auth::guard('admin')->user()->profile_image)
+                        @if(Auth::guard('admin')->check() && Auth::guard('admin')->user()->profile_image)
                             <img src="{{ asset(Auth::guard('admin')->user()->profile_image) }}" style="width: 100%; height: 100%; object-fit: cover;">
                         @else
                             {{ strtoupper(substr(Auth::guard('admin')->user()->name ?? 'AD', 0, 2)) }}
                         @endif
                     </div>
                     <div class="user-info">
-                        <div style="font-size: 14px; font-weight: 600;">{{ Auth::guard('admin')->user()->name ?? 'Admin User' }}</div>
+                        <div style="font-size: 14px; font-weight: 600;">{{ Auth::guard('admin')->check() ? Auth::guard('admin')->user()->name : 'Admin' }}</div>
                         <div style="font-size: 11px; color: #888;">Administrator</div>
                     </div>
                 </a>
