@@ -21,26 +21,26 @@
                 <div class="contact-form-wrap">
                     <div class="glass-card contact-form-card" style="padding: 40px; background: rgba(255,255,255,0.9); backdrop-filter: blur(15px); border-radius: 30px; border: 1px solid rgba(0,66,0,0.1); box-shadow: 0 20px 60px rgba(0,66,0,0.08);">
                         <h3 style="font-family: var(--font-serif); font-size: 2rem; color: var(--primary); margin-bottom: 30px;">Send us a Message</h3>
-                        <form id="main-contact-form" method="POST" action="{{ route('contact.store') }}" class="premium-form">
+                        <form id="main-contact-form" method="POST" action="{{ route('contact.store') }}" class="premium-form" novalidate>
                             @csrf
                             <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                                 <div class="input-group">
-                                    <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Full Name</label>
+                                    <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Full Name <span style="color: red;">*</span></label>
                                     <input type="text" name="name" placeholder="Your Name" required value="{{ old('name') }}" style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #ddd; background: #fff; font-family: var(--font-main);">
                                     @error('name')<span style="color: red; font-size: 0.8rem;">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="input-group">
-                                    <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Email Address</label>
+                                    <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Email Address <span style="color: red;">*</span></label>
                                     <input type="email" name="email" placeholder="Your Email" required value="{{ old('email') }}" style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #ddd; background: #fff; font-family: var(--font-main);">
                                     @error('email')<span style="color: red; font-size: 0.8rem;">{{ $message }}</span>@enderror
                                 </div>
                             </div>
                             <div class="input-group" style="margin-bottom: 20px;">
-                                <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Subject</label>
-                                <input type="text" name="subject" placeholder="How can we help?" value="{{ old('subject') }}" style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #ddd; background: #fff; font-family: var(--font-main);">
+                                <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Subject <span style="color: red;">*</span></label>
+                                <input type="text" name="subject" placeholder="How can we help?" required value="{{ old('subject') }}" style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #ddd; background: #fff; font-family: var(--font-main);">
                             </div>
                             <div class="input-group" style="margin-bottom: 30px;">
-                                <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Message</label>
+                                <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Message <span style="color: red;">*</span></label>
                                 <textarea rows="5" name="message" placeholder="Tell us more about your inquiry..." required style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #ddd; background: #fff; font-family: var(--font-main);">{{ old('message') }}</textarea>
                                 @error('message')<span style="color: red; font-size: 0.8rem;">{{ $message }}</span>@enderror
                             </div>
@@ -99,4 +99,92 @@
             </div>
         </section>
     </section>
+@endsection
+
+@section('extra_js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<style>
+    .error {
+        color: #d32f2f !important;
+        font-size: 13px !important;
+        margin-top: 5px !important;
+        display: block !important;
+        font-weight: 400 !important;
+        text-align: left !important;
+    }
+    .premium-form input.error, .premium-form textarea.error {
+        border-color: #d32f2f !important;
+        background-color: rgba(211, 47, 47, 0.02) !important;
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        // Add custom method for letters only
+        $.validator.addMethod("lettersOnly", function(value, element) {
+            return this.optional(element) || /^[a-zA-Z\s]+$/.test(value);
+        }, "Please enter only letters.");
+
+        // Add custom method for numeric only
+        $.validator.addMethod("numericOnly", function(value, element) {
+            return this.optional(element) || /^[0-9]+$/.test(value);
+        }, "Please enter only numbers.");
+
+        // Add custom method for valid phone length
+        $.validator.addMethod("phoneLength", function(value, element) {
+            return this.optional(element) || (value.length >= 10 && value.length <= 15);
+        }, "Please enter a valid phone number (10-15 digits).");
+
+        $("#main-contact-form").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 3,
+                    lettersOnly: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                subject: {
+                    required: true,
+                    minlength: 5
+                },
+                message: {
+                    required: true,
+                    minlength: 10
+                }
+            },
+            messages: {
+                name: {
+                    required: "Please enter your name",
+                    minlength: "Name must be at least 3 characters",
+                    lettersOnly: "Name must contain only letters"
+                },
+                email: {
+                    required: "Please enter your email",
+                    email: "Please enter a valid email address"
+                },
+                subject: {
+                    required: "Please enter a subject",
+                    minlength: "Subject must be at least 5 characters"
+                },
+                message: {
+                    required: "Please enter your message",
+                    minlength: "Message must be at least 10 characters"
+                }
+            },
+            errorElement: "span",
+            errorClass: "error",
+            highlight: function(element) {
+                $(element).addClass('error');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('error');
+            },
+            errorPlacement: function(error, element) {
+                error.insertAfter(element);
+            }
+        });
+    });
+</script>
 @endsection

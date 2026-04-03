@@ -78,28 +78,30 @@
                     </div>
 
                     <!-- Edit Address Form (Hidden by default) -->
-                    <div id="edit-address-container" class="edit-address-form-wrapper" style="display: none;">
+                    <div id="edit-address-container" class="edit-address-form-wrapper" style="{{ $errors->any() ? 'display: block;' : 'display: none;' }}">
                         <div class="form-header">
                             <h3 class="form-title">Update Address Details</h3>
                             <button onclick="toggleAddressForm()" class="close-form-btn"><i class="fas fa-times"></i></button>
                         </div>
                         
-                        <form action="{{ route('customer.address.update') }}" method="POST" id="addressForm" class="premium-form">
+                        <form action="{{ route('customer.address.update') }}" method="POST" id="addressForm" class="premium-form" novalidate>
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>Phone Number <span>*</span></label>
                                     <div class="input-with-icon">
                                         <i class="fas fa-phone"></i>
-                                        <input type="text" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="10-digit mobile number" maxlength="10">
+                                        <input type="text" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="10-digit mobile number" maxlength="15" class="@error('phone') is-invalid @enderror">
                                     </div>
+                                    @error('phone') <span class="error-msg">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Country <span>*</span></label>
                                     <div class="input-with-icon">
                                         <i class="fas fa-globe"></i>
-                                        <input type="text" name="country" value="{{ old('country', $user->country) }}" placeholder="e.g. India">
+                                        <input type="text" name="country" value="{{ old('country', $user->country) }}" placeholder="e.g. India" class="@error('country') is-invalid @enderror">
                                     </div>
+                                    @error('country') <span class="error-msg">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
@@ -107,26 +109,31 @@
                                 <label>Street Address <span>*</span></label>
                                 <div class="input-with-icon">
                                     <i class="fas fa-map-marker-alt"></i>
-                                    <input type="text" name="address_line1" value="{{ old('address_line1', $user->address_line1) }}" placeholder="House No, Building Name, Street" class="mb-3">
+                                    <input type="text" name="address_line1" value="{{ old('address_line1', $user->address_line1) }}" placeholder="House No, Building Name, Street" class="mb-3 @error('address_line1') is-invalid @enderror">
                                 </div>
-                                <div class="input-with-icon">
+                                @error('address_line1') <span class="error-msg">{{ $message }}</span> @enderror
+                                <div class="input-with-icon mt-3">
                                     <i class="fas fa-building"></i>
-                                    <input type="text" name="address_line2" value="{{ old('address_line2', $user->address_line2) }}" placeholder="Area, Landmark (Optional)">
+                                    <input type="text" name="address_line2" value="{{ old('address_line2', $user->address_line2) }}" placeholder="Area, Landmark (Optional)" class="@error('address_line2') is-invalid @enderror">
                                 </div>
+                                @error('address_line2') <span class="error-msg">{{ $message }}</span> @enderror
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label>Town / City <span>*</span></label>
-                                    <input type="text" name="city" value="{{ old('city', $user->city) }}" placeholder="City">
+                                    <input type="text" name="city" value="{{ old('city', $user->city) }}" placeholder="City" class="@error('city') is-invalid @enderror">
+                                    @error('city') <span class="error-msg">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>State <span>*</span></label>
-                                    <input type="text" name="state" value="{{ old('state', $user->state) }}" placeholder="State">
+                                    <input type="text" name="state" value="{{ old('state', $user->state) }}" placeholder="State" class="@error('state') is-invalid @enderror">
+                                    @error('state') <span class="error-msg">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>PIN Code <span>*</span></label>
-                                    <input type="text" name="postal_code" value="{{ old('postal_code', $user->postal_code) }}" placeholder="6-digit PIN" maxlength="6">
+                                    <input type="text" name="postal_code" value="{{ old('postal_code', $user->postal_code) }}" placeholder="6-digit PIN" maxlength="10" class="@error('postal_code') is-invalid @enderror">
+                                    @error('postal_code') <span class="error-msg">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
@@ -436,22 +443,122 @@
         box-shadow: 0 15px 35px rgba(0, 66, 0, 0.3);
     }
 
+    .error-msg {
+        color: #d32f2f;
+        font-size: 0.75rem;
+        margin-top: 5px;
+        display: block;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    .premium-form input.is-invalid {
+        border-color: #d32f2f !important;
+        background-color: rgba(211, 47, 47, 0.02) !important;
+    }
+
+    label.error {
+        color: #d32f2f;
+        font-size: 0.75rem;
+        margin-top: 5px;
+        display: block;
+        font-weight: 600;
+        text-transform: none;
+        letter-spacing: 0;
+    }
+
     @media (max-width: 768px) {
         .address-cards-grid { grid-template-columns: 1fr; }
         .premium-form .form-row { grid-template-columns: 1fr; }
     }
 </style>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 <script>
+$(document).ready(function() {
+    @if($errors->any())
+        // No need to call show() here anymore as it's handled by inline CSS,
+        // but we still want to scroll to the form if there are errors.
+        $('html, body').animate({
+            scrollTop: $("#edit-address-container").offset().top - 100
+        }, 500);
+    @endif
+
+    $("#addressForm").validate({
+        rules: {
+            phone: {
+                required: true,
+                minlength: 10,
+                maxlength: 15
+            },
+            country: {
+                required: true,
+                minlength: 2
+            },
+            address_line1: {
+                required: true,
+                minlength: 5
+            },
+            city: {
+                required: true
+            },
+            state: {
+                required: true
+            },
+            postal_code: {
+                required: true,
+                minlength: 5,
+                maxlength: 10
+            }
+        },
+        messages: {
+            phone: {
+                required: "Please enter your phone number",
+                minlength: "Phone number must be at least 10 digits"
+            },
+            country: {
+                required: "Please enter your country"
+            },
+            address_line1: {
+                required: "Please enter your street address"
+            },
+            city: {
+                required: "Please enter your city"
+            },
+            state: {
+                required: "Please enter your state"
+            },
+            postal_code: {
+                required: "Please enter your portal code"
+            }
+        },
+        errorElement: "span",
+        errorClass: "error-msg",
+        highlight: function(element) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element) {
+            $(element).removeClass('is-invalid');
+        },
+        errorPlacement: function(error, element) {
+            if (element.closest('.input-with-icon').length) {
+                error.insertAfter(element.closest('.input-with-icon'));
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+});
+
 function toggleAddressForm() {
     const form = document.getElementById('edit-address-container');
     if (form.style.display === 'none') {
-        form.style.display = 'block';
+        $(form).fadeIn();
         setTimeout(() => {
             form.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+        }, 300);
     } else {
-        form.style.display = 'none';
+        $(form).fadeOut();
     }
 }
 </script>

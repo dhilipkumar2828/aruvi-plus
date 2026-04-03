@@ -71,7 +71,7 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                <form action="{{ route('contact.store') }}" method="POST" class="contact-form">
+                <form action="{{ route('contact.store') }}" method="POST" class="contact-form" novalidate>
                     @csrf
                     <div class="form-group">
                         <input type="text" name="name" placeholder="Your Name" value="{{ old('name') }}" required class="form-control" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
@@ -98,8 +98,21 @@
 </section>
 @endsection
 
-@section('scripts')
+@section('extra_js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<style>
+    .error {
+        color: #d32f2f !important;
+        font-size: 13px !important;
+        margin-top: 5px !important;
+        display: block !important;
+        font-weight: 400 !important;
+        text-align: left !important;
+    }
+    .form-control.error {
+        border-color: #d32f2f !important;
+    }
+</style>
 <script>
     $(document).ready(function() {
         // Add custom method for letters only
@@ -112,10 +125,16 @@
             return this.optional(element) || /^[0-9]+$/.test(value);
         }, "Please enter only numbers.");
 
+        // Add custom method for valid phone length
+        $.validator.addMethod("phoneLength", function(value, element) {
+            return this.optional(element) || (value.length >= 10 && value.length <= 15);
+        }, "Please enter a valid phone number (10-15 digits).");
+
         $(".contact-form").validate({
             rules: {
                 name: {
                     required: true,
+                    minlength: 3,
                     lettersOnly: true
                 },
                 email: {
@@ -124,30 +143,51 @@
                 },
                 phone: {
                     required: true,
-                    numericOnly: true
+                    numericOnly: true,
+                    phoneLength: true
+                },
+                subject: {
+                    required: true,
+                    minlength: 5
                 },
                 message: {
-                    required: false
+                    required: true,
+                    minlength: 10
                 }
             },
             messages: {
                 name: {
                     required: "Please enter your name",
+                    minlength: "Name must be at least 3 characters",
                     lettersOnly: "Name must contain only letters"
                 },
-                email: "Please enter a valid email address",
+                email: {
+                    required: "Please enter your email",
+                    email: "Please enter a valid email address"
+                },
                 phone: {
                     required: "Please enter your phone number",
                     numericOnly: "Phone number must contain only numbers"
+                },
+                subject: {
+                    required: "Please enter a subject",
+                    minlength: "Subject must be at least 5 characters"
+                },
+                message: {
+                    required: "Please enter your message",
+                    minlength: "Message must be at least 10 characters"
                 }
             },
-            errorElement: "div",
-            errorPlacement: function(error, element) {
-                error.css({"color": "#d32f2f", "font-size": "13px", "margin-top": "6px", "font-weight": "400", "display": "block", "text-align": "left"});
-                error.insertAfter(element);
+            errorElement: "span",
+            errorClass: "error",
+            highlight: function(element) {
+                $(element).addClass('error');
             },
-            submitHandler: function(form) {
-                form.submit();
+            unhighlight: function(element) {
+                $(element).removeClass('error');
+            },
+            errorPlacement: function(error, element) {
+                error.insertAfter(element);
             }
         });
     });
