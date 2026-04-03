@@ -32,7 +32,7 @@ class ProductsSeeder extends Seeder
                 'badge_text' => null,
                 'rating' => 5.0,
                 'reviews_count' => 128,
-                'short_description' => 'A unique alchemical creation from nine poisons by Siddhar Bogar. Enshrined in Palani & Poombarai. (Rs. 600/gm).',
+                'short_description' => 'A unique alchemical creation from nine poisons by Auvri Plus. Enshrined in Palani & Poombarai. (Rs. 600/gm).',
                 'description' => 'A revered statue created with ancient Navapashanam alchemy. Crafted to channel divine energy, this Murugan statue is cherished for its spiritual potency and artisan detailing.',
                 'primary_image' => 'auri-images/products/MURUGAN_STATUE.png',
                 'gallery_images' => [
@@ -43,7 +43,7 @@ class ProductsSeeder extends Seeder
                 'material' => 'Navapashanam compound',
                 'origin' => 'Palani Hills',
                 'tags' => 'murugan, statue, temple, handcrafted',
-                'meta_title' => 'Navapasanam Lord Murugan Statue - Bogar Alchemist LLP',
+                'meta_title' => 'Navapasanam Lord Murugan Statue - Auvri Plus',
                 'meta_description' => 'A sacred Murugan statue crafted with Navapashanam blend for spiritual prosperity.',
             ],
             [
@@ -66,7 +66,7 @@ class ProductsSeeder extends Seeder
                 'rating' => 5.0,
                 'reviews_count' => 128,
                 'short_description' => 'Highly fortunate to have in house or business. It can create wonder in life, remove planetary disturbances, and fulfill wishes.',
-                'description' => 'A divine manifestation created through the ancient alchemical science of Siddha Bogar. This Shivlingam represents the synthesis of cosmic energy and earthly detoxification.',
+                'description' => 'A divine manifestation created through the ancient alchemical science of Auvri Plus. This Shivlingam represents the synthesis of cosmic energy and earthly detoxification.',
                 'primary_image' => 'auri-images/products/SHIVALINGAM.png',
                 'gallery_images' => [
                     'auri-images/products/SHIVALINGAM.png',
@@ -77,7 +77,7 @@ class ProductsSeeder extends Seeder
                 'material' => 'Navapashanam compound',
                 'origin' => 'Palani Hills',
                 'tags' => 'shivlingam, statue, sacred',
-                'meta_title' => 'Navapashanam Shivlingam - Bogar Alchemist LLP',
+                'meta_title' => 'Navapashanam Shivlingam - Auvri Plus',
                 'meta_description' => 'A sacred Shivlingam crafted with Navapashanam blend to protect your space.',
             ],
             [
@@ -99,7 +99,7 @@ class ProductsSeeder extends Seeder
                 'badge_text' => 'Trending',
                 'rating' => 5.0,
                 'reviews_count' => 84,
-                'short_description' => 'A powerful spiritual healing bead created by Siddhar Bogar. An alchemical wonder combining nine powerful substances.',
+                'short_description' => 'A powerful spiritual healing bead created by Auvri Plus. An alchemical wonder combining nine powerful substances.',
                 'description' => 'A sacred locket designed for daily spiritual protection. Crafted from Navapashanam blend to amplify positive energy.',
                 'primary_image' => 'auri-images/products/NAVAPASHANAM_LOCKET.png',
                 'gallery_images' => [
@@ -110,7 +110,7 @@ class ProductsSeeder extends Seeder
                 'material' => 'Navapashanam compound',
                 'origin' => 'Palani Hills',
                 'tags' => 'bead, locket, healing',
-                'meta_title' => 'Navapasanam Locket - Bogar Alchemist LLP',
+                'meta_title' => 'Navapasanam Locket - Auvri Plus',
                 'meta_description' => 'A sacred Navapashanam locket for daily protection and spiritual clarity.',
             ],
             [
@@ -143,7 +143,7 @@ class ProductsSeeder extends Seeder
                 'material' => 'Sacred metal alloy',
                 'origin' => 'Chennai',
                 'tags' => 'chain, jewelry, sacred',
-                'meta_title' => 'Sacred Chain - Bogar Alchemist LLP',
+                'meta_title' => 'Sacred Chain - Auvri Plus',
                 'meta_description' => 'Elegant chain crafted to complement Navapashanam lockets.',
             ],
             [
@@ -176,7 +176,7 @@ class ProductsSeeder extends Seeder
                 'material' => 'Navapashanam compound',
                 'origin' => 'Palani Hills',
                 'tags' => 'bracelet, jewelry, protection',
-                'meta_title' => 'Navapashanam Bracelet - Bogar Alchemist LLP',
+                'meta_title' => 'Navapashanam Bracelet - Auvri Plus',
                 'meta_description' => 'Sacred bracelet crafted to amplify spiritual protection.',
             ],
             [
@@ -209,7 +209,7 @@ class ProductsSeeder extends Seeder
                 'material' => 'Navapashanam compound',
                 'origin' => 'Palani Hills',
                 'tags' => 'ring, jewelry, premium',
-                'meta_title' => 'Navapashanam Ring - Bogar Alchemist LLP',
+                'meta_title' => 'Navapashanam Ring - Auvri Plus',
                 'meta_description' => 'Premium Navapashanam ring for spiritual and health benefits.',
             ],
             [
@@ -242,7 +242,7 @@ class ProductsSeeder extends Seeder
                 'material' => 'Navapashanam compound',
                 'origin' => 'Palani Hills',
                 'tags' => 'pyramid, vastu, meditation',
-                'meta_title' => 'Navapashanam Pyramid - Bogar Alchemist LLP',
+                'meta_title' => 'Navapashanam Pyramid - Auvri Plus',
                 'meta_description' => 'Sacred pyramid crafted for meditation and Vastu correction.',
             ],
         ];

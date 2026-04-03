@@ -356,8 +356,8 @@
             <div class="logo-content">
                 <img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus Logo" class="logo-main">
                 {{-- <div class="brand-text-wrap">
-                    <h1>BOGAR</h1>
-                    <p>SIDDHA PEEDAM</p>
+                    <h1>Auvri Plus</h1>
+                    <p>Auvri Plus</p>
                 </div>
                 <div class="mantra-text">Mantra for Success</div> --}}
             </div>

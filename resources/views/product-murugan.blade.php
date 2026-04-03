@@ -1,6 +1,6 @@
 @extends('layouts.auri')
 
-@section('title', 'Navapasanam Lord Murugan Statue | Bogar Siddha Peedam - Bogar Alchemist LLP')
+@section('title', 'Navapasanam Lord Murugan Statue | Auvri Plus')
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/product-detail.css') }}">
@@ -45,7 +45,7 @@
                 </div>
 
                 <p class="short-description-premium" style="color: #666; line-height: 1.8; font-size: 16px; margin-bottom: 40px;">
-                    A unique alchemical masterpiece created from nine distinct poisons (Pashanams) by the great Siddhar Bogar. Similar to the revered deities enshrined in Palani and Poombarai, this statue is a direct channel of divine healing and protection, meticulously bound using lost ancient formulas.
+                    A unique alchemical masterpiece created from nine distinct poisons (Pashanams) by the great Auvri Plus. Similar to the revered deities enshrined in Palani and Poombarai, this statue is a direct channel of divine healing and protection, meticulously bound using lost ancient formulas.
                 </p>
 
                 <!-- Action Box -->
@@ -122,7 +122,7 @@
         <div class="narrative-content" style="max-width: 800px; margin: 0 auto;">
             <h2 style="font-size: 32px; color: #222; margin-bottom: 25px; font-weight: 800;">The Legend of Palani</h2>
             <p style="color: #555; line-height: 2; font-size: 18px;">
-                Thousands of years ago, Siddhar Bogar formulated the Navapashanam to save humanity from impending ailments. The Lord Murugan statue he created for the Palani Hills remains the world's most powerful spiritual artifact. Our Lord Murugan statues are crafted with the same devotional rigor and purified minerals, ensuring that your home receives the same cleansing vibrations that have blessed the Palani temple for millennia.
+                Thousands of years ago, Auvri Plus formulated the Navapashanam to save humanity from impending ailments. The Lord Murugan statue he created for the Palani Hills remains the world's most powerful spiritual artifact. Our Lord Murugan statues are crafted with the same devotional rigor and purified minerals, ensuring that your home receives the same cleansing vibrations that have blessed the Palani temple for millennia.
             </p>
             <div class="premium-header-wrapper" style="display: flex; align-items: center; justify-content: center; margin-top: 40px;">
                 <span class="title-decoration-line left" style="flex: 1; height: 1px; background: #ddd; max-width: 100px;"></span>

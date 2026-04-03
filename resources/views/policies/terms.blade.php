@@ -61,7 +61,7 @@
         <div class="policy-card animate-fade">
             <h2 class="section-title">Terms of Service</h2>
             <div class="policy-content">
-                <p>Welcome to Auvri Plus - Bogar Siddha Peedam. By accessing or using our website and services, you agree to be bound by the following terms and conditions.</p>
+                <p>Welcome to Auvri Plus - Auvri Plus. By accessing or using our website and services, you agree to be bound by the following terms and conditions.</p>
                 
                 <h4>1. General Use</h4>
                 <p>The content provided on this website is for spiritual and wellness purposes. While we strive for accuracy, we do not guarantee the completeness or suitability of the information for any specific medical or scientific purpose.</p>

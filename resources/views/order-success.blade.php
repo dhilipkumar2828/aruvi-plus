@@ -1,6 +1,6 @@
 @extends('layouts.auri')
 
-@section('title', 'Order Successful | Bogar Siddha Peedam - Bogar Alchemist LLP')
+@section('title', 'Order Successful | Auvri Plus')
 
 @section('extra_css')
 <style>

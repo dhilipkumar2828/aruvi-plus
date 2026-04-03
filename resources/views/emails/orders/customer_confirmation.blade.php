@@ -37,7 +37,7 @@ Phone: {{ $order->phone }}
 Track Your Order
 </x-mail::button>
 
-If you have any questions, feel free to contact us at [care@bogaralchemist.com](mailto:care@bogaralchemist.com) or WhatsApp us at [0794851800](https://wa.me/0794851800).
+If you have any questions, feel free to contact us at [care@Auvri Plusalchemist.com](mailto:care@Auvri Plusalchemist.com) or WhatsApp us at [0794851800](https://wa.me/0794851800).
 
 Best Regards,<br>
 **Team {{ config('app.name') }}**

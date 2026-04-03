@@ -1,5 +1,7 @@
 /* --- Variables --- */
 :root {
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Playfair Display', serif;
   --primary: #004200;
   --primary-hover: #002e00;
   --secondary: #e8f5e9;
@@ -35,6 +37,7 @@ body {
   line-height: 1.6;
   background-color: var(--white);
   overflow-x: hidden;
+  font-size: 16px;
 }
 
 a {
@@ -74,9 +77,10 @@ section {
 h1,
 h2,
 h3,
-h4 {
+h4,
+.sec-title {
   font-family: var(--font-heading);
-  color: var(--secondary);
+  color: #092e09;
   font-weight: 600;
   line-height: 1.2;
 }
@@ -295,18 +299,15 @@ header {
 }
 
 .hero-txt h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 3.5rem;
-  line-height: 1.1;
+  font-size: 2.5rem;
   margin-bottom: 24px;
-  color: var(--primary);
 }
 
 .hero-txt p {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   color: #555;
   margin-bottom: 32px;
-  max-width: 480px;
+  max-width: 550px;
 }
 
 .hero-image {
@@ -646,10 +647,8 @@ header {
 }
 
 .glass-card h3 {
-  font-family: var(--font-serif);
   font-size: 1.5rem;
-  color: var(--primary);
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .glass-card p {
@@ -1098,14 +1097,14 @@ header {
 }
 
 .h1 {
-  top: 20%;
-  left: 10%;
+  font-size: 2.5rem;
+  margin-bottom: 24px;
 }
 
 .h2 {
-  bottom: 20%;
-  right: 10%;
-  animation-delay: 1.5s;
+  font-size: 2rem;
+  margin-bottom: 32px;
+  text-align: center;
 }
 
 /* 2. Categories */
@@ -1324,7 +1323,8 @@ header {
 }
 
 .edu-card h3 {
-  color: var(--text);
+  font-size: 1.5rem;
+  margin-bottom: 16px;
 }
 
 .edu-action {
@@ -1487,33 +1487,50 @@ header {
 
 /* 9. FAQ */
 .accordion {
-  max-width: 800px;
-  margin: 0 auto 32px;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .acc-item {
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .acc-head {
-  padding: 20px 0;
+  padding: 25px 0;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  font-size: 1.15rem;
   font-weight: 500;
+  color: #1a1a1a;
+}
+
+.acc-head i {
+  font-size: 1rem;
+  color: #333;
+  transition: transform 0.4s ease;
+}
+
+.acc-item.active .acc-head i {
+  transform: rotate(180deg);
 }
 
 .acc-body {
   max-height: 0;
   overflow: hidden;
-  transition: 0.3s;
-  color: var(--text-muted);
-  font-size: 0.95rem;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .acc-item.active .acc-body {
-  padding-bottom: 20px;
-  max-height: 200px;
+  max-height: 800px;
+  padding-bottom: 25px;
+}
+
+.acc-body p {
+  color: #555;
+  line-height: 1.8;
+  font-size: 1.05rem;
 }
 
 .faq-more {
@@ -1529,8 +1546,9 @@ header {
 }
 
 .final-cta h2 {
-  color: var(--white);
-  margin-bottom: 40px;
+  font-size: 2rem;
+  margin-bottom: 32px;
+  text-align: center;
 }
 
 .cta-actions {
@@ -1688,7 +1706,9 @@ footer {
 }
 
 .modal-content h2 {
-  color: var(--primary) !important;
+  font-size: 2rem;
+  margin-bottom: 32px;
+  text-align: center;
 }
 
 .modal-close {
@@ -1864,10 +1884,8 @@ footer {
 }
 
 .reviews-section .sec-head h2 {
-  color: #004200;
-  /* Dark Green */
-  font-size: 2.5rem;
-  margin-bottom: 12px;
+  font-size: 2rem;
+  margin-bottom: 32px;
   text-align: center;
 }
 
@@ -2030,6 +2048,8 @@ footer {
 
 /* --- Cinematic About Page Redesign --- */
 :root {
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Playfair Display', serif;
   --font-serif: "Playfair Display", serif;
   --accent-gold: #d4af37;
   --herbal-light: #f9fbf9;
@@ -2050,25 +2070,26 @@ footer {
 .about-view .sec-title {
   font-family: var(--font-serif);
   font-size: 3.5rem;
-  color: #004200;
+  color: #092e09;
   margin-bottom: 24px;
   line-height: 1.2;
 }
 
-.about-view .sub-title {
+.about-view .sub-title,
+.sub-title {
   font-size: 1.1rem;
-  color: #557555;
+  color: #004200;
   text-transform: uppercase;
   letter-spacing: 3px;
-  font-weight: 600;
+  font-weight: 800;
   margin-bottom: 20px;
   display: block;
 }
 
-.about-view .p-text {
-  font-size: 1.2rem;
-  line-height: 1.9;
-  color: #444;
+.about-view .p-text, .p-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #1a1a1a;
   margin-bottom: 25px;
   max-width: 850px;
 }
@@ -2107,10 +2128,10 @@ footer {
 }
 
 .about-split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 100px;
+  display: flex;
+  gap: 60px;
   align-items: center;
+  justify-content: space-between;
 }
 
 .split-img {
@@ -2213,10 +2234,8 @@ footer {
 }
 
 .center-hub h3 {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  color: var(--primary);
-  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
 }
 
 .radial-node {
@@ -2403,8 +2422,9 @@ footer {
   }
 
   .center-hub h3 {
-    font-size: 1.3rem;
-  }
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
 
   .radial-node {
     width: 100px;
@@ -2734,10 +2754,8 @@ footer {
 }
 
 .faq-categories h3 {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  color: var(--primary);
-  margin-bottom: 30px;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
 }
 
 .faq-categories ul {
@@ -3108,10 +3126,9 @@ footer {
 }
 
 .empty-cart-state h2 {
-  font-family: var(--font-serif);
   font-size: 2rem;
-  color: var(--primary);
-  margin-bottom: 15px;
+  margin-bottom: 32px;
+  text-align: center;
 }
 
 .empty-cart-state p {
@@ -3160,9 +3177,8 @@ footer {
 }
 
 .ci-info h3 {
-  font-size: 1.1rem;
-  color: var(--text);
-  margin-bottom: 5px;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
 }
 
 .ci-price {
@@ -3224,12 +3240,8 @@ footer {
 }
 
 .cart-summary h3 {
-  font-family: var(--font-serif);
   font-size: 1.5rem;
-  color: var(--primary);
-  margin-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .cs-row {

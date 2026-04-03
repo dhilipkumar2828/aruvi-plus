@@ -17,8 +17,8 @@
     <section class="about-story-sec">
         <div class="container">
             <div style="text-align: center; margin-bottom: 60px;">
-                <span class="sub-title" style="color: var(--primary); opacity: 0.8;">Our Purpose</span>
-                <h2 class="sec-title">What do we do at Auvriplus?</h2>
+                <span class="sub-title" style="color: #004200; font-weight: 800;">Our Purpose</span>
+                <h1 class="sec-title" style="color: #092e09;">What do we do at Auvri Plus?</h1>
             </div>
             <div class="about-split">
                 <div class="split-img">

@@ -168,7 +168,7 @@
         <div class="auth-card">
             <div class="auth-header">
                 <h2>Create Account</h2>
-                <p>Join the Bogar Siddha Peedam - Bogar Alchemist LLP community.</p>
+                <p>Join the Auvri Plus community.</p>
             </div>
 
             {{-- @if ($errors->any())

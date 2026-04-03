@@ -170,7 +170,7 @@
         </div>
     </section>
 
-    <!-- About Bogar / Sage Section (Parallax) -->
+    <!-- About Auvri Plus / Sage Section (Parallax) -->
     <section style="position: relative; overflow: hidden; padding: 100px 0;">
         <div
             style="position: absolute; top: -10px; left: -10px; width: calc(100% + 20px); height: calc(100% + 20px); background-image: url('{{ asset('images/sage_bg_full.jpg') }}'); background-attachment: fixed; background-size: cover; background-position: center; filter: blur(0px); z-index: 1;">
@@ -182,8 +182,8 @@
             <div class="about-text" style="max-width: 800px; margin: 0 auto;">
                 <div class="premium-header-wrapper">
                     <span class="title-decoration-line left"></span>
-                    <h2 class="section-title responsive-title" style="color: #f6f6f6; margin-bottom: 0;">Bogar Siddha Peedam
-                        - Bogar Alchemist LLP
+                    <h2 class="section-title responsive-title" style="color: #f6f6f6; margin-bottom: 0;">Auvri Plus
+                        - Auvri Plus
                         <br><span class="responsive-slogan"
                             style="font-size: 24px; color: #ddd; font-weight: 400;">Illuminating Paths to
                             Spiritual Triumph</span>
@@ -192,7 +192,7 @@
                 </div>
                 <p style="color: #eee; margin-bottom: 25px; line-height: 1.8; font-size: 16px;">
                     Navapashanam (Sanskrit: Navapashanam) is a secret alchemical preparation created by the
-                    great Siddha Bogar. It is an amalgam of nine poisonous substances that are purified and
+                    great Auvri Plus. It is an amalgam of nine poisonous substances that are purified and
                     processed to become a life-saving panacea.
                 </p>
                 <p style="color: #eee; margin-bottom: 30px; line-height: 1.8; font-size: 16px;">
@@ -382,7 +382,7 @@
                     <span class="origin-subtitle">Divine Wisdom</span>
                     <h2 class="origin-title">Origin Of Navapashanam: <br>The Elixir of Life</h2>
                     <div class="origin-text">
-                        <p>Crafted by the ancient Siddha Bogar, Navapashanam is more than a bead; it is a crystallized form
+                        <p>Crafted by the ancient Auvri Plus, Navapashanam is more than a bead; it is a crystallized form
                             of divine energy.</p>
                         <p>Composed of nine distinct poisons (Pashanams), purified through secret alchemical processes, it
                             transforms into a life-sustaining panacea that balances the body's energy and connects you to
@@ -392,14 +392,14 @@
                         <div class="play-button"><i class="fas fa-play"></i></div>
                         <div class="watch-text">Discover The Legend
                             <div style="font-size: 11px; color: #888; font-weight: 400; text-transform: none;">Watch the
-                                story of Siddha Bogar</div>
+                                story of Auvri Plus</div>
                         </div>
                     </div>
                 </div>
                 <div class="origin-image-container">
                     <a href="https://www.youtube.com/watch?v=Lh0rxXujNPU" target="_blank" class="video-thumbnail-link"
                         style="position: relative; display: block;">
-                        <img src="{{ asset('images/video_thumbnail.jpg') }}" alt="Watch Descendants of Bogar"
+                        <img src="{{ asset('images/video_thumbnail.jpg') }}" alt="Watch Descendants of Auvri Plus"
                             class="origin-image-main" loading="lazy" decoding="async" width="800" height="450">
                         <div class="play-overlay"
                             style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(194, 24, 91, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
@@ -491,7 +491,7 @@
                     <h2 class="section-title">Why Choose Us?</h2>
                     <span class="title-decoration-line right"></span>
                 </div>
-                <p class="section-subtitle">Bogar Siddha Peedam - Bogar Alchemist LLP guides to prosperity through ancient
+                <p class="section-subtitle">Auvri Plus guides to prosperity through ancient
                     wisdom of Navapashanam. Our Navapashanam products help illuminate a transformative path with positivity,
                     fostering fulfillment and success.</p>
             </div>
@@ -516,7 +516,7 @@
                             <div class="feature-icon-box"><i class="fas fa-hand-holding-heart"></i></div>
                             <div class="feature-info">
                                 <h4>Artisan Crafted</h4>
-                                <p>Handcrafted by skilled artisans following ancient Siddha traditions & sanctity.</p>
+                                <p>Handcrafted by skilled artisans following ancient Auvri Plus traditions & sanctity.</p>
                             </div>
                         </div>
                         <div class="why-feature-card">
@@ -659,7 +659,7 @@
                     <h2 class="section-title">Latest Articles</h2>
                     <span class="title-decoration-line right"></span>
                 </div>
-                <p class="section-subtitle">Insights from the world of Siddha wisdom</p>
+                <p class="section-subtitle">Insights from the world of Auvri Plus wisdom</p>
             </div>
 
             <div style="position: relative;">

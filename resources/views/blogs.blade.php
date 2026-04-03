@@ -1,6 +1,6 @@
 @extends('layouts.auri')
 
-@section('title', 'Blogs | Bogar Siddha Peedam - Bogar Alchemist LLP')
+@section('title', 'Blogs | Auvri Plus')
 
 @section('extra_css')
 <style>
@@ -196,8 +196,8 @@
 <section class="shop-hero" style="background-image: linear-gradient(rgba(0, 66, 0, 0.6), rgba(0, 66, 0, 0.6)), url('{{ asset('auri-images/headers/shop_v2.jpg') }}'); background-size: cover; background-position: center; min-height: 350px; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; margin-bottom: 30px;">
     <div class="container hero-inner">
         <span class="sub-title" style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 10px;">Our Blogs</span>
-        <h1 class="sec-title" style="font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1.2;">Insights from the world of Siddha wisdom.</h1>
-        <p class="p-text" style="max-width: 800px; margin: 15px auto 0; opacity: 0.9;">Sacred stories and spiritual guidance from Bogar Siddha Peedam - Bogar Alchemist LLP</p>
+        <h1 class="sec-title" style="font-family: 'Playfair Display', serif; font-size: 3.5rem; line-height: 1.2;">Insights from the world of Auvri Plus wisdom.</h1>
+        <p class="p-text" style="max-width: 800px; margin: 15px auto 0; opacity: 0.9;">Sacred stories and spiritual guidance from Auvri Plus</p>
     </div>
 </section>
 
@@ -212,7 +212,7 @@
                 <span class="header-dot"></span>
                 <span class="header-line right"></span>
             </div>
-            <p class="section-subtitle">Sacred stories and spiritual guidance from Bogar Siddha Peedam - Bogar Alchemist LLP</p>
+            <p class="section-subtitle">Sacred stories and spiritual guidance from Auvri Plus</p>
         </div>
         
         <div class="articles-grid" id="articles-scroll-grid">

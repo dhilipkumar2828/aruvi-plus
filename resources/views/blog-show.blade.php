@@ -1,6 +1,6 @@
 @extends('layouts.auri')
 
-@section('title', ($blog->title ?? 'Blog') . ' | Bogar Siddha Peedam - Bogar Alchemist LLP')
+@section('title', ($blog->title ?? 'Blog') . ' | Auvri Plus')
 
 @section('extra_css')
 <style>
@@ -97,7 +97,7 @@
             <!-- Meta Information -->
             <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 40px; color: #777; font-size: 0.95rem; font-weight: 500; padding-bottom: 25px; border-bottom: 1px solid #f0f0f0;">
                 <span><i class="far fa-calendar-alt" style="color: #d4145a;"></i> {{ optional($blog->published_at)->format('M d, Y') }}</span>
-                <span><i class="far fa-user" style="color: #d4145a;"></i> {{ $blog->author ?? 'Bogar Siddha Peedam - Bogar Alchemist LLP' }}</span>
+                <span><i class="far fa-user" style="color: #d4145a;"></i> {{ $blog->author ?? 'Auvri Plus' }}</span>
             </div>
 
             <!-- Blog Description / Content -->

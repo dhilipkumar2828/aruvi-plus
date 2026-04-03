@@ -38,7 +38,7 @@
 
             <div class="admin-form-group">
                 <label class="admin-form-label">Coupon Code <span class="text-danger">*</span></label>
-                <input type="text" name="code" value="{{ old('code') }}" required class="admin-input" placeholder="e.g. BOGAR10" style="text-transform: uppercase;">
+                <input type="text" name="code" value="{{ old('code') }}" required class="admin-input" placeholder="e.g. Auvri Plus10" style="text-transform: uppercase;">
             </div>
 
             <div class="admin-form-group">

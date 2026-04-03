@@ -615,7 +615,7 @@
                 <div class="field-row">
                     <div class="field">
                         <label for="product_meta_title">Meta Title</label>
-                        <input id="product_meta_title" name="product_meta_title" type="text" placeholder="Navapashanam Shivlingam - Bogar Siddha Peedam - Bogar Alchemist LLP" value="{{ old('product_meta_title', $product?->meta_title ?? '') }}">
+                        <input id="product_meta_title" name="product_meta_title" type="text" placeholder="Navapashanam Shivlingam - Auvri Plus" value="{{ old('product_meta_title', $product?->meta_title ?? '') }}">
                     </div>
                     <div class="field">
                         <label for="product_slug">URL Slug</label>
