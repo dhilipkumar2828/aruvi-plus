@@ -158,12 +158,12 @@
                 <p>Continue your spiritual journey with us.</p>
             </div>
 
-            @if ($errors->any())
+            {{-- @if ($errors->any())
                 <div class="error-box">
                     <i class="fas fa-exclamation-circle"></i>
                     <span>{{ $errors->first() }}</span>
                 </div>
-            @endif
+            @endif --}}
 
             <form method="POST" action="{{ route('login.submit') }}" id="loginForm" novalidate>
                 @csrf
@@ -171,17 +171,27 @@
                     <label class="form-label">Email Address</label>
                     <div class="input-wrap">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" name="email" class="form-input" placeholder="name@example.com" value="{{ old('email') }}" required autocomplete="email">
+                        <input type="email" name="email" class="form-input" placeholder="Enter your email address" value="{{ old('email') }}" required autocomplete="email">
                     </div>
+                    @error('email')
+                        <div class="field-error" style="color: #dc3545; font-size: 12px; margin-top: 6px; padding-left: 10px; font-weight: 500;">
+                            <i class="fas fa-info-circle"></i> {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Password</label>
                     <div class="input-wrap">
                         <i class="fas fa-lock"></i>
-                        <input type="password" name="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+                        <input type="password" name="password" id="password" class="form-input" placeholder="Enter your password" required autocomplete="current-password">
                         <i class="fas fa-eye" id="togglePassword" style="position: absolute; right: 18px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--primary); opacity: 0.6; z-index: 10;"></i>
                     </div>
+                    @error('password')
+                        <div class="field-error" style="color: #dc3545; font-size: 12px; margin-top: 6px; padding-left: 10px; font-weight: 500;">
+                            <i class="fas fa-info-circle"></i> {{ $message }}
+                        </div>
+                    @enderror
                 </div>  
 
                 <script>
@@ -213,6 +223,10 @@
                     <i class="fas fa-arrow-right"></i>
                 </button>
             </form>
+
+            <div class="auth-footer" style="margin-top: 25px; text-align: center; color: #666; font-size: 0.9rem;">
+                Don't have an account? <a href="{{ route('register') }}" style="color: var(--primary); font-weight: 700; text-decoration: none; border-bottom: 2px solid rgba(0, 66, 0, 0.1);">Create Account</a>
+            </div>
         </div>
     </div>
 </section>

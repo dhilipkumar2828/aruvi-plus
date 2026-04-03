@@ -11,7 +11,7 @@
         gap: 12px;
         padding: 10px 12px;
         border-radius: 14px;
-        border: 1px solid rgba(194, 24, 91, 0.2);
+        border: 1px solid rgba(0, 66, 0, 0.2);
         background: #fff;
         width: 100%;
         position: relative;
@@ -34,14 +34,14 @@
         justify-content: center;
         padding: 8px 14px;
         border-radius: 999px;
-        background: linear-gradient(135deg, #ff6d00 0%, #ff0055 100%); /* Using brand gradient */
+        background: linear-gradient(135deg, var(--primary) 0%, #ff0055 100%); /* Using brand gradient */
         color: #fff !important;
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.6px;
         text-transform: uppercase;
         cursor: pointer;
-        box-shadow: 0 4px 10px rgba(194, 24, 91, 0.2);
+        box-shadow: 0 4px 10px rgba(0, 66, 0, 0.2);
         border: none;
     }
 
@@ -58,7 +58,7 @@
         width: 40px;
         height: 40px;
         border-radius: 8px;
-        border: 1px solid rgba(194, 24, 91, 0.15);
+        border: 1px solid rgba(0, 66, 0, 0.15);
         object-fit: cover;
         background: rgba(252, 228, 236, 0.3);
     }
@@ -135,7 +135,7 @@
             </div>
         </div>
 
-        <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px; padding-top: 30px; border-top: 1px solid rgba(194, 24, 91, 0.1);">
+        <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px; padding-top: 30px; border-top: 1px solid rgba(0, 66, 0, 0.1);">
             <button type="submit" class="admin-btn admin-btn-primary">
                 <i class="fas fa-cloud-upload-alt"></i> Update Testimonial
             </button>

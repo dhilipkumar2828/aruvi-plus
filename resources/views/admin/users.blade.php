@@ -13,7 +13,7 @@
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search users..." style="padding: 8px 15px 8px 38px; border-radius: 50px; border: 1px solid #ddd; outline: none; background: #fff; width: 100%; font-size: 13px;">
                 </div>
                 @if(request('search'))
-                    <a href="{{ route('admin.users') }}" class="admin-btn" style="background: #fff; color: #ff6d00; border: 1px solid #ff6d00; padding: 6px 18px; font-weight: 800; text-transform: uppercase; font-size: 11px; height: auto; display: inline-flex; align-items: center; letter-spacing: 0.5px; box-shadow: 0 2px 6px rgba(255, 109, 0, 0.1);">CLEAR</a>
+                    <a href="{{ route('admin.users') }}" class="admin-btn" style="background: #fff; color: var(--primary); border: 1px solid var(--primary); padding: 6px 18px; font-weight: 800; text-transform: uppercase; font-size: 11px; height: auto; display: inline-flex; align-items: center; letter-spacing: 0.5px; box-shadow: 0 2px 6px rgba(255, 109, 0, 0.1);">CLEAR</a>
                 @endif
             </form>
         </div>
@@ -58,7 +58,7 @@
         </table>
     </div>
 
-    <div style="padding: 20px 30px; border-top: 1px solid rgba(194, 24, 91, 0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+    <div style="padding: 20px 30px; border-top: 1px solid rgba(0, 66, 0, 0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
         <div style="color: var(--text-muted); font-size: 14px; white-space: nowrap;">
             Showing {{ $users->firstItem() ?? 0 }} to {{ $users->lastItem() ?? 0 }} of {{ $users->total() }} entries
         </div>

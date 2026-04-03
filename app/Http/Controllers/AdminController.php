@@ -19,6 +19,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -383,21 +384,21 @@ class AdminController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', 'unique:categories,slug'],
-            // 'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'image' => ['nullable', 'image', 'max:5120'],
             'status' => ['nullable', 'string', 'in:active,inactive'],
         ]);
 
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     $imagePath = $this->storeImage($request->file('image'), 'uploads/categories', 'category');
-        // }
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $this->storeImage($request->file('image'), 'uploads/categories', 'category');
+        }
 
         $slug = $data['slug'] ?: Str::slug($data['name']);
         
         Category::create([
             'name' => $data['name'],
             'slug' => $slug,
-            // 'image' => $imagePath,
+            'image' => $imagePath,
             'status' => $data['status'] ?? 'active',
         ]);
 
@@ -416,26 +417,25 @@ class AdminController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', Rule::unique('categories', 'slug')->ignore($category->id)],
-            // 'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'image' => ['nullable', 'image', 'max:5120'],
             'status' => ['nullable', 'string', 'in:active,inactive'],
         ]);
 
         $slug = $data['slug'] ?: Str::slug($data['name']);
 
-        // if ($request->hasFile('image')) {
-        //     // Delete old image if exists
-        //     if ($category->image) {
-        //         $this->deleteImage($category->image);
-        //     }
-        //     $imagePath = $this->storeImage($request->file('image'), 'uploads/categories', 'category');
-        // } else {
-        //     $imagePath = $category->image;
-        // }
+        $imagePath = $category->image;
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($category->image) {
+                $this->deleteImage($category->image);
+            }
+            $imagePath = $this->storeImage($request->file('image'), 'uploads/categories', 'category');
+        }
 
         $category->update([
             'name' => $data['name'],
             'slug' => $slug,
-            // 'image' => $imagePath,
+            'image' => $imagePath,
             'status' => $data['status'] ?? 'active',
         ]);
 
@@ -446,6 +446,9 @@ class AdminController extends Controller
 
     public function destroyCategory(Category $category)
     {
+        if ($category->image) {
+            $this->deleteImage($category->image);
+        }
         $category->delete();
 
         return redirect()
@@ -1190,5 +1193,28 @@ class AdminController extends Controller
         if (Storage::disk('public')->exists($path)) {
             Storage::disk('public')->delete($path);
         }
+    }
+
+    public function validateUnique(Request $request)
+    {
+        $table = $request->query('table');
+        $column = $request->query('column');
+        $value = $request->query('value');
+        $ignoreId = $request->query('ignore_id');
+
+        $allowedTables = ['categories', 'products', 'blogs', 'users'];
+        if (!in_array($table, $allowedTables)) {
+            return response()->json(['exists' => false]);
+        }
+
+        $query = DB::table($table)->where($column, $value);
+
+        if ($ignoreId) {
+            $query->where('id', '!=', $ignoreId);
+        }
+
+        $exists = $query->exists();
+
+        return response()->json(['exists' => $exists]);
     }
 }

@@ -64,7 +64,7 @@
             <div class="admin-form-group" style="grid-column: span 2;">
                 <label class="admin-form-label">Order Items</label>
                 @if ($order->items->count() > 0)
-                    <div class="table-responsive" style="border: 1px solid rgba(194, 24, 91, 0.12); border-radius: 14px;">
+                    <div class="table-responsive" style="border: 1px solid rgba(0, 66, 0, 0.12); border-radius: 14px;">
                         <table class="admin-table">
                             <thead>
                                 <tr>
@@ -109,9 +109,9 @@
                             <span style="color: #2e7d32;">Shipping Discount</span>
                             <strong style="color: #2e7d32;">{{ $order->shipping_discount > 0 ? '-' . format_inr($order->shipping_discount) : '0' }}</strong>
                         </div>
-                        <div class="admin-input" style="display: flex; justify-content: space-between; align-items: center; border-color: rgba(194, 24, 91, 0.4); background: #fffcfd;">
+                        <div class="admin-input" style="display: flex; justify-content: space-between; align-items: center; border-color: rgba(0, 66, 0, 0.4); background: #fffcfd;">
                             <span style="color: #666;">Shipping Amount (Net)</span>
-                            <strong style="color: #c2185b;">{{ format_inr($order->shipping_amount - $order->shipping_discount) }}</strong>
+                            <strong style="color: var(--primary-dark);">{{ format_inr($order->shipping_amount - $order->shipping_discount) }}</strong>
                         </div>
                         <div class="admin-input" style="display: flex; justify-content: space-between; align-items: center; border-color: var(--primary); background: #fff9fb;">
                             <span style="color: #666; font-weight: 700;">Total Payable</span>
@@ -158,7 +158,7 @@
             </div>
         </div>
 
-        <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px; padding-top: 30px; border-top: 1px solid rgba(194, 24, 91, 0.1);">
+        <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px; padding-top: 30px; border-top: 1px solid rgba(0, 66, 0, 0.1);">
             {{-- <a href="{{ route('admin.orders') }}" class="admin-btn admin-btn-ghost">Discard Changes</a> --}}
             <button type="submit" class="admin-btn admin-btn-primary">
                 <i class="fas fa-save"></i> Update Order

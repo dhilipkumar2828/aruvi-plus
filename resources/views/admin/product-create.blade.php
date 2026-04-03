@@ -47,7 +47,7 @@
 
     .section-card {
         background: #fff;
-        border: 1px solid rgba(194, 24, 91, 0.12);
+        border: 1px solid rgba(0, 66, 0, 0.12);
         border-radius: 18px;
         padding: 22px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.02);
@@ -96,7 +96,7 @@
     .field select,
     .field textarea {
         background: #fff;
-        border: 1px solid rgba(194, 24, 91, 0.2);
+        border: 1px solid rgba(0, 66, 0, 0.2);
         border-radius: 12px;
         padding: 12px 14px;
         color: var(--text-dark);
@@ -109,7 +109,7 @@
     .field textarea:focus {
         outline: none;
         border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(194, 24, 91, 0.1);
+        box-shadow: 0 0 0 3px rgba(0, 66, 0, 0.1);
     }
 
     .help-text {
@@ -185,8 +185,8 @@
     }
 
     .switch input:checked + .slider {
-        background: rgba(194, 24, 91, 0.35);
-        border-color: rgba(194, 24, 91, 0.6);
+        background: rgba(0, 66, 0, 0.35);
+        border-color: rgba(0, 66, 0, 0.6);
     }
 
     .switch input:checked + .slider::before {
@@ -195,7 +195,7 @@
     }
 
     .dropzone {
-        border: 1px dashed rgba(194, 24, 91, 0.35);
+        border: 1px dashed rgba(0, 66, 0, 0.35);
         border-radius: 18px;
         padding: 22px;
         text-align: center;
@@ -208,7 +208,7 @@
         height: 48px;
         margin: 0 auto;
         border-radius: 14px;
-        background: rgba(194, 24, 91, 0.15);
+        background: rgba(0, 66, 0, 0.15);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -228,7 +228,7 @@
         gap: 12px;
         padding: 10px 12px;
         border-radius: 14px;
-        border: 1px solid rgba(194, 24, 91, 0.2);
+        border: 1px solid rgba(0, 66, 0, 0.2);
         background: #fff;
     }
 
@@ -256,7 +256,7 @@
         letter-spacing: 0.6px;
         text-transform: uppercase;
         cursor: pointer;
-        box-shadow: 0 8px 18px rgba(194, 24, 91, 0.2);
+        box-shadow: 0 8px 18px rgba(0, 66, 0, 0.2);
         border: none;
     }
 
@@ -280,7 +280,7 @@
         width: 76px;
         height: 76px;
         border-radius: 14px;
-        border: 1px solid rgba(194, 24, 91, 0.15);
+        border: 1px solid rgba(0, 66, 0, 0.15);
         object-fit: cover;
         background: rgba(252, 228, 236, 0.3);
     }
@@ -645,6 +645,26 @@
                 .replace(/[^\w ]+/g, '')
                 .replace(/ +/g, '-');
             $('#product_slug').val(slug);
+        });
+
+        $('#product_sku').on('input', function() {
+            let sku = $(this).val();
+            if (sku.length > 1) {
+                window.checkUnique('products', 'sku', sku, '#product_sku', {{ $product?->id ?? 'null' }});
+            } else {
+                $(this).css('border-color', '');
+                $(this).siblings('.error-msg').hide();
+            }
+        });
+
+        $('#product_slug').on('input', function() {
+            let slug = $(this).val();
+            if (slug.length > 1) {
+                window.checkUnique('products', 'slug', slug, '#product_slug', {{ $product?->id ?? 'null' }});
+            } else {
+                $(this).css('border-color', '');
+                $(this).siblings('.error-msg').hide();
+            }
         });
 
         // Strict Numeric Input Validation

@@ -13,8 +13,8 @@
             font-size: 11px !important;
             font-weight: 800 !important;
             background: #fff !important;
-            color: #ff6d00 !important;
-            border: 1px solid #ff6d00 !important;
+            color: var(--primary) !important;
+            border: 1px solid var(--primary) !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -27,14 +27,14 @@
         }
         
         .testimonials-management-page .admin-btn:hover {
-            background: #ff6d00 !important;
+            background: var(--primary) !important;
             color: #fff !important;
             transform: translateY(-1px) !important;
             box-shadow: 0 4px 12px rgba(255, 109, 0, 0.2) !important;
         }
 
         .testimonials-management-page .admin-btn-primary {
-            background: linear-gradient(135deg, #ff6d00 0%, #ff9100 100%) !important;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary) 100%) !important;
             border: none !important;
             color: #fff !important;
         }
@@ -98,7 +98,7 @@
                         <td>{{ $testimonial->designation }}</td>
                         <td>
                             @for ($i = 1; $i <= 5; $i++)
-                                <i class="fas fa-star" style="color: {{ $i <= $testimonial->rating ? '#ff9100' : '#ddd' }}; font-size: 10px;"></i>
+                                <i class="fas fa-star" style="color: {{ $i <= $testimonial->rating ? 'var(--primary)' : '#ddd' }}; font-size: 10px;"></i>
                             @endfor
                         </td>
                         <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ Str::limit($testimonial->content, 50) }}</td>
@@ -139,7 +139,7 @@
         </table>
     </div>
 
-    <div style="padding: 20px 30px; border-top: 1px solid rgba(194, 24, 91, 0.05); display: flex; justify-content: space-between; align-items: center;">
+    <div style="padding: 20px 30px; border-top: 1px solid rgba(0, 66, 0, 0.05); display: flex; justify-content: space-between; align-items: center;">
         <div style="color: var(--text-muted); font-size: 14px;">
             Showing {{ $testimonials->firstItem() ?? 0 }} to {{ $testimonials->lastItem() ?? 0 }} of {{ $testimonials->total() }} entries
         </div>

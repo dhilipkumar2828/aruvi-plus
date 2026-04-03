@@ -30,7 +30,7 @@
 
     .section-card {
         background: #fff;
-        border: 1px solid rgba(194, 24, 91, 0.08);
+        border: 1px solid rgba(0, 66, 0, 0.08);
         border-radius: 24px;
         padding: 35px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.03);
@@ -43,7 +43,7 @@
         gap: 12px;
         margin-bottom: 25px;
         padding-bottom: 15px;
-        border-bottom: 1px dashed rgba(194, 24, 91, 0.15);
+        border-bottom: 1px dashed rgba(0, 66, 0, 0.15);
     }
 
     .section-title i {
@@ -84,7 +84,7 @@
     .field select {
         width: 100%;
         background: #fff;
-        border: 1px solid rgba(194, 24, 91, 0.15);
+        border: 1px solid rgba(0, 66, 0, 0.15);
         border-radius: 12px;
         padding: 12px 14px;
         color: var(--text-dark);
@@ -98,7 +98,7 @@
     .field select:focus {
         outline: none;
         border-color: var(--primary);
-        box-shadow: 0 0 0 4px rgba(194, 24, 91, 0.1);
+        box-shadow: 0 0 0 4px rgba(0, 66, 0, 0.1);
     }
 
     .form-actions {
@@ -111,7 +111,7 @@
         padding: 14px 35px;
         font-size: 13px;
         border-radius: 14px;
-        box-shadow: 0 10px 25px rgba(194, 24, 91, 0.25);
+        box-shadow: 0 10px 25px rgba(0, 66, 0, 0.25);
     }
 
     /* File Upload Styles */
@@ -121,7 +121,7 @@
         gap: 12px;
         padding: 10px 12px;
         border-radius: 14px;
-        border: 1px solid rgba(194, 24, 91, 0.2);
+        border: 1px solid rgba(0, 66, 0, 0.2);
         background: #fff;
         width: 100%;
     }
@@ -150,7 +150,7 @@
         letter-spacing: 0.6px;
         text-transform: uppercase;
         cursor: pointer;
-        box-shadow: 0 8px 18px rgba(194, 24, 91, 0.2);
+        box-shadow: 0 8px 18px rgba(0, 66, 0, 0.2);
         border: none;
     }
 
@@ -174,7 +174,7 @@
         width: 76px;
         height: 76px;
         border-radius: 14px;
-        border: 1px solid rgba(194, 24, 91, 0.15);
+        border: 1px solid rgba(0, 66, 0, 0.15);
         object-fit: cover;
         background: rgba(252, 228, 236, 0.3);
     }
@@ -219,12 +219,12 @@
                     <p style="font-size: 11px; color: #888; margin-top: 4px;">Auto Generate from category name</p>
                 </div>
 
-                {{-- <div class="field">
-                    <label for="image">Category Image <span class="text-danger">*</span></label>
+                <div class="field">
+                    <label for="image">Category Image @if(!$isEdit)<span class="text-danger">*</span>@endif</label>
                     <div class="file-upload">
                         <input id="image" name="image" type="file" accept="image/*" {{ !$isEdit ? 'required' : '' }}>
                         <label for="image" class="file-button">Choose File</label>
-                        <span id="image_name" class="file-name">No file chosen</span>
+                        <span id="image_name" class="file-name">{{ $category?->image ? basename($category->image) : 'No file chosen' }}</span>
                         
                         <div class="media-preview" id="image_preview_container" style="{{ ($category && $category->image) ? '' : 'display: none;' }}; margin-top: 0; margin-left: auto;">
                             @if($category && $category->image)
@@ -239,8 +239,8 @@
                         </div>
                     </div>
                     
-                    <p style="font-size: 11px; color: #888; margin-top: 4px;">Recommended size: 500x500px. Max size: 2MB.</p>
-                </div> --}}
+                    <p style="font-size: 11px; color: #888; margin-top: 4px;">Recommended size: 500x500px. Max size: 5MB.</p>
+                </div>
 
                 <div class="field">
                     <label for="status">Status</label>
@@ -270,6 +270,24 @@
                 .replace(/[^\w ]+/g, '')
                 .replace(/ +/g, '-');
             $('#slug').val(slug);
+
+            // Real-time uniqueness check
+            if (name.length > 1) {
+                window.checkUnique('categories', 'name', name, '#name', {{ $category?->id ?? 'null' }});
+            } else {
+                $(this).css('border-color', '');
+                $(this).siblings('.error-msg').hide();
+            }
+        });
+
+        $('#slug').on('input', function() {
+            let slug = $(this).val();
+            if (slug.length > 1) {
+                window.checkUnique('categories', 'slug', slug, '#slug', {{ $category?->id ?? 'null' }});
+            } else {
+                $(this).css('border-color', '');
+                $(this).siblings('.error-msg').hide();
+            }
         });
 
         // File Input Change Handler with Preview

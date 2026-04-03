@@ -73,7 +73,7 @@
         border-color: var(--primary);
         background: var(--primary);
         color: #fff;
-        box-shadow: 0 0 10px rgba(194, 24, 91, 0.2);
+        box-shadow: 0 0 10px rgba(0, 66, 0, 0.2);
     }
 
     .step span { 
@@ -168,10 +168,10 @@
                 <a href="{{ route('admin.orders') }}" class="admin-btn admin-btn-ghost" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; box-shadow: none;">
                     <i class="fas fa-arrow-left"></i> Back to Orders
                 </a>
-                <a href="{{ route('admin.orders.download', $order) }}" class="admin-btn" style="background: linear-gradient(135deg, #FF9800, #C2185B); color: #fff; border: none; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 0 20px; border-radius: 8px; font-weight: 600; font-size: 14px;">
+                <a href="{{ route('admin.orders.download', $order) }}" class="admin-btn" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; border: none; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 0 20px; border-radius: 8px; font-weight: 600; font-size: 14px;">
                     <i class="fas fa-file-pdf" style="margin-right: 8px;"></i> PDF Invoice
                 </a>
-                <button onclick="window.print()" class="admin-btn" style="background: linear-gradient(135deg, #FF9800, #C2185B); color: #fff; border: none; display: flex; align-items: center; justify-content: center; padding: 0 20px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer;">
+                <button onclick="window.print()" class="admin-btn" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; border: none; display: flex; align-items: center; justify-content: center; padding: 0 20px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer;">
                     <i class="fas fa-print" style="margin-right: 8px;"></i> Print Invoice
                 </button>
             </div>
@@ -207,8 +207,8 @@
             {{-- Brand Header --}}
             <div class="invoice-box-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px;">
                 <div>
-                    <img src="{{ asset('images/logo_final.png') }}" alt="Bogar Siddha" style="max-height: 70px; margin-bottom: 15px;">
-                    <h2 style="font-size: 24px; font-weight: 800; color: #000; margin: 0;">Bogar Siddha Peedam - Bogar Alchemist LLP</h2>
+                    <img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus" style="max-height: 70px; margin-bottom: 15px;">
+                    <h2 style="font-size: 24px; font-weight: 800; color: #000; margin: 0;">Auvri Plus</h2>
                     <p style="font-size: 13px; color: #64748b; margin: 5px 0;">GSTIN: XXXXXXXXXXXXX</p>
                 </div>
                 <div style="text-align: right;">
@@ -351,7 +351,7 @@
 
                     <div style="display: flex; justify-content: space-between; padding: 12px 0; font-size: 14px; color: #64748b; border-bottom: 1px solid #f1f5f9;">
                         <span>Shipping Amount</span>
-                        <strong style="color: #c2185b;">₹{{ number_format($order->shipping_amount - $order->shipping_discount, 0) }}</strong>
+                        <strong style="color: var(--primary-dark);">₹{{ number_format($order->shipping_amount - $order->shipping_discount, 0) }}</strong>
                     </div>
 
                     <div style="display: flex; justify-content: space-between; padding: 25px 0; align-items: flex-end;">
@@ -372,7 +372,7 @@
                 <div style="text-align: center; width: 160px;">
                     <div style="border-bottom: 2px solid #1a1a1a; margin-bottom: 10px;"></div>
                     <p style="font-size: 12px; font-weight: 800; color: #1a1a1a; margin: 0;">Authorized Rep</p>
-                    <p style="font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Bogar Siddha Peedam - Bogar Alchemist LLP</p>
+                    <p style="font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Auvri Plus</p>
                 </div>
             </div>
         </div>

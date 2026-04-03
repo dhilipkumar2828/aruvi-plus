@@ -320,6 +320,30 @@
     </div>
 
     <div class="container">
+        @if(session('success'))
+            <div style="background: #d4edda; color: #155724; padding: 15px 25px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; border: 1px solid #c3e6cb;">
+                <i class="fas fa-check-circle"></i>
+                <div>{{ session('success') }}</div>
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div style="background: #f8d7da; color: #721c24; padding: 15px 25px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+                <ul style="margin: 0; padding-left: 20px;">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if(session('warning'))
+            <div style="background: #fff3cd; color: #856404; padding: 15px 25px; border-radius: 12px; margin-bottom: 30px; display: flex; align-items: center; gap: 15px; border: 1px solid #ffeeba;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>{{ session('warning') }}</div>
+            </div>
+        @endif
+
         @if (empty($cart))
             <div class="empty-cart-state">
                 <div class="empty-cart-icon">
@@ -385,11 +409,25 @@
                             </div>
                             <div class="cart-item-subtotal">
                                 <div>₹{{ number_format($item['price'] * $item['quantity']) }}</div>
-                                <form action="{{ route('cart.remove') }}" method="POST" style="display:inline; margin-top:10px;">
-                                    @csrf
-                                    <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
-                                    <button type="submit" class="btn-remove" style="margin-left: auto;"><i class="fas fa-trash"></i></button>
-                                </form>
+                                <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px;">
+                                    @auth
+                                    <form action="{{ route('wishlist.toggle') }}" method="POST" style="margin: 0;">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
+                                        <button type="submit" class="btn-remove" title="Move to Wishlist" style="background: #f0f7ff; color: #2196f3;">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                    </form>
+                                    @endauth
+                                    
+                                    <form action="{{ route('cart.remove') }}" method="POST" style="margin: 0;">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
+                                        <button type="submit" class="btn-remove" title="Remove Item" onclick="return confirm('Remove this item from your cart?')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -397,75 +435,73 @@
 
                 <!-- Summary Panel -->
                 <div class="summary-card">
-                    <h3>Order Summary</h3>
+                    <h3 style="margin-bottom: 25px; border-bottom: 2px solid var(--secondary); padding-bottom: 15px; font-family: 'Playfair Display', serif; font-size: 1.6rem;">Order Summary</h3>
                     
-                    <div class="summary-row">
-                        <span>Items Subtotal</span>
-                        <strong>₹{{ number_format($subtotal) }}</strong>
-                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px;">
+                        <div class="summary-row">
+                            <span style="color: #666;">Items Subtotal</span>
+                            <strong style="color: var(--primary);">₹{{ number_format($subtotal) }}</strong>
+                        </div>
 
-                    <div class="summary-row">
-                        <span>Shipping</span>
-                        @if($shipping > 0)
-                            <strong>₹{{ number_format($shipping) }}</strong>
-                        @else
-                            <strong style="color: #2e7d32;">FREE</strong>
+                        @if($discount > 0)
+                        <div class="summary-row" style="color: #2e7d32;">
+                            <span>Coupon Discount @if($coupon) ({{ $coupon->code }}) @endif</span>
+                            <strong>-₹{{ number_format($discount) }}</strong>
+                        </div>
                         @endif
                     </div>
 
-                    @if ($discount > 0)
-                        <div class="summary-row" style="color: #2e7d32;">
-                            <span>Coupon Discount</span>
-                            <strong>-₹{{ number_format($discount) }}</strong>
-                        </div>
-                    @endif
-
-                    <div class="coupon-box">
-                        <span class="coupon-title">HAVE A COUPON?</span>
+                    <!-- Coupon Area -->
+                    <div style="background: #fdfaf2; border: 1px dashed #d4af37; border-radius: 15px; padding: 25px; margin-bottom: 30px;">
+                        <span style="font-size: 0.75rem; font-weight: 800; color: #b58d04; display: block; margin-bottom: 15px; letter-spacing: 1.5px; text-transform: uppercase; text-align: center;">Promotional Offers</span>
                         @if ($coupon)
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <div style="display: flex; align-items: center; gap: 8px;">
-                                    <i class="fas fa-ticket-alt" style="color: var(--accent);"></i>
-                                    <strong>{{ $coupon->code }}</strong>
+                            <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 12px 20px; border-radius: 12px; border: 1px solid #f0e0b0; box-shadow: 0 4px 10px rgba(212, 175, 55, 0.05);">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="width: 32px; height: 32px; background: #fff9e6; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-ticket-alt" style="color: var(--accent); font-size: 0.9rem;"></i>
+                                    </div>
+                                    <div>
+                                        <div style="color: var(--primary); font-weight: 800; font-size: 0.9rem; letter-spacing: 1px;">{{ $coupon->code }}</div>
+                                        <div style="font-size: 0.65rem; color: #2e7d32; font-weight: 700; text-transform: uppercase;">Applied Automatically</div>
+                                    </div>
                                 </div>
                                 <form action="{{ route('cart.coupon.remove') }}" method="POST" style="margin: 0;">
                                     @csrf
-                                    <button type="submit" style="color: #f44336; font-size: 0.8rem; font-weight: 700;">REMOVE</button>
+                                    <button type="submit" style="color: #ff5252; font-size: 0.7rem; font-weight: 800; background: #fff5f5; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: 0.3s;">REMOVE</button>
                                 </form>
                             </div>
                         @else
-                            <form action="{{ route('cart.coupon.apply') }}" method="POST" class="coupon-input-group">
+                            <form action="{{ route('cart.coupon.apply') }}" method="POST" style="display: flex; align-items: center; background: white; border-radius: 50px; border: 1px solid #e0dfd5; overflow: hidden; padding: 4px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);">
                                 @csrf
-                                <input type="text" name="code" placeholder="Enter Code" class="coupon-input" required>
-                                <button type="submit" class="btn-apply shadow-sm">APPLY</button>
+                                <input type="text" name="code" placeholder="ENTER PROMO CODE" style="flex: 1; min-width: 0; padding: 12px 18px; border: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; outline: none; background: transparent;" required>
+                                <button type="submit" style="background: var(--accent); color: white; border: none; padding: 0 30px; border-radius: 50px; font-weight: 800; font-size: 0.75rem; cursor: pointer; transition: all 0.3s ease; height: 44px; display: flex; align-items: center; justify-content: center; min-width: 100px; flex-shrink: 0;">APPLY</button>
                             </form>
                         @endif
                     </div>
 
-                    <div class="summary-total">
-                        <span class="total-label">Total Amount</span>
-                        <div class="total-value">₹{{ number_format($total) }}</div>
+                    <div class="summary-total" style="border-top: 2px solid #f0f0f0; padding-top: 25px; margin-bottom: 30px;">
+                        <span style="font-size: 1.1rem; font-weight: 700; color: var(--primary);">Total Amount</span>
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--primary); font-family: 'Playfair Display', serif;">₹{{ number_format($subtotal - $discount) }}</div>
                     </div>
 
                     @auth
-                        <a href="{{ route('checkout') }}" class="btn-checkout">
-                             PROCEED TO CHECKOUT <i class="fas fa-long-arrow-alt-right"></i>
+                        <a href="{{ route('checkout') }}" class="btn-checkout" style="display: block; width: 100%; padding: 20px; text-align: center; background: var(--primary); color: #fff; border-radius: 50px; font-weight: 700; letter-spacing: 1px;">
+                             PROCEED TO CHECKOUT <i class="fas fa-long-arrow-alt-right" style="margin-left: 8px;"></i>
                         </a>
                     @else
-                        <a href="{{ route('login') }}" class="btn-checkout">
-                            LOGIN TO CHECKOUT <i class="fas fa-sign-in-alt"></i>
+                        <a href="{{ route('login') }}" class="btn-checkout" style="display: block; width: 100%; padding: 20px; text-align: center; background: var(--primary); color: #fff; border-radius: 50px; font-weight: 700; letter-spacing: 1px;">
+                            LOGIN TO CHECKOUT <i class="fas fa-sign-in-alt" style="margin-left: 8px;"></i>
                         </a>
                         <p style="margin: 20px 0 0; color: #888; font-size: 0.85rem; text-align: center;">
                             New customer? <a href="{{ route('register') }}" style="color: var(--primary); font-weight: 700;">Join Auvri Plus</a>
                         </p>
                     @endauth
 
-                    <div style="margin-top: 30px; text-align: center; opacity: 0.4;">
+                    <div style="margin-top: 30px; text-align: center; opacity: 0.5;">
                         <img src="https://checkout.razorpay.com/v1/checkout.js" alt="" style="display:none;">
-                        <i class="fab fa-cc-visa" style="font-size: 24px; margin: 0 5px;"></i>
-                        <i class="fab fa-cc-mastercard" style="font-size: 24px; margin: 0 5px;"></i>
-                        <i class="fas fa-shield-alt" style="font-size: 20px; margin: 0 5px;"></i>
-                        <div style="font-size: 0.7rem; margin-top: 5px;">Secure Encryption Enabled</div>
+                        <i class="fab fa-cc-visa" style="font-size: 24px; margin: 0 8px;"></i>
+                        <i class="fab fa-cc-mastercard" style="font-size: 24px; margin: 0 8px;"></i>
+                        <i class="fas fa-shield-alt" style="font-size: 20px; margin: 0 8px;"></i>
                     </div>
                 </div>
             </div>

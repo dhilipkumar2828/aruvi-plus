@@ -1,180 +1,185 @@
 @extends('layouts.auri')
 
-@section('title', 'My Wishlist | Bogar Siddha Peedam - Bogar Alchemist LLP')
+@section('title', 'My Wishlist | Auvri Plus')
 
 @section('content')
-<style>
-    /* Desktop & General Styles */
-    .main-content {
-        padding-top: 40px !important;
-        padding-bottom: 0px !important;
-        min-height: auto !important;
-    }
-    
-    .wishlist-table-container {
-        width: 100%;
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        overflow: hidden;
-    }
-
-    .wishlist-table {
-        width: 100%;
-        border-collapse: collapse;
-        white-space: nowrap; /* Ensures table cells don't wrap weirdly on small screens */
-    }
-
-    .wishlist-table thead {
-        background: linear-gradient(135deg, #FF9800, #C2185B);
-        color: #fff;
-    }
-
-    .wishlist-table th {
-        padding: 18px;
-        text-align: center;
-        font-weight: 600;
-        text-transform: uppercase;
-        font-size: 13px;
-        letter-spacing: 1px;
-        border: none;
-    }
-    
-    .wishlist-table th.align-left { text-align: left; }
-
-    .wishlist-table tbody tr {
-        border-bottom: 1px solid #eee;
-        transition: background 0.3s;
-    }
-
-    .wishlist-table tbody tr:hover {
-        background-color: #fafafa;
-    }
-
-    .wishlist-table td {
-        padding: 20px;
-        text-align: center;
-        vertical-align: middle;
-        color: #333;
-    }
-    
-    .wishlist-table td.align-left {
-        text-align: left;
-    }
-
-    /* Mobile Responsive Styles - Horizontal Scroll */
-    @media (max-width: 992px) {
-        .wishlist-table-container {
-            margin-bottom: 40px; /* Added bottom space for mobile */
-        }
-
-        .table-responsive {
-            display: block;
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        /* Optional: adjust cell padding slightly for mobile to save some space */
-        .wishlist-table td, .wishlist-table th {
-            padding: 15px 10px;
-        }
-    }
-</style>
-
-<!-- Page Title / Hero -->
-<section class="hero-small" style="background-image: url('{{ asset('images/hero_bg.jpg') }}'); margin-bottom: 0;">
-    <div class="hero-overlay"></div>
+<div class="luxury-account-page">
     <div class="container">
-        <h1>My Wishlist</h1>
-        <p>{{ isset($wishlistItems) && $wishlistItems->count() > 0 ? 'Your curated collection of sacred treasures.' : 'Start collecting your divine favorites.' }}</p>
-    </div>
-</section>
+        <!-- Page Header -->
+        <div class="account-page-header">
+            <h1 class="account-title">My Wishlist</h1>
+            <div class="account-breadcrumb">
+                <a href="{{ route('home') }}">Home</a>
+                <i class="fas fa-chevron-right separator"></i>
+                <a href="{{ route('customer.dashboard') }}">Account</a>
+                <i class="fas fa-chevron-right separator"></i>
+                <span>Wishlist</span>
+            </div>
+        </div>
 
-<main class="main-content">
+        <div class="account-grid">
+            <!-- Sidebar -->
+            <aside class="account-sidebar-col">
+                @include('customer.sidebar')
+            </aside>
 
-    <div class="container account-container">
-        @if($wishlistItems->count() > 0)
-            
-            <div class="wishlist-table-container">
-                <div class="table-responsive">
-                    <table class="table wishlist-table">
-                        <thead>
-                            <tr>
-                                <th>S.No</th>
-                                <th>Product Image</th>
-                                <th class="align-left">Product Name</th>
-                                <th>Price</th>
-                                <th>Cart</th>
-                                <th>Remove</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($wishlistItems as $item)
-                                <tr>
-                                    <td style="color: #555;">{{ $loop->iteration }}</td>
-                                    
-                                    <td>
-                                        <a href="{{ route('product.show', $item->product) }}" style="display: block;">
-                                            @if($item->product->primary_image)
-                                                <img src="{{ asset($item->product->primary_image) }}" alt="{{ $item->product->name }}" style="width: 70px; height: auto; border-radius: 6px; display: inline-block;">
-                                            @else
-                                                <img src="{{ asset('images/placeholder.png') }}" alt="{{ $item->product->name }}" style="width: 70px; height: auto; border-radius: 6px; display: inline-block;">
-                                            @endif
-                                        </a>
-                                    </td>
-                                    
-                                    <td class="align-left">
-                                        <a href="{{ route('product.show', $item->product) }}" style="color: #333; font-weight: 600; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#C2185B'" onmouseout="this.style.color='#333'">
-                                            {{ $item->product->name }}
-                                        </a>
-                                    </td>
-                                    
-                                    <td style="font-weight: 700; color: #C2185B;">
-                                         ₹{{ number_format($item->product->price, 0) }}
-                                    </td>
-                                    
-                                    <td>
-                                        <form action="{{ route('cart.add') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="product_id" value="{{ $item->product_id }}">
-                                            <input type="hidden" name="quantity" value="1">
-                                            <button type="submit" style="background: none; border: none; cursor: pointer; transition: transform 0.2s;" title="Add to Cart" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                                                 <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #FF9800, #F44336); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 4px 10px rgba(244, 67, 54, 0.3);">
-                                                    <i class="fas fa-shopping-cart" style="font-size: 18px;"></i>
+            <!-- Main Content -->
+            <div class="account-main-content">
+                <div class="section-card">
+                    <div class="section-header-flex">
+                        <h3 class="premium-section-title">Saved Products</h3>
+                        <span class="order-count">{{ $wishlistItems->count() }} Items</span>
+                    </div>
+
+                    @if($wishlistItems->count() > 0)
+                        <div class="luxury-table-wrapper">
+                            <table class="luxury-table">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($wishlistItems as $item)
+                                        <tr>
+                                            <td>
+                                                <div class="wishlist-product-cell">
+                                                    <a href="{{ route('product.show', $item->product) }}" class="product-thumb">
+                                                        @if($item->product->primary_image)
+                                                            <img src="{{ asset($item->product->primary_image) }}" alt="{{ $item->product->name }}">
+                                                        @else
+                                                            <div class="placeholder"><i class="fas fa-image"></i></div>
+                                                        @endif
+                                                    </a>
+                                                    <div class="product-info">
+                                                        <a href="{{ route('product.show', $item->product) }}" class="product-link">{{ $item->product->name }}</a>
+                                                        <span class="product-category">{{ $item->product->category?->name ?? 'Natural Wellness' }}</span>
+                                                    </div>
                                                 </div>
-                                            </button>
-                                        </form>
-                                    </td>
-                                    
-                                    <td>
-                                        <form action="{{ route('wishlist.destroy', $item->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="delete-confirm" data-message="Remove {{ $item->product->name }} from your wishlist?" style="background: none; border: none; cursor: pointer; transition: transform 0.2s;" title="Remove" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                                                <div style="width: 45px; height: 45px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ff0000; border: 1px solid #ffcccc; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                                                    <i class="fas fa-trash-alt" style="font-size: 18px;"></i>
+                                            </td>
+                                            <td class="product-price">₹{{ number_format($item->product->price, 2) }}</td>
+                                            <td>
+                                                <div class="action-btns center">
+                                                    <form action="{{ route('cart.add') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="product_id" value="{{ $item->product_id }}">
+                                                        <input type="hidden" name="quantity" value="1">
+                                                        <button type="submit" class="icon-btn cart-btn" title="Add to Cart">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                        </button>
+                                                    </form>
+                                                    <form action="{{ route('wishlist.destroy', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="icon-btn delete-btn" title="Remove">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </form>
                                                 </div>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @else
+                        <div class="empty-state">
+                            <div class="empty-icon"><i class="far fa-heart"></i></div>
+                            <h4 class="empty-title">Your wishlist is empty</h4>
+                            <p>Explore our collections and save your favorites to review them later.</p>
+                            <a href="{{ route('shop') }}" class="btn btn-premium">Start Exploring</a>
+                        </div>
+                    @endif
                 </div>
             </div>
-
-        @else
-            <div style="background: #fff; padding: 60px 20px; border-radius: 12px; text-align: center; color: #777; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #eee;">
-                <div style="width: 80px; height: 80px; background: #fce4ec; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
-                    <i class="fas fa-heart-broken" style="font-size: 32px; color: #C2185B;"></i>
-                </div>
-                <h3 style="font-size: 20px; color: #333; margin-bottom: 10px;">Your wishlist is empty</h3>
-                <p style="font-size: 15px; margin-bottom: 25px; color: #888;">Explore our collections and save your favorite items here.</p>
-                <a href="{{ route('shop') }}" class="btn" style="padding: 12px 35px; background: linear-gradient(135deg, #FF9800, #C2185B); color: #fff; text-decoration: none; border-radius: 50px; font-weight: 600; box-shadow: 0 4px 15px rgba(194, 24, 91, 0.3); transition: all 0.3s;">Start Shopping</a>
-            </div>
-        @endif
+        </div>
     </div>
-</main>
+</div>
+
+<style>
+/* Wishlist Page Specific Styles */
+.luxury-account-page {
+    background: var(--beige-light);
+    padding: 60px 0 100px;
+    min-height: 80vh;
+}
+
+.account-page-header { margin-bottom: 40px; }
+.account-title { font-family: 'Playfair Display', serif; font-size: 38px; color: var(--primary); margin-bottom: 10px; }
+.account-breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #888; }
+.account-breadcrumb a { color: var(--primary); font-weight: 600; }
+
+.account-grid { display: grid; grid-template-columns: 320px 1fr; gap: 40px; }
+
+.section-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--beige-soft);
+}
+
+.section-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--beige-light);
+    padding-bottom: 20px;
+}
+
+.premium-section-title { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--primary); margin: 0; }
+.order-count { font-size: 14px; color: #888; background: var(--beige-light); padding: 5px 15px; border-radius: 50px; }
+
+/* Product Table Cell */
+.wishlist-product-cell { display: flex; align-items: center; gap: 20px; }
+.product-thumb { width: 70px; height: 70px; flex-shrink: 0; border-radius: 12px; overflow: hidden; background: #fff; border: 1px solid var(--beige-soft); }
+.product-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.product-thumb .placeholder { height: 100%; display: flex; align-items: center; justify-content: center; color: #ccc; font-size: 24px; }
+
+.product-link { font-weight: 700; color: #333; text-decoration: none; font-size: 16px; display: block; margin-bottom: 4px; transition: color 0.3s; }
+.product-link:hover { color: var(--primary); }
+.product-category { font-size: 12px; color: #999; }
+
+.product-price { font-weight: 700; color: var(--primary); font-size: 16px; }
+
+/* Luxury Table Override */
+.luxury-table-wrapper { overflow-x: auto; }
+.luxury-table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+.luxury-table th { padding: 15px 20px; text-align: left; color: #999; font-size: 13px; text-transform: uppercase; font-weight: 600; }
+.luxury-table td { padding: 15px 20px; background: var(--luxury-green-soft); font-size: 15px; vertical-align: middle; }
+.luxury-table tr td:first-child { border-radius: 15px 0 0 15px; }
+.luxury-table tr td:last-child { border-radius: 0 15px 15px 0; }
+
+.text-center { text-align: center; }
+
+/* Action Buttons */
+.action-btns.center { justify-content: center; display: flex; gap: 12px; }
+
+.icon-btn {
+    width: 42px; height: 42px; border-radius: 12px; background: #fff; border: 1px solid var(--beige-soft);
+    display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; cursor: pointer;
+}
+
+.cart-btn { color: var(--primary); }
+.cart-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.delete-btn { color: #d32f2f; }
+.delete-btn:hover { background: #d32f2f; color: #fff; border-color: #d32f2f; }
+
+/* Empty State */
+.empty-state { text-align: center; padding: 100px 20px; }
+.empty-icon { font-size: 70px; color: var(--beige-dark); margin-bottom: 30px; opacity: 0.5; }
+.empty-title { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--primary); margin-bottom: 10px; }
+.btn-premium {
+    background: var(--primary); color: #fff; padding: 15px 40px; border-radius: 50px;
+    font-weight: 700; margin-top: 30px; display: inline-block; box-shadow: 0 10px 25px rgba(0, 66, 0, 0.2);
+}
+
+@media (max-width: 991px) {
+    .account-grid { grid-template-columns: 1fr; }
+}
+</style>
 @endsection

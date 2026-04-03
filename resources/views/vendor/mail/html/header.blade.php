@@ -2,7 +2,7 @@
 <tr>
 <td class="header">
 <a href="{{ $url }}" style="display: inline-block;">
-<img src="{{ url('images/logo_final.png') }}" class="logo" alt="{{ config('app.name') }}">
+<img src="{{ url('auri-images/logo.png') }}" class="logo" alt="{{ config('app.name') }}">
 </a>
 </td>
 </tr>

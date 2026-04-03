@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bogar Siddha Peeda | Admin Access</title>
+    <title>Auvri Plus | Admin Access</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Outfit:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,25 +17,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logo_final.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('auri-images/logo.png') }}">
 
     <style>
         :root {
-            --primary: #FF9800;
-            --primary-rgb: 255, 152, 0;
+            --primary: #004200;
+            --primary-rgb: 0, 66, 0;
             --gold: #d4af37;
             --gold-light: #f9d976;
-            --accent: #FF6D00;
-            --bg-deep: #080506;
-            --orange: #ff8c00;
+            --accent: #006400;
+            --bg-deep: #002200;
+            --secondary: #d4af37;
         }
 
         #toast-container > .toast {
-            background: linear-gradient(135deg, #FF8C00 0%, #FF6D00 100%) !important;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%) !important;
             opacity: 1 !important;
-            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.3) !important;
+            box-shadow: 0 10px 30px rgba(0, 66, 0, 0.3) !important;
             border-radius: 16px !important;
-            border: 1px solid rgba(99, 39, 39, 0.1) !important;
+            border: 1px solid rgba(212, 175, 55, 0.1) !important;
             padding: 15px 15px 15px 42px !important;
         }
 
@@ -48,7 +48,7 @@
 
         body {
             font-family: 'Outfit', sans-serif;
-            background: linear-gradient(90deg, #FF9800 0%, #f7171f 100%);
+            background: linear-gradient(135deg, #002e00 0%, #004200 100%);
             height: 100vh;
             color: #fff;
             overflow: hidden;
@@ -112,7 +112,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            /* background: url('{{ asset('images/logo_final.png') }}') no-repeat center center; */
+            /* background: url('{{ asset('auri-images/logo.png') }}') no-repeat center center; */
             background-size: 80%;
             opacity: 0.4;
             z-index: 1;
@@ -136,16 +136,17 @@
         }
 
         .brand-text-wrap h1 {
-            font-size: 46px;
-            font-weight: 900;
-            letter-spacing: 6px;
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            font-weight: 700;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            background: linear-gradient(135deg, #ffffff 0%, #ffd700 100%);
+            background: linear-gradient(135deg, #ffffff 0%, var(--gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin: 0;
             line-height: 1.1;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
 
         .brand-text-wrap p {
@@ -199,7 +200,7 @@
             left: 0;
             right: 0;
             height: 6px;
-            background: linear-gradient(90deg, #FF9100, #F44336, #D81B60);
+            background: linear-gradient(90deg, var(--gold), var(--primary));
         }
 
         .form-header {
@@ -207,11 +208,12 @@
         }
 
         .form-header h2 {
-            font-size: 32px;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             margin-bottom: 8px;
-            color: #1a1a1a;
+            color: var(--primary);
         }
 
         .form-header p {
@@ -300,7 +302,7 @@
         .btn-submit {
             width: 100%;
             height: 64px;
-            background: linear-gradient(90deg, #FF9800 0%, #E91E63 100%);
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
             border: none;
             border-radius: 20px;
             color: #fff;
@@ -314,7 +316,7 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
-            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.35);
+            box-shadow: 0 15px 35px rgba(0, 66, 0, 0.25);
             margin-top: 10px;
         }
 
@@ -352,7 +354,7 @@
         <!-- Brand Side -->
         <div class="left-pane">
             <div class="logo-content">
-                <img src="{{ asset('images/logo_final.png') }}" alt="Bogar Sacred Logo" class="logo-main">
+                <img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus Logo" class="logo-main">
                 {{-- <div class="brand-text-wrap">
                     <h1>BOGAR</h1>
                     <p>SIDDHA PEEDAM</p>

@@ -109,7 +109,7 @@
         }
     </style>
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logo_final.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('auri-images/logo.png') }}">
 </head>
 
 <body>
@@ -122,7 +122,7 @@
                 <!-- Left: Logo & Search -->
                 <div class="nav-left">
                     <a href="{{ url('/') }}" class="logo">
-                        <img src="{{ asset('images/logo_final.png') }}" alt="Bogar Siddha Peedam - Bogar Alchemist LLP">
+                        <img src="{{ asset('auri-images/logo.png') }}" alt="Bogar Siddha Peedam - Bogar Alchemist LLP">
                     </a>
                 </div>
 
@@ -201,7 +201,7 @@
             <div class="mobile-nav-content">
                 <div class="mobile-nav-header">
                     <a href="{{ url('/') }}" class="logo">
-                        <img src="{{ asset('images/logo_final.png') }}"
+                        <img src="{{ asset('auri-images/logo.png') }}"
                             alt="Bogar Siddha Peedam - Bogar Alchemist LLP">
                     </a>
                     <button class="close-menu" id="closeMenu">&times;</button>
@@ -240,7 +240,7 @@
         <div class="container">
             <div class="footer-columns">
                 <div class="footer-col footer-info">
-                    <img src="{{ asset('images/logo_final.png') }}"
+                    <img src="{{ asset('auri-images/logo.png') }}"
                         alt="Bogar Siddha Peedam - Bogar Alchemist LLP Logo" class="footer-logo">
                     <p>Bogar Siddha Peedam - Bogar Alchemist LLP is dedicated to guiding individuals toward prosperity
                         and triumph by harnessing ancient wisdom and spiritual enlightenment.</p>

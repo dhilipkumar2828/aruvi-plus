@@ -23,6 +23,19 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $cart = session('cart', []);
+        
+        // Sync cart with active status from DB
+        if (!empty($cart)) {
+            $activeProductIds = Product::active()->whereIn('id', array_keys($cart))->pluck('id')->toArray();
+            $originalCount = count($cart);
+            $cart = array_intersect_key($cart, array_flip($activeProductIds));
+            
+            if (count($cart) !== $originalCount) {
+                session(['cart' => $cart]);
+                session()->flash('warning', 'Some items in your cart are currently unavailable and have been removed.');
+            }
+        }
+
         $subtotal = $this->calculateSubtotal($cart);
         [$coupon, $discount] = $this->resolveCoupon($subtotal);
         
@@ -63,14 +76,26 @@ class CartController extends Controller
             'action' => ['nullable', 'string'],
         ]);
 
-        $product = Product::findOrFail($data['product_id']);
+        $product = Product::active()->findOrFail($data['product_id']);
         $quantity = $data['quantity'] ?? 1;
 
         $cart = session('cart', []);
         $existing = $cart[$product->id] ?? null;
+        $current_qty = $existing ? $existing['quantity'] : 0;
+        $new_total_qty = $current_qty + $quantity;
+
+        // Stock Check
+        if ($product->stock !== null && $new_total_qty > $product->stock) {
+            $allowed_qty = max(0, $product->stock - $current_qty);
+            if ($allowed_qty <= 0) {
+                return back()->with('error', "Sorry, no more stock available for {$product->name}.");
+            }
+            $new_total_qty = $current_qty + $allowed_qty;
+            session()->flash('warning', "Only {$product->stock} items available. We've added the remaining {$allowed_qty} items to your cart.");
+        }
 
         if ($existing) {
-            $cart[$product->id]['quantity'] += $quantity;
+            $cart[$product->id]['quantity'] = $new_total_qty;
         } else {
             $cart[$product->id] = [
                 'product_id' => $product->id,
@@ -78,7 +103,7 @@ class CartController extends Controller
                 'price' => (float) $product->price,
                 'image' => $product->primary_image,
                 'slug' => $product->slug,
-                'quantity' => $quantity,
+                'quantity' => $new_total_qty,
             ];
         }
 
@@ -87,8 +112,8 @@ class CartController extends Controller
         $action = $data['action'] ?? 'add';
         if ($action === 'buy') {
             return redirect()
-                ->route('cart.index')
-                ->with('success', 'Item added to cart. You can continue to checkout.');
+                ->route('checkout')
+                ->with('success', 'Ready to checkout.');
         }
 
         return back()->with('success', 'Item added to cart.');
@@ -101,9 +126,17 @@ class CartController extends Controller
             'quantity' => ['required', 'integer', 'min:1'],
         ]);
 
+        $product = Product::active()->findOrFail($data['product_id']);
+        $requested_qty = (int) $data['quantity'];
+
         $cart = session('cart', []);
-        if (isset($cart[$data['product_id']])) {
-            $cart[$data['product_id']]['quantity'] = $data['quantity'];
+        if (isset($cart[$product->id])) {
+            // Stock Check for update
+            if ($product->stock !== null && $requested_qty > $product->stock) {
+                $requested_qty = $product->stock;
+                session()->flash('warning', "Only {$product->stock} items available. Quantity has been adjusted.");
+            }
+            $cart[$product->id]['quantity'] = $requested_qty;
         }
 
         session(['cart' => $cart]);
@@ -138,6 +171,21 @@ class CartController extends Controller
     public function showCheckout(Request $request)
     {
         $cart = session('cart', []);
+        
+        // Sync cart with active status from DB
+        if (!empty($cart)) {
+            $activeProductIds = Product::active()->whereIn('id', array_keys($cart))->pluck('id')->toArray();
+            $originalCount = count($cart);
+            $cart = array_intersect_key($cart, array_flip($activeProductIds));
+            
+            if (count($cart) !== $originalCount) {
+                session(['cart' => $cart]);
+                if (empty($cart)) {
+                    return redirect()->route('cart.index')->with('warning', 'The items in your cart are no longer available.');
+                }
+            }
+        }
+
         if (empty($cart)) {
             return redirect()->route('cart.index')->with('success', 'Your cart is empty.');
         }
@@ -164,8 +212,14 @@ class CartController extends Controller
         }
         $defaultAddress = $addresses->where('is_default', true)->first() ?: $addresses->first();
         
-        $state = $request->get('state') ?: ($defaultAddress ? $defaultAddress->state : null);
-        [$shipping_charges, $shipping_discount] = $this->calculateShipping($subtotal, $state);
+        // Only calculate shipping if explicitly requested via query or old input
+        $state = $request->get('state') ?: (old('state') ?: null);
+        $shipping_charges = 0.0;
+        $shipping_discount = 0.0;
+        
+        if ($state) {
+            [$shipping_charges, $shipping_discount] = $this->calculateShipping($subtotal, $state);
+        }
         
         $total = max($subtotal - $discount + $shipping_charges - $shipping_discount, 0);
 
@@ -200,32 +254,34 @@ class CartController extends Controller
         }
 
         $shipping = $request->validate([
-            'phone' => ['required', 'string', 'max:50'],
+            'name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s]+$/'],
+            'phone' => ['required', 'string', 'regex:/^[0-9]{10}$/'],
             'address_line1' => ['required', 'string', 'max:255'],
             'address_line2' => ['nullable', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:100'],
             'state' => ['required', 'string', 'max:100'],
-            'postal_code' => ['required', 'string', 'max:20'],
+            'postal_code' => ['required', 'string', 'regex:/^[0-9]{6}$/'],
             'country' => ['required', 'string', 'max:100'],
             'notes' => ['nullable', 'string', 'max:500'],
             'save_address' => ['nullable', 'boolean'],
+        ], [
+            'name.regex' => 'Name should only contain alphabets and spaces.',
+            'phone.regex' => 'Phone number must be exactly 10 digits.',
+            'postal_code.regex' => 'Postal code must be exactly 6 digits.',
         ]);
 
         if ($user && $request->boolean('save_address')) {
-            $user->addresses()->updateOrCreate(
-                [
-                    'address_line1' => $shipping['address_line1'],
-                    'postal_code' => $shipping['postal_code']
-                ],
-                [
-                    'phone' => $shipping['phone'],
-                    'address_line2' => $shipping['address_line2'] ?? null,
-                    'city' => $shipping['city'],
-                    'state' => $shipping['state'],
-                    'country' => $shipping['country'],
-                    'is_default' => !$user->addresses()->exists()
-                ]
-            );
+            $user->addresses()->create([
+                'name' => $shipping['name'],
+                'phone' => $shipping['phone'],
+                'address_line1' => $shipping['address_line1'],
+                'address_line2' => $shipping['address_line2'] ?? null,
+                'city' => $shipping['city'],
+                'state' => $shipping['state'],
+                'postal_code' => $shipping['postal_code'],
+                'country' => $shipping['country'],
+                'is_default' => !$user->addresses()->exists()
+            ]);
         }
 
         $discountMap = [];
@@ -260,7 +316,7 @@ class CartController extends Controller
 
         $order = Order::create([
             'order_number' => $orderNumber,
-            'customer_name' => $user->name,
+            'customer_name' => $shipping['name'],
             'customer_email' => $user->email,
             'phone' => $shipping['phone'],
             'address_line1' => $shipping['address_line1'],

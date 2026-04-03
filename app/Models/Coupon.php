@@ -74,43 +74,34 @@ class Coupon extends Model
 
         if (!empty($eligibleProductIds)) {
             $cartProductIds = collect($cart)->pluck('product_id')->toArray();
-            $missingProducts = [];
             
+            // Check if AT LEAST ONE eligible product is in the cart
+            $hasEligibleProduct = false;
             foreach ($eligibleProductIds as $id) {
-                if (!in_array($id, $cartProductIds)) {
-                    $missingProducts[] = Product::find($id)->name ?? 'Unknown Product';
+                if (in_array((int)$id, $cartProductIds)) {
+                    $hasEligibleProduct = true;
+                    break;
                 }
             }
 
-            if (!empty($missingProducts)) {
-                return 'This coupon requires the following products to be in your cart: ' . implode(', ', $missingProducts);
-            }
-
-            // Check if there are any products in the cart that are NOT part of the coupon
-            $extraneousProducts = [];
-            foreach ($cart as $item) {
-                if (!in_array($item['product_id'], $eligibleProductIds)) {
-                    $extraneousProducts[] = $item['name'];
-                }
-            }
-
-            if (!empty($extraneousProducts)) {
-                return 'This coupon can only be applied when your cart contains ONLY the specific products it was created for. Please remove: ' . implode(', ', $extraneousProducts);
+            if (!$hasEligibleProduct) {
+                $productNames = $this->products()->pluck('name')->toArray();
+                return 'This coupon only applies to: ' . implode(', ', $productNames);
             }
 
             $eligibleSubtotal = 0;
             foreach ($cart as $item) {
-                if (in_array($item['product_id'], $eligibleProductIds)) {
+                if (in_array((int)$item['product_id'], $eligibleProductIds)) {
                     $eligibleSubtotal += $item['price'] * $item['quantity'];
                 }
             }
 
             // Minimum amount check for product-specific coupons usually applies to the eligible subtotal
             if ($this->minimum_amount && $eligibleSubtotal < $this->minimum_amount) {
-                return 'Eligible products in your cart do not meet the minimum amount for this coupon.';
+                return 'Participating products in your cart do not meet the minimum amount (₹' . number_format($this->minimum_amount) . ') for this coupon.';
             }
         } elseif ($this->minimum_amount && $subtotal < $this->minimum_amount) {
-            return 'This coupon requires a higher order subtotal.';
+            return 'This coupon requires a minimum subtotal of ₹' . number_format($this->minimum_amount) . '.';
         }
 
         return null;

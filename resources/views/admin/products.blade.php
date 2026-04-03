@@ -34,7 +34,7 @@
                 </select>
 
                 @if(request('category') || request('search') || request('status') || request('stock_status'))
-                    <a href="{{ route('admin.products') }}" class="admin-btn" style="background: #fff; color: #ff6d00; border: 1px solid #ff6d00; padding: 6px 18px; font-weight: 800; text-transform: uppercase; font-size: 11px; height: 38px; display: inline-flex; align-items: center; letter-spacing: 0.5px; box-shadow: 0 2px 6px rgba(255, 109, 0, 0.1); border-radius: 50px;">CLEAR</a>
+                    <a href="{{ route('admin.products') }}" class="admin-btn" style="background: #fff; color: var(--primary); border: 1px solid var(--primary); padding: 6px 18px; font-weight: 800; text-transform: uppercase; font-size: 11px; height: 38px; display: inline-flex; align-items: center; letter-spacing: 0.5px; box-shadow: 0 2px 6px rgba(255, 109, 0, 0.1); border-radius: 50px;">CLEAR</a>
                 @endif
             </form>
             <a href="{{ route('admin.products.create') }}" class="admin-btn admin-btn-primary" style="white-space: nowrap; height: 42px;">
@@ -121,7 +121,7 @@
         </table>
     </div>
 
-    <div style="padding: 20px 30px; border-top: 1px solid rgba(194, 24, 91, 0.05); display: flex; justify-content: space-between; align-items: center;">
+    <div style="padding: 20px 30px; border-top: 1px solid rgba(0, 66, 0, 0.05); display: flex; justify-content: space-between; align-items: center;">
         <div style="color: var(--text-muted); font-size: 14px;">
             Showing {{ $products->firstItem() ?? 0 }} to {{ $products->lastItem() ?? 0 }} of {{ $products->total() }} entries
         </div>
