@@ -140,9 +140,9 @@
             </div>
         </div>
         <div class="footer-copy">
-            <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                <span>&copy; {{ date('Y') }} Auvri Plus. All rights reserved.</span>
-                <a href="{{ route('admin.login') }}" style="color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;">ADMIN LOGIN <i class="fas fa-lock" style="font-size: 0.65rem; margin-left: 5px;"></i></a>
+            <div class="container" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; text-align: center;">
+                <span style="color: #ccc; font-size: 0.9rem; line-height: 1.6; font-weight: 500;">&copy; {{ date('Y') }} Auvri Plus. All rights reserved.</span>
+                {{-- <a href="{{ route('admin.login') }}" style="color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;">ADMIN LOGIN <i class="fas fa-lock" style="font-size: 0.65rem; margin-left: 5px;"></i></a> --}}
             </div>
         </div>
     </footer>
