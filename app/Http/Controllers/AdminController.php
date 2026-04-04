@@ -11,6 +11,7 @@ use App\Models\Coupon;
 use App\Models\Category;
 use App\Models\CouponUsage;
 use App\Models\Testimonial;
+use App\Models\ProductReview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -1047,6 +1048,62 @@ class AdminController extends Controller
         return redirect()
             ->route('admin.testimonials')
             ->with('success', 'Testimonial deleted successfully.');
+    }
+
+    public function reviews(Request $request)
+    {
+        $query = ProductReview::with('product')->orderByDesc('created_at');
+
+        if ($request->filled('status')) {
+            $query->where('is_approved', $request->status === 'approved');
+        }
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'LIKE', "%{$search}%")
+                  ->orWhere('email', 'LIKE', "%{$search}%")
+                  ->orWhere('comment', 'LIKE', "%{$search}%")
+                  ->orWhereHas('product', function($sq) use ($search) {
+                      $sq->where('name', 'LIKE', "%{$search}%");
+                  });
+            });
+        }
+
+        $reviews = $query->paginate(10);
+
+        return view('admin.reviews', compact('reviews'));
+    }
+
+    public function approveReview(ProductReview $review)
+    {
+        $review->update(['is_approved' => true]);
+
+        // Update product average rating and review count
+        $product = $review->product;
+        $reviews = $product->reviews()->where('is_approved', true)->get();
+        // Skip direct assignment if reviews_count/rating are virtual or readonly in some contexts
+        $product->update([
+            'reviews_count' => $reviews->count(),
+            'rating' => $reviews->avg('rating') ?: 5
+        ]);
+
+        return redirect()->back()->with('success', 'Review approved successfully.');
+    }
+
+    public function destroyReview(ProductReview $review)
+    {
+        $product = $review->product;
+        $review->delete();
+
+        // Update product average rating and review count
+        $reviews = $product->reviews()->where('is_approved', true)->get();
+        $product->update([
+            'reviews_count' => $reviews->count(),
+            'rating' => $reviews->avg('rating') ?: 5
+        ]);
+
+        return redirect()->back()->with('success', 'Review deleted successfully.');
     }
 
     public function logout(Request $request)

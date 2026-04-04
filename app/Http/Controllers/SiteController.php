@@ -167,16 +167,11 @@ class SiteController extends Controller
             'email' => $data['email'],
             'rating' => $data['rating'],
             'comment' => $data['comment'],
-            'is_approved' => true,
+            'is_approved' => false,
         ]);
 
-        // Update product average rating and review count
-        $reviews = $product->reviews()->get();
-        $product->reviews_count = $reviews->count();
-        $product->rating = $reviews->avg('rating');
-        $product->save();
-
-        return redirect()->back()->with('success', 'Your review has been submitted successfully.');
+        // Redirect with success message
+        return redirect()->back()->with('success', 'Your review has been submitted and is pending administrator approval.');
     }
 
     public function blogs()

@@ -153,13 +153,18 @@
                             @endfor
                         </div>
                         <h4 class="p-title">{{ $product->name }}</h4>
-                        <div class="p-bot">
-                            <span class="p-price">₹{{ number_format($product->price) }}</span>
+                        <div class="p-bot" style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+                            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                <span class="p-price" style="font-weight: 800; color: #004200; font-size: 1.15rem; font-family: 'Playfair Display', serif;">₹{{ number_format($product->price) }}</span>
+                                @if($product->compare_price && $product->compare_price > 0)
+                                    <span style="text-decoration: line-through; color: #999; font-size: 0.85rem; font-weight: 500;">₹{{ number_format($product->compare_price) }}</span>
+                                @endif
+                            </div>
                             <form action="{{ route('cart.add') }}" method="POST" style="display:inline;">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="add-btn"><i class="fas fa-plus"></i></button>
+                                <button type="submit" class="add-btn" style="background: #e8f5e9; color: #004200; width: 35px; height: 35px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;"><i class="fas fa-plus"></i></button>
                             </form>
                         </div>
                     </div>

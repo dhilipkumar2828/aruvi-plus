@@ -252,8 +252,8 @@
 
 .upload-trigger {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 5px;
+    right: 5px;
     width: 32px;
     height: 32px;
     background: #fff;
@@ -262,13 +262,22 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
     color: var(--primary);
     transition: all 0.3s;
     z-index: 5;
+    border: 1px solid #f0f0f0;
 }
-.upload-trigger:hover { transform: scale(1.1); background: var(--primary); color: #fff; }
-.upload-trigger i { pointer-events: none; }
+.upload-trigger:hover { transform: scale(1.1); background: var(--primary); color: #fff; border-color: var(--primary); }
+.upload-trigger i { 
+    pointer-events: none; 
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
 
 .upload-info h4 { margin: 0; color: var(--primary); font-family: 'Playfair Display', serif; }
 .upload-info p { margin: 5px 0 0; font-size: 13px; color: #888; }
