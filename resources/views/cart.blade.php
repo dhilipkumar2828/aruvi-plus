@@ -68,12 +68,9 @@
         grid-template-columns: 100px 1fr auto auto;
         gap: 25px;
         align-items: center;
-        padding: 25px 0;
+        padding: 30px 0;
         border-bottom: 1px solid #f0f0f0;
-    }
-
-    .cart-item:last-child {
-        border-bottom: none;
+        position: relative; /* For absolute positioning of actions */
     }
 
     .cart-item-img {
@@ -91,6 +88,47 @@
         max-width: 100%;
         max-height: 100%;
         object-fit: contain;
+    }
+
+    .cart-item-actions-corner {
+        position: absolute;
+        top: 20px;
+        right: 0;
+        display: flex;
+        gap: 8px;
+    }
+
+    .btn-action-small {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        transition: 0.3s;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-wishlist {
+        background: #f0f7ff;
+        color: #2196f3;
+    }
+
+    .btn-wishlist:hover {
+        background: #2196f3;
+        color: #fff;
+    }
+
+    .btn-remove-small {
+        background: #fff5f5;
+        color: #ff5252;
+    }
+
+    .btn-remove-small:hover {
+        background: #ff5252;
+        color: #fff;
     }
 
     .cart-item-info h4 {
@@ -143,8 +181,11 @@
         font-weight: 700;
         font-size: 1.1rem;
         color: var(--primary);
-        min-width: 100px;
-        text-align: right;
+        min-width: 130px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .btn-remove {
@@ -408,26 +449,27 @@
                                 </form>
                             </div>
                             <div class="cart-item-subtotal">
-                                <div>₹{{ number_format($item['price'] * $item['quantity']) }}</div>
-                                <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px;">
-                                    @auth
-                                    <form action="{{ route('wishlist.toggle') }}" method="POST" style="margin: 0;">
-                                        @csrf
-                                        <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
-                                        <button type="submit" class="btn-remove" title="Move to Wishlist" style="background: #f0f7ff; color: #2196f3;">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-                                    </form>
-                                    @endauth
-                                    
-                                    <form action="{{ route('cart.remove') }}" method="POST" style="margin: 0;">
-                                        @csrf
-                                        <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
-                                        <button type="submit" class="btn-remove" title="Remove Item" onclick="return confirm('Remove this item from your cart?')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
+                                <div style="font-size: 1.4rem; font-weight: 800; color: #004200; font-family: 'Playfair Display', serif;">₹{{ number_format($item['price'] * $item['quantity']) }}</div>
+                            </div>
+
+                            <div class="cart-item-actions-corner">
+                                @auth
+                                <form action="{{ route('wishlist.toggle') }}" method="POST" style="margin: 0;">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
+                                    <button type="submit" class="btn-action-small btn-wishlist" title="Move to Wishlist">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </form>
+                                @endauth
+                                
+                                <form action="{{ route('cart.remove') }}" method="POST" style="margin: 0;">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
+                                    <button type="submit" class="btn-action-small btn-remove-small" title="Remove Item" onclick="return confirm('Remove this item? (Price: ₹{{ number_format($item['price'] * $item['quantity']) }})')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     @endforeach
@@ -444,9 +486,14 @@
                         </div>
 
                         @if($discount > 0)
-                        <div class="summary-row" style="color: #2e7d32;">
-                            <span>Coupon Discount @if($coupon) ({{ $coupon->code }}) @endif</span>
-                            <strong>-₹{{ number_format($discount) }}</strong>
+                        <div class="summary-row" style="color: #1b5e20; align-items: flex-start;">
+                            <div style="flex: 1; padding-right: 15px;">
+                                <div style="font-weight: 600;">Coupon Discount</div>
+                                @if($coupon)
+                                <div style="font-size: 0.75rem; color: #43a047; font-weight: 700; letter-spacing: 0.5px;">({{ $coupon->code }})</div>
+                                @endif
+                            </div>
+                            <strong style="white-space: nowrap;">- ₹{{ number_format($discount) }}</strong>
                         </div>
                         @endif
                     </div>

@@ -1162,6 +1162,12 @@
                     </a>
                 </li>
                 <li class="menu-item">
+                    <a href="{{ route('admin.reviews') }}" class="menu-link {{ Route::is('admin.reviews*') ? 'active' : '' }}">
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>Reviews</span>
+                    </a>
+                </li>
+                <li class="menu-item">
                     <a href="{{ route('admin.users') }}" class="menu-link {{ Route::is('admin.users*') ? 'active' : '' }}">
                         <i class="fas fa-users"></i>
                         <span>Users</span>

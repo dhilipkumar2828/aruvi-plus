@@ -73,20 +73,24 @@
                     <span class="review-count">({{ $product->reviews_count ?? 0 }} Reviews)</span>
                 </div>
 
-                <div class="luxury-price-card">
-                    <div class="price-top">
-                        <span class="label">Investment in Wellness</span>
-                        <div class="price-val">₹{{ number_format($product->price) }}</div>
+                <div class="luxury-price-card" style="background: white; border-radius: 20px; padding: 25px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); margin-bottom: 35px; border: 1px solid #f0f0f0;">
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <span class="label" style="text-transform: uppercase; font-size: 11px; letter-spacing: 2px; color: #999; font-weight: 700;">Investment in Wellness</span>
+                        <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                            <div class="price-val" style="font-family: 'Playfair Display', serif; font-size: 3.2rem; color: #004200; font-weight: 800; line-height: 1;">₹{{ number_format($product->price) }}</div>
+                            @if($product->compare_price && $product->compare_price > 0)
+                                <span style="text-decoration: line-through; color: #bbb; font-size: 1.4rem; font-weight: 500;">₹{{ number_format($product->compare_price) }}</span>
+                                @if($product->compare_price > $product->price)
+                                    <span style="background: #e53935; color: #fff; padding: 4px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 800; box-shadow: 0 5px 15px rgba(229,57,53,0.2);">{{ round((($product->compare_price - $product->price) / $product->compare_price) * 100) }}% OFF</span>
+                                @endif
+                            @endif
+
+                            <p style="color: #666; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;">{{ $product->short_description }}</p>
+                        </div>
                     </div>
-                    @if($product->compare_price && $product->compare_price > $product->price)
-                    <div style="margin-top: 8px;">
-                        <span style="text-decoration: line-through; color: #aaa; font-size: 1rem;">₹{{ number_format($product->compare_price) }}</span>
-                        <span style="color: #e53935; font-weight: 600; margin-left: 10px;">{{ round((($product->compare_price - $product->price) / $product->compare_price) * 100) }}% OFF</span>
-                    </div>
-                    @endif
-                    <div class="price-badges">
-                        <span><i class="fas fa-leaf"></i> 100% Organic</span>
-                        <span><i class="fas fa-flask"></i> Lab Tested</span>
+                    <div class="price-badges" style="margin-top: 20px; display: flex; gap: 25px; border-top: 1px solid #f5f5f5; padding-top: 20px;">
+                        <span style="color: #666; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;"><i class="fas fa-leaf" style="color: #81c784;"></i> 100% Organic</span>
+                        <span style="color: #666; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;"><i class="fas fa-flask" style="color: #81c784;"></i> Lab Tested</span>
                     </div>
                 </div>
 
@@ -161,32 +165,91 @@
             <div class="lx-tabs-header">
                 <button class="lx-tab-btn active" onclick="switchLxTab(this, 'lx-desc')">Description</button>
                 <button class="lx-tab-btn" onclick="switchLxTab(this, 'lx-usage')">Usage Instructions</button>
-                @if($product->reviews && $product->reviews->count())
-                <button class="lx-tab-btn" onclick="switchLxTab(this, 'lx-reviews')">Reviews ({{ $product->reviews->count() }})</button>
-                @endif
+                <button class="lx-tab-btn" onclick="switchLxTab(this, 'lx-reviews')">Reviews ({{ $product->reviews->count() ?? 0 }})</button>
             </div>
             <div class="lx-tabs-content">
                 <div id="lx-desc" class="lx-content-pane active">
                     <p>{{ $product->description ?? 'Authentic Ayurvedic product crafted with ancient wisdom.' }}</p>
                 </div>
                 <div id="lx-usage" class="lx-content-pane">
-                    <p>Apply a small amount to the focal points or as directed by an Ayurvedic practitioner. Best used during early morning or before sleep for maximum absorption.</p>
+                    <p>{{ $product->short_description ?? 'Authentic Ayurvedic product crafted with ancient wisdom.' }}</p>
                 </div>
-                @if($product->reviews && $product->reviews->count())
                 <div id="lx-reviews" class="lx-content-pane">
-                    <div style="display: grid; gap: 20px;">
-                        @foreach($product->reviews as $review)
-                        <div style="padding: 20px; border-radius: 15px; border: 1px solid rgba(0,100,0,0.1); background: #f9fbf9;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <strong>{{ $review->name }}</strong>
-                                <span style="color: gold;">{{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}</span>
-                            </div>
-                            <p style="color: #555; margin: 0;">{{ $review->comment }}</p>
+                    <div style="display: grid; grid-template-columns: 1fr 350px; gap: 40px; align-items: start;">
+                        <!-- Review List -->
+                        <div>
+                            <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 25px; color: #004200;">Community Experiences</h4>
+                            @if($product->reviews && $product->reviews->count())
+                                <div style="display: grid; gap: 20px;">
+                                    @foreach($product->reviews as $review)
+                                    <div style="padding: 25px; border-radius: 20px; border: 1px solid #f0f0f0; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.02);">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div style="width: 40px; height: 40px; border-radius: 50%; background: #e8f5e9; color: #2e7d32; display: flex; align-items: center; justify-content: center; font-weight: 700;">{{ substr($review->name, 0, 1) }}</div>
+                                                <div>
+                                                    <div style="font-weight: 700; color: #333;">{{ $review->name }}</div>
+                                                    <div style="font-size: 0.75rem; color: #999;">{{ $review->created_at->diffForHumans() }}</div>
+                                                </div>
+                                            </div>
+                                            <div style="color: #ffd700; font-size: 0.85rem;">
+                                                @for($i=1; $i<=5; $i++)
+                                                    <i class="{{ $i <= $review->rating ? 'fas' : 'far' }} fa-star"></i>
+                                                @endfor
+                                            </div>
+                                        </div>
+                                        <p style="color: #555; line-height: 1.6; margin: 0; font-size: 0.95rem;">{{ $review->comment }}</p>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <div style="padding: 60px 20px; text-align: center; background: #fdfdfd; border-radius: 20px; border: 1px dashed #ddd;">
+                                    <i class="far fa-comment-dots" style="font-size: 3rem; color: #ccc; margin-bottom: 20px;"></i>
+                                    <p style="color: #888; font-size: 1rem;">Be the first to share your journey with this remedy.</p>
+                                </div>
+                            @endif
                         </div>
-                        @endforeach
+
+                        <!-- Review Form -->
+                        <div style="position: sticky; top: 100px; background: #f9fbf9; padding: 30px; border-radius: 25px; border: 1px solid rgba(0,66,0,0.08);">
+                            @auth
+                                <h5 style="font-family: 'Playfair Display', serif; font-size: 1.25rem; margin-bottom: 20px; color: #004200;">Share Your Thoughts</h5>
+                                <form action="{{ route('product.review.store', $product->slug) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="name" value="{{ Auth::user()->name }}">
+                                    <input type="hidden" name="email" value="{{ Auth::user()->email }}">
+                                    
+                                    <div style="margin-bottom: 20px;">
+                                        <label style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: #666; margin-bottom: 10px;">Your Rating</label>
+                                        <div class="star-rating" style="display: flex; gap: 8px; font-size: 1.5rem; color: #ddd; cursor: pointer;">
+                                            <i class="far fa-star star-btn" data-value="1"></i>
+                                            <i class="far fa-star star-btn" data-value="2"></i>
+                                            <i class="far fa-star star-btn" data-value="3"></i>
+                                            <i class="far fa-star star-btn" data-value="4"></i>
+                                            <i class="far fa-star star-btn" data-value="5"></i>
+                                            <input type="hidden" name="rating" id="review_rating" value="5" required>
+                                        </div>
+                                    </div>
+
+                                    <div style="margin-bottom: 20px;">
+                                        <label style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: #666; margin-bottom: 10px;">Experience Details</label>
+                                        <textarea name="comment" rows="4" style="width: 100%; border-radius: 15px; border: 1px solid #ddd; padding: 15px; font-family: inherit; font-size: 0.9rem; resize: none; background: #fff;" placeholder="How did this product help you?" required></textarea>
+                                    </div>
+
+                                    <button type="submit" style="width: 100%; border: none; padding: 15px; border-radius: 50px; font-weight: 700; letter-spacing: 1px; background: #004200; color: #fff; cursor: pointer; transition: transform 0.2s ease;">SUBMIT REVIEW</button>
+                                </form>
+                            @else
+                                <div style="text-align: center;">
+                                    <div style="width: 60px; height: 60px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+                                        <i class="fas fa-lock" style="color: #004200;"></i>
+                                    </div>
+                                    <h5 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 10px;">Want to review this?</h5>
+                                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 25px;">Please login to your account to share your experience with others.</p>
+                                    <a href="{{ route('login') }}" style="display: block; text-decoration: none; padding: 15px; border-radius: 50px; font-weight: 700; letter-spacing: 1px; background: #004200; color: #fff;">LOGIN TO REVIEW</a>
+                                </div>
+                            @endauth
+                        </div>
                     </div>
                 </div>
-                @endif
             </div>
         </div>
     </section>
@@ -285,5 +348,39 @@
         newVal = Math.max(1, Math.min(max, newVal));
         input.value = newVal;
     }
+
+    $(document).ready(function() {
+        // Star Rating Interaction
+        $('.star-btn').on('mouseover', function() {
+            let val = $(this).data('value');
+            $('.star-btn').each(function() {
+                if ($(this).data('value') <= val) {
+                    $(this).removeClass('far').addClass('fas').css('color', '#ffd700');
+                } else {
+                    $(this).removeClass('fas').addClass('far').css('color', '#ddd');
+                }
+            });
+        }).on('mouseout', function() {
+            let currentVal = $('#review_rating').val();
+            $('.star-btn').each(function() {
+                if ($(this).data('value') <= currentVal) {
+                    $(this).removeClass('far').addClass('fas').css('color', '#ffd700');
+                } else {
+                    $(this).removeClass('fas').addClass('far').css('color', '#ddd');
+                }
+            });
+        }).on('click', function() {
+            let val = $(this).data('value');
+            $('#review_rating').val(val);
+        });
+
+        // Initialize stars on load
+        let initialVal = $('#review_rating').val();
+        $('.star-btn').each(function() {
+            if ($(this).data('value') <= initialVal) {
+                $(this).removeClass('far').addClass('fas').css('color', '#ffd700');
+            }
+        });
+    });
 </script>
 @endsection

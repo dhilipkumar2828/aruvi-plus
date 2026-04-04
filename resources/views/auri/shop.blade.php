@@ -75,6 +75,11 @@
                         </form>
 
                         <a href="{{ route('product.show', $product->slug) }}" class="quick-view-btn">Quick View</a>
+                        @if($product->compare_price && $product->compare_price > $product->price)
+                            <div style="position: absolute; bottom: 15px; left: 15px; background: #e53935; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; z-index: 5; box-shadow: 0 4px 10px rgba(229,57,53,0.2);">
+                                {{ round((($product->compare_price - $product->price) / $product->compare_price) * 100) }}% OFF
+                            </div>
+                        @endif
                     </div>
                     <div class="p-info">
                         <div class="p-rating">
@@ -87,7 +92,12 @@
                             <span style="font-size: 0.8rem; color: var(--primary); opacity: 0.7;">{{ $product->category_rel->name }}</span>
                         @endif
                         <div class="p-bot">
-                            <span class="p-price">₹{{ number_format($product->price) }}</span>
+                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                <span class="p-price" style="font-size: 1.2rem; font-weight: 800; color: #004200;">₹{{ number_format($product->price) }}</span>
+                                @if($product->compare_price && $product->compare_price > 0)
+                                    <span style="text-decoration: line-through; color: #999; font-size: 0.9rem; letter-spacing: 0.5px; opacity: 0.7;">₹{{ number_format($product->compare_price) }}</span>
+                                @endif
+                            </div>
                             <form action="{{ route('cart.add') }}" method="POST" style="display:inline;">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">

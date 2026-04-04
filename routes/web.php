@@ -135,6 +135,11 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/testimonials/{testimonial}/edit', [AdminController::class, 'editTestimonial'])->name('admin.testimonials.edit');
     Route::put('/testimonials/{testimonial}', [AdminController::class, 'updateTestimonial'])->name('admin.testimonials.update');
     Route::delete('/testimonials/{testimonial}', [AdminController::class, 'destroyTestimonial'])->name('admin.testimonials.destroy');
+
+    Route::get('/reviews', [AdminController::class, 'reviews'])->name('admin.reviews');
+    Route::patch('/reviews/{review}/approve', [AdminController::class, 'approveReview'])->name('admin.reviews.approve');
+    Route::delete('/reviews/{review}', [AdminController::class, 'destroyReview'])->name('admin.reviews.destroy');
+
     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
 
     Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
