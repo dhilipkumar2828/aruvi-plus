@@ -398,15 +398,7 @@
                                         <option value="Uttarakhand">Uttarakhand</option>
                                         <option value="West Bengal">West Bengal</option>
                                     </optgroup>
-                                    <optgroup label="Union Territories">
-                                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                                        <option value="Chandigarh">Chandigarh</option>
-                                        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
-                                        <option value="Delhi">Delhi</option>
-                                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                        <option value="Ladakh">Ladakh</option>
-                                        <option value="Lakshadweep">Lakshadweep</option>
-                                    </optgroup>
+                                   
                                 </select>
                             </div>
                             <div>
@@ -545,13 +537,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Form fields mapping
             const fieldSelectors = {
-                phone: 'input[name="phone"]',
-                country: 'input[name="country"]',
-                address_line1: 'input[name="address_line1"]',
-                address_line2: 'input[name="address_line2"]',
-                city: 'input[name="city"]',
-                state: 'input[name="state"]',
-                postal_code: 'input[name="postal_code"]'
+                phone: '[name="phone"]',
+                country: '[name="country"]',
+                address_line1: '[name="address_line1"]',
+                address_line2: '[name="address_line2"]',
+                city: '[name="city"]',
+                state: '[name="state"]',
+                postal_code: '[name="postal_code"]'
             };
 
             const fields = {};

@@ -1,6 +1,6 @@
 @extends('layouts.auri')
 
-@section('title', 'Navapashanam Shivlingam | Auvri Plus')
+@section('title', 'Aurvi Plus Shivlingam | Auvri Plus')
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/product-detail.css') }}">
@@ -24,14 +24,14 @@
             <!-- Left: Gallery -->
             <div class="product-gallery" style="flex: 1; min-width: 350px;">
                 <div class="main-image-container" style="background: #fff; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 20px;">
-                    <img src="{{ asset('images/Navapashanam_Shivlingam_New_Side1.png') }}" alt="Navapashanam Shivlingam" id="mainImg" style="width: 100%; height: auto; object-fit: contain;">
+                    <img src="{{ asset('images/Aurvi Plus_Shivlingam_New_Side1.png') }}" alt="Aurvi Plus Shivlingam" id="mainImg" style="width: 100%; height: auto; object-fit: contain;">
                 </div>
                 <div class="thumbnail-grid" style="display: flex; gap: 15px;">
-                    <div class="thumb-item active" onclick="changeImage('{{ asset('images/Navapashanam_Shivlingam_New_Side1.png') }}', this)" style="width: 80px; height: 80px; background: #fff; border-radius: 10px; cursor: pointer; padding: 10px; border: 2px solid transparent;">
-                        <img src="{{ asset('images/Navapashanam_Shivlingam_New_Side1.png') }}" alt="Side 1" style="width: 100%; height: 100%; object-fit: contain;">
+                    <div class="thumb-item active" onclick="changeImage('{{ asset('images/Aurvi Plus_Shivlingam_New_Side1.png') }}', this)" style="width: 80px; height: 80px; background: #fff; border-radius: 10px; cursor: pointer; padding: 10px; border: 2px solid transparent;">
+                        <img src="{{ asset('images/Aurvi Plus_Shivlingam_New_Side1.png') }}" alt="Side 1" style="width: 100%; height: 100%; object-fit: contain;">
                     </div>
-                    <div class="thumb-item" onclick="changeImage('{{ asset('images/Navapashanam_Shivlingam_New_Side2.png') }}', this)" style="width: 80px; height: 80px; background: #fff; border-radius: 10px; cursor: pointer; padding: 10px; border: 2px solid transparent;">
-                        <img src="{{ asset('images/Navapashanam_Shivlingam_New_Side2.png') }}" alt="Side 2" style="width: 100%; height: 100%; object-fit: contain;">
+                    <div class="thumb-item" onclick="changeImage('{{ asset('images/Aurvi Plus_Shivlingam_New_Side2.png') }}', this)" style="width: 80px; height: 80px; background: #fff; border-radius: 10px; cursor: pointer; padding: 10px; border: 2px solid transparent;">
+                        <img src="{{ asset('images/Aurvi Plus_Shivlingam_New_Side2.png') }}" alt="Side 2" style="width: 100%; height: 100%; object-fit: contain;">
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
             <!-- Right: Content -->
             <div class="product-info-panel" style="flex: 1; min-width: 350px;">
                 <div class="category-tag" style="display: inline-flex; align-items: center; gap: 8px; background: #fce4ec; color: #c2185b; padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 12px; margin-bottom: 15px; text-transform: uppercase;"><i class="fas fa-tag"></i> Sacred Artifacts</div>
-                <h1 class="product-title-premium" style="font-size: 36px; color: #222; margin-bottom: 20px; font-weight: 800;">Navapashanam Shivlingam</h1>
+                <h1 class="product-title-premium" style="font-size: 36px; color: #222; margin-bottom: 20px; font-weight: 800;">Aurvi Plus Shivlingam</h1>
                 <div class="rating-summary" style="display: flex; align-items: center; gap: 10px; margin-bottom: 25px;">
                     <div class="stars" style="color: #ff9f43; font-size: 14px;">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
@@ -97,7 +97,7 @@
         <div class="narrative-content" style="max-width: 800px; margin: 0 auto;">
             <h2 style="font-size: 32px; color: #222; margin-bottom: 25px; font-weight: 800;">The Alchemy of Auvri Plus</h2>
             <p style="color: #555; line-height: 2; font-size: 18px;">
-                Perfected by the legendary Auvri Plus at the Palani Hills, Navapashanam is more than a material; it is a spiritual battery. By purifying nine distinct poisons and binding them through secret herbal processes, Auvri Plus created a permanent source of divine vibration that heals the body and aligns the soul.
+                Perfected by the legendary Auvri Plus at the Palani Hills, Aurvi Plus is more than a material; it is a spiritual battery. By purifying nine distinct poisons and binding them through secret herbal processes, Auvri Plus created a permanent source of divine vibration that heals the body and aligns the soul.
             </p>
             <div class="premium-header-wrapper" style="display: flex; align-items: center; justify-content: center; margin-top: 40px;">
                 <span class="title-decoration-line left" style="flex: 1; height: 1px; background: #ddd; max-width: 100px;"></span>

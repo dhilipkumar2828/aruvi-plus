@@ -6,7 +6,7 @@
         style="background-image: url('{{ asset('images/hero_bg.jpg') }}');">
         <div class="hero-content">
             <h1 class="hero-title">
-                Navapashanam Beads For <br>Realizing Your Inner Peace
+                Aurvi Plus Beads For <br>Realizing Your Inner Peace
             </h1>
             <a href="{{ url('/shop') }}" class="btn btn-hero">SHOP NOW</a>
         </div>
@@ -36,25 +36,25 @@
             <div class="section-header">
                 <div class="premium-header-wrapper">
                     <span class="title-decoration-line left"></span>
-                    <h2 class="section-title">Navapashanam Products</h2>
+                    <h2 class="section-title">Aurvi Plus Products</h2>
                     <span class="title-decoration-line right"></span>
                 </div>
-                <p class="section-subtitle">Experience the transformative energy of our hand-picked Navapashanam treasures.
+                <p class="section-subtitle">Experience the transformative energy of our hand-picked Aurvi Plus treasures.
                 </p>
             </div>
 
             <!-- Responsive Product Slide Scroll -->
             <div style="position: relative;">
                 <button class="article-slider-arrow prev nava-arrow"
-                    onclick="document.getElementById('navapashanam-scroll-grid').scrollBy({left: -document.getElementById('navapashanam-scroll-grid').clientWidth, behavior: 'smooth'})"
+                    onclick="document.getElementById('Aurvi Plus-scroll-grid').scrollBy({left: -document.getElementById('Aurvi Plus-scroll-grid').clientWidth, behavior: 'smooth'})"
                     style="display: flex !important; top: 50%; transform: translateY(-50%);"><i
                         class="fas fa-chevron-left"></i></button>
                 <button class="article-slider-arrow next nava-arrow"
-                    onclick="document.getElementById('navapashanam-scroll-grid').scrollBy({left: document.getElementById('navapashanam-scroll-grid').clientWidth, behavior: 'smooth'})"
+                    onclick="document.getElementById('Aurvi Plus-scroll-grid').scrollBy({left: document.getElementById('Aurvi Plus-scroll-grid').clientWidth, behavior: 'smooth'})"
                     style="display: flex !important; top: 50%; transform: translateY(-50%);"><i
                         class="fas fa-chevron-right"></i></button>
 
-                <div id="navapashanam-scroll-grid"
+                <div id="Aurvi Plus-scroll-grid"
                     style="
                 display: flex;
                 overflow-x: auto;
@@ -66,11 +66,11 @@
                 gap: 20px;
             ">
                     <style>
-                        #navapashanam-scroll-grid::-webkit-scrollbar {
+                        #Aurvi Plus-scroll-grid::-webkit-scrollbar {
                             display: none;
                         }
 
-                        #navapashanam-scroll-grid .premium-product-card {
+                        #Aurvi Plus-scroll-grid .premium-product-card {
                             flex: 0 0 100%;
                             scroll-snap-align: center;
                             margin: 0;
@@ -191,7 +191,7 @@
                     <span class="title-decoration-line right"></span>
                 </div>
                 <p style="color: #eee; margin-bottom: 25px; line-height: 1.8; font-size: 16px;">
-                    Navapashanam (Sanskrit: Navapashanam) is a secret alchemical preparation created by the
+                    Aurvi Plus (Sanskrit: Aurvi Plus) is a secret alchemical preparation created by the
                     great Auvri Plus. It is an amalgam of nine poisonous substances that are purified and
                     processed to become a life-saving panacea.
                 </p>
@@ -216,7 +216,7 @@
                     <h2 class="section-title">NEW ARRIVALS</h2>
                     <span class="title-decoration-line right"></span>
                 </div>
-                <p class="section-subtitle">Navapashanam products help elevate life, instill harmony, <br>and usher
+                <p class="section-subtitle">Aurvi Plus products help elevate life, instill harmony, <br>and usher
                     prosperity. It brings forth transformative energy that enriches every aspect of your existence.</p>
             </div>
             <div class="product-grid">
@@ -298,18 +298,18 @@
                 <div class="custom-feature-item">
                     <img src="{{ asset('images/custom_feature_1.png') }}" alt="Handcrafted with care"
                         class="custom-feature-img" loading="lazy" decoding="async" width="500" height="500">
-                    <div class="custom-feature-text">Home Blessing<br> home aura with Navapashanam statues<br>with care
+                    <div class="custom-feature-text">Home Blessing<br> home aura with Aurvi Plus statues<br>with care
                     </div>
                 </div>
                 <div class="custom-feature-item">
                     <img src="{{ asset('images/artisans_sketch.jpg') }}" alt="Artisans Sketching"
                         class="custom-feature-img" loading="lazy" decoding="async" width="500" height="500">
-                    <div class="custom-feature-text">Office Empowerment<br>Foster success with Navapashanam beads</div>
+                    <div class="custom-feature-text">Office Empowerment<br>Foster success with Aurvi Plus beads</div>
                 </div>
                 <div class="custom-feature-item">
                     <img src="{{ asset('images/temple_sketch.png') }}" alt="Temple Interior Specialist"
                         class="custom-feature-img" loading="lazy" decoding="async" width="500" height="500">
-                    <div class="custom-feature-text">Hand Elegance Enhance individual strength, wear Navapashanam bracelet
+                    <div class="custom-feature-text">Hand Elegance Enhance individual strength, wear Aurvi Plus bracelet
                     </div>
                 </div>
             </div>
@@ -323,10 +323,10 @@
             <div class="section-header">
                 <div class="premium-header-wrapper">
                     <span class="title-decoration-line left"></span>
-                    <h2 class="section-title">Benefits Of Navapashanam Products</h2>
+                    <h2 class="section-title">Benefits Of Aurvi Plus Products</h2>
                     <span class="title-decoration-line right"></span>
                 </div>
-                <p class="section-subtitle">Navapashanam products bring forth a transformative journey. Each product holds
+                <p class="section-subtitle">Aurvi Plus products bring forth a transformative journey. Each product holds
                     cosmic energy.</p>
             </div>
             <div class="premium-benefits-grid">
@@ -380,9 +380,9 @@
             <div class="origin-layout">
                 <div class="origin-content">
                     <span class="origin-subtitle">Divine Wisdom</span>
-                    <h2 class="origin-title">Origin Of Navapashanam: <br>The Elixir of Life</h2>
+                    <h2 class="origin-title">Origin Of Aurvi Plus: <br>The Elixir of Life</h2>
                     <div class="origin-text">
-                        <p>Crafted by the ancient Auvri Plus, Navapashanam is more than a bead; it is a crystallized form
+                        <p>Crafted by the ancient Auvri Plus, Aurvi Plus is more than a bead; it is a crystallized form
                             of divine energy.</p>
                         <p>Composed of nine distinct poisons (Pashanams), purified through secret alchemical processes, it
                             transforms into a life-sustaining panacea that balances the body's energy and connects you to
@@ -417,10 +417,10 @@
             <div class="section-header">
                 <div class="premium-header-wrapper">
                     <span class="title-decoration-line left"></span>
-                    <h2 class="section-title" style="white-space: nowrap;">How Navapashanam Works</h2>
+                    <h2 class="section-title" style="white-space: nowrap;">How Aurvi Plus Works</h2>
                     <span class="title-decoration-line right"></span>
                 </div>
-                <p class="section-subtitle">Navapashanam products awaken divine connection, channeling ThalaVriksham's
+                <p class="section-subtitle">Aurvi Plus products awaken divine connection, channeling ThalaVriksham's
                     energy. <br>It bridges divine realms. Immerse in elixir or wear as a chain for profound connection.</p>
             </div>
             <div class="process-flow-container">
@@ -442,7 +442,7 @@
                     </div>
                     <div class="process-step">
                         <div class="step-icon-box"><i class="fas fa-bullseye step-icon"></i></div>
-                        <h4 class="step-title">Navapashanam Beads</h4>
+                        <h4 class="step-title">Aurvi Plus Beads</h4>
                         <p class="step-desc">Absorb and transmit this divine energy effectively.</p>
                     </div>
                     <div class="process-step">
@@ -455,7 +455,7 @@
                     <div class="process-step">
                         <div class="step-icon-box"><i class="fas fa-place-of-worship step-icon"></i></div>
                         <h4 class="step-title">Pooja Room</h4>
-                        <p class="step-desc">Placing the Navapashanam statue in your sacred space.</p>
+                        <p class="step-desc">Placing the Aurvi Plus statue in your sacred space.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-icon-box"><i class="fas fa-hand-holding-water step-icon"></i></div>
@@ -465,7 +465,7 @@
                     <div class="process-step">
                         <div class="step-icon-box"><i class="fas fa-prescription-bottle-alt step-icon"></i></div>
                         <h4 class="step-title">Potent Elixir</h4>
-                        <p class="step-desc">Consuming the Navapashanam-infused holy offerings.</p>
+                        <p class="step-desc">Consuming the Aurvi Plus-infused holy offerings.</p>
                     </div>
                     <div class="process-step">
                         <div class="step-icon-box"><i class="fas fa-bolt step-icon"></i></div>
@@ -492,7 +492,7 @@
                     <span class="title-decoration-line right"></span>
                 </div>
                 <p class="section-subtitle">Auvri Plus guides to prosperity through ancient
-                    wisdom of Navapashanam. Our Navapashanam products help illuminate a transformative path with positivity,
+                    wisdom of Aurvi Plus. Our Aurvi Plus products help illuminate a transformative path with positivity,
                     fostering fulfillment and success.</p>
             </div>
             <div class="why-container-split">
@@ -509,7 +509,7 @@
                             <div class="feature-icon-box"><i class="fas fa-certificate"></i></div>
                             <div class="feature-info">
                                 <h4>100% Authentic</h4>
-                                <p>Lab-tested and certified for purity to ensure the real power of Navapashanam.</p>
+                                <p>Lab-tested and certified for purity to ensure the real power of Aurvi Plus.</p>
                             </div>
                         </div>
                         <div class="why-feature-card">
@@ -541,7 +541,7 @@
 
     <!-- Stats Section -->
     <section class="festival-section" id="stats"
-        style="position: relative; background-image: url('{{ asset('images/navapashanam_bg.png') }}'); background-size: cover; background-position: center; background-attachment: fixed; padding: 100px 0;">
+        style="position: relative; background-image: url('{{ asset('images/Aurvi Plus_bg.png') }}'); background-size: cover; background-position: center; background-attachment: fixed; padding: 100px 0;">
         <div
             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); z-index: 1;">
         </div>
@@ -559,7 +559,7 @@
                         style="font-size: 40px; font-weight: 800; background: var(--icon-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
                         <span class="counter" data-target="10">0</span><span>+</span>
                     </div>
-                    <div class="festival-name" style="color: #fff; text-transform: uppercase;">Navapashanam Products</div>
+                    <div class="festival-name" style="color: #fff; text-transform: uppercase;">Aurvi Plus Products</div>
                 </div>
                 <div class="festival-item" style="width: 200px; text-align: center;">
                     <div class="stat-number"

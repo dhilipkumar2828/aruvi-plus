@@ -25,22 +25,30 @@
                             @csrf
                             <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                                 <div class="input-group">
-                                    <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Full Name <span style="color: red;">*</span></label>
+                                    <label style="display: block; text-align: left; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Full Name <span style="color: red;">*</span></label>
                                     <input type="text" name="name" placeholder="Your Name" required value="{{ old('name') }}" style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #ddd; background: #fff; font-family: var(--font-main);">
                                     @error('name')<span style="color: red; font-size: 0.8rem;">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="input-group">
-                                    <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Email Address <span style="color: red;">*</span></label>
+                                    <label style="display: block; text-align: left; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Email Address <span style="color: red;">*</span></label>
                                     <input type="email" name="email" placeholder="Your Email" required value="{{ old('email') }}" style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #ddd; background: #fff; font-family: var(--font-main);">
                                     @error('email')<span style="color: red; font-size: 0.8rem;">{{ $message }}</span>@enderror
                                 </div>
                             </div>
-                            <div class="input-group" style="margin-bottom: 20px;">
-                                <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Subject <span style="color: red;">*</span></label>
-                                <input type="text" name="subject" placeholder="How can we help?" required value="{{ old('subject') }}" style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #ddd; background: #fff; font-family: var(--font-main);">
+                            <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                                <div class="input-group">
+                                    <label style="display: block; text-align: left; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Mobile Number <span style="color: red;">*</span></label>
+                                    <input type="text" name="phone" placeholder="Your Mobile Number" maxlength="10" required value="{{ old('phone') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #ddd; background: #fff; font-family: var(--font-main);">
+                                    @error('phone')<span style="color: red; font-size: 0.8rem;">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="input-group">
+                                    <label style="display: block; text-align: left; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Subject <span style="color: red;">*</span></label>
+                                    <input type="text" name="subject" placeholder="How can we help?" required value="{{ old('subject') }}" style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #ddd; background: #fff; font-family: var(--font-main);">
+                                    @error('subject')<span style="color: red; font-size: 0.8rem;">{{ $message }}</span>@enderror
+                                </div>
                             </div>
                             <div class="input-group" style="margin-bottom: 30px;">
-                                <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Message <span style="color: red;">*</span></label>
+                                <label style="display: block; text-align: left; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #555;">Message <span style="color: red;">*</span></label>
                                 <textarea rows="5" name="message" placeholder="Tell us more about your inquiry..." required style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #ddd; background: #fff; font-family: var(--font-main);">{{ old('message') }}</textarea>
                                 @error('message')<span style="color: red; font-size: 0.8rem;">{{ $message }}</span>@enderror
                             </div>
@@ -145,6 +153,12 @@
                     required: true,
                     email: true
                 },
+                phone: {
+                    required: true,
+                    numericOnly: true,
+                    minlength: 10,
+                    maxlength: 10
+                },
                 subject: {
                     required: true,
                     minlength: 5
@@ -163,6 +177,12 @@
                 email: {
                     required: "Please enter your email",
                     email: "Please enter a valid email address"
+                },
+                phone: {
+                    required: "Please enter your mobile number",
+                    numericOnly: "Please enter only numbers",
+                    minlength: "Mobile number must be 10 digits",
+                    maxlength: "Mobile number must be 10 digits"
                 },
                 subject: {
                     required: "Please enter a subject",

@@ -361,50 +361,45 @@
     </div>
 
     <div class="container">
-        @if(session('success'))
-            <div style="background: #d4edda; color: #155724; padding: 15px 25px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; border: 1px solid #c3e6cb;">
-                <i class="fas fa-check-circle"></i>
-                <div>{{ session('success') }}</div>
-            </div>
-        @endif
-
-        @if($errors->any())
-            <div style="background: #f8d7da; color: #721c24; padding: 15px 25px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
-                <ul style="margin: 0; padding-left: 20px;">
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        @if(session('warning'))
-            <div style="background: #fff3cd; color: #856404; padding: 15px 25px; border-radius: 12px; margin-bottom: 30px; display: flex; align-items: center; gap: 15px; border: 1px solid #ffeeba;">
-                <i class="fas fa-exclamation-triangle"></i>
-                <div>{{ session('warning') }}</div>
-            </div>
-        @endif
-
         @if (empty($cart))
-            <div class="empty-cart-state">
-                <div class="empty-cart-icon">
-                    <i class="fas fa-shopping-basket"></i>
+            <div class="empty-cart-state" style="max-width: 600px; margin: 0 auto; padding: 30px 10px;">
+                <div class="empty-cart-icon" style="margin-bottom: 30px; opacity: 0.6;">
+                    <i class="fas fa-shopping-basket" style="font-size: 4.5rem; color: #d4e1d4;"></i>
                 </div>
-                <h2>Your Cart is Empty</h2>
-                <p>It seems you haven't added any items to your cart yet. Explore our sacred collections and find something special.</p>
-                <a href="{{ route('shop') }}" class="btn btn-primary" style="padding: 15px 40px; border-radius: 50px;">
-                    <i class="fas fa-store"></i> Start Shopping
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #004200; margin-bottom: 15px;">Your Cart is Empty</h2>
+                <p style="color: #666; font-size: 1.05rem; line-height: 1.6; margin-bottom: 35px;">It seems you haven't added any items to your cart yet. Explore our sacred collections and find something special for your wellness journey.</p>
+                <a href="{{ route('shop') }}" class="btn btn-primary" style="padding: 12px 35px; font-weight: 700; letter-spacing: 0.5px; box-shadow: 0 10px 20px rgba(0, 66, 0, 0.15);">
+                    <i class="fas fa-store" style="font-size: 0.9rem; margin-right: 8px;"></i> Start Shopping
                 </a>
             </div>
         @else
             <!-- Header Actions -->
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-                <a href="{{ route('shop') }}" style="color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                <a href="{{ route('shop') }}" class="btn-continue-shopping">
                     <i class="fas fa-arrow-left"></i> Continue Shopping
                 </a>
+                <style>
+                    .btn-continue-shopping {
+                        color: var(--primary);
+                        font-weight: 600;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        padding: 10px 20px;
+                        border: 1px solid var(--primary);
+                        border-radius: 50px;
+                        transition: all 0.3s ease;
+                        text-decoration: none;
+                    }
+                    .btn-continue-shopping:hover {
+                        background: var(--primary);
+                        color: #fff !important;
+                        box-shadow: 0 5px 15px rgba(0, 66, 0, 0.1);
+                    }
+                </style>
                 <form action="{{ route('cart.clear') }}" method="POST" style="margin: 0;">
                     @csrf
-                    <button type="submit" style="color: #666; font-size: 0.9rem; text-decoration: underline;" onclick="return confirm('Clear all items from your cart?')">
+                    <button type="submit" class="btn-clear-cart" style="color: #666; font-size: 0.9rem; text-decoration: underline; background: none; border: none; cursor: pointer;">
                         Clear Cart
                     </button>
                 </form>
@@ -453,20 +448,11 @@
                             </div>
 
                             <div class="cart-item-actions-corner">
-                                @auth
-                                <form action="{{ route('wishlist.toggle') }}" method="POST" style="margin: 0;">
-                                    @csrf
-                                    <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
-                                    <button type="submit" class="btn-action-small btn-wishlist" title="Move to Wishlist">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                </form>
-                                @endauth
                                 
                                 <form action="{{ route('cart.remove') }}" method="POST" style="margin: 0;">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
-                                    <button type="submit" class="btn-action-small btn-remove-small" title="Remove Item" onclick="return confirm('Remove this item? (Price: ₹{{ number_format($item['price'] * $item['quantity']) }})')">
+                                    <button type="submit" class="btn-action-small btn-remove-small confirm-delete" title="Remove Item">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
@@ -500,7 +486,7 @@
 
                     <!-- Coupon Area -->
                     <div style="background: #fdfaf2; border: 1px dashed #d4af37; border-radius: 15px; padding: 25px; margin-bottom: 30px;">
-                        <span style="font-size: 0.75rem; font-weight: 800; color: #b58d04; display: block; margin-bottom: 15px; letter-spacing: 1.5px; text-transform: uppercase; text-align: center;">Promotional Offers</span>
+                        <span style="font-size: 0.75rem; font-weight: 800; color: #b58d04; display: block; margin-bottom: 15px; letter-spacing: 1.5px; text-transform: uppercase; text-align: center;">Coupons & Savings</span>
                         @if ($coupon)
                             <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 12px 20px; border-radius: 12px; border: 1px solid #f0e0b0; box-shadow: 0 4px 10px rgba(212, 175, 55, 0.05);">
                                 <div style="display: flex; align-items: center; gap: 10px;">
@@ -518,10 +504,10 @@
                                 </form>
                             </div>
                         @else
-                            <form action="{{ route('cart.coupon.apply') }}" method="POST" style="display: flex; align-items: center; background: white; border-radius: 50px; border: 1px solid #e0dfd5; overflow: hidden; padding: 4px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);">
+                            <form action="{{ route('cart.coupon.apply') }}" method="POST" style="display: flex; align-items: center; background: white; border-radius: 50px; border: 1px solid #e0dfd5; overflow: hidden; padding: 5px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.03);">
                                 @csrf
-                                <input type="text" name="code" placeholder="ENTER PROMO CODE" style="flex: 1; min-width: 0; padding: 12px 18px; border: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; outline: none; background: transparent;" required>
-                                <button type="submit" style="background: var(--accent); color: white; border: none; padding: 0 30px; border-radius: 50px; font-weight: 800; font-size: 0.75rem; cursor: pointer; transition: all 0.3s ease; height: 44px; display: flex; align-items: center; justify-content: center; min-width: 100px; flex-shrink: 0;">APPLY</button>
+                                <input type="text" name="code" placeholder="COUPON CODE" style="flex: 1; min-width: 0; padding: 10px 15px; border: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; outline: none; background: transparent;" required>
+                                <button type="submit" style="background: var(--accent); color: white; border: none; padding: 0 25px; border-radius: 50px; font-weight: 800; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease; height: 42px; display: flex; align-items: center; justify-content: center; min-width: 90px; flex-shrink: 0; letter-spacing: 1px;">APPLY</button>
                             </form>
                         @endif
                     </div>
@@ -567,5 +553,53 @@
         document.getElementById('input-' + pid).value = qty;
         document.getElementById('form-' + pid).submit();
     }
+
+    $(document).ready(function() {
+        // Confirm Item Removal
+        $('.confirm-delete').on('click', function(e) {
+            e.preventDefault();
+            const $form = $(this).closest('form');
+            
+            Swal.fire({
+                title: 'Remove this item?',
+                text: "You can always add it back later!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#004200',
+                cancelButtonColor: '#ff5252',
+                confirmButtonText: 'Yes, remove it!',
+                cancelButtonText: 'No, keep it',
+                background: '#fff',
+                borderRadius: '24px'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $form.submit();
+                }
+            });
+        });
+
+        // Confirm Clear Cart
+        $('.btn-clear-cart').on('click', function(e) {
+            e.preventDefault();
+            const $form = $(this).closest('form');
+            
+            Swal.fire({
+                title: 'Clear your entire cart?',
+                text: "This will remove all items from your basket.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#004200',
+                cancelButtonColor: '#666',
+                confirmButtonText: 'Yes, clear it',
+                cancelButtonText: 'Wait, keep them',
+                background: '#fff',
+                borderRadius: '24px'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $form.submit();
+                }
+            });
+        });
+    });
 </script>
 @endsection

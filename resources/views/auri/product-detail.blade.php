@@ -110,7 +110,7 @@
 
                         <div class="buy-now-wrapper-premium" style="display: flex; gap: 12px; margin-bottom: 25px;">
                             <button type="submit" name="action" value="add" class="btn-premium-cart-lx">
-                                <i class="fas fa-shopping-bag"></i>
+                                <i class="fas fa-shopping-cart"></i>
                                 <span>ADD TO CART</span>
                             </button>
                             <button type="submit" name="action" value="buy" class="btn-premium-buy-lx">
@@ -309,7 +309,10 @@
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $related->id }}">
                                 <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="add-btn"><i class="fas fa-plus"></i></button>
+                                <button type="submit" class="add-btn-pill" title="Add to Cart">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span>Add</span>
+                                </button>
                             </form>
                         </div>
                     </div>

@@ -95,6 +95,14 @@
                         </div>
                         <i class="fas fa-chevron-right arrow"></i>
                     </a>
+                    <a href="{{ route('wishlist.index') }}" class="quick-link-card">
+                        <div class="link-icon"><i class="fas fa-heart"></i></div>
+                        <div class="link-info">
+                            <h4>My Wishlist</h4>
+                            <p>View your saved products</p>
+                        </div>
+                        <i class="fas fa-chevron-right arrow"></i>
+                    </a>
                     <a href="{{ route('customer.details') }}" class="quick-link-card">
                         <div class="link-icon"><i class="fas fa-user-cog"></i></div>
                         <div class="link-info">
@@ -152,13 +160,15 @@
 
 .dashboard-stats {
     display: flex;
-    gap: 40px;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .stat-item {
+    width: 180px;
     text-align: center;
     background: rgba(255, 255, 255, 0.1);
-    padding: 20px 30px;
+    padding: 20px 10px;
     border-radius: 20px;
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -300,7 +310,7 @@
 /* Quick Links Grid */
 .quick-links-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
 }
 

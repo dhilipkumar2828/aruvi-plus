@@ -47,19 +47,19 @@
                     <!-- Progress Tracker -->
                     <div class="order-tracker-container d-print-none">
                         <div class="tracker-steps">
-                            <div class="step active">
+                            <div class="step {{ in_array($order->status, ['placed', 'shipped', 'out_for_delivery', 'delivered', 'completed']) ? 'active' : '' }}">
                                 <div class="step-circle"><i class="fas fa-shopping-bag"></i></div>
                                 <span class="step-label">Placed</span>
                             </div>
-                            <div class="step {{ in_array($order->status, ['processing', 'completed', 'delivered']) ? 'active' : '' }}">
-                                <div class="step-circle"><i class="fas fa-cog"></i></div>
-                                <span class="step-label">Processing</span>
-                            </div>
-                            <div class="step {{ in_array($order->status, ['shipped', 'completed', 'delivered']) ? 'active' : '' }}">
+                            <div class="step {{ in_array($order->status, ['shipped', 'out_for_delivery', 'delivered', 'completed']) ? 'active' : '' }}">
                                 <div class="step-circle"><i class="fas fa-truck"></i></div>
                                 <span class="step-label">Shipped</span>
                             </div>
-                            <div class="step {{ in_array($order->status, ['completed', 'delivered']) ? 'active' : '' }}">
+                            <div class="step {{ in_array($order->status, ['out_for_delivery', 'delivered', 'completed']) ? 'active' : '' }}">
+                                <div class="step-circle"><i class="fas fa-shipping-fast"></i></div>
+                                <span class="step-label">Out for Delivery</span>
+                            </div>
+                            <div class="step {{ in_array($order->status, ['delivered', 'completed']) ? 'active' : '' }}">
                                 <div class="step-circle"><i class="fas fa-check-circle"></i></div>
                                 <span class="step-label">Delivered</span>
                             </div>
@@ -353,8 +353,8 @@
 }
 
 .tracker-line-fill.status-placed { width: 0%; }
-.tracker-line-fill.status-processing { width: 33.33%; }
-.tracker-line-fill.status-shipped { width: 66.66%; }
+.tracker-line-fill.status-shipped { width: 33.33%; }
+.tracker-line-fill.status-out_for_delivery { width: 66.66%; }
 .tracker-line-fill.status-completed,
 .tracker-line-fill.status-delivered { width: 100%; }
 

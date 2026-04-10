@@ -21,6 +21,9 @@ use Illuminate\Validation\Rule;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderStatusUpdated;
+use App\Mail\InquiryReply;
 
 
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -56,6 +59,11 @@ class AdminController extends Controller
 
         if ($guard->attempt($credentials, $remember)) {
             $request->session()->regenerate();
+
+            if ($guard->user()->status === 'inactive') {
+                $guard->logout();
+                return back()->withErrors(['email' => 'Your account is inactive. Please contact system administrator.']);
+            }
 
             if ($guard->user()->role !== 'admin') {
                 $guard->logout();
@@ -155,7 +163,7 @@ class AdminController extends Controller
             'product_slug' => ['nullable', 'string', 'max:255'],
             'product_meta_description' => ['nullable', 'string'],
             'primary_image' => ['nullable', 'string', 'max:255'],
-            'primary_image_upload' => ['nullable', 'image', 'max:5120'],
+            'primary_image_upload' => ['required', 'image', 'max:5120'],
             'gallery_images' => ['nullable', 'string'],
             'gallery_uploads.*' => ['nullable', 'image', 'max:5120'],
             'badge_text' => ['nullable', 'string', 'max:50'],
@@ -264,7 +272,7 @@ class AdminController extends Controller
             'product_slug' => ['nullable', 'string', 'max:255'],
             'product_meta_description' => ['nullable', 'string'],
             'primary_image' => ['nullable', 'string', 'max:255'],
-            'primary_image_upload' => ['nullable', 'image', 'max:5120'],
+            'primary_image_upload' => ['required', 'image', 'max:5120'],
             'gallery_images' => ['nullable', 'string'],
             'gallery_uploads.*' => ['nullable', 'image', 'max:5120'],
             'badge_text' => ['nullable', 'string', 'max:50'],
@@ -383,9 +391,9 @@ class AdminController extends Controller
     public function storeCategory(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'unique:categories,name'],
             'slug' => ['nullable', 'string', 'max:255', 'unique:categories,slug'],
-            'image' => ['nullable', 'image', 'max:5120'],
+            'image' => ['required', 'image', 'max:5120'],
             'status' => ['nullable', 'string', 'in:active,inactive'],
         ]);
 
@@ -416,7 +424,7 @@ class AdminController extends Controller
     public function updateCategory(Request $request, Category $category)
     {
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', Rule::unique('categories', 'name')->ignore($category->id)],
             'slug' => ['nullable', 'string', 'max:255', Rule::unique('categories', 'slug')->ignore($category->id)],
             'image' => ['nullable', 'image', 'max:5120'],
             'status' => ['nullable', 'string', 'in:active,inactive'],
@@ -717,6 +725,19 @@ class AdminController extends Controller
             'notes' => $data['notes'] ?? null,
         ]);
 
+        // Send Emails on Status Update
+        try {
+            // To Customer
+            Mail::to($order->customer_email)->send(new OrderStatusUpdated($order));
+            
+            // To Admin
+            $adminUser = User::where('role', 'admin')->first();
+            $adminEmail = $adminUser ? $adminUser->email : config('mail.from.address');
+            Mail::to($adminEmail)->send(new OrderStatusUpdated($order));
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Order Status Update Mail Error: ' . $e->getMessage());
+        }
+
         return redirect()
             ->route('admin.orders')
             ->with('success', 'Order #' . $order->order_number . ' updated successfully.');
@@ -790,11 +811,29 @@ class AdminController extends Controller
     {
         $data = $request->validate([
             'status' => ['required', 'string', 'max:50'],
+            'admin_reply' => ['nullable', 'string', 'max:2000'],
         ]);
 
-        $inquiry->update([
+        $updateData = [
             'status' => strtolower($data['status']),
-        ]);
+        ];
+
+        // If a new reply is being sent
+        if (!empty($data['admin_reply']) && $data['admin_reply'] !== $inquiry->admin_reply) {
+            $updateData['admin_reply'] = $data['admin_reply'];
+            $updateData['replied_at'] = now();
+            $updateData['status'] = 'replied'; // Auto set to replied
+
+            // Send Email to Customer
+            try {
+                Mail::to($inquiry->email)->send(new InquiryReply($inquiry, $data['admin_reply']));
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::error('Inquiry Reply Mail Error: ' . $e->getMessage());
+                // Optional: return with error if mail fails
+            }
+        }
+
+        $inquiry->update($updateData);
 
         return redirect()
             ->route('admin.inquiries')
@@ -830,6 +869,53 @@ class AdminController extends Controller
         $users = $query->paginate(10);
 
         return view('admin.users', compact('users'));
+    }
+
+    public function showUser(User $user)
+    {
+        return view('admin.user-show', compact('user'));
+    }
+
+    public function editUser(User $user)
+    {
+        return view('admin.user-edit', compact('user'));
+    }
+
+    public function updateUser(Request $request, User $user)
+    {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s]+$/'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'phone' => ['nullable', 'string', 'size:10', 'regex:/^[0-9]+$/'],
+            'status' => ['required', 'string', 'in:active,inactive'],
+        ], [
+            'name.regex' => 'Full Name should only contain alphabets.',
+            'phone.size' => 'Phone Number must be exactly 10 digits.',
+            'phone.regex' => 'Phone Number should only contain digits.',
+        ]);
+
+        $user->update($data);
+
+        return redirect()->route('admin.users')->with('success', 'User updated successfully.');
+    }
+
+    public function updateUserPassword(Request $request, User $user)
+    {
+        $data = $request->validate([
+            'password' => ['required', 'string', 'min:6'],
+        ]);
+
+        $user->update([
+            'password' => Hash::make($data['password']),
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Password updated successfully for ' . $user->name]);
+    }
+
+    public function destroyUser(User $user)
+    {
+        $user->delete();
+        return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
     }
 
     public function blogs(Request $request)
@@ -1273,5 +1359,148 @@ class AdminController extends Controller
         $exists = $query->exists();
 
         return response()->json(['exists' => $exists]);
+    }
+
+    public function transactionReport(Request $request)
+    {
+        $query = Order::query();
+
+        // Search Filter
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('order_number', 'like', "%$search%")
+                  ->orWhere('customer_name', 'like', "%$search%")
+                  ->orWhere('transaction_id', 'like', "%$search%");
+            });
+        }
+
+        // Status Filter
+        if ($request->filled('payment_status') && $request->payment_status !== 'all') {
+            $query->where('payment_status', $request->payment_status);
+        }
+
+        // Date Filter
+        if ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->start_date);
+        }
+        if ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->end_date);
+        }
+
+        // Stats
+        $totalOrders = (clone $query)->count();
+        $totalRevenue = (clone $query)->where('payment_status', 'paid')->sum('amount');
+
+        // Export logic
+        if ($request->has('export')) {
+            $ordersExport = $query->latest()->get();
+            if ($request->export === 'csv') {
+                return $this->exportCsv($ordersExport);
+            }
+            if ($request->export === 'pdf') {
+                $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.exports.transactions-pdf', [
+                    'orders' => $ordersExport,
+                    'totalOrders' => $totalOrders,
+                    'totalRevenue' => $totalRevenue,
+                    'filters' => $request->all()
+                ])->setPaper('a4', 'landscape');
+                
+                return $pdf->download('transactions-report-' . date('Y-m-d') . '.pdf');
+            }
+        }
+
+        $orders = $query->latest()->paginate(20)->withQueryString();
+
+        return view('admin.reports-transactions', compact('orders', 'totalOrders', 'totalRevenue'));
+    }
+
+    private function exportCsv($orders)
+    {
+        $filename = "transactions-report-" . date("Y-m-d") . ".xls";
+        
+        $xml = '<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="Header">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#004200" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="Currency">
+   <NumberFormat ss:Format="#,##0.00"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Transactions">
+  <Table>
+   <Column ss:Width="40"/>
+   <Column ss:Width="150"/>
+   <Column ss:Width="150"/>
+   <Column ss:Width="100"/>
+   <Column ss:Width="80"/>
+   <Column ss:Width="80"/>
+   <Column ss:Width="80"/>
+   <Column ss:Width="80"/>
+   <Column ss:Width="80"/>
+   <Column ss:Width="150"/>
+   <Row ss:Height="20">
+    <Cell ss:StyleID="Header"><Data ss:Type="String">S.No</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Order #</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Customer</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Date</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Taxable</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">GST</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Total</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Method</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Status</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Txn ID</Data></Cell>
+   </Row>';
+
+        foreach ($orders as $index => $order) {
+            $amount = (float)$order->amount;
+            $shipping = (float)($order->shipping_amount ?? 0);
+            $discount = (float)($order->shipping_discount ?? 0);
+            $productTotal = $amount - ($shipping - $discount);
+            
+            $taxable = (float)$order->taxable_value;
+            if ($taxable <= 0) $taxable = $productTotal / 1.18;
+            
+            $gst = (float)$order->gst_amount;
+            if ($gst <= 0) $gst = $productTotal - $taxable;
+
+            $xml .= '<Row>
+                <Cell><Data ss:Type="Number">' . ($index + 1) . '</Data></Cell>
+                <Cell><Data ss:Type="String">' . $order->order_number . '</Data></Cell>
+                <Cell><Data ss:Type="String">' . htmlspecialchars($order->customer_name) . '</Data></Cell>
+                <Cell><Data ss:Type="String">' . $order->created_at->format('d-m-Y') . '</Data></Cell>
+                <Cell ss:StyleID="Currency"><Data ss:Type="Number">' . $taxable . '</Data></Cell>
+                <Cell ss:StyleID="Currency"><Data ss:Type="Number">' . $gst . '</Data></Cell>
+                <Cell ss:StyleID="Currency"><Data ss:Type="Number">' . $amount . '</Data></Cell>
+                <Cell><Data ss:Type="String">' . strtoupper($order->payment_method ?: 'ONLINE') . '</Data></Cell>
+                <Cell><Data ss:Type="String">' . strtoupper($order->payment_status) . '</Data></Cell>
+                <Cell><Data ss:Type="String">' . ($order->transaction_id ?: 'N/A') . '</Data></Cell>
+            </Row>';
+        }
+
+        $xml .= '</Table>
+ </Worksheet>
+</Workbook>';
+
+        return response($xml)
+            ->header('Content-Type', 'application/vnd.ms-excel')
+            ->header('Content-Disposition', 'attachment; filename=' . $filename);
     }
 }

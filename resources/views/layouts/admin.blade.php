@@ -678,6 +678,19 @@
             box-shadow: 0 5px 15px rgba(76, 175, 80, 0.25);
         }
 
+        /* Password - Orange */
+        .action-btn:has(.fa-key) {
+            color: #FF9800;
+            border-color: rgba(255, 152, 0, 0.3);
+            background: rgba(255, 152, 0, 0.05);
+        }
+        .action-btn:has(.fa-key):hover {
+            background: #FF9800;
+            color: #fff;
+            border-color: #FF9800;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.25);
+        }
+
         /* Delete - Red */
         .action-btn:has(.fa-trash-alt), .action-btn:has(.fa-trash) {
             color: #F44336;
@@ -1138,9 +1151,15 @@
                 </li>
 
                 <li class="menu-item">
-                    <a href="{{ route('admin.orders') }}" class="menu-link {{ Route::is('admin.orders*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.orders') }}" class="menu-link {{ Route::is('admin.orders*') && !Route::is('admin.reports.transactions') ? 'active' : '' }}">
                         <i class="fas fa-shopping-cart"></i>
                         <span>Orders</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('admin.reports.transactions') }}" class="menu-link {{ Route::is('admin.reports.transactions') ? 'active' : '' }}">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <span>Transaction Report</span>
                     </a>
                 </li>
                 <li class="menu-item">

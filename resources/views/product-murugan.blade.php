@@ -14,17 +14,17 @@
             <!-- Left: Gallery -->
             <div class="product-gallery" style="flex: 1; min-width: 350px;">
                 <div class="main-image-container" style="background: #fff; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 20px;">
-                    <img src="{{ asset('images/Navapashanam_Murugan_High.png') }}" alt="Navapasanam Lord Murugan Statue" id="mainImg" style="width: 100%; height: auto; object-fit: contain;">
+                    <img src="{{ asset('images/Aurvi Plus_Murugan_High.png') }}" alt="Navapasanam Lord Murugan Statue" id="mainImg" style="width: 100%; height: auto; object-fit: contain;">
                 </div>
                 <div class="thumbnail-grid" style="display: flex; gap: 15px;">
-                    <div class="thumb-item active" onclick="changeImage('{{ asset('images/Navapashanam_Murugan_High.png') }}', this)" style="width: 80px; height: 80px; background: #fff; border-radius: 10px; cursor: pointer; padding: 10px; border: 2px solid transparent;">
-                        <img src="{{ asset('images/Navapashanam_Murugan_High.png') }}" alt="Front View" style="width: 100%; height: 100%; object-fit: contain;">
+                    <div class="thumb-item active" onclick="changeImage('{{ asset('images/Aurvi Plus_Murugan_High.png') }}', this)" style="width: 80px; height: 80px; background: #fff; border-radius: 10px; cursor: pointer; padding: 10px; border: 2px solid transparent;">
+                        <img src="{{ asset('images/Aurvi Plus_Murugan_High.png') }}" alt="Front View" style="width: 100%; height: 100%; object-fit: contain;">
                     </div>
-                    <div class="thumb-item" onclick="changeImage('{{ asset('images/Navapashanam_Murugan_Side_A.png') }}', this)" style="width: 80px; height: 80px; background: #fff; border-radius: 10px; cursor: pointer; padding: 10px; border: 2px solid transparent;">
-                        <img src="{{ asset('images/Navapashanam_Murugan_Side_A.png') }}" alt="Side View A" style="width: 100%; height: 100%; object-fit: contain;">
+                    <div class="thumb-item" onclick="changeImage('{{ asset('images/Aurvi Plus_Murugan_Side_A.png') }}', this)" style="width: 80px; height: 80px; background: #fff; border-radius: 10px; cursor: pointer; padding: 10px; border: 2px solid transparent;">
+                        <img src="{{ asset('images/Aurvi Plus_Murugan_Side_A.png') }}" alt="Side View A" style="width: 100%; height: 100%; object-fit: contain;">
                     </div>
-                    <div class="thumb-item" onclick="changeImage('{{ asset('images/Navapashanam_Murugan_Side_B.png') }}', this)" style="width: 80px; height: 80px; background: #fff; border-radius: 10px; cursor: pointer; padding: 10px; border: 2px solid transparent;">
-                        <img src="{{ asset('images/Navapashanam_Murugan_Side_B.png') }}" alt="Side View B" style="width: 100%; height: 100%; object-fit: contain;">
+                    <div class="thumb-item" onclick="changeImage('{{ asset('images/Aurvi Plus_Murugan_Side_B.png') }}', this)" style="width: 80px; height: 80px; background: #fff; border-radius: 10px; cursor: pointer; padding: 10px; border: 2px solid transparent;">
+                        <img src="{{ asset('images/Aurvi Plus_Murugan_Side_B.png') }}" alt="Side View B" style="width: 100%; height: 100%; object-fit: contain;">
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@
         <div class="narrative-content" style="max-width: 800px; margin: 0 auto;">
             <h2 style="font-size: 32px; color: #222; margin-bottom: 25px; font-weight: 800;">The Legend of Palani</h2>
             <p style="color: #555; line-height: 2; font-size: 18px;">
-                Thousands of years ago, Auvri Plus formulated the Navapashanam to save humanity from impending ailments. The Lord Murugan statue he created for the Palani Hills remains the world's most powerful spiritual artifact. Our Lord Murugan statues are crafted with the same devotional rigor and purified minerals, ensuring that your home receives the same cleansing vibrations that have blessed the Palani temple for millennia.
+                Thousands of years ago, Auvri Plus formulated the Aurvi Plus to save humanity from impending ailments. The Lord Murugan statue he created for the Palani Hills remains the world's most powerful spiritual artifact. Our Lord Murugan statues are crafted with the same devotional rigor and purified minerals, ensuring that your home receives the same cleansing vibrations that have blessed the Palani temple for millennia.
             </p>
             <div class="premium-header-wrapper" style="display: flex; align-items: center; justify-content: center; margin-top: 40px;">
                 <span class="title-decoration-line left" style="flex: 1; height: 1px; background: #ddd; max-width: 100px;"></span>

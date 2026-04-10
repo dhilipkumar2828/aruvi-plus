@@ -39,7 +39,7 @@
                         seekers.
                     </p>
                     <p style="margin-bottom: 20px; line-height: 1.8; color: #555;">
-                        Our core offering, <strong>Navapashanam</strong> (sanskrit: Navapaṣāṇam), is a secret
+                        Our core offering, <strong>Aurvi Plus</strong> (sanskrit: Navapaṣāṇam), is a secret
                         alchemical
                         preparation created by Auvri Plus. Keep in mind that "Pashanam" translates to poison. However,
                         in the hands of a master alchemist like Auvri Plus, these nine poisonous substances are purified,
@@ -55,16 +55,16 @@
         </div>
     </section>
 
-    <!-- Section: What are Navapashanam Beads? -->
+    <!-- Section: What are Aurvi Plus Beads? -->
     <section class="bg-theme-light" style="padding: 80px 0; overflow: hidden;">
         <div class="container">
             <div class="section-header">
                 <div class="premium-header-wrapper">
                     <span class="title-decoration-line left"></span>
-                    <h2 class="section-title">What are Navapashanam Beads?</h2>
+                    <h2 class="section-title">What are Aurvi Plus Beads?</h2>
                     <span class="title-decoration-line right"></span>
                 </div>
-                <p class="section-subtitle">Divine Essence of Navapashanam Beads</p>
+                <p class="section-subtitle">Divine Essence of Aurvi Plus Beads</p>
             </div>
 
             <div class="row" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-top: 40px;">
@@ -72,8 +72,8 @@
                 <!-- Text Content (Left) -->
                 <div style="flex: 0 0 50%; max-width: 50%; padding-right: 25px; box-sizing: border-box; text-align: center;">
                     <p style="margin-bottom: 25px; line-height: 1.8; color: #555; font-size: 16px;">
-                        Navapashanam Beads are not merely jewelry; they are vessels of potent cosmic energy.
-                        "Navapashanam" is derived from two words: <strong>'Nava'</strong> meaning nine, and
+                        Aurvi Plus Beads are not merely jewelry; they are vessels of potent cosmic energy.
+                        "Aurvi Plus" is derived from two words: <strong>'Nava'</strong> meaning nine, and
                         <strong>'Pashanam'</strong> meaning poison. This refers to the nine unique alchemical poisons
                         that, when purified and combined by the great Auvri Plus, transform into a supreme life-giving
                         elixir.
@@ -106,7 +106,7 @@
                         <div class="chakra-ring chakra-ring-1"></div>
                         <div class="chakra-ring chakra-ring-2"></div>
                         
-                        <img src="{{ asset('images/navapashanam_bead_v2.png') }}" alt="Divine Navapashanam Beads"
+                        <img src="{{ asset('images/Aurvi Plus_bead_v2.png') }}" alt="Divine Aurvi Plus Beads"
                             style="position: relative; z-index: 2; width: 100%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); transition: transform 0.3s ease;">
                     </div>
                 </div>
@@ -280,7 +280,7 @@
                         <div
                             style="position: absolute; top: -30px; left: -30px; width: 100%; height: 100%; background: #fffaf5; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; z-index: 1;">
                         </div>
-                        <img src="{{ asset('images/about-theme.png') }}" alt="Navapashanam Beads Ritual"
+                        <img src="{{ asset('images/about-theme.png') }}" alt="Aurvi Plus Beads Ritual"
                             style="position: relative; z-index: 2; width: 100%; max-width: 500px; display: block; margin: 0 auto; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));">
                     </div>
                 </div>
@@ -290,10 +290,10 @@
                     <button
                         style="border: none; background: var(--theme-pink-light); color: var(--primary-color); padding: 5px 15px; border-radius: 20px; font-weight: 600; font-size: 14px; margin-bottom: 15px;">THEME</button>
                     <h2 class="section-title" style="text-align: left; margin-bottom: 15px;">How to Use it?</h2>
-                    <h3 style="font-size: 24px; color: #333; margin-bottom: 20px; font-weight: 600;">Navapashanam Beads
+                    <h3 style="font-size: 24px; color: #333; margin-bottom: 20px; font-weight: 600;">Aurvi Plus Beads
                         for Inner Awakening</h3>
                     <p style="color: #666; line-height: 1.8; margin-bottom: 40px;">
-                        Navapashanam beads offer spiritual enlightenment and prosperity and infuse your life with divine
+                        Aurvi Plus beads offer spiritual enlightenment and prosperity and infuse your life with divine
                         energy and harmony.
                         Incorporating them into your daily life is simple and profound.
                     </p>
@@ -376,7 +376,7 @@
                     How it Works?</h2>
                 <p class="section-subtitle"
                     style="color: #ddd !important; font-size: 18px; max-width: 700px; margin: 0 auto;">
-                    Transformative Qualities of Navapashanam Beads<br>
+                    Transformative Qualities of Aurvi Plus Beads<br>
                     <span style="font-size: 14px; opacity: 0.8; font-weight: 400; display: block; margin-top: 10px;">
                         Each item carries celestial energy, fostering prosperity, well-being, and spiritual equilibrium.
                     </span>
@@ -633,7 +633,7 @@
                     </div>
                     <h3>Our Mission</h3>
                     <p style="color: #666; line-height: 1.6;">To empower individuals by providing access to authentic
-                        Navapashanam products and spiritual wisdom, fostering holistic well-being and inner peace.</p>
+                        Aurvi Plus products and spiritual wisdom, fostering holistic well-being and inner peace.</p>
                 </div>
                 <!-- Vision -->
                 <div class="vision-mission-card" style="animation-delay: 0.2s;">

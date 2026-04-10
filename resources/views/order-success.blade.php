@@ -92,15 +92,21 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 12px;
-        min-width: 240px;
-        padding: 18px 25px;
+        gap: 10px;
+        min-width: 200px;
+        padding: 14px 25px;
         border-radius: 50px;
         font-weight: 700;
+        font-size: 0.95rem;
         text-decoration: none;
         transition: all 0.3s ease;
-        box-shadow: 0 10px 20px rgba(0, 66, 0, 0.2);
-        letter-spacing: 1px;
+        box-shadow: 0 8px 15px rgba(0, 66, 0, 0.15);
+        letter-spacing: 0.5px;
+    }
+
+    .btn-continue-shop {
+        background: var(--primary);
+        color: #fff !important;
     }
 
     .btn-continue-shop:hover {

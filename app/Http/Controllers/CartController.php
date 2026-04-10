@@ -108,6 +108,13 @@ class CartController extends Controller
         }
 
         session(['cart' => $cart]);
+        
+        // Remove from wishlist if it exists and user is logged in
+        if (Auth::check()) {
+            Wishlist::where('user_id', Auth::id())
+                ->where('product_id', $product->id)
+                ->delete();
+        }
 
         $action = $data['action'] ?? 'add';
         if ($action === 'buy') {
@@ -336,7 +343,7 @@ class CartController extends Controller
             'coupon_type' => $coupon?->type,
             'coupon_value' => $coupon?->value,
             'discount_amount' => $discount,
-            'status' => 'processing',
+            'status' => 'placed',
             'payment_status' => 'pending',
         ]);
 
@@ -415,7 +422,8 @@ class CartController extends Controller
             Mail::to($order->customer_email)->send(new CustomerOrderConfirmation($order));
             
             // To Admin
-            $adminEmail = env('ADMIN_EMAIL', 'admin@bogor.com');
+            $adminUser = \App\Models\User::where('role', 'admin')->first();
+            $adminEmail = $adminUser ? $adminUser->email : config('mail.from.address', 'aurviplus@asvchitfunds.com');
             Mail::to($adminEmail)->send(new AdminOrderNotification($order));
         } catch (\Exception $e) {
             // Log error or ignore to prevent checkout from failing due to mail issues

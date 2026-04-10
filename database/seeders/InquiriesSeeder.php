@@ -26,7 +26,7 @@ class InquiriesSeeder extends Seeder
                 'email' => 'vinod@example.com',
                 'phone' => '+91 98765 11002',
                 'subject' => 'Authenticity certificate',
-                'message' => 'Do you provide a lab certification with each Navapashanam product?',
+                'message' => 'Do you provide a lab certification with each Aurvi Plus product?',
                 'status' => 'replied',
             ],
             [

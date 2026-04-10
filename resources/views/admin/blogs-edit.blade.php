@@ -90,7 +90,7 @@
             
             <div class="admin-form-group">
                 <label class="admin-form-label">Custom Slug (Optional)</label>
-                <input type="text" id="slug" name="slug" value="{{ old('slug', $blog->slug) }}" class="admin-input" placeholder="e.g. benefits-of-navapashanam">
+                <input type="text" id="slug" name="slug" value="{{ old('slug', $blog->slug) }}" class="admin-input" placeholder="e.g. benefits-of-Aurvi Plus">
                 @error('slug') <span class="text-danger" style="font-size: 13px;">{{ $message }}</span> @enderror
             </div>
 

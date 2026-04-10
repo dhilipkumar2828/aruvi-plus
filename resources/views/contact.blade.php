@@ -7,7 +7,7 @@
     <div class="hero-overlay"></div>
     <div class="container">
         <h1>Contact Us</h1>
-        <p>We’re here to help with your Navapashanam journey.</p>
+        <p>We’re here to help with your Aurvi Plus journey.</p>
     </div>
 </section>
 
@@ -81,7 +81,7 @@
                     </div>
                     <div class="grid-2">
                         <div class="form-group">
-                            <input type="text" name="phone" placeholder="Phone Number" value="{{ old('phone') }}" required class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                            <input type="text" name="phone" placeholder="Phone Number" value="{{ old('phone') }}" required class="form-control" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                         </div>
                         <div class="form-group">
                             <input type="text" name="subject" placeholder="Subject" value="{{ old('subject') }}" class="form-control">

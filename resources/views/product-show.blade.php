@@ -95,7 +95,7 @@
                
 
                 <div class="short-description-premium">
-                    {{ $product->description ?? 'A rare Navapashanam statue crafted using nine purified minerals. Each piece is consecrated with traditional rituals, intended for spiritual protection, healing presence, and temple grade reverence.' }}
+                    {{ $product->description ?? 'A rare Aurvi Plus statue crafted using nine purified minerals. Each piece is consecrated with traditional rituals, intended for spiritual protection, healing presence, and temple grade reverence.' }}
                 </div>
 
                 <form action="{{ route('cart.add') }}" method="POST">

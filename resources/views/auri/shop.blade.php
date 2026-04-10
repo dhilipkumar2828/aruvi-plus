@@ -76,7 +76,7 @@
 
                         <a href="{{ route('product.show', $product->slug) }}" class="quick-view-btn">Quick View</a>
                         @if($product->compare_price && $product->compare_price > $product->price)
-                            <div style="position: absolute; bottom: 15px; left: 15px; background: #e53935; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; z-index: 5; box-shadow: 0 4px 10px rgba(229,57,53,0.2);">
+                            <div style="position: absolute; top: 15px; left: 15px; background: #e53935; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; z-index: 5; box-shadow: 0 4px 10px rgba(229,57,53,0.2);">
                                 {{ round((($product->compare_price - $product->price) / $product->compare_price) * 100) }}% OFF
                             </div>
                         @endif
@@ -102,7 +102,7 @@
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="add-btn" title="Add to Cart"><i class="fas fa-plus"></i></button>
+                                <button type="submit" class="add-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></button>
                             </form>
                         </div>
                     </div>

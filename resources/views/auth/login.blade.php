@@ -168,7 +168,7 @@
             <form method="POST" action="{{ route('login.submit') }}" id="loginForm" novalidate>
                 @csrf
                 <div class="form-group">
-                    <label class="form-label">Email Address</label>
+                    <label class="form-label">Email Address<span class="text-danger" style="color: #dc3545;">*</span></label>
                     <div class="input-wrap">
                         <i class="fas fa-envelope"></i>
                         <input type="email" name="email" class="form-input" placeholder="Enter your email address" value="{{ old('email') }}" required autocomplete="email">
@@ -181,7 +181,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Password</label>
+                    <label class="form-label">Password<span class="text-danger" style="color: #dc3545;">*</span></label>
                     <div class="input-wrap">
                         <i class="fas fa-lock"></i>
                         <input type="password" name="password" id="password" class="form-input" placeholder="Enter your password" required autocomplete="current-password">
@@ -210,13 +210,13 @@
                     });
                 </script>
 
-                {{-- <div class="remember-flex">
-                    <label class="remember-label">
-                        <input type="checkbox" name="remember">
+                <div class="remember-flex" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 0.85rem;">
+                    <label class="remember-label" style="display: flex; align-items: center; gap: 8px; color: #666; cursor: pointer;">
+                        <input type="checkbox" name="remember" style="accent-color: var(--primary);">
                         <span>Keep me logged in</span>
                     </label>
-                    <a href="#" class="forgot-link">Forgot?</a>
-                </div> --}}
+                    <a href="{{ route('password.request') }}" class="forgot-link" style="color: var(--primary); font-weight: 700; text-decoration: none;">Forgot Password?</a>
+                </div>
 
                 <button type="submit" class="auth-btn">
                     <span>SIGN IN</span>

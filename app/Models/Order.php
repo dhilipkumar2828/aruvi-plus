@@ -33,6 +33,12 @@ class Order extends Model
         'discount_amount',
         'status',
         'payment_status',
+        'taxable_value',
+        'gst_amount',
+        'gst_rate',
+        'payment_method',
+        'transaction_id',
+        'gateway_order_id',
     ];
 
     protected $casts = [
@@ -41,6 +47,9 @@ class Order extends Model
         'shipping_discount' => 'decimal:2',
         'coupon_value' => 'decimal:2',
         'discount_amount' => 'decimal:2',
+        'taxable_value' => 'decimal:2',
+        'gst_amount' => 'decimal:2',
+        'gst_rate' => 'decimal:2',
     ];
 
     public function items()

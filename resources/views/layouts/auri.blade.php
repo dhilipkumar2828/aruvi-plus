@@ -34,7 +34,7 @@
                 <ul class="nav-links">
                     <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
                     <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About Us</a></li>
-                    <li><a href="{{ route('shop') }}" class="{{ request()->routeIs('shop') ? 'active' : '' }}">Products</a></li>
+                    <li><a href="{{ route('shop') }}" class="{{ request()->routeIs('shop') ? 'active' : '' }}">Shop</a></li>
                     <li><a href="{{ route('blogs.index') }}" class="{{ request()->routeIs('blogs.index') ? 'active' : '' }}">Blogs</a></li>
                     <li><a href="{{ route('faq') }}" class="{{ request()->routeIs('faq') ? 'active' : '' }}">FAQ</a></li>
                     <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
@@ -77,16 +77,6 @@
 
     <!-- Main Content -->
     <main>
-        @if(session('success'))
-            <div class="site-alert site-alert-success">
-                <i class="fas fa-check-circle"></i> {{ session('success') }}
-            </div>
-        @endif
-        @if(session('error'))
-            <div class="site-alert site-alert-error">
-                <i class="fas fa-exclamation-circle"></i> {{ session('error') }}
-            </div>
-        @endif
         @yield('content')
     </main>
 
@@ -100,7 +90,7 @@
             </div>
             <!-- Col 1: Help -->
             <div class="f-col">
-                <h4>HELP</h4>
+                <h4>QUICK LINKS</h4>
                 <div class="f-line"></div>
                 <ul>
                     <li><a href="{{ route('home') }}">Home</a></li>
@@ -261,6 +251,16 @@
                 }
             });
         });
+        // Global Session Messages
+        @if(session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+        @if(session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+        @if(session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
     </script>
     @yield('extra_js')
 </body>

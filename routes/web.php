@@ -32,7 +32,7 @@ Route::get('/shipping-policy', function () { return view('policies.shipping'); }
 Route::get('/privacy-policy', function () { return view('policies.privacy'); })->name('privacy');
 
 Route::get('/product/detail', function () {
-    return redirect()->route('product.show', ['product' => 'navapashanam-shivlingam']);
+    return redirect()->route('product.show', ['product' => 'Aurvi Plus-shivlingam']);
 })->name('product.detail');
 
 Route::get('/product/murugan', function () {
@@ -45,6 +45,12 @@ Route::post('/login', [SiteAuthController::class, 'login'])->name('login.submit'
 Route::get('/register', [SiteAuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [SiteAuthController::class, 'register'])->name('register.submit');
 Route::match(['get', 'post'], '/logout', [SiteAuthController::class, 'logout'])->name('logout');
+
+// Forgot Password
+Route::get('/forgot-password', [SiteAuthController::class, 'showForgotPassword'])->name('password.request');
+Route::post('/forgot-password', [SiteAuthController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/reset-password/{token}', [SiteAuthController::class, 'showResetPassword'])->name('password.reset');
+Route::post('/reset-password', [SiteAuthController::class, 'updatePassword'])->name('password.update');
 
 // Cart
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
@@ -109,6 +115,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/orders', [AdminController::class, 'orders'])->name('admin.orders');
     Route::get('/orders/{order}', [AdminController::class, 'showOrder'])->name('admin.orders.show');
     Route::get('/orders/{order}/download', [AdminController::class, 'downloadInvoice'])->name('admin.orders.download');
+    Route::get('/reports/transactions', [AdminController::class, 'transactionReport'])->name('admin.reports.transactions');
     Route::get('/orders/{order}/edit', [AdminController::class, 'editOrder'])->name('admin.orders.edit');
     Route::put('/orders/{order}', [AdminController::class, 'updateOrder'])->name('admin.orders.update');
     Route::delete('/orders/{order}', [AdminController::class, 'destroyOrder'])->name('admin.orders.destroy');
@@ -141,6 +148,11 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::delete('/reviews/{review}', [AdminController::class, 'destroyReview'])->name('admin.reviews.destroy');
 
     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::get('/users/{user}', [AdminController::class, 'showUser'])->name('admin.users.show');
+    Route::get('/users/{user}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
+    Route::put('/users/{user}', [AdminController::class, 'updateUser'])->name('admin.users.update');
+    Route::delete('/users/{user}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
+    Route::put('/users/{user}/password', [AdminController::class, 'updateUserPassword'])->name('admin.users.password.update');
 
     Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::post('/profile/personal', [AdminController::class, 'updatePersonalInfo'])->name('admin.profile.personal');

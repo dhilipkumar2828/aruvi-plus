@@ -1295,6 +1295,37 @@ header {
   color: var(--white);
 }
 
+.add-btn-pill {
+  background: var(--secondary);
+  color: var(--primary);
+  padding: 8px 18px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 66, 0, 0.05);
+}
+
+.add-btn-pill i {
+  font-size: 0.9rem;
+}
+
+.add-btn-pill:hover {
+  background: var(--primary);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 66, 0, 0.15);
+}
+
+.add-btn-pill:active {
+  transform: translateY(0);
+}
+
 /* 5. Education */
 .education-section {
   background: linear-gradient(rgba(255, 255, 255, 0.945), rgba(255, 255, 255, 0.808)), url('/auri-images/about/approach-bg.png');
@@ -3119,7 +3150,7 @@ footer {
   color: #777;
 }
 
-.empty-cart-state i {
+.empty-cart-icon i {
   font-size: 5rem;
   color: var(--beige-dark);
   margin-bottom: 20px;
@@ -3296,8 +3327,7 @@ footer {
 .site-alert {
     position: fixed;
     top: 90px;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 30px;
     z-index: 9999;
     padding: 14px 30px;
     border-radius: 50px;

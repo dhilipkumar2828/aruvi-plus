@@ -182,17 +182,17 @@
         {{-- Progress Area --}}
         <div class="glass-card d-print-none" style="margin-bottom: 25px; padding: 25px; border-radius: 20px;">
             <div class="status-tracker">
-                <div class="step active">
+                <div class="step {{ in_array($order->status, ['placed', 'shipped', 'out_for_delivery', 'delivered', 'completed']) ? 'active' : '' }}">
                     <div class="step-icon">1</div>
                     <span>Placed</span>
                 </div>
-                <div class="step {{ in_array($order->status, ['processing', 'shipped', 'delivered', 'completed']) ? 'active' : '' }}">
+                <div class="step {{ in_array($order->status, ['shipped', 'out_for_delivery', 'delivered', 'completed']) ? 'active' : '' }}">
                     <div class="step-icon">2</div>
-                    <span>Process</span>
-                </div>
-                <div class="step {{ in_array($order->status, ['shipped', 'delivered', 'completed']) ? 'active' : '' }}">
-                    <div class="step-icon">3</div>
                     <span>Shipped</span>
+                </div>
+                <div class="step {{ in_array($order->status, ['out_for_delivery', 'delivered', 'completed']) ? 'active' : '' }}">
+                    <div class="step-icon">3</div>
+                    <span>Out for Delivery</span>
                 </div>
                 <div class="step {{ in_array($order->status, ['delivered', 'completed']) ? 'active' : '' }}">
                     <div class="step-icon">4</div>

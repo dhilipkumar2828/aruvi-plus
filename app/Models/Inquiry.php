@@ -16,5 +16,7 @@ class Inquiry extends Model
         'subject',
         'message',
         'status',
+        'admin_reply',
+        'replied_at',
     ];
 }
