@@ -22,7 +22,7 @@ Thank you for choosing **{{ config('app.name') }}**. Your order **#{{ $order->or
 @if($order->discount_amount > 0)
 | | | **Coupon Discount** | -₹{{ number_format($order->discount_amount, 2) }} |
 @endif
-| | | **Shipping** | {{ $order->shipping_amount - $order->shipping_discount > 0 ? '₹'.number_format($order->shipping_amount - $order->shipping_discount, 2) : 'FREE' }} |
+| | | **Shipping** | {{ $order->shipping_amount - $order->shipping_discount > 0 ? '₹'.number_format($order->shipping_amount - $order->shipping_discount, 2) : '₹0.00' }} |
 | | | **Grand Total** | **₹{{ number_format($order->amount, 2) }}** |
 
 ## Shipping Details

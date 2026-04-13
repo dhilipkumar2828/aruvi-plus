@@ -10,6 +10,8 @@ use App\Models\Testimonial;
 use App\Models\ProductReview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactInquiry;
 
 class SiteController extends Controller
 {
@@ -137,7 +139,7 @@ class SiteController extends Controller
             'message' => ['required', 'string', 'max:2000'],
         ]);
 
-        Inquiry::create([
+        $inquiry = Inquiry::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'] ?? null,
@@ -145,6 +147,16 @@ class SiteController extends Controller
             'message' => $data['message'],
             'status' => 'new',
         ]);
+
+        // Send Email to Admin (Dynamic based on DB)
+        try {
+            $adminUser = \App\Models\User::where('role', 'admin')->first();
+            $adminEmail = $adminUser ? $adminUser->email : config('mail.from.address');
+            
+            Mail::to($adminEmail)->send(new ContactInquiry($data));
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Contact Mail Error: ' . $e->getMessage());
+        }
 
         return redirect()
             ->route('contact')

@@ -398,15 +398,7 @@
                                         <option value="Uttarakhand">Uttarakhand</option>
                                         <option value="West Bengal">West Bengal</option>
                                     </optgroup>
-                                    <optgroup label="Union Territories">
-                                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                                        <option value="Chandigarh">Chandigarh</option>
-                                        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
-                                        <option value="Delhi">Delhi</option>
-                                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                        <option value="Ladakh">Ladakh</option>
-                                        <option value="Lakshadweep">Lakshadweep</option>
-                                    </optgroup>
+                                   
                                 </select>
                             </div>
                             <div>
@@ -431,11 +423,7 @@
                                 address for future use</label>
                         </div>
 
-                        <button type="submit" class="btn-premium btn-complete-order">
-                            PLACE ORDER NOW <i class="fas fa-check-circle"></i>
-                        </button>
-
-                        <p style="text-align: center; margin-top: 20px; color: #888; font-size: 13px;">
+                        <p style="text-align: center; margin-top: 10px; color: #888; font-size: 13px;">
                             <i class="fas fa-lock"></i> Your transaction is secure and encrypted.
                         </p>
                     </form>
@@ -473,47 +461,57 @@
                         @endforeach
                     </div>
 
-                    <div class="summary-row">
-                        <span>Items Subtotal</span>
-                        <strong>{{ format_inr($subtotal) }}</strong>
-                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; border-top: 1px solid #f0f0f0; padding-top: 20px;">
+                       
 
-                    @if ($coupon)
-                        {{-- <div class="applied-coupon" style="padding: 10px 15px; margin: 15px 0;">
-                            <div class="coupon-info">
-                                <i class="fas fa-tag"></i>
-                                <div>
-                                    <span class="coupon-code" style="font-size: 14px;">{{ $coupon->code }}</span>
-                                    <small style="color: #166534;">Coupon Code Applied</small>
-                                </div>
-                            </div>
-                        </div> --}}
-                        <div class="summary-row" style="color: #2e7d32;">
-                            <span>Coupon Discount @if($coupon) ({{ $coupon->code }}) @endif</span>
-                            <strong id="summary-coupon-discount">-{{ format_inr($discount) }}</strong>
-                        </div>
-                    @endif
-
-                    <div id="shipping-summary-wrapper" style="display: {{ old('state') ? 'block' : 'none' }};">
-                        @if ($shipping_discount > 0)
+                        @if ($discount > 0)
                             <div class="summary-row" style="color: #2e7d32;">
-                                <span>Shipping Discount</span>
-                                <strong id="summary-shipping-discount">-{{ format_inr($shipping_discount) }}</strong>
+                                <span>Coupon Discount</span>
+                                <strong id="summary-coupon-discount">-{{ format_inr($discount) }}</strong>
                             </div>
                         @endif
 
-                        <div class="summary-row">
-                            <span>Shipping Amount</span>
-                            <strong id="summary-shipping-net" style="color: {{ $shipping_charges - $shipping_discount <= 0 ? '#2e7d32' : '#c2185b' }};">
-                                {{ $shipping_charges - $shipping_discount <= 0 ? 'FREE' : format_inr($shipping_charges - $shipping_discount) }}
-                            </strong>
+                        <div id="shipping-summary-wrapper" style="display: {{ $shipping_charges > 0 ? 'flex' : 'none' }}; flex-direction: column; gap: 12px;">
+                            @if ($shipping_discount > 0)
+                                <div class="summary-row" style="color: #2e7d32;">
+                                    <span>Shipping Discount</span>
+                                    <strong id="summary-shipping-discount">-{{ format_inr($shipping_discount) }}</strong>
+                                </div>
+                            @endif
+                          
+                        </div>
+
+                        <div style="border-top: 1px dashed #e2e8f0; padding-top: 15px; margin-top: 5px; display: flex; flex-direction: column; gap: 10px;">
+                             <div class="summary-row">
+                                <span style="color: #777; font-size: 0.9rem;">Product Value</span>
+                                <strong id="summary-product-value" style="color: #444; font-weight: 600;">{{ format_inr($taxable_product_value) }}</strong>
+                            </div>
+
+                            <div class="summary-row">
+                                <span style="color: #777; font-size: 0.9rem;">Shipping Charges</span>
+                                <strong id="summary-shipping-taxable" style="color: #444; font-weight: 600;">{{ format_inr($taxable_shipping_value,2)}}</strong>
+                            </div>
+
+                            <div class="summary-row">
+                                <span style="color: #333; font-weight: 700; font-size: 0.95rem;">Taxable Value</span>
+                                <strong id="summary-taxable-value" style="color: #333; font-weight: 700;">{{ format_inr($taxable_value) }}</strong>
+                            </div>
+
+                            <div class="summary-row">
+                                <span style="color: #777; font-size: 0.9rem;">GST (18%)</span>
+                                <strong id="summary-gst-amount" style="color: #444; font-weight: 600;">{{ format_inr($gst_amount) }}</strong>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="summary-total">
-                        <span class="total-label">Payable Amount</span>
-                        <div class="total-value" id="summary-total">{{ format_inr($total) }}</div>
+                    <div class="summary-total" style="background: #fff5f8; border: 1px solid #ffebeb; border-radius: 12px; padding: 5px 10px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 1.2rem; font-weight: 800; color: #b0185e;">Total</span>
+                        <div style="font-size: 2rem; font-weight: 900; color: #b0185e;" id="summary-total">₹{{ number_format($total, 0) }}</div>
                     </div>
+
+                    <button type="submit" form="checkoutForm" class="btn-premium btn-complete-order" style="width: 100%; padding: 18px; border-radius: 12px; font-weight: 800; font-size: 1rem; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--primary); color: white; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0, 66, 0, 0.15);">
+                        PLACE ORDER NOW <i class="fas fa-check-circle"></i>
+                    </button>
 
                     <div
                         style="background: #fff9f0; border-radius: 16px; padding: 15px; border: 1px dashed #ffd8a8; margin-top: 10px;">
@@ -525,14 +523,7 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 25px; text-align: center;">
-                        <img src="https://checkout.razorpay.com/v1/checkout.js" alt="" style="display:none;">
-                        <div style="display: flex; justify-content: center; gap: 15px; opacity: 0.5;">
-                            <i class="fab fa-cc-visa" style="font-size: 24px;"></i>
-                            <i class="fab fa-cc-mastercard" style="font-size: 24px;"></i>
-                            <i class="fas fa-shield-alt" style="font-size: 20px;"></i>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -545,13 +536,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Form fields mapping
             const fieldSelectors = {
-                phone: 'input[name="phone"]',
-                country: 'input[name="country"]',
-                address_line1: 'input[name="address_line1"]',
-                address_line2: 'input[name="address_line2"]',
-                city: 'input[name="city"]',
-                state: 'input[name="state"]',
-                postal_code: 'input[name="postal_code"]'
+                phone: '[name="phone"]',
+                country: '[name="country"]',
+                address_line1: '[name="address_line1"]',
+                address_line2: '[name="address_line2"]',
+                city: '[name="city"]',
+                state: '[name="state"]',
+                postal_code: '[name="postal_code"]'
             };
 
             const fields = {};
@@ -587,7 +578,7 @@
                     .then(response => response.json())
                     .then(data => {
                         const wrapper = document.getElementById('shipping-summary-wrapper');
-                        if (wrapper) wrapper.style.display = 'block';
+                        if (wrapper) wrapper.style.display = 'flex';
 
                         if (document.getElementById('summary-shipping-charges'))
                             document.getElementById('summary-shipping-charges').innerText = data.formatted_shipping_charges;
@@ -599,6 +590,19 @@
                             document.getElementById('summary-shipping-net').innerText = data.formatted_shipping_net;
                             document.getElementById('summary-shipping-net').style.color = data.shipping_net <= 0 ? '#2e7d32' : '#c2185b';
                         }
+                        
+                        // New Tax Rows
+                        if (document.getElementById('summary-product-value'))
+                            document.getElementById('summary-product-value').innerText = data.formatted_taxable_product_value;
+                        
+                        if (document.getElementById('summary-shipping-taxable'))
+                            document.getElementById('summary-shipping-taxable').innerText = data.formatted_taxable_shipping_value;
+                        
+                        if (document.getElementById('summary-taxable-value'))
+                            document.getElementById('summary-taxable-value').innerText = data.formatted_taxable_value;
+                        
+                        if (document.getElementById('summary-gst-amount'))
+                            document.getElementById('summary-gst-amount').innerText = data.formatted_gst_amount;
 
                         if (document.getElementById('summary-total'))
                             document.getElementById('summary-total').innerText = data.formatted_total;

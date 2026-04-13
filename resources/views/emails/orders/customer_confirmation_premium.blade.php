@@ -1,223 +1,102 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmation - {{ $order->order_number }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Order Confirmation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-        
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-            background: #ffffff;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #FF9100 0%, #F44336 50%, #D81B60 100%);
-            padding: 40px 20px;
-            text-align: center;
-            color: white;
-        }
-        
-        .header img {
-            max-width: 150px;
-            margin-bottom: 10px;
-        }
-        
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-            font-weight: 600;
-        }
-        
-        .content {
-            padding: 40px 30px;
-        }
-        
-        .intro {
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        
-        .order-card {
-            background: #fdfdfd;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .order-title {
-            font-weight: 600;
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #F44336;
-            border-bottom: 2px solid #f8f9fa;
-            padding-bottom: 10px;
-        }
-        
-        .items-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        
-        .items-table th {
-            text-align: left;
-            font-size: 14px;
-            color: #888;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .items-table td {
-            padding: 15px 0;
-            border-bottom: 1px solid #f8f9fa;
-            font-size: 15px;
-        }
-        
-        .total-row td {
-            padding: 8px 0;
-            border-bottom: none;
-        }
-        
-        .grand-total {
-            font-size: 20px;
-            font-weight: 700;
-            color: #D81B60;
-            padding-top: 15px !important;
-            border-top: 2px solid #eee !important;
-        }
-        
-        .address-box {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-        }
-        
-        .button {
-            display: inline-block;
-            background: linear-gradient(135deg, #FF9100 0%, #F44336 100%);
-            color: white;
-            text-decoration: none;
-            padding: 15px 35px;
-            border-radius: 30px;
-            font-weight: 600;
-            margin: 20px 0;
-            box-shadow: 0 5px 15px rgba(244, 67, 54, 0.3);
-        }
-        
-        .footer {
-            background: #f8f9fa;
-            padding: 30px;
-            text-align: center;
-            font-size: 13px;
-            color: #888;
-        }
-        
-        .social-links a {
-            display: inline-block;
-            margin: 0 10px;
-            color: #666;
-            text-decoration: none;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <img src="{{ $message->embed(public_path('auri-images/logo.png')) }}" alt="Navapashanam Logo" style="max-width: 150px; height: auto; margin-bottom: 10px;">
-            <h1>We've Got Your Order!</h1>
-            <p style="color: rgba(255,255,255,0.9); margin-top: 5px; font-size: 14px;">Order #{{ $order->order_number }}</p>
-        </div>
-        
-        <div class="content">
-            <div class="intro">
-                Hello <strong>{{ $order->customer_name }}</strong>,<br><br>
-                Thank you for your order! We're excited to let you know that your order <strong>#{{ $order->order_number }}</strong> has been received and is now being processed with care.
-            </div>
-            
-            <div class="order-card">
-                <div class="order-title">Order Summary</div>
-                <table class="items-table">
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th style="text-align: center;">Qty</th>
-                            <th style="text-align: right;">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($order->items as $item)
-                        <tr>
-                            <td>{{ $item->product_name }}</td>
-                            <td style="text-align: center;">{{ $item->quantity }}</td>
-                            <td style="text-align: right;">₹{{ number_format($item->line_total, 2) }}</td>
-                        </tr>
-                        @endforeach
-                        
-                        <tr class="total-row">
-                            <td colspan="2" style="text-align: right; color: #888;">Subtotal:</td>
-                            <td style="text-align: right;">₹{{ number_format($order->amount - $order->shipping_amount + $order->shipping_discount + $order->discount_amount, 2) }}</td>
-                        </tr>
-                        
-                        @if($order->discount_amount > 0)
-                        <tr class="total-row">
-                            <td colspan="2" style="text-align: right; color: #888;">Discount:</td>
-                            <td style="text-align: right; color: #F44336;">-₹{{ number_format($order->discount_amount, 2) }}</td>
-                        </tr>
-                        @endif
-                        
-                        <tr class="total-row">
-                            <td colspan="2" style="text-align: right; color: #888;">Shipping:</td>
-                            <td style="text-align: right;">{{ $order->shipping_amount - $order->shipping_discount > 0 ? '₹'.number_format($order->shipping_amount - $order->shipping_discount, 2) : 'FREE' }}</td>
-                        </tr>
-                        
-                        <tr class="total-row">
-                            <td colspan="2" style="text-align: right;" class="grand-total">Total Amount:</td>
-                            <td style="text-align: right;" class="grand-total">₹{{ number_format($order->amount, 2) }}</td>
-                        </tr>
-                    </tbody>
+<body style="margin: 0; padding: 0; background-color: #f1f5f9; font-family: 'Outfit', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td style="padding: 40px 0;">
+                <table align="center" border="0" cellpadding="0" cellspacing="0" width="650" style="border-collapse: collapse; background-color: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
+                    <!-- Elegant Header -->
+                    <tr>
+                        <td align="center" style="padding: 50px 0; background-color: #063a17;">
+                            <img src="{{ $message->embed(public_path('auri-images/logo.png')) }}" alt="Auvri Plus" width="140" style="display: block; margin-bottom: 15px;" />
+                            <h2 style="color: #ffffff; font-size: 24px; margin: 0; font-weight: 700;">We've Got Your Order!</h2>
+                            <p style="color: rgba(255,255,255,0.8); margin: 5px 0 0; font-size: 14px;">Order #{{ $order->order_number }}</p>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="padding: 40px;">
+                            <p style="color: #475569; font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+                                Hello {{ $order->customer_name }}, thank you for choosing Auvri Plus. Your order has been successfully placed and is being prepared for dispatch.
+                            </p>
+
+                            <!-- Order Summary Table -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td style="color: #063a17; font-size: 20px; font-weight: 700; padding-bottom: 25px;">Order Summary</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: left; font-size: 13px; color: #94a3b8; text-transform: uppercase; padding-bottom: 15px; border-bottom: 1px solid #f1f5f9;">Product</th>
+                                                    <th style="text-align: center; font-size: 13px; color: #94a3b8; text-transform: uppercase; padding-bottom: 15px; border-bottom: 1px solid #f1f5f9;" width="80">Qty</th>
+                                                    <th style="text-align: right; font-size: 13px; color: #94a3b8; text-transform: uppercase; padding-bottom: 15px; border-bottom: 1px solid #f1f5f9;" width="120">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php $subtotal = 0; @endphp
+                                                @foreach($order->items as $item)
+                                                @php $subtotal += $item->line_total; @endphp
+                                                <tr>
+                                                    <td style="padding: 20px 0; border-bottom: 1px solid #f8f9fa; font-size: 15px; color: #1e293b; font-weight: 500;">{{ $item->product_name }}</td>
+                                                    <td style="padding: 20px 0; border-bottom: 1px solid #f8f9fa; text-align: center; font-size: 15px; color: #475569;">{{ $item->quantity }}</td>
+                                                    <td style="padding: 20px 0; border-bottom: 1px solid #f8f9fa; text-align: right; font-size: 15px; color: #1e293b; font-weight: 600;">₹{{ number_format($item->line_total, 2) }}</td>
+                                                </tr>
+                                                @endforeach
+                                                
+                                                <tr>
+                                                    <td colspan="2" style="text-align: right; padding: 20px 15px 5px 0; font-size: 14px; color: #94a3b8;">Subtotal:</td>
+                                                    <td style="text-align: right; padding: 20px 0 5px 0; font-size: 15px; color: #1e293b; font-weight: 600;">₹{{ number_format($subtotal, 2) }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align: right; padding: 5px 15px 5px 0; font-size: 14px; color: #94a3b8;">Shipping:</td>
+                                                    <td style="text-align: right; padding: 5px 0; font-size: 15px; color: #1e293b; font-weight: 600;">₹{{ number_format($order->shipping_cost ?? 0, 2) }}</td>
+                                                </tr>
+                                                @if($order->discount_amount > 0)
+                                                <tr>
+                                                    <td colspan="2" style="text-align: right; padding: 5px 15px 5px 0; font-size: 14px; color: #dc2626;">Discount:</td>
+                                                    <td style="text-align: right; padding: 5px 0; font-size: 15px; color: #dc2626; font-weight: 600;">-₹{{ number_format($order->discount_amount, 2) }}</td>
+                                                </tr>
+                                                @endif
+                                                <tr>
+                                                    <td colspan="2" style="text-align: right; padding: 25px 15px 20px 0; font-size: 16px; font-weight: 700; color: #D81B60;">Total Amount:</td>
+                                                    <td style="text-align: right; padding: 25px 0 20px 0; font-size: 18px; font-weight: 800; color: #D81B60;">₹{{ number_format($order->amount, 2) }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div align="center" style="margin-top: 30px; padding-top: 30px; border-top: 1px solid #f1f5f9;">
+                                <a href="{{ url('/customer/orders/' . $order->id) }}" style="display: inline-block; background-color: #063a17; color: #ffffff; padding: 18px 50px; border-radius: 12px; text-decoration: none; font-size: 16px; font-weight: 700;">Track Your Order</a>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td align="center" style="padding: 40px; background-color: #f8fafc; border-top: 1px solid #f1f5f9;">
+                            <div style="color: #94a3b8; font-size: 13px; line-height: 1.6;">
+                                <strong style="color: #334155;">Auvri Plus</strong><br/>
+                                Traditional Wisdom, Modern Science<br/>
+                                © {{ date('Y') }} All Rights Reserved.
+                            </div>
+                        </td>
+                    </tr>
                 </table>
-            </div>
-            
-            <div class="address-box">
-                <div style="font-weight: 600; margin-bottom:10px;">Delivery Address</div>
-                <div style="font-size: 14px; line-height: 1.6; color: #666;">
-                    {{ $order->customer_name }}<br>
-                    {{ $order->address_line1 }}<br>
-                    {{ $order->address_line2 ? $order->address_line2 . ',' : '' }}
-                    {{ $order->city }}, {{ $order->state }} - {{ $order->postal_code }}<br>
-                    {{ $order->country }}<br>
-                    Phone: {{ $order->phone }}
-                </div>
-            </div>
-            
-            
-        </div>
-        
-        <div class="footer">
-            <p>&copy; {{ date('Y') }} <strong>Navapashanam | Auvri Plus</strong>. All Rights Reserved.</p>
-            <p>Palani, Tamil Nadu, India</p>
-            <div class="social-links">
-                <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">WhatsApp</a>
-            </div>
-            <p style="margin-top: 20px;">If you have any questions, reply to this email or contact us at <a href="mailto:care@Auvri Plusalchemist.com" style="color: #F44336;">care@Auvri Plusalchemist.com</a></p>
-        </div>
-    </div>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

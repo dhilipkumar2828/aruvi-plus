@@ -34,7 +34,7 @@
                 <ul class="nav-links">
                     <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
                     <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About Us</a></li>
-                    <li><a href="{{ route('shop') }}" class="{{ request()->routeIs('shop') ? 'active' : '' }}">Products</a></li>
+                    <li><a href="{{ route('shop') }}" class="{{ request()->routeIs('shop') ? 'active' : '' }}">Shop</a></li>
                     <li><a href="{{ route('blogs.index') }}" class="{{ request()->routeIs('blogs.index') ? 'active' : '' }}">Blogs</a></li>
                     <li><a href="{{ route('faq') }}" class="{{ request()->routeIs('faq') ? 'active' : '' }}">FAQ</a></li>
                     <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
@@ -58,16 +58,41 @@
                         {{ session('cart') ? array_sum(array_column(session('cart'), 'quantity')) : 0 }}
                     </span>
                 </a>
-                <div class="auth-box" style="display: flex; align-items: center; gap: 15px; margin-left: 10px; font-size: 0.95rem; font-weight: 500;">
+                <div class="auth-box" style="display: flex; align-items: center; gap: 12px; margin-left: 15px;">
                     @auth
-                        <a href="{{ route('customer.dashboard') }}" style="color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-                            <i class="far fa-user-circle" style="font-size: 1.2rem;"></i>
-                            <span>{{ Auth::user()->name }}</span>
-                        </a>
+                        <div class="user-dropdown">
+                            <div class="user-trigger" id="userDropdownTrigger">
+                                @if(Auth::user()->profile_image)
+                                    <img src="{{ asset(Auth::user()->profile_image) }}" alt="{{ Auth::user()->name }}" class="user-avatar-header">
+                                @else
+                                    <i class="far fa-user-circle" style="font-size: 1.25rem; color: #d4af37;"></i>
+                                @endif
+                            </div>
+                            <div class="dropdown-menu-auri" id="userDropdownMenu">
+                                <div class="dropdown-header-auri">
+                                    <h5>{{ Auth::user()->name }}</h5>
+                                    <p>{{ Auth::user()->email }}</p>
+                                </div>
+                                <div class="dropdown-list-auri">
+                                    <a href="{{ route('customer.dashboard') }}" class="dropdown-item-auri">
+                                        <i class="fas fa-th-large"></i> Dashboard
+                                    </a>
+                                    <a href="{{ route('customer.details') }}" class="dropdown-item-auri">
+                                        <i class="fas fa-user-edit"></i> View & Edit Profile
+                                    </a>
+                                    <a href="{{ route('customer.orders') }}" class="dropdown-item-auri">
+                                        <i class="fas fa-box-open"></i> My Orders
+                                    </a>
+                                    <form action="{{ route('logout') }}" method="POST" id="logout-form" style="display: none;">@csrf</form>
+                                    <a href="#" class="dropdown-item-auri logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="fas fa-sign-out-alt"></i> Logout
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     @else
-                        <a href="{{ route('login') }}" style="color: #fff; text-decoration: none;">Login</a>
-                        <span style="color: rgba(255,255,255,0.4);">|</span>
-                        <a href="{{ route('register') }}" style="color: #fff; text-decoration: none;">Register</a>
+                        <a href="{{ route('login') }}" class="auth-btn-login">Login</a>
+                        <a href="{{ route('register') }}" class="auth-btn-register">Register</a>
                     @endauth
                 </div>
                 
@@ -77,16 +102,6 @@
 
     <!-- Main Content -->
     <main>
-        @if(session('success'))
-            <div class="site-alert site-alert-success">
-                <i class="fas fa-check-circle"></i> {{ session('success') }}
-            </div>
-        @endif
-        @if(session('error'))
-            <div class="site-alert site-alert-error">
-                <i class="fas fa-exclamation-circle"></i> {{ session('error') }}
-            </div>
-        @endif
         @yield('content')
     </main>
 
@@ -100,7 +115,7 @@
             </div>
             <!-- Col 1: Help -->
             <div class="f-col">
-                <h4>HELP</h4>
+                <h4>QUICK LINKS</h4>
                 <div class="f-line"></div>
                 <ul>
                     <li><a href="{{ route('home') }}">Home</a></li>
@@ -173,6 +188,25 @@
     <!-- Auri Scripts -->
     <script src="{{ asset('auri-script.js') }}"></script>
     <script>
+        // User Dropdown Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const trigger = document.getElementById('userDropdownTrigger');
+            const menu = document.getElementById('userDropdownMenu');
+            
+            if (trigger && menu) {
+                trigger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    menu.classList.toggle('show');
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (!trigger.contains(e.target) && !menu.contains(e.target)) {
+                        menu.classList.remove('show');
+                    }
+                });
+            }
+        });
+
         // Scroll button
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -261,6 +295,16 @@
                 }
             });
         });
+        // Global Session Messages
+        @if(session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+        @if(session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+        @if(session('warning'))
+            toastr.warning("{{ session('warning') }}");
+        @endif
     </script>
     @yield('extra_js')
 </body>

@@ -8,7 +8,7 @@
     <div class="hero-overlay"></div>
     <div class="container">
         <h1>{{ isset($category) ? $category->name . ' Collections' : 'Shop Collections' }}</h1>
-        <p>{{ isset($category) ? 'Explore our exclusive ' . strtolower($category->name) . ' range' : 'Discover the Divine Energy of Navapashanam' }}</p>
+        <p>{{ isset($category) ? 'Explore our exclusive ' . strtolower($category->name) . ' range' : 'Discover the Divine Energy of Aurvi Plus' }}</p>
     </div>
 </section>
 

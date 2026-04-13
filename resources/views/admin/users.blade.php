@@ -28,7 +28,9 @@
                 <th>Email</th>
                 <th>Phone Number</th>
                 <th>Role</th>
+                <th>Status</th>
                 <th>Joined Date</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -41,11 +43,28 @@
                     <td>
                         <span class="status-badge status-warning">{{ ucfirst($user->role ?? 'Customer') }}</span>
                     </td>
+                    <td>
+                        <span class="status-badge {{ $user->status === 'active' ? 'status-success' : 'status-danger' }}">
+                            {{ ucfirst($user->status ?? 'Active') }}
+                        </span>
+                    </td>
                     <td>{{ optional($user->created_at)->format('M d, Y') }}</td>
+                    <td>
+                        <div class="action-flex">
+                            <a href="{{ route('admin.users.show', $user->id) }}" class="action-btn" title="View"><i class="fas fa-eye"></i> View</a>
+                            <a href="{{ route('admin.users.edit', $user->id) }}" class="action-btn" title="Edit"><i class="fas fa-edit"></i> Edit</a>
+                            <a href="javascript:void(0)" onclick="openPasswordModal('{{ $user->id }}', '{{ $user->email }}', '{{ $user->name }}')" class="action-btn" title="Password"><i class="fas fa-key"></i> Password</a>
+                            <form id="delete-form-{{ $user->id }}" action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" onclick="confirmDelete('{{ $user->id }}')" class="action-btn" title="Delete"><i class="fas fa-trash"></i> Delete</button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" style="text-align: center; color: #888; padding: 30px;">
+                    <td colspan="8" style="text-align: center; color: #888; padding: 30px;">
                         @if(request('search'))
                             No users found matching your search.
                         @else
@@ -67,4 +86,119 @@
         </div>
     </div>
 </div>
+</div>
+
+<!-- Change Password Modal -->
+<div id="passwordModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); backdrop-filter: blur(5px);">
+    <div class="modal-content" style="background-color: #fefefe; margin: 10% auto; padding: 40px; border: 1px solid #888; width: 100%; max-width: 500px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative;">
+        <div style="text-align: center; margin-bottom: 25px;">
+            <h2 style="font-family: 'Playfair Display', serif; color: #333; margin-bottom: 5px;">Change Password</h2>
+            <p id="passwordUserEmail" style="color: #666; font-size: 14px;">Update password for dhilipkumar</p>
+        </div>
+        
+        <form id="passwordForm">
+            @csrf
+            @method('PUT')
+            <input type="hidden" id="passwordUserId" name="user_id">
+            <div style="margin-bottom: 25px;">
+                <input type="password" id="newPassword" name="password" placeholder="Enter new password (min 6 chars)" style="width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 14px; outline: none; transition: border-color 0.3s;" required minlength="6">
+            </div>
+            
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button type="submit" style="background: var(--primary); color: #fff; border: none; padding: 12px 30px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: transform 0.2s;">Update Now</button>
+                <button type="button" onclick="closePasswordModal()" style="background: #6b7280; color: #fff; border: none; padding: 12px 30px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: transform 0.2s;">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function openPasswordModal(id, email, name) {
+    document.getElementById('passwordUserId').value = id;
+    document.getElementById('passwordUserEmail').innerText = 'Update password for ' + (name || email);
+    document.getElementById('passwordModal').style.display = 'block';
+    document.getElementById('newPassword').value = '';
+}
+
+function closePasswordModal() {
+    document.getElementById('passwordModal').style.display = 'none';
+}
+
+function confirmDelete(id) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#F44336',
+        cancelButtonColor: '#6b7280',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel',
+        reverseButtons: true,
+        background: '#fff',
+        borderRadius: '20px',
+        customClass: {
+            title: 'playfair-font',
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('delete-form-' + id).submit();
+        }
+    });
+}
+
+document.getElementById('passwordForm').onsubmit = function(e) {
+    e.preventDefault();
+    const id = document.getElementById('passwordUserId').value;
+    const password = document.getElementById('newPassword').value;
+    
+    const url = "{{ route('admin.users.password.update', ':id') }}".replace(':id', id);
+    
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({
+            _method: 'PUT',
+            password: password
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: data.message,
+                timer: 2000,
+                showConfirmButton: false
+            });
+            closePasswordModal();
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: data.message || 'Something went wrong.'
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'An error occurred while updating the password.'
+        });
+    });
+};
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    if (event.target == document.getElementById('passwordModal')) {
+        closePasswordModal();
+    }
+}
+</script>
 @endsection

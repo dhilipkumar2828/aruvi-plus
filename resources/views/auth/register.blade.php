@@ -181,7 +181,7 @@
             <form method="POST" action="{{ route('register.submit') }}" id="registerForm" novalidate>
                 @csrf
                 <div class="form-group">
-                    <label class="form-label">Full Name</label>
+                    <label class="form-label">Full Name<span class="text-danger" style="color: #dc3545;">*</span></label>
                     <div class="input-wrap">
                         <i class="fas fa-user"></i>
                         <input type="text" name="name" class="form-input" placeholder="Enter your full name" value="{{ old('name') }}" required autocomplete="name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
@@ -194,7 +194,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Email Address</label>
+                    <label class="form-label">Email Address<span class="text-danger" style="color: #dc3545;">*</span></label>
                     <div class="input-wrap">
                         <i class="fas fa-envelope"></i>
                         <input type="email" name="email" class="form-input" placeholder="Enter your email address" value="{{ old('email') }}" required autocomplete="email">
@@ -207,7 +207,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Phone Number</label>
+                    <label class="form-label">Phone Number<span class="text-danger" style="color: #dc3545;">*</span></label>
                     <div class="input-wrap">
                         <i class="fas fa-phone-alt"></i>
                         <input type="text" name="phone" id="reg_phone" class="form-input" placeholder="Enter your phone number" value="{{ old('phone') }}" required autocomplete="tel" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
@@ -221,7 +221,7 @@
 
                 <div class="input-row">
                     <div class="form-group">
-                        <label class="form-label">Password</label>
+                        <label class="form-label">Password<span class="text-danger" style="color: #dc3545;">*</span></label>
                         <div class="input-wrap">
                             <i class="fas fa-lock"></i>
                             <input type="password" name="password" id="password" class="form-input" placeholder="Enter password" required autocomplete="new-password">
@@ -235,7 +235,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Confirm</label>
+                        <label class="form-label">Confirm Password<span class="text-danger" style="color: #dc3545;">*</span></label>
                         <div class="input-wrap">
                             <i class="fas fa-shield-alt"></i>
                             <input type="password" name="password_confirmation" id="password_confirmation" class="form-input" placeholder="Confirm password" required autocomplete="new-password">

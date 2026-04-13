@@ -84,13 +84,13 @@
         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px;">
             <div class="admin-form-group">
                 <label class="admin-form-label">Article Title <span class="text-danger">*</span></label>
-                <input type="text" id="title" name="title" value="{{ old('title') }}" required class="admin-input" placeholder="e.g. The Secrets of Navapashanam">
+                <input type="text" id="title" name="title" value="{{ old('title') }}" required class="admin-input" placeholder="e.g. The Secrets of Aurvi Plus">
                 @error('title') <span class="text-danger" style="font-size: 13px;">{{ $message }}</span> @enderror
             </div>
             
             <div class="admin-form-group">
                 <label class="admin-form-label">Custom Slug (Optional)</label>
-                <input type="text" id="slug" name="slug" value="{{ old('slug') }}" class="admin-input" placeholder="e.g. benefits-of-navapashanam">
+                <input type="text" id="slug" name="slug" value="{{ old('slug') }}" class="admin-input" placeholder="e.g. benefits-of-Aurvi Plus">
                 @error('slug') <span class="text-danger" style="font-size: 13px;">{{ $message }}</span> @enderror
             </div>
 

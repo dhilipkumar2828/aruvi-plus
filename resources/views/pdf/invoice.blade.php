@@ -29,25 +29,6 @@
         .content-area {
             padding: 0 30px 20px;
         }
-        .status-tracker {
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 10px 15px;
-            background: #f8fafc;
-            border-radius: 10px;
-            border: 1px solid #f1f5f9;
-        }
-        .status-step {
-            text-align: center;
-            width: 25%;
-            font-size: 7.5pt;
-            color: #94a3b8;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        .status-step.active {
-            color: #c2185b;
-        }
         .section-title {
             font-size: 7.5pt;
             font-weight: bold;
@@ -63,7 +44,7 @@
         }
         .address-table td {
             vertical-align: top;
-            width: 33.33%;
+            width: 50%;
         }
         .insight-box {
             background: #f8fafc;
@@ -92,26 +73,64 @@
             vertical-align: top;
         }
         .totals-table {
-            width: 280px;
+            width: 300px;
             float: right;
         }
         .totals-table td {
-            padding: 6px 0;
-            font-size: 9.5pt;
+            padding: 8px 0;
+            font-size: 10pt;
+            color: #1e293b;
         }
-        .total-amount {
-            font-size: 16pt;
-            font-weight: bold;
-            color: #004200;
+        .totals-line-label {
+            color: #64748b;
         }
-        .footer {
-            margin-top: 30px;
-            padding-top: 20px;
+        .totals-line-value {
+            text-align: right;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        .discount-label {
+            color: #1a5d1a;
+        }
+        .discount-value {
+            color: #1a5d1a;
+            text-align: right;
+            font-weight: 700;
+        }
+        .taxable-row td {
             border-top: 1px solid #f1f5f9;
+            padding-top: 15px !important;
         }
-        .text-right { text-align: right; }
-        .text-center { text-align: center; }
-        .text-muted { color: #64748b; }
+        .final-total-label {
+            color: #9d174d;
+            font-size: 11pt;
+            font-weight: bold;
+            padding-top: 15px !important;
+        }
+        .final-total-value {
+            color: #9d174d;
+            font-size: 12pt;
+            font-weight: bold;
+            text-align: right;
+            padding-top: 15px !important;
+        }
+        .gst-note {
+            font-size: 8pt;
+            color: #64748b;
+            text-align: right;
+            margin-top: -3px;
+        }
+        .support-contact {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 11pt;
+            margin-top: 50px;
+        }
+        .support-contact b {
+            color: #c2185b;
+            font-weight: bold;
+            font-size: 12.5pt;
+        }
         .clear { clear: both; }
     </style>
 </head>
@@ -137,30 +156,8 @@
     </div>
 
     <div class="content-area">
-        <div class="status-tracker">
-            <table width="100%">
-                <tr>
-                    <td class="status-step active">1. Placed</td>
-                    <td class="status-step {{ in_array($order->status, ['processing', 'shipped', 'delivered', 'completed']) ? 'active' : '' }}">2. Process</td>
-                    <td class="status-step {{ in_array($order->status, ['shipped', 'delivered', 'completed']) ? 'active' : '' }}">3. Shipped</td>
-                    <td class="status-step {{ in_array($order->status, ['delivered', 'completed']) ? 'active' : '' }}">4. Delivered</td>
-                </tr>
-            </table>
-        </div>
-
         <table class="address-table">
             <tr>
-                <td>
-                    <span class="section-title">Billing Details</span>
-                    <div style="padding-right: 15px; font-size: 9pt;">
-                        <strong style="font-size: 10pt; color: #000;">{{ $order->customer_name }}</strong><br>
-                        <span class="text-muted">{{ $order->customer_email }}</span><br>
-                        <span class="text-muted">{{ $order->phone }}</span><br>
-                        {{ $order->address_line1 }}<br>
-                        @if($order->address_line2) {{ $order->address_line2 }}<br> @endif
-                        {{ $order->city }}, {{ $order->state }} - {{ $order->postal_code }}
-                    </div>
-                </td>
                 <td>
                     <span class="section-title">Shipping Details</span>
                     <div style="padding-right: 15px; font-size: 9pt;">
@@ -232,38 +229,48 @@
             </tbody>
         </table>
 
+        @php
+            $gst_rate = 0.18;
+            $subtotal_inc = $order->items->count() > 0 ? $order->items->sum('line_total') : $order->amount;
+            $discount_inc = $order->discount_amount;
+            $shipping_inc = max(0, $order->shipping_amount - $order->shipping_discount);
+            
+            // Taxable breakdown to match the image logic:
+            $net_product_taxable = ($subtotal_inc - $discount_inc) / (1 + $gst_rate);
+            $shipping_taxable = $shipping_inc / (1 + $gst_rate);
+            $taxable_value = $net_product_taxable + $shipping_taxable;
+            $gst_amount = $order->amount - $taxable_value;
+        @endphp
         <div style="width: 100%;">
             <table class="totals-table">
                 <tr>
-                    <td class="text-muted">Subtotal</td>
-                    <td class="text-right" style="font-weight: bold;">₹{{ number_format($order->items->count() > 0 ? $order->items->sum('line_total') : $order->amount, 0) }}</td>
+                    <td class="totals-line-label">Product Value</td>
+                    <td class="totals-line-value">₹{{ number_format($net_product_taxable, 2) }}</td>
                 </tr>
                 @if($order->discount_amount > 0)
                 <tr>
-                    <td style="color: #dc2626;">Discount @if($order->coupon_code) <span style="font-size: 7.5pt;">({{ $order->coupon_code }})</span> @endif</td>
-                    <td class="text-right" style="color: #dc2626; font-weight: bold;">- ₹{{ number_format($order->discount_amount, 0) }}</td>
+                    <td class="discount-label">Coupon Discount</td>
+                    <td class="discount-value">- ₹{{ number_format($order->discount_amount, 0) }}</td>
                 </tr>
                 @endif
                 <tr>
-                    <td class="text-muted">Shipping Charges</td>
-                    <td class="text-right" style="font-weight: bold;">₹{{ number_format($order->shipping_amount, 0) }}</td>
+                    <td class="totals-line-label">Shipping Charges</td>
+                    <td class="totals-line-value">₹{{ number_format($shipping_taxable, 2) }}</td>
                 </tr>
-                @if($order->shipping_discount > 0)
-                <tr>
-                    <td style="color: #2e7d32;">Shipping Discount</td>
-                    <td class="text-right" style="color: #2e7d32; font-weight: bold;">- ₹{{ number_format($order->shipping_discount, 0) }}</td>
-                </tr>
-                @endif
-                <tr>
-                    <td class="text-muted">Total Shipping</td>
-                    <td class="text-right" style="color: #004200; font-weight: bold;">₹{{ number_format($order->shipping_amount - $order->shipping_discount, 0) }} @if($order->shipping_amount - $order->shipping_discount <= 0) (FREE) @endif</td>
+                <tr class="taxable-row">
+                    <td style="font-weight: bold;">Taxable Value</td>
+                    <td class="totals-line-value" style="font-size: 11pt;">₹{{ number_format($taxable_value, 2) }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="border-top: 1px solid #f1f5f9; padding-top: 10px; margin-top: 5px;"></td>
+                    <td class="totals-line-label">GST (18%)</td>
+                    <td class="totals-line-value">₹{{ number_format($gst_amount, 2) }}</td>
+                </tr>
+                <tr style="border-top: 1px solid #f1f5f9;">
+                    <td class="final-total-label">Final Total</td>
+                    <td class="final-total-value">₹{{ number_format($order->amount, 2) }}</td>
                 </tr>
                 <tr>
-                    <td style="font-weight: bold; font-size: 11pt;">Final Amount</td>
-                    <td class="text-right total-amount">₹{{ number_format($order->amount, 0) }}</td>
+                    <td colspan="2" class="gst-note">(inclusive of GST)</td>
                 </tr>
             </table>
             <div class="clear"></div>
@@ -272,19 +279,23 @@
         <div class="footer">
             <table width="100%">
                 <tr>
-                    <td width="70%">
-                        <span class="section-title">Declaration</span>
-                        <p style="font-size: 7.5pt; color: #94a3b8; margin: 0;">
-                            This is a computer generated invoice and does not require a physical signature. Goods once sold cannot be returned unless found damaged upon arrival. Generated on {{ now()->format('d M, Y H:i A') }}
+                    <td width="60%" style="vertical-align: top;">
+                        <div style="font-weight: bold; font-size: 7.5pt; color: #1e293b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">DECLARATION</div>
+                        <p style="font-size: 7.5pt; color: #94a3b8; margin: 0; line-height: 1.6; font-weight: 300;">
+                            This is a computer generated invoice and does not require a physical signature. Goods once sold cannot be returned unless found damaged upon arrival.
                         </p>
                     </td>
-                    <td width="30%" class="text-center">
-                        <div style="border-bottom: 2px solid #1a1a1a; margin-bottom: 5px; width: 100px; margin-left: auto; margin-right: auto;"></div>
-                        <div style="font-weight: bold; font-size: 8.5pt;">Authorized Signatory</div>
-                        <div style="font-size: 6.5pt; color: #94a3b8; text-transform: uppercase;">Auvri Plus - Premium Wellness</div>
+                    <td width="5%"></td>
+                    <td width="35%" style="vertical-align: top;">
+                        <div style="border-top: 1px solid #cbd5e1; margin-bottom: 12px; width: 100%;"></div>
+                        <div style="font-weight: bold; font-size: 9pt; color: #1e293b; margin-bottom: 4px;">Authorized Rep</div>
+                        <div style="font-size: 7pt; color: #94a3b8; line-height: 1.4; font-weight: 300;">BOGAR SIDDHA PEEDAM -<br>BOGAR ALCHEMIST LLP</div>
                     </td>
                 </tr>
             </table>
+            <div class="support-contact">
+                Questions? <b style="margin-left: 5px;">Reach out to support</b>
+            </div>
         </div>
     </div>
 </body>

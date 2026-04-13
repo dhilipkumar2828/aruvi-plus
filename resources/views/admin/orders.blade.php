@@ -48,14 +48,14 @@
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search orders..." class="header-search-input" id="orderSearchInput">
                 </div>
                 
-                <select name="status" class="select2" data-placeholder="Select Status" onchange="this.form.submit()" style="min-width: 140px;">
-                    <option value="">All Status</option>
-                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                    <option value="processing" {{ request('status') == 'processing' ? 'selected' : '' }}>Processing</option>
-                    <option value="shipped" {{ request('status') == 'shipped' ? 'selected' : '' }}>Shipped</option>
-                    <option value="delivered" {{ request('status') == 'delivered' ? 'selected' : '' }}>Delivered</option>
-                    <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                </select>
+                    <select name="status" class="select2" data-placeholder="Select Status" onchange="this.form.submit()" style="min-width: 140px;">
+                        <option value="">All Status</option>
+                        <option value="placed" {{ request('status') == 'placed' ? 'selected' : '' }}>Placed</option>
+                        <option value="shipped" {{ request('status') == 'shipped' ? 'selected' : '' }}>Shipped</option>
+                        <option value="out_for_delivery" {{ request('status') == 'out_for_delivery' ? 'selected' : '' }}>Out for Delivery</option>
+                        <option value="delivered" {{ request('status') == 'delivered' ? 'selected' : '' }}>Delivered</option>
+                        <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                    </select>
 
                 <select name="payment_status" class="select2" data-placeholder="Select Payment" onchange="this.form.submit()" style="min-width: 150px;">
                     <option value="">Payment Status</option>
@@ -97,7 +97,7 @@
                    @php
                     $status = strtolower($order->status);
                     $badgeClass = 'status-warning';
-                    if ($status === 'delivered' || $status === 'shipped') {
+                    if (in_array($status, ['delivered', 'shipped', 'out_for_delivery'])) {
                         $badgeClass = 'status-success';
                     } elseif ($status === 'cancelled') {
                         $badgeClass = 'status-danger';

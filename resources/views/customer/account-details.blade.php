@@ -26,19 +26,23 @@
             <!-- Main Content -->
             <div class="account-main-content">
                 <div class="section-card">
+                    @php
+                        $securityErrors = $errors->has('current_password') || $errors->has('password') || $errors->has('password_confirmation');
+                        $activeTab = $securityErrors ? 'security' : 'personal';
+                    @endphp
                     <!-- Tab Navigation -->
                     <div class="premium-tabs">
-                        <button type="button" class="luxury-tab-btn active" data-tab="personal">
+                        <button type="button" class="luxury-tab-btn {{ $activeTab == 'personal' ? 'active' : '' }}" data-tab="personal">
                             <i class="fas fa-user-circle"></i> Personal Information
                         </button>
-                        <button type="button" class="luxury-tab-btn" data-tab="security">
+                        <button type="button" class="luxury-tab-btn {{ $activeTab == 'security' ? 'active' : '' }}" data-tab="security">
                             <i class="fas fa-shield-alt"></i> Security & Password
                         </button>
                     </div>
 
                     <div class="tab-content-wrapper">
                         <!-- Personal Info Tab -->
-                        <div class="luxury-tab-pane active" id="personal">
+                        <div class="luxury-tab-pane {{ $activeTab == 'personal' ? 'active' : '' }}" id="personal">
                             <form action="{{ route('customer.details.update') }}" method="POST" enctype="multipart/form-data" id="personalInfoForm" class="luxury-form">
                                 @csrf
                                 <div class="profile-upload-section">
@@ -104,7 +108,7 @@
                         </div>
 
                         <!-- Security Tab -->
-                        <div class="luxury-tab-pane" id="security">
+                        <div class="luxury-tab-pane {{ $activeTab == 'security' ? 'active' : '' }}" id="security">
                             <form action="{{ route('customer.password.update') }}" method="POST" id="securityForm" class="luxury-form">
                                 @csrf
                                 <div class="security-intro">

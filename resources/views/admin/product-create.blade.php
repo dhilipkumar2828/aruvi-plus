@@ -392,7 +392,7 @@
                 </div>
                 <div class="field">
                     <label for="product_name">Product Name <span class="text-danger">*</span></label>
-                    <input id="product_name" name="product_name" type="text" placeholder="Navapashanam Shivlingam" value="{{ old('product_name', $product?->name ?? '') }}" required>
+                    <input id="product_name" name="product_name" type="text" placeholder="Aurvi Plus Shivlingam" value="{{ old('product_name', $product?->name ?? '') }}" required>
                 </div>
                 <div class="field-row">
                     <div class="field">
@@ -416,7 +416,7 @@
                     </div>
                     <div class="field">
                         <label for="product_collection">Collection <span class="text-danger">*</span></label>
-                        <input id="product_collection" name="product_collection" type="text" placeholder="Navapashanam Classics" value="{{ old('product_collection', $product?->collection ?? '') }}" required>
+                        <input id="product_collection" name="product_collection" type="text" placeholder="Aurvi Plus Classics" value="{{ old('product_collection', $product?->collection ?? '') }}" required>
                     </div>
                 </div>
                 <div class="field-row">
@@ -517,7 +517,7 @@
                 </div>
                 <div class="field">
                     <label for="product_summary">Short Summary</label>
-                    <input id="product_summary" name="product_summary" type="text" placeholder="A sacred statue crafted with ancient Navapashanam blend." value="{{ old('product_summary', $product?->short_description ?? '') }}">
+                    <input id="product_summary" name="product_summary" type="text" placeholder="A sacred statue crafted with ancient Aurvi Plus blend." value="{{ old('product_summary', $product?->short_description ?? '') }}">
                 </div>
                 <div class="field">
                     <label for="product_description">Full Description</label>
@@ -537,11 +537,14 @@
                 </div>
                 <div class="field">
                     <label for="primary_image_upload">Upload Primary Image <span class="text-danger">*</span></label>
-                    <div class="file-upload">
-                        <input id="primary_image_upload" name="primary_image_upload" type="file" accept="image/*">
+                    <div class="file-upload @error('primary_image_upload') is-invalid @enderror">
+                        <input id="primary_image_upload" name="primary_image_upload" type="file" accept="image/*" required>
                         <label for="primary_image_upload" class="file-button">Choose File</label>
                         <span id="primary_image_upload_name" class="file-name">No file chosen</span>
                     </div>
+                    @error('primary_image_upload')
+                        <div class="text-danger" style="font-size: 12px; margin-top: 5px;">{{ $message }}</div>
+                    @enderror
                     @if ($isEdit && $product?->primary_image)
                         <div class="media-preview">
                             <img src="{{ asset($product->primary_image) }}" alt="Current primary image" class="media-thumb">
@@ -594,7 +597,7 @@
                 <div class="field-row">
                     <div class="field">
                         <label for="product_material">Material</label>
-                        <input id="product_material" name="product_material" type="text" placeholder="Navapashanam compound" value="{{ old('product_material', $product?->material ?? '') }}">
+                        <input id="product_material" name="product_material" type="text" placeholder="Aurvi Plus compound" value="{{ old('product_material', $product?->material ?? '') }}">
                     </div>
                     <div class="field">
                         <label for="product_origin">Origin</label>
@@ -615,11 +618,11 @@
                 <div class="field-row">
                     <div class="field">
                         <label for="product_meta_title">Meta Title</label>
-                        <input id="product_meta_title" name="product_meta_title" type="text" placeholder="Navapashanam Shivlingam - Auvri Plus" value="{{ old('product_meta_title', $product?->meta_title ?? '') }}">
+                        <input id="product_meta_title" name="product_meta_title" type="text" placeholder="Aurvi Plus Shivlingam - Auvri Plus" value="{{ old('product_meta_title', $product?->meta_title ?? '') }}">
                     </div>
                     <div class="field">
                         <label for="product_slug">URL Slug</label>
-                        <input id="product_slug" name="product_slug" type="text" placeholder="navapashanam-shivlingam" value="{{ old('product_slug', $product?->slug ?? '') }}">
+                        <input id="product_slug" name="product_slug" type="text" placeholder="Aurvi Plus-shivlingam" value="{{ old('product_slug', $product?->slug ?? '') }}">
                     </div>
                 </div>
                 <div class="field">

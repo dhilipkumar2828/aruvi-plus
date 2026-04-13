@@ -1,83 +1,121 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>New Order Alert</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+    </style>
 </head>
-<body style="font-family: 'Poppins', Helvetica, Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; color: #333;">
-    <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee;">
-        
-        <!-- Header with Gradient -->
-        <div style="background: linear-gradient(135deg, #FF9100 0%, #F44336 50%, #D81B60 100%); padding: 40px 20px; text-align: center; color: white;">
-            <img src="{{ $message->embed(public_path('auri-images/logo.png')) }}" alt="Navapashanam Logo" style="max-width: 150px; height: auto; margin-bottom: 15px;">
-            <h1 style="margin: 0; font-size: 24px; font-weight: 600; color: #ffffff;">New Order Alert!</h1>
-            <p style="color: rgba(255,255,255,0.9); margin-top: 5px; font-size: 14px;">Order #{{ $order->order_number }}</p>
-        </div>
-        
-        <!-- Content -->
-        <div style="padding: 30px;">
-            
-            <!-- Customer Card -->
-            <div style="background: #fdfdfd; border: 1px solid #eee; border-radius: 12px; padding: 20px; margin-bottom: 25px;">
-                <div style="font-weight: 600; font-size: 16px; margin-bottom: 15px; color: #F44336; border-bottom: 2px solid #f8f9fa; padding-bottom: 8px; text-transform: uppercase;">Customer Details</div>
-                <div style="font-size: 15px; line-height: 1.8;">
-                    <span style="color: #888; width: 100px; display: inline-block;">Name:</span> <strong style="color: #333;">{{ $order->customer_name }}</strong><br>
-                    <span style="color: #888; width: 100px; display: inline-block;">Email:</span> <a href="mailto:{{ $order->customer_email }}" style="color: #F44336; text-decoration: none;">{{ $order->customer_email }}</a><br>
-                    <span style="color: #888; width: 100px; display: inline-block;">Phone:</span> <span style="color: #333;">{{ $order->phone }}</span><br>
-                    <span style="color: #888; width: 100px; display: inline-block;">Amount:</span> <strong style="color: #D81B60; font-size: 18px;">₹{{ number_format($order->amount, 2) }}</strong>
-                </div>
-            </div>
-            
-            <!-- Items Table -->
-            <div style="background: #fdfdfd; border: 1px solid #eee; border-radius: 12px; padding: 20px; margin-bottom: 25px;">
-                <div style="font-weight: 600; font-size: 16px; margin-bottom: 15px; color: #F44336; border-bottom: 2px solid #f8f9fa; padding-bottom: 8px; text-transform: uppercase;">Order Items</div>
-                <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
-                    <thead>
-                        <tr>
-                            <th style="text-align: left; font-size: 13px; color: #888; padding-bottom: 10px; border-bottom: 1px solid #eee;">Product</th>
-                            <th style="text-align: center; font-size: 13px; color: #888; padding-bottom: 10px; border-bottom: 1px solid #eee;">Qty</th>
-                            <th style="text-align: right; font-size: 13px; color: #888; padding-bottom: 10px; border-bottom: 1px solid #eee;">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($order->items as $item)
-                        <tr>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #f8f9fa; font-size: 14px;">{{ $item->product_name }}</td>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #f8f9fa; font-size: 14px; text-align: center;">{{ $item->quantity }}</td>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #f8f9fa; font-size: 14px; text-align: right;">₹{{ number_format($item->line_total, 2) }}</td>
-                        </tr>
-                        @endforeach
-                        <tr>
-                            <td colspan="2" style="text-align: right; padding-top: 15px; font-weight: 600; color: #888;">Grand Total:</td>
-                            <td style="text-align: right; padding-top: 15px; font-size: 20px; font-weight: 700; color: #D81B60;">₹{{ number_format($order->amount, 2) }}</td>
-                        </tr>
-                    </tbody>
+<body style="margin: 0; padding: 0; background-color: #f1f5f9; font-family: 'Outfit', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td style="padding: 40px 0;">
+                <table align="center" border="0" cellpadding="0" cellspacing="0" width="650" style="border-collapse: collapse; background-color: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
+                    <!-- Elegant Header -->
+                    <tr>
+                        <td align="center" style="padding: 50px 0; background-color: #063a17;">
+                            <img src="{{ $message->embed(public_path('auri-images/logo.png')) }}" alt="Auvri Plus" width="140" style="display: block; margin-bottom: 15px;" />
+                            <h2 style="color: #ffffff; font-size: 24px; margin: 0; font-weight: 700;">New Order Received!</h2>
+                            <p style="color: rgba(255,255,255,0.8); margin: 5px 0 0; font-size: 14px;">Order #{{ $order->order_number }}</p>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="padding: 40px;">
+                            <!-- Customer Info Card -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8fafc; border-radius: 12px; padding: 25px; margin-bottom: 40px; border: 1px solid #f1f5f9; border-left: 4px solid #063a17;">
+                                <tr>
+                                    <td style="font-size: 14px; font-weight: 800; color: #063a17; text-transform: uppercase; letter-spacing: 1px; padding-bottom: 15px;">Customer Information</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 15px; color: #334155; line-height: 1.8;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td width="100" style="font-weight: 600; color: #94a3b8;">Name:</td>
+                                                <td style="color: #1e293b; font-weight: 500;">{{ $order->customer_name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="100" style="font-weight: 600; color: #94a3b8;">Email:</td>
+                                                <td style="color: #1e293b; font-weight: 500;">{{ $order->customer_email }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="100" style="font-weight: 600; color: #94a3b8;">Phone:</td>
+                                                <td style="color: #1e293b; font-weight: 500;">{{ $order->phone }}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Order Summary Table (EXACT MATCH TO SCREENSHOT) -->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td style="color: #063a17; font-size: 20px; font-weight: 700; padding-bottom: 25px;">Order Summary</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: left; font-size: 13px; color: #94a3b8; text-transform: uppercase; padding-bottom: 15px; border-bottom: 1px solid #f1f5f9;">Product</th>
+                                                    <th style="text-align: center; font-size: 13px; color: #94a3b8; text-transform: uppercase; padding-bottom: 15px; border-bottom: 1px solid #f1f5f9;" width="80">Qty</th>
+                                                    <th style="text-align: right; font-size: 13px; color: #94a3b8; text-transform: uppercase; padding-bottom: 15px; border-bottom: 1px solid #f1f5f9;" width="120">Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php $subtotal = 0; @endphp
+                                                @foreach($order->items as $item)
+                                                @php $subtotal += $item->line_total; @endphp
+                                                <tr>
+                                                    <td style="padding: 20px 0; border-bottom: 1px solid #f8f9fa; font-size: 15px; color: #1e293b; font-weight: 500;">{{ $item->product_name }}</td>
+                                                    <td style="padding: 20px 0; border-bottom: 1px solid #f8f9fa; text-align: center; font-size: 15px; color: #475569;">{{ $item->quantity }}</td>
+                                                    <td style="padding: 20px 0; border-bottom: 1px solid #f8f9fa; text-align: right; font-size: 15px; color: #1e293b; font-weight: 600;">₹{{ number_format($item->line_total, 2) }}</td>
+                                                </tr>
+                                                @endforeach
+                                                
+                                                <!-- Financial Totals Overlay -->
+                                                <tr>
+                                                    <td colspan="2" style="text-align: right; padding: 20px 15px 5px 0; font-size: 14px; color: #94a3b8;">Subtotal:</td>
+                                                    <td style="text-align: right; padding: 20px 0 5px 0; font-size: 15px; color: #1e293b; font-weight: 600;">₹{{ number_format($subtotal, 2) }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align: right; padding: 5px 15px 5px 0; font-size: 14px; color: #94a3b8;">Shipping:</td>
+                                                    <td style="text-align: right; padding: 5px 0; font-size: 15px; color: #1e293b; font-weight: 600;">₹{{ number_format($order->shipping_cost ?? 0, 2) }}</td>
+                                                </tr>
+                                                @if($order->discount_amount > 0)
+                                                <tr>
+                                                    <td colspan="2" style="text-align: right; padding: 5px 15px 5px 0; font-size: 14px; color: #dc2626;">Discount:</td>
+                                                    <td style="text-align: right; padding: 5px 0; font-size: 15px; color: #dc2626; font-weight: 600;">-₹{{ number_format($order->discount_amount, 2) }}</td>
+                                                </tr>
+                                                @endif
+                                                <tr>
+                                                    <td colspan="2" style="text-align: right; padding: 25px 15px 20px 0; font-size: 16px; font-weight: 700; color: #D81B60;">Total Amount:</td>
+                                                    <td style="text-align: right; padding: 25px 0 20px 0; font-size: 18px; font-weight: 800; color: #D81B60;">₹{{ number_format($order->amount, 2) }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Management CTA -->
+                            <div align="center" style="margin-top: 30px; padding-top: 30px; border-top: 1px solid #f1f5f9;">
+                                <a href="{{ url('/admin/orders/' . $order->id) }}" style="display: inline-block; background-color: #063a17; color: #ffffff; padding: 18px 50px; border-radius: 12px; text-decoration: none; font-size: 16px; font-weight: 700;">Manage This Order</a>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td align="center" style="padding: 30px; background-color: #f8fafc; color: #94a3b8; font-size: 12px;">
+                            © {{ date('Y') }} <strong>Auvri Plus Admin Portal</strong>. Confidential Notification.
+                        </td>
+                    </tr>
                 </table>
-            </div>
-            
-            <!-- Address -->
-            <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 25px;">
-                <div style="font-weight: 600; margin-bottom: 10px; color: #333;">Shipping Address</div>
-                <div style="font-size: 14px; line-height: 1.6; color: #666;">
-                    {{ $order->customer_name }}<br>
-                    {{ $order->address_line1 }}<br>
-                    {{ $order->address_line2 ? $order->address_line2 . ',' : '' }}
-                    {{ $order->city }}, {{ $order->state }} - {{ $order->postal_code }}<br>
-                    {{ $order->country }}
-                </div>
-            </div>
-            
-            <!-- Action Button -->
-            <div style="text-align: center; margin-top: 30px;">
-                <a href="{{ url('/admin/orders/' . $order->id) }}" style="display: inline-block; background: linear-gradient(135deg, #FF9100 0%, #F44336 100%); color: white !important; text-decoration: none; padding: 15px 40px; border-radius: 30px; font-weight: 600; box-shadow: 0 5px 15px rgba(244, 67, 54, 0.3);">Manage Order</a>
-            </div>
-            
-        </div>
-        
-        <!-- Footer -->
-        <div style="background: #f8f9fa; padding: 25px; text-align: center; font-size: 12px; color: #999; border-top: 1px solid #eee;">
-            <p style="margin: 0;">&copy; {{ date('Y') }} <strong>Navapashanam Admin</strong>. All Rights Reserved.</p>
-        </div>
-        
-    </div>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

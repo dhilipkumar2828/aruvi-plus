@@ -33,7 +33,7 @@
 
                     <div class="address-cards-grid">
                         <!-- Billing Address -->
-                        <div class="premium-address-card">
+                        {{-- <div class="premium-address-card">
                             <div class="card-type-badge"><i class="fas fa-file-invoice"></i> Billing</div>
                             <div class="address-details">
                                 @if($user->address_line1)
@@ -52,7 +52,7 @@
                             <button onclick="toggleAddressForm()" class="edit-btn">
                                 <i class="fas fa-edit"></i> Edit Address
                             </button>
-                        </div>
+                        </div> --}}
 
                         <!-- Shipping Address -->
                         <div class="premium-address-card">
@@ -91,7 +91,7 @@
                                     <label>Phone Number <span>*</span></label>
                                     <div class="input-with-icon">
                                         <i class="fas fa-phone"></i>
-                                        <input type="text" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="10-digit mobile number" maxlength="15" class="@error('phone') is-invalid @enderror">
+                                        <input type="text" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="10-digit mobile number" maxlength="10" class="@error('phone') is-invalid @enderror" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                     </div>
                                     @error('phone') <span class="error-msg">{{ $message }}</span> @enderror
                                 </div>
@@ -99,7 +99,7 @@
                                     <label>Country <span>*</span></label>
                                     <div class="input-with-icon">
                                         <i class="fas fa-globe"></i>
-                                        <input type="text" name="country" value="{{ old('country', $user->country) }}" placeholder="e.g. India" class="@error('country') is-invalid @enderror">
+                                        <input type="text" name="country" value="{{ old('country', $user->country) }}" placeholder="e.g. India" class="@error('country') is-invalid @enderror" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
                                     </div>
                                     @error('country') <span class="error-msg">{{ $message }}</span> @enderror
                                 </div>
@@ -122,17 +122,17 @@
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label>Town / City <span>*</span></label>
-                                    <input type="text" name="city" value="{{ old('city', $user->city) }}" placeholder="City" class="@error('city') is-invalid @enderror">
+                                    <input type="text" name="city" value="{{ old('city', $user->city) }}" placeholder="City" class="@error('city') is-invalid @enderror" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
                                     @error('city') <span class="error-msg">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>State <span>*</span></label>
-                                    <input type="text" name="state" value="{{ old('state', $user->state) }}" placeholder="State" class="@error('state') is-invalid @enderror">
+                                    <input type="text" name="state" value="{{ old('state', $user->state) }}" placeholder="State" class="@error('state') is-invalid @enderror" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
                                     @error('state') <span class="error-msg">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>PIN Code <span>*</span></label>
-                                    <input type="text" name="postal_code" value="{{ old('postal_code', $user->postal_code) }}" placeholder="6-digit PIN" maxlength="10" class="@error('postal_code') is-invalid @enderror">
+                                    <input type="text" name="postal_code" value="{{ old('postal_code', $user->postal_code) }}" placeholder="6-digit PIN" maxlength="6" class="@error('postal_code') is-invalid @enderror" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                     @error('postal_code') <span class="error-msg">{{ $message }}</span> @enderror
                                 </div>
                             </div>

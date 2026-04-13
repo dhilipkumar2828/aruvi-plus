@@ -30,6 +30,11 @@
             </a>
         </li>
         <li>
+            <a href="{{ route('wishlist.index') }}" class="{{ request()->routeIs('wishlist.index') ? 'active' : '' }}">
+                <i class="fas fa-heart"></i> My Wishlist
+            </a>
+        </li>
+        <li>
             <a href="{{ route('customer.details') }}" class="{{ request()->routeIs('customer.details') ? 'active' : '' }}">
                 <i class="fas fa-user-edit"></i> Account Details
             </a>

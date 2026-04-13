@@ -17,7 +17,7 @@ class TestimonialSeeder extends Seeder
         Testimonial::create([
             'name' => 'Ramesh',
             'designation' => '',
-            'content' => 'Navapashanam water brought a remarkable change—more energy, less fatigue, and heightened cheerfulness. Grateful for the divine energy boost!',
+            'content' => 'Aurvi Plus water brought a remarkable change—more energy, less fatigue, and heightened cheerfulness. Grateful for the divine energy boost!',
             'rating' => 5,
             'image' => 'images/testimonial ramesh.png',
             'is_active' => true,
@@ -26,7 +26,7 @@ class TestimonialSeeder extends Seeder
         Testimonial::create([
             'name' => 'Karthik',
             'designation' => '',
-            'content' => 'Since acquiring the Navapashanam bead, my life has significantly improved. Wearing it and consuming the water has enhanced my clarity and alertness.',
+            'content' => 'Since acquiring the Aurvi Plus bead, my life has significantly improved. Wearing it and consuming the water has enhanced my clarity and alertness.',
             'rating' => 5,
             'image' => 'images/karthik.png',
             'is_active' => true,
