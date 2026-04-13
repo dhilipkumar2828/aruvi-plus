@@ -223,18 +223,7 @@
 
             {{-- Address Information --}}
             <div class="address-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-bottom: 40px;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div>
-                        <span class="summary-label">Billing Details</span>
-                        <div class="summary-value">
-                            <strong style="display: block; color: #000; margin-bottom: 4px; font-size: 15px;">{{ $order->customer_name }}</strong>
-                            {{ $order->customer_email }}<br>
-                            {{ $order->phone }}<br>
-                            {{ $order->address_line1 }}<br>
-                            @if($order->address_line2) {{ $order->address_line2 }}<br> @endif
-                            {{ $order->city }}, {{ $order->state }} - {{ $order->postal_code }}
-                        </div>
-                    </div>
+                <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
                     <div>
                         <span class="summary-label">Shipping Details</span>
                         <div class="summary-value">
@@ -324,55 +313,68 @@
 
             {{-- Totals Area --}}
             <div style="display: flex; justify-content: flex-end;">
+                @php
+                    $gst_rate = 0.18;
+                    $subtotal_inc = $order->items->count() > 0 ? $order->items->sum('line_total') : $order->amount;
+                    $discount_inc = $order->discount_amount;
+                    $shipping_inc = max(0, $order->shipping_amount - $order->shipping_discount);
+                    
+                    // Taxable breakdown to match the image logic:
+                    $net_product_taxable = ($subtotal_inc - $discount_inc) / (1 + $gst_rate);
+                    $shipping_taxable = $shipping_inc / (1 + $gst_rate);
+                    $taxable_value = $net_product_taxable + $shipping_taxable;
+                    $gst_amount = $order->amount - $taxable_value;
+                @endphp
                 <div style="width: 320px;">
                     <div style="display: flex; justify-content: space-between; padding: 12px 0; font-size: 14px; color: #64748b; border-bottom: 1px solid #f1f5f9;">
-                        <span>Items Subtotal</span>
-                        <strong style="color: #333;">₹{{ number_format($order->items->count() > 0 ? $order->items->sum('line_total') : $order->amount, 0) }}</strong>
+                        <span>Product Value</span>
+                        <strong style="color: #333;">₹{{ number_format($net_product_taxable, 2) }}</strong>
                     </div>
                     
                     @if($order->discount_amount > 0)
-                    <div style="display: flex; justify-content: space-between; padding: 12px 0; font-size: 14px; color: #dc2626; border-bottom: 1px solid #f1f5f9;">
-                        <span>Discount @if($order->coupon_code) ({{ $order->coupon_code }}) @endif</span>
+                    <div style="display: flex; justify-content: space-between; padding: 12px 0; font-size: 14px; color: #1a5d1a; border-bottom: 1px solid #f1f5f9;">
+                        <span>Coupon Discount</span>
                         <strong>- ₹{{ number_format($order->discount_amount, 0) }}</strong>
                     </div>
                     @endif
 
                     <div style="display: flex; justify-content: space-between; padding: 12px 0; font-size: 14px; color: #64748b; border-bottom: 1px solid #f1f5f9;">
                         <span>Shipping Charges</span>
-                        <strong style="color: #333;">₹{{ number_format($order->shipping_amount, 0) }}</strong>
+                        <strong style="color: #333;">₹{{ number_format($shipping_taxable, 2) }}</strong>
                     </div>
 
-                    @if($order->shipping_discount > 0)
-                    <div style="display: flex; justify-content: space-between; padding: 12px 0; font-size: 14px; color: #2e7d32; border-bottom: 1px solid #f1f5f9;">
-                        <span>Shipping Discount</span>
-                        <strong>- ₹{{ number_format($order->shipping_discount, 0) }}</strong>
+                    <div style="display: flex; justify-content: space-between; padding: 12px 0; font-size: 15px; color: #1e293b; border-bottom: 1px solid #f1f5f9; background: #fcfcfc;">
+                        <span style="font-weight: 700;">Taxable Value</span>
+                        <strong style="font-weight: 700;">₹{{ number_format($taxable_value, 2) }}</strong>
                     </div>
-                    @endif
 
                     <div style="display: flex; justify-content: space-between; padding: 12px 0; font-size: 14px; color: #64748b; border-bottom: 1px solid #f1f5f9;">
-                        <span>Shipping Amount</span>
-                        <strong style="color: var(--primary-dark);">₹{{ number_format($order->shipping_amount - $order->shipping_discount, 0) }}</strong>
+                        <span>GST (18%)</span>
+                        <strong style="color: #333;">₹{{ number_format($gst_amount, 2) }}</strong>
                     </div>
 
-                    <div style="display: flex; justify-content: space-between; padding: 25px 0; align-items: flex-end;">
-                        <span style="font-size: 16px; font-weight: 700; color: #1e293b;">Total Amount</span>
-                        <strong style="font-size: 28px; font-weight: 900; color: var(--primary);">₹{{ number_format($order->amount, 0) }}</strong>
+                    <div style="display: flex; justify-content: space-between; padding: 25px 0; align-items: flex-start;">
+                        <div>
+                            <span style="font-size: 18px; font-weight: 800; color: #9d174d; display: block; line-height: 1;">Final Amount</span>
+                            <span style="font-size: 12px; color: #64748b; font-weight: 500;">(Inclusive of GST)</span>
+                        </div>
+                        <strong style="font-size: 28px; font-weight: 800; color: #9d174d; line-height: 1;">₹{{ number_format($order->amount, 2) }}</strong>
                     </div>
                 </div>
             </div>
 
             {{-- Footer --}}
-            <div style="margin-top: 80px; display: flex; justify-content: space-between; align-items: flex-end;">
+            <div style="margin-top: 80px; display: flex; justify-content: space-between; align-items: flex-start;">
                 <div style="max-width: 450px;">
-                    <h6 style="font-size: 11px; font-weight: 800; color: #1e293b; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px;">Declaration</h6>
-                    <p style="font-size: 11px; color: #94a3b8; line-height: 1.8; margin: 0;">
-                        This is a computer generated invoice and does not require a physical signature. The items listed above are for the sole use of the customer and are not for resale. Goods once sold cannot be returned unless found damaged upon arrival.
+                    <h6 style="font-size: 11px; font-weight: 800; color: #1e293b; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px;">Declaration</h6>
+                    <p style="font-size: 11px; color: #94a3b8; line-height: 1.8; margin: 0; font-weight: 300;">
+                        This is a computer generated invoice and does not require a physical signature. Goods once sold cannot be returned unless found damaged upon arrival.
                     </p>
                 </div>
-                <div style="text-align: center; width: 160px;">
-                    <div style="border-bottom: 2px solid #1a1a1a; margin-bottom: 10px;"></div>
-                    <p style="font-size: 12px; font-weight: 800; color: #1a1a1a; margin: 0;">Authorized Rep</p>
-                    <p style="font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Auvri Plus</p>
+                <div style="text-align: left; width: 220px;">
+                    <div style="border-bottom: 1px solid #cbd5e1; margin-bottom: 15px;"></div>
+                    <p style="font-size: 15px; font-weight: 800; color: #1a1a1a; margin: 0 0 3px;">Authorized Rep</p>
+                    <p style="font-size: 12px; color: #94a3b8; line-height: 1.4; font-weight: 300; margin: 0;">BOGAR SIDDHA PEEDAM -<br>BOGAR ALCHEMIST LLP</p>
                 </div>
             </div>
         </div>

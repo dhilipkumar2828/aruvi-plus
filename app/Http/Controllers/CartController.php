@@ -53,12 +53,19 @@ class CartController extends Controller
         }
         
         $shipping = $shipping_charges - $shipping_discount;
-        $total = max($subtotal - $discount + $shipping, 0);
+        $total = round(max($subtotal - $discount + $shipping, 0));
+
+        // GST Calculation (18% inclusive)
+        $net_amount = max($subtotal - $discount, 0);
+        $taxable_value = $net_amount / 1.18;
+        $gst_amount = $net_amount - $taxable_value;
 
         return view('cart', [
             'cart' => $cart,
             'subtotal' => $subtotal,
             'discount' => $discount,
+            'taxable_value' => $taxable_value,
+            'gst_amount' => $gst_amount,
             'shipping_charges' => $shipping_charges,
             'shipping_discount' => $shipping_discount,
             'shipping' => $shipping,
@@ -228,12 +235,23 @@ class CartController extends Controller
             [$shipping_charges, $shipping_discount] = $this->calculateShipping($subtotal, $state);
         }
         
-        $total = max($subtotal - $discount + $shipping_charges - $shipping_discount, 0);
+        $shipping = max($shipping_charges - $shipping_discount, 0);
+        $total = round(max($subtotal - $discount + $shipping, 0));
+
+        // GST Calculation (18% inclusive)
+        $taxable_product_value = max($subtotal - $discount, 0) / 1.18;
+        $taxable_shipping_value = $shipping / 1.18;
+        $taxable_value = $total / 1.18;
+        $gst_amount = $total - $taxable_value;
 
         return view('checkout', [
             'cart' => $cart,
             'subtotal' => $subtotal,
             'discount' => $discount,
+            'taxable_product_value' => $taxable_product_value,
+            'taxable_shipping_value' => $taxable_shipping_value,
+            'taxable_value' => $taxable_value,
+            'gst_amount' => $gst_amount,
             'shipping_charges' => $shipping_charges,
             'shipping_discount' => $shipping_discount,
             'total' => $total,
@@ -319,7 +337,11 @@ class CartController extends Controller
         $orderNumber = $this->generateOrderNumber();
         
         [$ship_charge, $ship_discount] = $this->calculateShipping($subtotal, $shipping['state']);
-        $orderTotal = max($subtotal - $discount + $ship_charge - $ship_discount, 0);
+        $orderTotal = round(max($subtotal - $discount + $ship_charge - $ship_discount, 0));
+
+        // GST Calculation (18% inclusive)
+        $taxable_value = $orderTotal / 1.18;
+        $gst_amount = $orderTotal - $taxable_value;
 
         $order = Order::create([
             'order_number' => $orderNumber,
@@ -345,6 +367,10 @@ class CartController extends Controller
             'discount_amount' => $discount,
             'status' => 'placed',
             'payment_status' => 'pending',
+            'taxable_value' => $taxable_value,
+            'gst_amount' => $gst_amount,
+            'gst_rate' => 18,
+            'payment_method' => 'Cash On Delivery',
         ]);
 
         // Prepare Product/HSN lookup for performance
@@ -579,16 +605,31 @@ class CartController extends Controller
         [$shipping_charges, $shipping_discount] = $this->calculateShipping($subtotal, $state);
         
         $shipping = $shipping_charges - $shipping_discount;
-        $total = max($subtotal - $discount + $shipping, 0);
+        $total = round(max($subtotal - $discount + $shipping, 0));
+
+        // GST Calculation (18% inclusive)
+        $net_amount = max($subtotal - $discount, 0);
+        $taxable_product_value = $net_amount / 1.18;
+        $taxable_shipping_value = $shipping / 1.18;
+        $taxable_value = $total / 1.18;
+        $gst_amount = $total - $taxable_value;
 
         return response()->json([
             'shipping_charges' => $shipping_charges,
             'shipping_discount' => $shipping_discount,
             'shipping_net' => $shipping,
+            'taxable_product_value' => $taxable_product_value,
+            'taxable_shipping_value' => $taxable_shipping_value,
+            'taxable_value' => $taxable_value,
+            'gst_amount' => $gst_amount,
             'total' => $total,
             'formatted_shipping_charges' => '₹' . number_format($shipping_charges, 0),
             'formatted_shipping_discount' => '-₹' . number_format($shipping_discount, 0),
-            'formatted_shipping_net' => $shipping <= 0 ? 'FREE' : '₹' . number_format($shipping, 0),
+            'formatted_shipping_net' => $shipping <= 0 ? '₹0.00' : '₹' . number_format($shipping, 0),
+            'formatted_taxable_product_value' => '₹' . number_format($taxable_product_value, 2),
+            'formatted_taxable_shipping_value' => '₹' . number_format($taxable_shipping_value, 2),
+            'formatted_taxable_value' => '₹' . number_format($taxable_value, 2),
+            'formatted_gst_amount' => '₹' . number_format($gst_amount, 2),
             'formatted_total' => '₹' . number_format($total, 0),
             'currency_symbol' => '₹'
         ]);

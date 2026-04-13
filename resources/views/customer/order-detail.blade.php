@@ -97,17 +97,7 @@
 
                         <!-- Address Sections -->
                         <div class="invoice-addresses">
-                            <div class="address-col">
-                                <h4 class="address-title">Billing Address</h4>
-                                <div class="address-content">
-                                    <strong>{{ $order->customer_name ?? $user->name }}</strong>
-                                    <p>{{ $order->address_line1 }}<br>
-                                    @if($order->address_line2) {{ $order->address_line2 }}<br> @endif
-                                    {{ $order->city }}, {{ $order->state }} - {{ $order->postal_code }}<br>
-                                    {{ $order->country }}</p>
-                                    <p class="contact-info"><i class="fas fa-phone-alt"></i> {{ $order->phone ?? $user->phone }}</p>
-                                </div>
-                            </div>
+
                             <div class="address-col">
                                 <h4 class="address-title">Shipping Address</h4>
                                 <div class="address-content">
@@ -169,60 +159,78 @@
                         </div>
 
                         <!-- Invoice Footer / Totals -->
-                        <div class="invoice-footer">
-                            <div class="disclaimer">
-                                <h5>Terms & Conditions</h5>
-                                <p>1. Items once sold cannot be returned unless damaged during transit.</p>
-                                <p>2. Please keep this invoice for any warranty claims.</p>
-                                <p>3. This is a computer generated invoice and requires no physical signature.</p>
-                            </div>
-                            <div class="totals-calculation" style="display: flex; flex-direction: column; gap: 12px; min-width: 300px;">
-                                <div class="calc-row" style="display: flex; justify-content: space-between; font-size: 1rem; color: #666;">
-                                    <span>Items Subtotal</span>
-                                    <span style="font-weight: 600; color: #333;">₹{{ number_format($order->items->sum('line_total'), 2) }}</span>
+                        <div class="invoice-footer" style="justify-content: flex-end;">
+                            @php
+                                $gst_rate = 0.18;
+                                $subtotal_inc = $order->items->sum('line_total');
+                                $discount_inc = $order->discount_amount;
+                                $shipping_inc = max(0, $order->shipping_amount - $order->shipping_discount);
+                                
+                                // Taxable breakdown to match the image logic
+                                $net_product_taxable = ($subtotal_inc - $discount_inc) / (1 + $gst_rate);
+                                $shipping_taxable = $shipping_inc / (1 + $gst_rate);
+                                $taxable_value = $net_product_taxable + $shipping_taxable;
+                                $gst_amount = $order->amount - $taxable_value;
+                            @endphp
+                            <div class="totals-calculation" style="width: 300px; margin-left: auto;">
+                                <div class="calc-row">
+                                    <span class="label">Product Value</span>
+                                    <span class="value">₹{{ number_format($net_product_taxable, 2) }}</span>
                                 </div>
                                 
                                 @if($order->discount_amount > 0)
-                                <div class="calc-row discount" style="display: flex; justify-content: space-between; font-size: 1rem; color: #2e7d32;">
-                                    <span>Coupon Discount ({{ $order->coupon_code ?? 'Promo' }})</span>
-                                    <span style="font-weight: 700;">-₹{{ number_format($order->discount_amount, 2) }}</span>
+                                <div class="calc-row discount-row">
+                                    <span class="label">Coupon Discount</span>
+                                    <span class="value">- ₹{{ number_format($order->discount_amount, 0) }}</span>
                                 </div>
                                 @endif
 
-                                <div class="calc-row" style="display: flex; justify-content: space-between; font-size: 1rem; color: #666;">
-                                    <span>Shipping Charges</span>
-                                    <span style="font-weight: 600; color: #333;">₹{{ number_format($order->shipping_amount, 2) }}</span>
+                                <div class="calc-row">
+                                    <span class="label">Shipping Charges</span>
+                                    <span class="value">₹{{ number_format($shipping_taxable, 2) }}</span>
                                 </div>
 
-                                @if($order->shipping_discount > 0)
-                                <div class="calc-row" style="display: flex; justify-content: space-between; font-size: 1rem; color: #2e7d32;">
-                                    <span>Shipping Discount</span>
-                                    <span style="font-weight: 700;">-₹{{ number_format($order->shipping_discount, 2) }}</span>
+                                <div class="calc-row taxable-value-row">
+                                    <span class="label" style="font-weight: 700; color: #333;">Taxable Value</span>
+                                    <span class="value" style="font-weight: 700; color: #333;">₹{{ number_format($taxable_value, 2) }}</span>
                                 </div>
-                                @endif
 
-                                <div class="calc-row grand-total" style="display: flex; justify-content: space-between; border-top: 2px solid var(--primary); margin-top: 15px; padding-top: 15px; color: var(--primary);">
-                                    <span style="font-size: 1.1rem; font-weight: 700;">Grand Total</span>
-                                    <span style="font-size: 1.8rem; font-weight: 800; font-family: 'Playfair Display', serif;">₹{{ number_format($order->amount, 2) }}</span>
+                                <div class="calc-row">
+                                    <span class="label">GST (18%)</span>
+                                    <span class="value">₹{{ number_format($gst_amount, 2) }}</span>
+                                </div>
+
+                                <div class="calc-row grand-total-row">
+                                    <div class="total-label-box">
+                                        <div class="final-total-label">Final Total</div>
+                                        <div class="gst-inclusive-note">(inclusive of GST)</div>
+                                    </div>
+                                    <span class="final-total-value">₹{{ number_format($order->amount, 2) }}</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="print-signature d-none d-print-flex">
-                        <div class="signature-line">
-                            <p>Customer Signature</p>
+                        
+                        <div class="invoice-signature-block" style="margin-top: 80px; display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; width: 100%;">
+                            <div style="width: 55%; text-align: left;">
+                                <div style="font-weight: bold; font-size: 14px; color: #1e293b; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">DECLARATION</div>
+                                <p style="font-size: 13px; color: #94a3b8; margin: 0; line-height: 1.6; font-weight: 300;">
+                                    This is a computer generated invoice and does not require a physical signature. Goods once sold cannot be returned unless found damaged upon arrival.
+                                </p>
+                            </div>
+                            <div style="width: 35%; text-align: left;">
+                                <div style="border-top: 1px solid #cbd5e1; margin-bottom: 15px; width: 100%;"></div>
+                                <div style="font-weight: bold; font-size: 16px; color: #1e293b; margin-bottom: 5px;">Authorized Rep</div>
+                                <div style="font-size: 13px; color: #94a3b8; line-height: 1.4; font-weight: 300;">BOGAR SIDDHA PEEDAM -<br>BOGAR ALCHEMIST LLP</div>
+                            </div>
                         </div>
-                        <div class="signature-line text-right">
-                            <p>Authorized Signatory</p>
-                            <strong>Auvri Plus</strong>
+
+                        <div class="support-contact-web" style="text-align: center; margin-top: 100px; padding-bottom: 20px;">
+                            <span style="color: #94a3b8; font-size: 18px;">Questions?</span> <b style="color: #c2185b; font-weight: 800; font-size: 20px; margin-left: 5px;">Reach out to support</b>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 <style>
 /* Order Details Redesign */
@@ -396,8 +404,8 @@
 /* Addresses */
 .invoice-addresses {
     display: grid;
-    grid-template-columns: 1fr 1fr 1.2fr;
-    gap: 30px;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
     margin-bottom: 50px;
 }
 
@@ -449,11 +457,17 @@
 .disclaimer h5 { font-size: 14px; color: #333; margin: 0 0 10px; }
 .disclaimer p { font-size: 12px; color: #888; margin: 0 0 5px; line-height: 1.5; }
 
-.totals-calculation { width: 300px; }
-.calc-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px; color: #666; }
-.calc-row.discount { color: #d32f2f; }
-.grand-total { border-top: 1.5px solid var(--primary); margin-top: 15px; padding-top: 15px; color: var(--primary); }
-.grand-total span:last-child { font-size: 24px; font-weight: 800; }
+.totals-calculation { width: 320px; }
+.calc-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 15px; color: #64748b; }
+.calc-row .value { font-weight: 700; color: #1e293b; }
+.calc-row.discount-row { color: #1a5d1a; }
+.calc-row.discount-row .value { color: #1a5d1a; }
+.taxable-value-row { border-top: 1px solid #f1f5f9; padding-top: 15px; margin-top: 5px; }
+.grand-total-row { border-top: 1px solid #f1f5f9; margin-top: 15px; padding-top: 20px; align-items: flex-start; }
+.invoice-signature-block { border-top: 1px solid #f1f5f9; padding-top: 40px; margin-top: 40px; }
+.final-total-label { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 800; color: #9d174d; line-height: 1; }
+.gst-inclusive-note { font-size: 12px; color: #64748b; font-weight: 500; margin-top: 4px; }
+.final-total-value {font-size: 20px; font-weight: 800; color: #9d174d; line-height: 1; }
 
 /* Print Specific */
 @media print {

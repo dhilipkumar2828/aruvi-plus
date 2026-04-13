@@ -173,34 +173,58 @@
                 Thank you for your purchase. Your order has been successfully placed and is being processed.
             </p>
 
-            <div class="order-info">
-                <div class="order-info-item">
-                    <span class="order-info-label">Order Number:</span>
-                    <span class="order-info-value">#{{ $order->order_number }}</span>
+            <div class="order-info" style="background: white; border: 1px solid #eee; border-radius: 20px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); text-align: left; margin-bottom: 35px;">
+                <div class="order-info-item" style="border-bottom: 1px solid #f8f8f8; padding-bottom: 12px;">
+                    <span class="order-info-label" style="color: #888;">Order Number:</span>
+                    <span class="order-info-value" style="color: #333; font-weight: 800; font-size: 1.1rem;">#{{ $order->order_number }}</span>
                 </div>
-                <div class="order-info-item">
-                    <span class="order-info-label">Items Subtotal:</span>
-                    <span class="order-info-value">{{ format_inr($order->items->sum('line_total')) }}</span>
+
+                <div class="order-info-item" style="margin-top: 15px;">
+                    <span class="order-info-label" style="color: #888;">Product Value :</span>
+                    <span class="order-info-value" style="color: #444; font-weight: 600;">₹{{ number_format(($order->amount - ($order->shipping_amount - $order->shipping_discount)) / 1.18, 2) }}</span>
                 </div>
+
                 @if($order->discount_amount > 0)
-                <div class="order-info-item" style="color: #2e7d32;">
-                    <span class="order-info-label">Coupon Savings @if($order->coupon_code) ({{ $order->coupon_code }}) @endif:</span>
-                    <span class="order-info-value">-{{ format_inr($order->discount_amount) }}</span>
+                <div class="order-info-item">
+                    <span class="order-info-label" style="color: #0d9488;">Coupon Discount:</span>
+                    <span class="order-info-value" style="color: #0d9488; font-weight: 700;">-₹{{ number_format($order->discount_amount, 2) }}</span>
                 </div>
                 @endif
-                @if($order->shipping_amount > 0)
+
                 <div class="order-info-item">
-                    <span class="order-info-label">Shipping:</span>
-                    <span class="order-info-value">{{ format_inr($order->shipping_amount - $order->shipping_discount) }}</span>
+                    <span class="order-info-label" style="color: #888;">Shipping Charges:</span>
+                    <span class="order-info-value" style="color: #444; font-weight: 600;">₹{{ number_format(($order->shipping_amount - $order->shipping_discount) / 1.18, 2) }}</span>
                 </div>
-                @endif
-                <div class="order-info-item" style="border-top: 1px dashed #ced4ce; padding-top: 10px; margin-top: 10px;">
-                    <span class="order-info-label" style="font-size: 1.2rem; color: var(--primary);">Final Payable:</span>
-                    <span class="order-info-value" style="font-size: 1.2rem;">{{ format_inr($order->amount) }}</span>
+
+                <div style="border-top: 1px solid #f0f0f0; margin: 15px 0; padding-top: 15px;">
+                    <div class="order-info-item">
+                        <span class="order-info-label" style="color: #1a1a1a; font-weight: 800;">Taxable Value:</span>
+                        <span class="order-info-value" style="color: #1a1a1a; font-weight: 800;">
+                            ₹{{ number_format($order->taxable_value > 0 ? $order->taxable_value : ($order->amount / 1.18), 2) }}
+                        </span>
+                    </div>
+
+                    <div class="order-info-item">
+                        <span class="order-info-label" style="color: #888;">GST (18%):</span>
+                        <span class="order-info-value" style="color: #444; font-weight: 600;">
+                            ₹{{ number_format($order->gst_amount > 0 ? $order->gst_amount : ($order->amount - ($order->amount / 1.18)), 2) }}
+                        </span>
+                    </div>
                 </div>
+
                 <div class="order-info-item">
-                    <span class="order-info-label">Date:</span>
-                    <span class="order-info-value">{{ $order->created_at->format('M d, Y') }}</span>
+                    <span class="order-info-label" style="color: #888;">Payment Method:</span>
+                    <span class="order-info-value" style="color: #333; font-weight: 700;">{{ $order->payment_method ?? 'Cash On Delivery' }}</span>
+                </div>
+
+                <div class="order-info-item">
+                    <span class="order-info-label" style="color: #888;">Date:</span>
+                    <span class="order-info-value" style="color: #333; font-weight: 600;">{{ $order->created_at->format('M d, Y') }}</span>
+                </div>
+
+                <div class="order-info-item" style="border-top: 1px solid #f0f0f0; padding-top: 20px; margin-top: 20px; display: flex; align-items: center;">
+                    <span class="order-info-label" style="font-size: 1.4rem; color: #1a1a1a; font-weight: 800;">Grand Total:</span>
+                    <span class="order-info-value" style="font-size: 1.8rem; color: #b0185e; font-weight: 900;">₹{{ number_format($order->amount, 0) }}</span>
                 </div>
             </div>
 

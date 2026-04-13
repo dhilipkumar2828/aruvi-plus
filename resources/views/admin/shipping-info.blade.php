@@ -138,14 +138,12 @@
                         <th rowspan="2" style="width: 50px; text-align: center; vertical-align: middle; color: #fff;">S.No</th>
                         <th rowspan="2" style="text-align: center; vertical-align: middle; color: #fff;">From Amount</th>
                         <th rowspan="2" style="text-align: center; vertical-align: middle; color: #fff;">To Amount</th>
-                        <th colspan="2" style="text-align: center; color: #fff;">TamilNadu</th>
-                        <th colspan="2" style="text-align: center; color: #fff;">Other States</th>
+                        <th style="text-align: center; color: #fff;">TamilNadu</th>
+                        <th style="text-align: center; color: #fff;">Other States</th>
                     </tr>
                     <tr>
                         <th style="text-align: center; color: #fff; font-size: 11px;">Shipping Charges</th>
-                        <th style="text-align: center; color: #fff; font-size: 11px;">Discount</th>
                         <th style="text-align: center; color: #fff; font-size: 11px;">Shipping Charges</th>
-                        <th style="text-align: center; color: #fff; font-size: 11px;">Discount</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -162,13 +160,7 @@
                                 <input type="number" step="0.01" min="0" name="shipping[{{ $info->id }}][shipping_charges_tn_py]" value="{{ $info->shipping_charges_tn_py + 0 }}" class="admin-input" placeholder="Charges">
                             </td>
                             <td style="text-align: center;">
-                                <input type="number" step="0.01" min="0" name="shipping[{{ $info->id }}][discount_tn_py]" value="{{ $info->discount_tn_py + 0 }}" class="admin-input" placeholder="Discount">
-                            </td>
-                            <td style="text-align: center;">
                                 <input type="number" step="0.01" min="0" name="shipping[{{ $info->id }}][shipping_charges_other]" value="{{ $info->shipping_charges_other + 0 }}" class="admin-input" placeholder="Charges">
-                            </td>
-                            <td style="text-align: center;">
-                                <input type="number" step="0.01" min="0" name="shipping[{{ $info->id }}][discount_other]" value="{{ $info->discount_other + 0 }}" class="admin-input" placeholder="Discount">
                             </td>
                         </tr>
                     @endforeach

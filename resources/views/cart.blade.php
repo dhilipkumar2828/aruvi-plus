@@ -405,6 +405,24 @@
                 </form>
             </div>
 
+            {{-- <div style="margin-bottom: 30px;">
+                @if(session('success'))
+                    <div style="background: #f0fff4; border: 1px solid #c6f6d5; color: #2f855a; padding: 15px 25px; border-radius: 12px; margin-bottom: 20px; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-check-circle"></i> {{ session('success') }}
+                    </div>
+                @endif
+                @if(session('error'))
+                    <div style="background: #fff5f5; border: 1px solid #fed7d7; color: #c53030; padding: 15px 25px; border-radius: 12px; margin-bottom: 20px; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-exclamation-circle"></i> {{ session('error') }}
+                    </div>
+                @endif
+                @if($errors->has('coupon'))
+                    <div style="background: #fffaf0; border: 1px solid #feebc8; color: #c05621; padding: 15px 25px; border-radius: 12px; margin-bottom: 20px; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 12px;">
+                        <i class="fas fa-ticket-alt"></i> {{ $errors->first('coupon') }}
+                    </div>
+                @endif
+            </div> --}}
+
             <div class="cart-grid">
                 <!-- Items List -->
                 <div class="cart-items-container">
@@ -463,58 +481,70 @@
 
                 <!-- Summary Panel -->
                 <div class="summary-card">
-                    <h3 style="margin-bottom: 25px; border-bottom: 2px solid var(--secondary); padding-bottom: 15px; font-family: 'Playfair Display', serif; font-size: 1.6rem;">Order Summary</h3>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px;">
+                    <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;">
                         <div class="summary-row">
                             <span style="color: #666;">Items Subtotal</span>
                             <strong style="color: var(--primary);">₹{{ number_format($subtotal) }}</strong>
                         </div>
 
                         @if($discount > 0)
-                        <div class="summary-row" style="color: #1b5e20; align-items: flex-start;">
-                            <div style="flex: 1; padding-right: 15px;">
-                                <div style="font-weight: 600;">Coupon Discount</div>
-                                @if($coupon)
-                                <div style="font-size: 0.75rem; color: #43a047; font-weight: 700; letter-spacing: 0.5px;">({{ $coupon->code }})</div>
-                                @endif
-                            </div>
-                            <strong style="white-space: nowrap;">- ₹{{ number_format($discount) }}</strong>
+                        <div class="summary-row" style="color: #1b5e20;">
+                            <span style="font-weight: 600;">Coupon Discount</span>
+                            <strong>- ₹{{ number_format($discount) }}</strong>
                         </div>
                         @endif
                     </div>
 
-                    <!-- Coupon Area -->
-                    <div style="background: #fdfaf2; border: 1px dashed #d4af37; border-radius: 15px; padding: 25px; margin-bottom: 30px;">
-                        <span style="font-size: 0.75rem; font-weight: 800; color: #b58d04; display: block; margin-bottom: 15px; letter-spacing: 1.5px; text-transform: uppercase; text-align: center;">Coupons & Savings</span>
-                        @if ($coupon)
-                            <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 12px 20px; border-radius: 12px; border: 1px solid #f0e0b0; box-shadow: 0 4px 10px rgba(212, 175, 55, 0.05);">
-                                <div style="display: flex; align-items: center; gap: 10px;">
-                                    <div style="width: 32px; height: 32px; background: #fff9e6; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                                        <i class="fas fa-ticket-alt" style="color: var(--accent); font-size: 0.9rem;"></i>
-                                    </div>
-                                    <div>
-                                        <div style="color: var(--primary); font-weight: 800; font-size: 0.9rem; letter-spacing: 1px;">{{ $coupon->code }}</div>
-                                        <div style="font-size: 0.65rem; color: #2e7d32; font-weight: 700; text-transform: uppercase;">Applied Automatically</div>
-                                    </div>
-                                </div>
-                                <form action="{{ route('cart.coupon.remove') }}" method="POST" style="margin: 0;">
-                                    @csrf
-                                    <button type="submit" style="color: #ff5252; font-size: 0.7rem; font-weight: 800; background: #fff5f5; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: 0.3s;">REMOVE</button>
-                                </form>
+                    <!-- Coupon Applied Box -->
+                    @if($coupon)
+                    <div style="background: #f0fff4; border: 1px solid #c6f6d5; border-radius: 12px; padding: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 24px; height: 24px; background: #38a169; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">
+                                <i class="fas fa-check"></i>
                             </div>
-                        @else
-                            <form action="{{ route('cart.coupon.apply') }}" method="POST" style="display: flex; align-items: center; background: white; border-radius: 50px; border: 1px solid #e0dfd5; overflow: hidden; padding: 5px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.03);">
-                                @csrf
-                                <input type="text" name="code" placeholder="COUPON CODE" style="flex: 1; min-width: 0; padding: 10px 15px; border: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; outline: none; background: transparent;" required>
-                                <button type="submit" style="background: var(--accent); color: white; border: none; padding: 0 25px; border-radius: 50px; font-weight: 800; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease; height: 42px; display: flex; align-items: center; justify-content: center; min-width: 90px; flex-shrink: 0; letter-spacing: 1px;">APPLY</button>
-                            </form>
-                        @endif
+                            <div>
+                                <div style="color: #2f855a; font-weight: 800; font-size: 1rem; letter-spacing: 0.5px;">{{ $coupon->code }}</div>
+                                <div style="font-size: 0.75rem; color: #38a169; font-weight: 600;">Coupon Applied</div>
+                            </div>
+                        </div>
+                        <form action="{{ route('cart.coupon.remove') }}" method="POST" style="margin: 0;">
+                            @csrf
+                            <button type="submit" style="color: #e53e3e; font-size: 0.85rem; font-weight: 700; background: none; border: none; cursor: pointer; text-decoration: none;">Remove</button>
+                        </form>
+                    </div>
+                    @endif
+
+                    <!-- Coupon Input (only if NOT applied) -->
+                    @if(!$coupon)
+                    <div style="margin-bottom: 25px;">
+                        <form action="{{ route('cart.coupon.apply') }}" method="POST" style="display: flex; align-items: center; background: white; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; padding: 4px;">
+                            @csrf
+                            <input type="text" name="code" placeholder="COUPON CODE" style="flex: 1; padding: 10px 15px; border: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; outline: none;" required>
+                            <button type="submit" style="background: var(--primary); color: white; border: none; padding: 0 20px; border-radius: 8px; font-weight: 700; font-size: 0.75rem; cursor: pointer; height: 38px;">APPLY</button>
+                        </form>
+                    </div>
+                    @endif
+
+                    <div style="border-top: 1px dashed #e2e8f0; padding-top: 20px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px;">
+                        <div class="summary-row">
+                            <span style="color: #718096; font-size: 0.95rem;">Product Value</span>
+                            <strong style="color: #2d3748; font-weight: 600;">₹{{ number_format($taxable_value, 2) }}</strong>
+                        </div>
+
+                        <div class="summary-row">
+                            <span style="color: #2d3748; font-weight: 700; font-size: 0.95rem;">Taxable Value</span>
+                            <strong style="color: #2d3748; font-weight: 700;">₹{{ number_format($taxable_value, 2) }}</strong>
+                        </div>
+
+                        <div class="summary-row">
+                            <span style="color: #718096; font-size: 0.95rem;">GST (18%)</span>
+                            <strong style="color: #2d3748; font-weight: 600;">₹{{ number_format($gst_amount, 2) }}</strong>
+                        </div>
                     </div>
 
-                    <div class="summary-total" style="border-top: 2px solid #f0f0f0; padding-top: 25px; margin-bottom: 30px;">
-                        <span style="font-size: 1.1rem; font-weight: 700; color: var(--primary);">Total Amount</span>
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--primary); font-family: 'Playfair Display', serif;">₹{{ number_format($subtotal - $discount) }}</div>
+                    <div class="summary-total" style="background: #fff5f8; border: 1px solid #ffebeb; border-radius: 15px; padding: 5px 10px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 1.3rem; font-weight: 800; color: #b0185e;">Total</span>
+                        <div style="font-size: 2.2rem; font-weight: 900; color: #b0185e;">₹{{ number_format($total, 0) }}</div>
                     </div>
 
                     @auth
