@@ -28,7 +28,6 @@
     }
 
     .cart-hero h1 {
-        font-family: 'Playfair Display', serif;
         font-size: 3rem;
         color: var(--accent) !important;
         margin-bottom: 10px;
@@ -366,7 +365,7 @@
                 <div class="empty-cart-icon" style="margin-bottom: 30px; opacity: 0.6;">
                     <i class="fas fa-shopping-basket" style="font-size: 4.5rem; color: #d4e1d4;"></i>
                 </div>
-                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #004200; margin-bottom: 15px;">Your Cart is Empty</h2>
+                <h2 style="font-size: 2.2rem; color: #004200; margin-bottom: 15px;">Your Cart is Empty</h2>
                 <p style="color: #666; font-size: 1.05rem; line-height: 1.6; margin-bottom: 35px;">It seems you haven't added any items to your cart yet. Explore our sacred collections and find something special for your wellness journey.</p>
                 <a href="{{ route('shop') }}" class="btn btn-primary" style="padding: 12px 35px; font-weight: 700; letter-spacing: 0.5px; box-shadow: 0 10px 20px rgba(0, 66, 0, 0.15);">
                     <i class="fas fa-store" style="font-size: 0.9rem; margin-right: 8px;"></i> Start Shopping
@@ -462,7 +461,7 @@
                                 </form>
                             </div>
                             <div class="cart-item-subtotal">
-                                <div style="font-size: 1.4rem; font-weight: 800; color: #004200; font-family: 'Playfair Display', serif;">₹{{ number_format($item['price'] * $item['quantity']) }}</div>
+                                <div style="font-size: 1.4rem; font-weight: 800; color: #004200;">₹{{ number_format($item['price'] * $item['quantity']) }}</div>
                             </div>
 
                             <div class="cart-item-actions-corner">

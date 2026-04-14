@@ -165,7 +165,7 @@
 }
 
 .account-page-header { margin-bottom: 40px; }
-.account-title { font-family: 'Playfair Display', serif; font-size: 38px; color: var(--primary); margin-bottom: 10px; }
+.account-title { font-size: 38px; color: var(--primary); margin-bottom: 10px; }
 .account-breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #888; }
 .account-breadcrumb a { color: var(--primary); font-weight: 600; text-decoration: none; }
 
@@ -283,7 +283,7 @@
     height: 100%;
 }
 
-.upload-info h4 { margin: 0; color: var(--primary); font-family: 'Playfair Display', serif; }
+.upload-info h4 { margin: 0; color: var(--primary); }
 .upload-info p { margin: 5px 0 0; font-size: 13px; color: #888; }
 
 /* Forms */

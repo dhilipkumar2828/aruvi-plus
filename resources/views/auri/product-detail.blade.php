@@ -77,7 +77,7 @@
                     <div style="display: flex; flex-direction: column; gap: 10px;">
                         <span class="label" style="text-transform: uppercase; font-size: 11px; letter-spacing: 2px; color: #999; font-weight: 700;">Investment in Wellness</span>
                         <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
-                            <div class="price-val" style="font-family: 'Playfair Display', serif; font-size: 3.2rem; color: #004200; font-weight: 800; line-height: 1;">₹{{ number_format($product->price) }}</div>
+                            <div class="price-val" style="font-size: 3.2rem; color: #004200; font-weight: 800; line-height: 1;">₹{{ number_format($product->price) }}</div>
                             @if($product->compare_price && $product->compare_price > 0)
                                 <span style="text-decoration: line-through; color: #bbb; font-size: 1.4rem; font-weight: 500;">₹{{ number_format($product->compare_price) }}</span>
                                 @if($product->compare_price > $product->price)
@@ -163,22 +163,44 @@
     <section class="tabs-luxury-sec">
         <div class="container">
             <div class="lx-tabs-header">
-                <button class="lx-tab-btn active" onclick="switchLxTab(this, 'lx-desc')">Description</button>
-                <button class="lx-tab-btn" onclick="switchLxTab(this, 'lx-usage')">Usage Instructions</button>
+                <button class="lx-tab-btn active" onclick="switchLxTab(this, 'lx-desc')">Full Description</button>
+                @if($product->ayurvedic_specs)
+                    <button class="lx-tab-btn" onclick="switchLxTab(this, 'lx-ayurvedic')">Ayurvedic Specs</button>
+                @endif
+                @if($product->usage_instructions)
+                    <button class="lx-tab-btn" onclick="switchLxTab(this, 'lx-usage')">Usage Instructions</button>
+                @endif
+                @if($product->ingredients)
+                    <button class="lx-tab-btn" onclick="switchLxTab(this, 'lx-ingredients')">Ingredients</button>
+                @endif
                 <button class="lx-tab-btn" onclick="switchLxTab(this, 'lx-reviews')">Reviews ({{ $product->reviews->count() ?? 0 }})</button>
             </div>
             <div class="lx-tabs-content">
                 <div id="lx-desc" class="lx-content-pane active">
-                    <p>{{ $product->description ?? 'Authentic Ayurvedic product crafted with ancient wisdom.' }}</p>
+                    <p>{!! nl2br(e($product->description ?? 'No description available.')) !!}</p>
                 </div>
-                <div id="lx-usage" class="lx-content-pane">
-                    <p>{{ $product->short_description ?? 'Authentic Ayurvedic product crafted with ancient wisdom.' }}</p>
-                </div>
+                @if($product->ayurvedic_specs)
+                    <div id="lx-ayurvedic" class="lx-content-pane">
+                        <p>{!! nl2br(e($product->ayurvedic_specs ?? 'No Ayurvedic specs available.')) !!}</p>
+                    </div>
+                @endif
+
+                @if($product->usage_instructions)
+                    <div id="lx-usage" class="lx-content-pane">
+                        <p>{!! nl2br(e($product->usage_instructions ?? 'No usage instructions available.')) !!}</p>
+                    </div>
+                @endif
+
+                @if($product->ingredients)
+                    <div id="lx-ingredients" class="lx-content-pane">
+                        <p>{!! nl2br(e($product->ingredients ?? 'No ingredients available.')) !!}</p>
+                    </div>
+                @endif
                 <div id="lx-reviews" class="lx-content-pane">
                     <div style="display: grid; grid-template-columns: 1fr 350px; gap: 40px; align-items: start;">
                         <!-- Review List -->
                         <div>
-                            <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 25px; color: #004200;">Community Experiences</h4>
+                            <h4 style="font-size: 1.5rem; margin-bottom: 25px; color: #004200;">Community Experiences</h4>
                             @if($product->reviews && $product->reviews->count())
                                 <div style="display: grid; gap: 20px;">
                                     @foreach($product->reviews as $review)
@@ -212,7 +234,7 @@
                         <!-- Review Form -->
                         <div style="position: sticky; top: 100px; background: #f9fbf9; padding: 30px; border-radius: 25px; border: 1px solid rgba(0,66,0,0.08);">
                             @auth
-                                <h5 style="font-family: 'Playfair Display', serif; font-size: 1.25rem; margin-bottom: 20px; color: #004200;">Share Your Thoughts</h5>
+                                <h5 style="font-size: 1.25rem; margin-bottom: 20px; color: #004200;">Share Your Thoughts</h5>
                                 <form action="{{ route('product.review.store', $product->slug) }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="name" value="{{ Auth::user()->name }}">
@@ -242,7 +264,7 @@
                                     <div style="width: 60px; height: 60px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
                                         <i class="fas fa-lock" style="color: #004200;"></i>
                                     </div>
-                                    <h5 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 10px;">Want to review this?</h5>
+                                    <h5 style="font-size: 1.2rem; margin-bottom: 10px;">Want to review this?</h5>
                                     <p style="font-size: 0.85rem; color: #666; margin-bottom: 25px;">Please login to your account to share your experience with others.</p>
                                     <a href="{{ route('login') }}" style="display: block; text-decoration: none; padding: 15px; border-radius: 50px; font-weight: 700; letter-spacing: 1px; background: #004200; color: #fff;">LOGIN TO REVIEW</a>
                                 </div>

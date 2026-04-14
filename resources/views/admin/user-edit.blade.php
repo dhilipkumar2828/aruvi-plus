@@ -5,7 +5,7 @@
 @section('content')
 <div class="content-card animate-fade">
     <div class="card-header" style="justify-content: space-between;">
-        <h3 style="color: var(--primary); font-family: 'Playfair Display', serif;">Edit User Details</h3>
+        <h3 style="color: var(--primary);">Edit User Details</h3>
         <a href="{{ route('admin.users') }}" class="admin-btn admin-btn-ghost" style="padding: 8px 20px; font-size: 11px;">
             <i class="fas fa-arrow-left"></i> BACK TO LIST
         </a>

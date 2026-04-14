@@ -92,7 +92,7 @@
 <div id="passwordModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); backdrop-filter: blur(5px);">
     <div class="modal-content" style="background-color: #fefefe; margin: 10% auto; padding: 40px; border: 1px solid #888; width: 100%; max-width: 500px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative;">
         <div style="text-align: center; margin-bottom: 25px;">
-            <h2 style="font-family: 'Playfair Display', serif; color: #333; margin-bottom: 5px;">Change Password</h2>
+            <h2 style="color: #333; margin-bottom: 5px;">Change Password</h2>
             <p id="passwordUserEmail" style="color: #666; font-size: 14px;">Update password for dhilipkumar</p>
         </div>
         
