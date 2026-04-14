@@ -29,7 +29,6 @@
         }
 
         .checkout-hero h1 {
-            font-family: 'Playfair Display', serif;
             font-size: 3rem;
             color: var(--accent) !important;
             margin-bottom: 10px;
@@ -276,7 +275,7 @@
                         <div id="addressSelectionModal" class="auri-custom-modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center;">
                             <div class="modal-content-auri" style="background: white; border-radius: 20px; width: 90%; max-width: 500px; max-height: 80vh; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.15); animation: modalFadeIn 0.3s ease;">
                                 <div class="modal-header-auri" style="padding: 20px 25px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; background: #fdfdfd;">
-                                    <h4 style="margin: 0; font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.4rem;">Select Shipping Address</h4>
+                                    <h4 style="margin: 0; color: var(--primary); font-size: 1.4rem;">Select Shipping Address</h4>
                                     <span class="close-modal-auri" onclick="toggleAddressModal(false)" style="font-size: 1.5rem; cursor: pointer; color: #999;">&times;</span>
                                 </div>
                                 <div class="modal-body-auri" style="padding: 20px 25px; overflow-y: auto; max-height: 50vh;">

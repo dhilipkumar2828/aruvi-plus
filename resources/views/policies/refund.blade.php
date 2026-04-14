@@ -19,7 +19,6 @@
     }
     .policy-hero h1 {
         color: #d4af37 !important;
-        font-family: 'Playfair Display', serif;
         font-size: 3.5rem;
     }
     .policy-card {

@@ -240,7 +240,7 @@
 }
 
 .account-page-header { margin-bottom: 40px; }
-.account-title { font-family: 'Playfair Display', serif; font-size: 38px; color: var(--primary); margin-bottom: 10px; }
+.account-title {font-size: 38px; color: var(--primary); margin-bottom: 10px; }
 .account-breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #888; }
 .account-breadcrumb a { color: var(--primary); font-weight: 600; }
 
@@ -382,11 +382,10 @@
 }
 
 .invoice-logo { max-height: 80px; margin-bottom: 15px; }
-.company-name { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--primary); margin: 0; }
+.company-name { font-size: 24px; color: var(--primary); margin: 0; }
 .company-sub { font-size: 14px; color: #888; }
 
 .invoice-label {
-    font-family: 'Playfair Display', serif;
     font-size: 28px;
     color: var(--primary);
     margin: 0 0 15px;
@@ -419,7 +418,7 @@
     padding-bottom: 8px;
 }
 
-.address-content strong { display: block; margin-bottom: 8px; color: #333; font-size: 16px; font-family: 'Playfair Display', serif; }
+.address-content strong { display: block; margin-bottom: 8px; color: #333; font-size: 16px; }
 .address-content p { font-size: 14px; color: #666; line-height: 1.6; margin: 0; }
 .contact-info { margin-top: 10px !important; color: var(--primary) !important; font-weight: 600; }
 
@@ -465,7 +464,7 @@
 .taxable-value-row { border-top: 1px solid #f1f5f9; padding-top: 15px; margin-top: 5px; }
 .grand-total-row { border-top: 1px solid #f1f5f9; margin-top: 15px; padding-top: 20px; align-items: flex-start; }
 .invoice-signature-block { border-top: 1px solid #f1f5f9; padding-top: 40px; margin-top: 40px; }
-.final-total-label { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 800; color: #9d174d; line-height: 1; }
+.final-total-label { font-size: 16px; font-weight: 800; color: #9d174d; line-height: 1; }
 .gst-inclusive-note { font-size: 12px; color: #64748b; font-weight: 500; margin-top: 4px; }
 .final-total-value {font-size: 20px; font-weight: 800; color: #9d174d; line-height: 1; }
 

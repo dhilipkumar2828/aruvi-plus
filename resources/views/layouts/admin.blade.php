@@ -272,7 +272,6 @@
 
         .page-title h1 {
             margin: 0;
-            font-family: 'Playfair Display', serif;
             font-size: 32px;
             font-weight: 700;
             color: var(--primary);
@@ -390,7 +389,6 @@
 
         .card-header h3 {
             margin: 0;
-            font-family: 'Playfair Display', serif;
             font-size: 22px;
             font-weight: 700;
             color: var(--primary);

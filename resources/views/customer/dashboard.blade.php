@@ -145,7 +145,6 @@
 }
 
 .dashboard-hero .user-name {
-    font-family: 'Playfair Display', serif;
     font-size: 42px;
     margin: 10px 0 15px;
     color: #fff;
@@ -214,7 +213,6 @@
 }
 
 .premium-section-title {
-    font-family: 'Playfair Display', serif;
     font-size: 24px;
     color: var(--primary);
     margin: 0;

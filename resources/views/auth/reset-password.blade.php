@@ -30,7 +30,6 @@
     }
 
     .auth-header h2 {
-        font-family: 'Playfair Display', serif;
         color: var(--primary) !important;
         font-size: 2.2rem;
         margin-bottom: 35px;

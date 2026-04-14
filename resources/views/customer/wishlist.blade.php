@@ -107,7 +107,7 @@
 }
 
 .account-page-header { margin-bottom: 40px; }
-.account-title { font-family: 'Playfair Display', serif; font-size: 38px; color: var(--primary); margin-bottom: 10px; }
+.account-title {font-size: 38px; color: var(--primary); margin-bottom: 10px; }
 .account-breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #888; }
 .account-breadcrumb a { color: var(--primary); font-weight: 600; }
 
@@ -130,7 +130,7 @@
     padding-bottom: 20px;
 }
 
-.premium-section-title { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--primary); margin: 0; }
+.premium-section-title { font-size: 24px; color: var(--primary); margin: 0; }
 .order-count { font-size: 14px; color: #888; background: var(--beige-light); padding: 5px 15px; border-radius: 50px; }
 
 /* Product Table Cell */
@@ -172,7 +172,7 @@
 /* Empty State */
 .empty-state { text-align: center; padding: 100px 20px; }
 .empty-icon { font-size: 70px; color: var(--beige-dark); margin-bottom: 30px; opacity: 0.5; }
-.empty-title { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--primary); margin-bottom: 10px; }
+.empty-title { font-size: 26px; color: var(--primary); margin-bottom: 10px; }
 .btn-premium {
     background: var(--primary); color: #fff; padding: 15px 40px; border-radius: 50px;
     font-weight: 700; margin-top: 30px; display: inline-block; box-shadow: 0 10px 25px rgba(0, 66, 0, 0.2);

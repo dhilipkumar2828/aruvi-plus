@@ -137,13 +137,13 @@
                         @php
                             $isInWishlist = Auth::check() && Auth::user()->wishlist->contains('product_id', $product->id);
                         @endphp
-                        <form action="{{ route('wishlist.toggle') }}" method="POST" class="wishlist-overlay-form" style="position: absolute; top: 15px; right: 15px; z-index: 5;">
+                        {{-- <form action="{{ route('wishlist.toggle') }}" method="POST" class="wishlist-overlay-form" style="position: absolute; top: 15px; right: 15px; z-index: 5;">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                             <button type="submit" style="width: 40px; height: 40px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; color: {{ $isInWishlist ? '#d4145a' : 'var(--primary)' }}; transition: all 0.3s ease;">
                                 <i class="{{ $isInWishlist ? 'fas' : 'far' }} fa-heart"></i>
                             </button>
-                        </form>
+                        </form> --}}
                         <a href="{{ route('product.show', $product->slug) }}" class="quick-view-btn">Quick View</a>
                     </div>
                     <div class="p-info">
@@ -155,7 +155,7 @@
                         <h4 class="p-title">{{ $product->name }}</h4>
                         <div class="p-bot" style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
                             <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                                <span class="p-price" style="font-weight: 800; color: #004200; font-size: 1.15rem; font-family: 'Playfair Display', serif;">₹{{ number_format($product->price) }}</span>
+                                <span class="p-price" style="font-weight: 800; color: #004200; font-size: 1.15rem;">₹{{ number_format($product->price) }}</span>
                                 @if($product->compare_price && $product->compare_price > 0)
                                     <span style="text-decoration: line-through; color: #999; font-size: 0.85rem; font-weight: 500;">₹{{ number_format($product->compare_price) }}</span>
                                 @endif

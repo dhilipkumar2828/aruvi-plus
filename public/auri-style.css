@@ -418,7 +418,7 @@ header .container {
 .hero-section {
   background:
     linear-gradient(rgba(0, 66, 0, 0.4), rgba(0, 66, 0, 0.4)),
-    url("/aruvi-new-website/public/auri-images/background-main.png");
+    url("auri-images/background-main.png");
   background-size: cover;
   background-position: center;
   padding: 120px 0 140px;
@@ -1494,7 +1494,7 @@ header .container {
 
 /* 5. Education */
 .education-section {
-  background: linear-gradient(rgba(255, 255, 255, 0.945), rgba(255, 255, 255, 0.808)), url('/auri-images/about/approach-bg.png');
+  background: linear-gradient(rgba(255, 255, 255, 0.945), rgba(255, 255, 255, 0.808)), url('auri-images/about/approach-bg.png');
   /* background: var(--secondary); */
   background-size: cover;
   background-position: center;
@@ -2295,7 +2295,7 @@ footer {
 .about-hero-sec {
   background:
     linear-gradient(rgba(0, 66, 0, 0.6), rgba(0, 66, 0, 0.6)),
-    url("/aruvi-new-website/public/auri-images/headers/about_v2.png");
+    url("auri-images/headers/about_v2.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -2366,7 +2366,7 @@ footer {
 
 /* --- 3. Advanced Radial Philosophy Section --- */
 .advanced-philosophy-sec {
-  background: linear-gradient(rgba(255, 255, 255, 0.945), rgba(255, 255, 255, 0.808)), url('/aruvi-new-website/public/auri-images/about/image\ copy.png');
+  background: linear-gradient(rgba(255, 255, 255, 0.945), rgba(255, 255, 255, 0.808)), url('auri-images/about/image\ copy.png');
   background-size: cover;
   background-position: center;
   position: relative;
@@ -2680,7 +2680,7 @@ footer {
 /* 5. Dosha Sections - Grid Layout with Floating Background */
 .dosha-panels {
   padding: 50px 0 !important;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/aruvi-new-website/public/auri-images/about/panchamahabhuta_bg.png');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('auri-images/about/panchamahabhuta_bg.png');
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
@@ -2784,7 +2784,7 @@ footer {
 .about-cta {
   background:
     linear-gradient(rgba(0, 66, 0, 0.8), rgba(0, 66, 0, 0.8)),
-    url("/aruvi-new-website/public/auri-images/background-main.png");
+    url("auri-images/background-main.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -2852,7 +2852,7 @@ footer {
 .shop-hero {
   background:
     linear-gradient(rgba(0, 66, 0, 0.65), rgba(0, 66, 0, 0.65)),
-    url("/aruvi-new-website/public/auri-images/headers/shop_v2.jpg");
+    url("auri-images/headers/shop_v2.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -2919,7 +2919,7 @@ footer {
 .faq-hero {
   background:
     linear-gradient(rgba(0, 66, 0, 0.7), rgba(0, 66, 0, 0.7)),
-    url("/aruvi-new-website/public/auri-images/headers/faq_v2.jpg");
+    url("auri-images/headers/faq_v2.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -3013,7 +3013,7 @@ footer {
 .contact-hero {
   background:
     linear-gradient(rgba(0, 66, 0, 0.7), rgba(0, 66, 0, 0.7)),
-    url("/aruvi-new-website/public/auri-images/headers/contact-v2.png");
+    url("auri-images/headers/contact-v2.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -3028,7 +3028,7 @@ footer {
 .terms-hero {
   background:
     linear-gradient(rgba(0, 66, 0, 0.7), rgba(0, 66, 0, 0.7)),
-    url("/aruvi-new-website/public/auri-images/headers/terms_v2.jpg");
+    url("auri-images/headers/terms_v2.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -3051,7 +3051,7 @@ footer {
 .shipping-hero {
   background:
     linear-gradient(rgba(0, 66, 0, 0.7), rgba(0, 66, 0, 0.7)),
-    url("/aruvi-new-website/public/auri-images/headers/shipping_v2.jpg");
+    url("auri-images/headers/shipping_v2.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -3078,7 +3078,7 @@ footer {
 .refund-hero {
   background:
     linear-gradient(rgba(0, 66, 0, 0.7), rgba(0, 66, 0, 0.7)),
-    url("/aruvi-new-website/public/auri-images/headers/refund_v2.jpg");
+    url("auri-images/headers/refund_v2.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -3101,7 +3101,7 @@ footer {
 .privacy-hero {
   background:
     linear-gradient(rgba(0, 66, 0, 0.7), rgba(0, 66, 0, 0.7)),
-    url("/aruvi-new-website/public/auri-images/headers/privacy_v2.jpg");
+    url("auri-images/headers/privacy_v2.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

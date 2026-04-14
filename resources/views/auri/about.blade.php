@@ -8,7 +8,7 @@
     <section class="about-hero-sec" style="background-image: linear-gradient(rgba(0, 66, 0, 0.5), rgba(0, 66, 0, 0.5)), url('{{ asset('auri-images/headers/about_v2.jpg') }}'); background-size: cover; background-position: center; min-height: 300px; display: flex; align-items: center; text-align: center; color: #fff; position: relative;">
         <div class="container hero-inner" style="max-width: 900px; margin: 0 auto; position: relative; z-index: 2;">
             <span class="sub-title" style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 15px;">AUVRIPLUS TRADITION</span>
-            <h1 class="sec-title" style="font-family: 'Playfair Display', serif; font-size: 4rem; line-height: 1.1; margin-bottom: 25px;">Authenticity & Tradition</h1>
+            <h1 class="sec-title" style="font-size: 4rem; line-height: 1.1; margin-bottom: 25px;">Authenticity & Tradition</h1>
             <p class="p-text" style="font-size: 1.2rem; line-height: 1.7; opacity: 0.95; margin: 0 auto;">Going way back to the ancient times, and infusing that wisdom to the present-day culture, is where we come from. Auvriplus is the best brand in the combination of authenticity and tradition to give the best products for Hair Care.<br>Our foundations come from the ancient ayurvedic scriptures and science.</p>
         </div>
     </section>

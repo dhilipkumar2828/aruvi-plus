@@ -49,7 +49,6 @@
     }
 
     .success-title {
-        font-family: 'Playfair Display', serif;
         font-size: 2.5rem;
         font-weight: 800;
         color: var(--primary);

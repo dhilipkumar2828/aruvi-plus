@@ -300,6 +300,36 @@
         color: #777;
     }
 
+    .media-preview-item {
+        position: relative;
+        display: inline-block;
+    }
+
+    .remove-image-btn {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        width: 22px;
+        height: 22px;
+        background: #ff4d4d;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        cursor: pointer;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        z-index: 5;
+        transition: all 0.2s ease;
+    }
+
+    .remove-image-btn:hover {
+        background: #e60000;
+        transform: scale(1.1);
+    }
+
     .file-input-hidden {
         position: absolute;
         width: 1px;
@@ -524,6 +554,18 @@
                     <textarea id="product_description" name="product_description" placeholder="Share the history, benefits, and craftsmanship details.">{{ old('product_description', $product?->description ?? '') }}</textarea>
                     <div class="help-text">Highlight spiritual significance, rituals, and care guidance.</div>
                 </div>
+                <div class="field">
+                    <label for="ayurvedic_specs">Ayurvedic Specs</label>
+                    <textarea id="ayurvedic_specs" name="ayurvedic_specs" placeholder="Details about ayurvedic specifications...">{{ old('ayurvedic_specs', $product?->ayurvedic_specs ?? '') }}</textarea>
+                </div>
+                <div class="field">
+                    <label for="usage_instructions">Usage Instructions</label>
+                    <textarea id="usage_instructions" name="usage_instructions" placeholder="How to use this product...">{{ old('usage_instructions', $product?->usage_instructions ?? '') }}</textarea>
+                </div>
+                <div class="field">
+                    <label for="ingredients">Ingredients</label>
+                    <textarea id="ingredients" name="ingredients" placeholder="List of ingredients...">{{ old('ingredients', $product?->ingredients ?? '') }}</textarea>
+                </div>
             </section>
 
             <section class="section-card">
@@ -531,14 +573,14 @@
                     <h4>Media</h4>
                     <span class="section-hint">Gallery</span>
                 </div>
-                <div class="field">
+                <div class="field" style="display: none;">
                     <label for="primary_image">Primary Image Path</label>
-                    <input id="primary_image" name="primary_image" type="text" placeholder="images/your-image.png" value="{{ old('primary_image', $product?->primary_image ?? '') }}">
+                    <input id="primary_image" name="primary_image" type="hidden" value="{{ old('primary_image', $product?->primary_image ?? '') }}">
                 </div>
                 <div class="field">
-                    <label for="primary_image_upload">Upload Primary Image <span class="text-danger">*</span></label>
+                    <label for="primary_image_upload">Upload Primary Image @if(!$isEdit)<span class="text-danger">*</span>@endif</label>
                     <div class="file-upload @error('primary_image_upload') is-invalid @enderror">
-                        <input id="primary_image_upload" name="primary_image_upload" type="file" accept="image/*" required>
+                        <input id="primary_image_upload" name="primary_image_upload" type="file" accept="image/*" {{ !$isEdit ? 'required' : '' }}>
                         <label for="primary_image_upload" class="file-button">Choose File</label>
                         <span id="primary_image_upload_name" class="file-name">No file chosen</span>
                     </div>
@@ -546,37 +588,45 @@
                         <div class="text-danger" style="font-size: 12px; margin-top: 5px;">{{ $message }}</div>
                     @enderror
                     @if ($isEdit && $product?->primary_image)
-                        <div class="media-preview">
-                            <img src="{{ asset($product->primary_image) }}" alt="Current primary image" class="media-thumb">
+                        <div class="media-preview" id="primary-preview-container">
+                            <div class="media-preview-item">
+                                <img src="{{ asset($product->primary_image) }}" alt="Current primary image" class="media-thumb">
+                                <div class="remove-image-btn" onclick="removeProductImage('primary', '{{ $product->primary_image }}', this)">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
                         </div>
                     @endif
+                    <div class="media-preview" id="primary-upload-preview" style="display: none; margin-top: 10px;"></div>
                 </div>
                 <div class="field">
-                    <label for="gallery_images">Gallery Images (comma separated)</label>
-                    <textarea id="gallery_images" name="gallery_images" placeholder="images/img1.png, images/img2.png">{{ $galleryValue }}</textarea>
-                </div>
-                @if ($isEdit && !empty($product?->gallery_images))
-                    @php
-                        $galleryPreview = is_array($product->gallery_images)
-                            ? array_slice($product->gallery_images, 0, 3)
-                            : [];
-                    @endphp
-                    @if (!empty($galleryPreview))
-                        <div class="media-preview">
-                            @foreach ($galleryPreview as $image)
-                                <img src="{{ asset($image) }}" alt="Gallery image" class="media-thumb">
-                            @endforeach
-                            @if (count($product->gallery_images ?? []) > 3)
-                                <div class="media-thumb empty">+{{ count($product->gallery_images) - 3 }} more</div>
-                            @endif
-                        </div>
+                    <label>Gallery Images</label>
+                    <div class="field" style="display: none;">
+                        <textarea id="gallery_images" name="gallery_images" placeholder="images/img1.png, images/img2.png">{{ $galleryValue }}</textarea>
+                    </div>
+                
+                    @if ($isEdit && !empty($product?->gallery_images))
+                        @if (is_array($product->gallery_images) && count($product->gallery_images) > 0)
+                            <div class="media-preview" id="gallery-preview-container">
+                                @foreach ($product->gallery_images as $image)
+                                    <div class="media-preview-item">
+                                        <img src="{{ asset($image) }}" alt="Gallery image" class="media-thumb">
+                                        <div class="remove-image-btn" onclick="removeProductImage('gallery', '{{ $image }}', this)">
+                                            <i class="fas fa-times"></i>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
                     @endif
-                @endif
-                <input id="gallery_uploads" name="gallery_uploads[]" type="file" accept="image/*" multiple class="file-input-hidden">
-                <div class="file-upload" style="margin-top: 12px;">
+                    <div class="media-preview" id="gallery-upload-preview" style="display: none; margin-top: 10px;"></div>
+                    
+                    <input id="gallery_uploads" name="gallery_uploads[]" type="file" accept="image/*" multiple class="file-input-hidden">
+                    <div class="file-upload" style="margin-top: 12px;">
                         <label for="gallery_uploads" class="file-button">Choose Files</label>
                         <span id="gallery_uploads_name" class="file-name">No files chosen</span>
                     </div>
+                </div>
             </section>
 
             <section class="section-card">
@@ -703,22 +753,95 @@
         if (primaryInput && primaryName) {
             primaryInput.addEventListener('change', function () {
                 primaryName.textContent = primaryInput.files.length ? primaryInput.files[0].name : 'No file chosen';
+                if (primaryInput.files && primaryInput.files[0]) {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#primary-upload-preview').html(`
+                            <div class="media-preview-item">
+                                <img src="${e.target.result}" class="media-thumb">
+                                <div class="remove-image-btn" onclick="clearProductInput('primary_image_upload')">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+                        `).show();
+                        $('#primary-preview-container').hide();
+                    }
+                    reader.readAsDataURL(primaryInput.files[0]);
+                }
             });
         }
 
         const galleryInput = document.getElementById('gallery_uploads');
         const galleryName = document.getElementById('gallery_uploads_name');
+        
+        let galleryFileArray = [];
+
         if (galleryInput && galleryName) {
             galleryInput.addEventListener('change', function () {
-                if (!galleryInput.files.length) {
-                    galleryName.textContent = 'No files chosen';
-                    return;
-                }
-                galleryName.textContent = galleryInput.files.length === 1
-                    ? galleryInput.files[0].name
-                    : galleryInput.files.length + ' files selected';
+                if (!galleryInput.files.length) return;
+                
+                // Append new files to our tracking array instead of replacing
+                const newFiles = Array.from(galleryInput.files);
+                galleryFileArray = galleryFileArray.concat(newFiles);
+                renderGalleryUploadPreviews();
             });
         }
+
+        window.renderGalleryUploadPreviews = function() {
+            if (galleryFileArray.length === 0) {
+                $('#gallery-upload-preview').hide().html('');
+                galleryName.textContent = 'No files chosen';
+                galleryInput.value = '';
+                return;
+            }
+
+            galleryName.textContent = galleryFileArray.length === 1
+                ? galleryFileArray[0].name
+                : galleryFileArray.length + ' files selected';
+
+            $('#gallery-upload-preview').html(`
+                <div id="gallery-preview-items" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 5px;"></div>
+            `).show();
+
+            galleryFileArray.forEach((file, index) => {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#gallery-preview-items').append(`
+                        <div class="media-preview-item" data-index="${index}">
+                            <img src="${e.target.result}" class="media-thumb">
+                            <div class="remove-image-btn" onclick="removeSelectedGalleryFile(${index})">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    `);
+                }
+                reader.readAsDataURL(file);
+            });
+
+            // Sync with actual input
+            const dt = new DataTransfer();
+            galleryFileArray.forEach(file => dt.items.add(file));
+            galleryInput.files = dt.files;
+        };
+
+        window.removeSelectedGalleryFile = function(index) {
+            galleryFileArray.splice(index, 1);
+            renderGalleryUploadPreviews();
+        };
+
+        window.clearProductInput = function(id) {
+            const input = document.getElementById(id);
+            input.value = '';
+            if (id === 'primary_image_upload') {
+                $('#primary_image_upload_name').text('No file chosen');
+                $('#primary-upload-preview').hide().html('');
+                $('#primary-preview-container').show();
+            } else {
+                galleryFileArray = [];
+                $('#gallery_uploads_name').text('No files chosen');
+                $('#gallery-upload-preview').hide().html('');
+            }
+        };
     })();
 
     // Clear error on input (kept for any custom handled cases if needed, but global covers it)
@@ -726,5 +849,43 @@
         $(this).css('border-color', '');
         $(this).next('.error-msg').remove();
     });
+
+    // Image Removal Function
+    window.removeProductImage = function(type, path, btn) {
+        Swal.fire({
+            title: 'Remove Image?',
+            text: "This image will be removed from the product catalog.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#004200',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, remove it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (type === 'primary') {
+                    $('#primary_image').val('');
+                    $(btn).closest('.media-preview').fadeOut(300, function() {
+                        $(this).remove();
+                    });
+                    toastr.success('Primary image removed.');
+                } else if (type === 'gallery') {
+                    let galleryInput = $('#gallery_images');
+                    let images = galleryInput.val().split(',').map(img => img.trim()).filter(img => img !== '');
+                    
+                    images = images.filter(img => img !== path);
+                    galleryInput.val(images.join(', '));
+                    
+                    $(btn).closest('.media-preview-item').fadeOut(300, function() {
+                        $(this).remove();
+                        if ($('#gallery-preview-container').children(':visible').length === 0) {
+                            $('#gallery-preview-container').remove();
+                        }
+                    });
+                    toastr.success('Gallery image removed.');
+                }
+            }
+        });
+    };
 </script>
 @endsection

@@ -103,7 +103,6 @@
 
 .user-sidebar-name {
     margin: 0;
-    font-family: 'Playfair Display', serif;
     font-weight: 700;
     color: var(--primary);
     font-size: 20px;

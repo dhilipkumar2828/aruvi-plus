@@ -19,7 +19,7 @@
     <div class="main-content" style="margin-left: 0; padding: 60px 40px; text-align: center; background: #fff;">
         <div class="content-card" style="padding: 100px 40px; box-shadow: none; border: 1px solid #eee;">
             <div style="font-size: 150px; font-weight: 800; color: #004200; opacity: 0.1; line-height: 1; margin-bottom: -50px;">404</div>
-            <h1 style="font-family: 'Playfair Display', serif; font-size: 40px; color: #004200; position: relative; z-index: 2;">Module Not Found</h1>
+            <h1 style=" font-size: 40px; color: #004200; position: relative; z-index: 2;">Module Not Found</h1>
             <p style="color: #666; font-size: 16px; margin: 30px auto; max-width: 500px;">The administration page or data record you are looking for has been moved or does not exist.</p>
             <a href="{{ route('admin.dashboard') }}" class="admin-btn admin-btn-primary" style="padding: 15px 40px; font-weight: 700;">Return to Admin Dashboard</a>
         </div>

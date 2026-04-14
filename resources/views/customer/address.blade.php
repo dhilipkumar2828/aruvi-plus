@@ -171,7 +171,6 @@
     }
 
     .account-title {
-        font-family: 'Playfair Display', serif;
         font-size: 2.5rem;
         color: var(--primary);
         margin-bottom: 10px;
@@ -221,7 +220,6 @@
     }
 
     .premium-section-title {
-        font-family: 'Playfair Display', serif;
         font-size: 1.8rem;
         color: var(--primary);
         margin-bottom: 8px;
@@ -275,7 +273,6 @@
     }
 
     .recipient-name {
-        font-family: 'Playfair Display', serif;
         font-size: 1.4rem;
         color: var(--primary);
         margin-bottom: 12px;
@@ -345,7 +342,6 @@
     }
 
     .form-title {
-        font-family: 'Playfair Display', serif;
         font-size: 1.5rem;
         color: var(--primary);
     }

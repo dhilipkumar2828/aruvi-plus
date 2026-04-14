@@ -136,7 +136,6 @@
         }
 
         .brand-text-wrap h1 {
-            font-family: 'Playfair Display', serif;
             font-size: 52px;
             font-weight: 700;
             letter-spacing: 4px;
@@ -208,7 +207,6 @@
         }
 
         .form-header h2 {
-            font-family: 'Playfair Display', serif;
             font-size: 36px;
             font-weight: 700;
             letter-spacing: 0.5px;
