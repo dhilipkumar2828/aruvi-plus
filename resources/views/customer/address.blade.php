@@ -166,8 +166,9 @@
 
     .account-page-header {
         margin-bottom: 40px;
-        border-bottom: 2px solid var(--border-soft);
+        /* border-bottom: 2px solid var(--border-soft); */
         padding-bottom: 20px;
+        margin-top: 30px;
     }
 
     .account-title {

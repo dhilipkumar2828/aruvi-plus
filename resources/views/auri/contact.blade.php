@@ -4,6 +4,92 @@
 @section('meta_description', 'Have questions about our Ayurvedic remedies? Our team is here to help you on your wellness journey.')
 
 @section('content')
+<style>
+    @media (max-width: 768px) {
+        /* General Spacing */
+        .contact-main-section {
+            padding: 40px 0 !important;
+        }
+        
+        /* Hero */
+        .contact-hero {
+            min-height: 220px !important;
+            padding: 40px 20px !important;
+        }
+        .contact-hero h1.sec-title {
+            font-size: 2.2rem !important;
+        }
+        .contact-hero .p-text {
+            font-size: 0.95rem !important;
+        }
+        
+        /* Layout & Form */
+        .contact-layout {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 40px !important;
+        }
+        .contact-form-card {
+            padding: 25px 20px !important;
+            border-radius: 20px !important;
+        }
+        .contact-form-card h3 {
+            font-size: 1.6rem !important;
+            margin-bottom: 20px !important;
+        }
+        .form-row {
+            grid-template-columns: 1fr !important;
+            gap: 15px !important;
+            margin-bottom: 15px !important;
+        }
+        .premium-form input, .premium-form textarea {
+            padding: 12px !important;
+            font-size: 0.95rem !important;
+        }
+        
+        /* Buttons */
+        .btn-primary {
+            padding: 14px !important;
+            font-size: 1rem !important;
+            border-radius: 50px !important;
+        }
+        
+        /* Sidebar Info Blocks */
+        .contact-sidebar {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 25px !important;
+        }
+        .info-block {
+            gap: 15px !important;
+            margin-bottom: 0 !important;
+            text-align: left !important;
+            align-items: center !important;
+        }
+        .info-icon {
+            width: 50px !important;
+            height: 50px !important;
+            min-width: 50px !important;
+            font-size: 1.2rem !important;
+        }
+        .info-txt h4 {
+            font-size: 1.1rem !important;
+            margin-bottom: 4px !important;
+        }
+        .info-txt p {
+            font-size: 0.95rem !important;
+        }
+        
+        /* Map */
+        .contact-map {
+            margin-top: 40px !important;
+        }
+        .contact-map iframe {
+            height: 300px !important;
+            border-radius: 20px !important;
+        }
+    }
+</style>
     <!-- Contact Hero -->
     <section class="contact-hero" style="background-image: linear-gradient(rgba(0, 66, 0, 0.6), rgba(0, 66, 0, 0.6)), url('{{ asset('auri-images/headers/contact-v2.png') }}'); background-size: cover; background-position: center; min-height: 300px; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff;">
         <div class="container hero-inner">

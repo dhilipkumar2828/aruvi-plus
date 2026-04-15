@@ -6,7 +6,7 @@
 <div class="luxury-account-page">
     <div class="container">
         <!-- Dashboard Hero -->
-        <div class="dashboard-hero">
+        <div class="dashboard-hero" style="margin-top: 60px">
             <div class="dashboard-hero-content">
                 <span class="welcome-text">Welcome back,</span>
                 <h1 class="user-name">{{ $user->name }}</h1>
@@ -86,7 +86,7 @@
                 </div>
 
                 <!-- Quick Links -->
-                <div class="quick-links-grid">
+                {{-- <div class="quick-links-grid">
                     <a href="{{ route('customer.address') }}" class="quick-link-card">
                         <div class="link-icon"><i class="fas fa-map-marked-alt"></i></div>
                         <div class="link-info">
@@ -111,7 +111,7 @@
                         </div>
                         <i class="fas fa-chevron-right arrow"></i>
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

@@ -38,15 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Navbar background on scroll
-    const nav = document.querySelector('nav');
+    // 3. Header Styling on Scroll
+    const header = document.getElementById('main-header');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            nav.style.boxShadow = "0 5px 20px rgba(0,0,0,0.05)";
-            nav.style.padding = "10px 0";
+            header.classList.add('scrolled');
         } else {
-            nav.style.boxShadow = "none";
-            nav.style.padding = "20px 0";
+            header.classList.remove('scrolled');
         }
     });
 

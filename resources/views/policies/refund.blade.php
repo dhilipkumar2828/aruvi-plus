@@ -60,21 +60,32 @@
         <div class="policy-card animate-fade">
             <h2 class="section-title">Returns & Refunds</h2>
             <div class="policy-content">
-                <p>We want you to be completely satisfied with your purchase from Auvri Plus. If you are not satisfied, we are here to help.</p>
+                <h4>Overview</h4>
+                <p>Our refund and returns policy lasts 30 days. If 30 days have passed since your purchase, we can’t offer you a full refund or exchange.</p>
+                <p>To be eligible for a return, your item must be unused and in the same condition that you received it. It must also be in the original packaging.</p>
+                <p>To complete your return, we require a receipt or proof of purchase.</p>
+
+                <h4>Refunds</h4>
+                <p>Once your return is received and inspected, we will send you an email to notify you that we have received your returned item. We will also notify you of the approval or rejection of your refund.</p>
+                <p>If you are approved, then your refund will be processed, and a credit will automatically be applied to your credit card or original method of payment, within a 10 days.</p>
+
+                <h4>Late or missing refunds</h4>
+                <p>If you haven’t received a refund yet, first check your bank account again.</p>
+                <p>Then contact your credit card company, it may take some time before your refund is officially posted.</p>
+                <p>Next contact your bank. There is often some processing time before a refund is posted.</p>
+                <p>If you’ve done all of this and you still have not received your refund yet, please contact us.</p>
+
+                <h4>Sale items</h4>
+                <p>Only regular priced items may be refunded. Sale items cannot be refunded.</p>
+
+                <h4>Shipping returns</h4>
+                <p>To return your product, you should mail your product. You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are non-refundable. If you receive a refund, the cost of return shipping will be deducted from your refund.</p>
+                <p>Depending on where you live, the time it may take for your exchanged product to reach you may vary.</p>
+                <p>If you are returning more expensive items, you may consider using a trackable shipping service or purchasing shipping insurance. We don’t guarantee that we will receive your returned item.</p>
+
+                <h4>Need help?</h4>
+                <p>Contact us for questions related to refunds and returns.</p>
                 
-                <h4>1. Returns</h4>
-                <p>You have 7 working days from the date of delivery to return an item. To be eligible for a return, the item must be unused and in the same condition as when you received it. It must also be in the original packaging.</p>
-                
-                <h4>2. Refunds</h4>
-                <p>Once we receive your item, we will inspect it and notify you that we have received your returned item. We will immediately notify you on the status of your refund after inspecting the item. If your return is approved, we will initiate a refund to your original method of payment.</p>
-                
-                <h4>3. Shipping</h4>
-                <p>You will be responsible for paying your own shipping costs for returning your item. Shipping costs are non-refundable. If you receive a refund, the cost of return shipping will be deducted from your refund.</p>
-                
-                <h4>4. Non-Refundable Items</h4>
-                <p>Certain items, such as opened herbal remedies or custom-made spiritual artifacts, may be ineligible for returns due to hygiene and cultural reasons.</p>
-                
-                <p class="mt-5 text-muted">Last updated: {{ date('F d, Y') }}</p>
             </div>
         </div>
     </div>

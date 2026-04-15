@@ -60,24 +60,11 @@
         <div class="policy-card animate-fade">
             <h2 class="section-title">Shipping Policy</h2>
             <div class="policy-content">
-                <p>We ensure that your sacred items are handled with care and delivered securely to your doorstep.</p>
+                <h4>Processing & Dispatch</h4>
+                <p>We at Wide Wings, dispatch the order within 3-4 business days.</p>
                 
-                <h4>1. Processing Time</h4>
-                <p>Orders are typically processed within 3-5 business days. Please note that certain handcrafted or energized items may require additional time for preparation.</p>
-                
-                <h4>2. Shipping Rates</h4>
-                <p>Shipping charges for your order will be calculated and displayed at checkout. We offer standard and expressed shipping options depending on your location.</p>
-                
-                <h4>3. Domestic Shipping (India)</h4>
-                <p>Domestic orders are usually delivered within 7-10 business days after dispatch. We use reputable courier services like BlueDart, Delhivery, or Speed Post.</p>
-                
-                <h4>4. International Shipping</h4>
-                <p>We ship worldwide. International delivery times vary by destination but generally range from 15-25 business days. Customs duties and taxes, if applicable, are the responsibility of the customer.</p>
-                
-                <h4>5. Tracking</h4>
-                <p>Once your order has shipped, you will receive an email with a tracking number to monitor your package.</p>
-                
-                <p class="mt-5 text-muted">Last updated: {{ date('F d, Y') }}</p>
+                <h4>Delivery Timeline</h4>
+                <p>All Products will be delivered within 10 business days.</p>                
             </div>
         </div>
     </div>

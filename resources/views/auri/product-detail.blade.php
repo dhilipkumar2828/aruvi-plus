@@ -4,6 +4,122 @@
 @section('meta_description', Str::limit(strip_tags($product->description ?? ''), 160))
 
 @section('content')
+<style>
+    @media (max-width: 768px) {
+        .hero-grid-luxury {
+            grid-template-columns: 1fr !important;
+            gap: 30px !important;
+            padding: 0 15px !important;
+        }
+        .main-img-luxury {
+            width: 100% !important;
+            height: auto !important;
+            border-radius: 20px !important;
+        }
+        .thumb-strip-vertical {
+            flex-direction: row !important;
+            justify-content: flex-start !important;
+            overflow-x: auto !important;
+            padding: 10px 0 !important;
+            gap: 10px !important;
+            scrollbar-width: none;
+        }
+        .v-thumb {
+            width: 60px !important;
+            height: 60px !important;
+            flex-shrink: 0 !important;
+        }
+        .luxury-title {
+            font-size: 2.2rem !important;
+            margin-bottom: 15px !important;
+            text-align: center !important;
+        }
+        .luxury-rating {
+            justify-content: center !important;
+            margin-bottom: 20px !important;
+        }
+        .luxury-price-card {
+            padding: 20px !important;
+            text-align: center !important;
+        }
+        .price-val {
+            font-size: 2.2rem !important;
+            justify-content: center !important;
+        }
+        .price-badges {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 10px !important;
+        }
+        .container-qty-stepper {
+            margin: 0 auto !important;
+        }
+        .luxury-actions form > div {
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+        }
+        .buy-now-wrapper-premium {
+            flex-direction: column !important;
+            gap: 15px !important;
+        }
+        .btn-premium-cart-lx, .btn-premium-buy-lx {
+            width: 100% !important;
+            justify-content: center !important;
+            padding: 16px !important;
+        }
+        .contact-buttons-luxury {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 10px !important;
+        }
+        .btn-lx-outline {
+            width: 100% !important;
+            justify-content: center !important;
+        }
+        .benefit-highlights-row {
+            justify-content: center !important;
+            flex-wrap: wrap !important;
+        }
+        
+        /* Benefits Section */
+        .benefits-glass-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+        }
+        
+        /* Tabs */
+        .lx-tabs-header {
+            display: flex !important;
+            overflow-x: auto !important;
+            white-space: nowrap !important;
+            gap: 15px !important;
+            padding-bottom: 10px !important;
+            scrollbar-width: none;
+            justify-content: flex-start !important;
+        }
+        .lx-tab-btn {
+            padding: 10px 20px !important;
+            font-size: 0.9rem !important;
+            flex-shrink: 0 !important;
+        }
+        
+        /* Reviews */
+        #lx-reviews > div {
+            grid-template-columns: 1fr !important;
+            gap: 30px !important;
+        }
+        #lx-reviews .review-form-sticky {
+            position: static !important;
+        }
+        
+        /* Trust Indicators */
+        .lx-trust-flex {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 15px !important;
+        }
+    }
+</style>
 <div class="luxury-detail-wrapper animate-fade">
     <!-- 1. Product Hero Section -->
     <section class="product-hero-premium">
@@ -70,7 +186,9 @@
                             <i class="{{ $i <= round($product->rating ?? 5) ? 'fas' : 'far' }} fa-star"></i>
                         @endfor
                     </div>
-                    <span class="review-count">({{ $product->reviews_count ?? 0 }} Reviews)</span>
+                    @if($product->reviews_count > 0)
+                        <span class="review-count">({{ $product->reviews_count ?? 0 }} Reviews)</span>
+                    @endif
                 </div>
 
                 <div class="luxury-price-card" style="background: white; border-radius: 20px; padding: 25px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); margin-bottom: 35px; border: 1px solid #f0f0f0;">
@@ -232,7 +350,7 @@
                         </div>
 
                         <!-- Review Form -->
-                        <div style="position: sticky; top: 100px; background: #f9fbf9; padding: 30px; border-radius: 25px; border: 1px solid rgba(0,66,0,0.08);">
+                        <div class="review-form-sticky" style="position: sticky; top: 100px; background: #f9fbf9; padding: 30px; border-radius: 25px; border: 1px solid rgba(0,66,0,0.08);">
                             @auth
                                 <h5 style="font-size: 1.25rem; margin-bottom: 20px; color: #004200;">Share Your Thoughts</h5>
                                 <form action="{{ route('product.review.store', $product->slug) }}" method="POST">

@@ -11,9 +11,9 @@
                 <h1 >Nature's Wisdom for Modern Wellness</h1>
                 <p style="font-size: 1.1rem; color: #f0f0f0; margin-bottom: 32px; max-width: 480px;">From herbal powders to nourishing oils and capsules, our Ayurvedic remedies are carefully prepared to support balance, vitality, and daily well-being.</p>
                 <div class="hero-btns" style="display: flex; gap: 20px;">
-                    <a href="{{ route('shop') }}" class="btn btn-primary" style="background: #004200; color: #fff; padding: 14px 28px; border-radius: 50px; text-decoration: none; font-weight: 600;">Shop Ayurvedic Products</a>
+                    <a href="{{ route('shop') }}" class="btn btn-primary" style="background: #004200; color: #fff; padding: 14px 28px; border-radius: 50px; text-decoration: none; font-weight: 600;">Shop</a>
                     <a href="https://wa.me/919818299669" class="btn btn-outline" target="_blank" style="border: 2px solid rgba(255,255,255,0.7); color: #fff; padding: 14px 28px; border-radius: 50px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 10px;">
-                        <i class="fab fa-whatsapp"></i> Talk to Our Support Team
+                        <i class="fab fa-whatsapp"></i> Need help?
                     </a>
                 </div>
             </div>
@@ -37,7 +37,7 @@
 
     <section class="ingredients-section shadow-text-sec">
         <div class="container" style="position: relative;">
-            <h2 style="color: var(--primary); text-align: center; margin-bottom: 40px;">Powered by Nature</h2>
+            <h2 class="sec-title-nature">Powered by Nature</h2>
             
             <div class="category-wrapper" style="position: relative; padding: 0 30px;">
                 <button class="testi-nav testi-prev" onclick="this.parentElement.querySelector('.ing-scroller').scrollBy({left: -300, behavior: 'smooth'})" style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
@@ -65,21 +65,113 @@
             </div>
             
             <style>
+                .sec-title-nature {
+                    color: var(--primary);
+                    text-align: center;
+                    margin-bottom: 40px;
+                    font-family: var(--font-heading);
+                    font-size: 2.5rem;
+                }
                 .ing-scroller {
                     display: flex !important;
                     flex-wrap: nowrap !important;
                     overflow-x: auto !important;
                     gap: 15px !important;
-                    padding: 10px 0 !important;
+                    padding: 20px 5px !important;
                     scroll-behavior: smooth;
                     -webkit-overflow-scrolling: touch;
+                    scroll-snap-type: x mandatory;
+                    scrollbar-width: none;
                 }
+                .ing-scroller::-webkit-scrollbar { display: none !important; }
+                
                 .ing-pill {
-                    flex: 0 0 calc(25% - 20px) !important;
+                    flex: 0 0 calc(25% - 15px) !important;
                     min-width: 260px !important;
+                    scroll-snap-align: start;
+                    background: #fff;
+                    border: 1.5px solid #f0f0f0;
+                    border-radius: 60px;
+                    padding: 12px 25px;
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
                 }
-                .ing-scroller::-webkit-scrollbar {
-                    display: none !important;
+                .ing-pill:hover {
+                    border-color: var(--primary);
+                    transform: translateY(-3px);
+                    box-shadow: 0 12px 30px rgba(0,66,0,0.1);
+                }
+                .ing-pill img {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    flex-shrink: 0;
+                    background: #f9f9f9;
+                }
+                .ing-txt {
+                    display: flex;
+                    flex-direction: column;
+                    line-height: 1.3;
+                    text-align: left;
+                }
+                .ing-txt strong {
+                    font-size: 1.05rem;
+                    color: var(--primary);
+                    white-space: nowrap;
+                }
+                .ing-txt span {
+                    font-size: 0.8rem;
+                    color: #888;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+
+                @media (max-width: 768px) {
+                    .sec-title-nature {
+                        font-size: 1.8rem;
+                        margin-bottom: 25px;
+                    }
+                    .category-wrapper {
+                        padding: 0 !important;
+                        margin: 0 !important;
+                    }
+                    .ing-scroller {
+                        gap: 0 !important;
+                        padding: 15px 0 !important;
+                        justify-content: flex-start !important;
+                    }
+                    .ing-pill {
+                        flex: 0 0 100% !important;
+                        min-width: 100% !important;
+                        border-radius: 0 !important;
+                        border: none !important;
+                        background: transparent !important;
+                        box-shadow: none !important;
+                        padding: 10px 60px !important; /* Space for arrows */
+                        justify-content: center !important;
+                        scroll-snap-align: center !important;
+                    }
+                    .ing-pill img {
+                        width: 60px !important;
+                        height: 60px !important;
+                    }
+                    .ing-txt strong {
+                        font-size: 1.3rem !important;
+                    }
+                    .testi-nav {
+                        display: flex !important;
+                        width: 42px !important;
+                        height: 42px !important;
+                        background: rgba(255, 255, 255, 0.95) !important;
+                        box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+                        color: #004200 !important; /* Ensure arrow is green */
+                    }
+                    .testi-prev { left: 10px !important; }
+                    .testi-next { right: 10px !important; }
                 }
             </style>
         </div>
@@ -116,62 +208,61 @@
                 <h2 style="color: var(--primary);">Best Selling Products</h2>
                 <a href="{{ route('shop') }}" class="link-view-all">View All Products <i class="fas fa-arrow-right"></i></a>
             </div>
-            <div class="product-grid">
-                @forelse($featuredProducts as $product)
-                <div class="product-card">
-                    <div class="p-img-wrap">
-                        <a href="{{ route('product.show', $product->slug) }}">
-                            @php
-                                $img_path = $product->primary_image;
-                                if ($img_path && !str_starts_with($img_path, 'http') && !str_starts_with($img_path, '/')) {
-                                    $img_path = asset($img_path);
-                                }
-                            @endphp
-                            @if($img_path)
-                                <img src="{{ $img_path }}" alt="{{ $product->name }}" onerror="this.src='https://via.placeholder.com/300?text=Auvri+Product'">
-                            @else
-                                <img src="https://via.placeholder.com/300?text={{ urlencode($product->name) }}" alt="{{ $product->name }}">
-                            @endif
-                        </a>
-                        <!-- Wishlist Overlay -->
-                        @php
-                            $isInWishlist = Auth::check() && Auth::user()->wishlist->contains('product_id', $product->id);
-                        @endphp
-                        {{-- <form action="{{ route('wishlist.toggle') }}" method="POST" class="wishlist-overlay-form" style="position: absolute; top: 15px; right: 15px; z-index: 5;">
-                            @csrf
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            <button type="submit" style="width: 40px; height: 40px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; color: {{ $isInWishlist ? '#d4145a' : 'var(--primary)' }}; transition: all 0.3s ease;">
-                                <i class="{{ $isInWishlist ? 'fas' : 'far' }} fa-heart"></i>
-                            </button>
-                        </form> --}}
-                        <a href="{{ route('product.show', $product->slug) }}" class="quick-view-btn">Quick View</a>
-                    </div>
-                    <div class="p-info">
-                        <div class="p-rating">
-                            @for($i = 1; $i <= 5; $i++)
-                                @if($i <= round($product->rating ?? 5))★@else☆@endif
-                            @endfor
-                        </div>
-                        <h4 class="p-title">{{ $product->name }}</h4>
-                        <div class="p-bot" style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
-                            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                                <span class="p-price" style="font-weight: 800; color: #004200; font-size: 1.15rem;">₹{{ number_format($product->price) }}</span>
-                                @if($product->compare_price && $product->compare_price > 0)
-                                    <span style="text-decoration: line-through; color: #999; font-size: 0.85rem; font-weight: 500;">₹{{ number_format($product->compare_price) }}</span>
+            <div class="product-slider-wrapper" style="position: relative;">
+                <button class="testi-nav testi-prev shop-nav-prev" onclick="this.parentElement.querySelector('.product-grid').scrollBy({left: -350, behavior: 'smooth'})" style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: none; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <div class="product-grid">
+                    @forelse($featuredProducts as $product)
+                    <div class="product-card">
+                        <div class="p-img-wrap">
+                            <a href="{{ route('product.show', $product->slug) }}">
+                                @php
+                                    $img_path = $product->primary_image;
+                                    if ($img_path && !str_starts_with($img_path, 'http') && !str_starts_with($img_path, '/')) {
+                                        $img_path = asset($img_path);
+                                    }
+                                @endphp
+                                @if($img_path)
+                                    <img src="{{ $img_path }}" alt="{{ $product->name }}" onerror="this.src='https://via.placeholder.com/300?text=Auvri+Product'">
+                                @else
+                                    <img src="https://via.placeholder.com/300?text={{ urlencode($product->name) }}" alt="{{ $product->name }}">
                                 @endif
+                            </a>
+                            <a href="{{ route('product.show', $product->slug) }}" class="quick-view-btn">Quick View</a>
+                        </div>
+                        <div class="p-info">
+                            <div class="p-rating">
+                                @for($i = 1; $i <= 5; $i++)
+                                    @if($i <= round($product->rating ?? 5))★@else☆@endif
+                                @endfor
                             </div>
-                            <form action="{{ route('cart.add') }}" method="POST" style="display:inline;">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="add-btn" title="Add to Cart" style="background: #e8f5e9; color: #004200; width: 35px; height: 35px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;"><i class="fas fa-shopping-cart"></i></button>
-                            </form>
+                            <h4 class="p-title">{{ $product->name }}</h4>
+                            <div class="p-bot" style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+                                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                    <span class="p-price" style="font-weight: 800; color: #004200; font-size: 1.15rem;">₹{{ number_format($product->price) }}</span>
+                                    @if($product->compare_price && $product->compare_price > 0)
+                                        <span style="text-decoration: line-through; color: #999; font-size: 0.85rem; font-weight: 500;">₹{{ number_format($product->compare_price) }}</span>
+                                    @endif
+                                </div>
+                                <form action="{{ route('cart.add') }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="add-btn" title="Add to Cart" style="background: #e8f5e9; color: #004200; width: 35px; height: 35px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;"><i class="fas fa-shopping-cart"></i></button>
+                                </form>
+                            </div>
                         </div>
                     </div>
+                    @empty
+                    <p style="text-align:center; color:#888; grid-column: 1/-1;">No products available yet.</p>
+                    @endforelse
                 </div>
-                @empty
-                <p style="text-align:center; color:#888; grid-column: 1/-1;">No products available yet.</p>
-                @endforelse
+
+                <button class="testi-nav testi-next shop-nav-next" onclick="this.parentElement.querySelector('.product-grid').scrollBy({left: 350, behavior: 'smooth'})" style="position: absolute; right: -20px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: none; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -280,14 +371,183 @@
             }
         }
         @media (max-width: 768px) {
+            .secondary-btn-lx {
+                padding: 10px 20px !important;
+                font-size: 0.9rem !important;
+            }
             .white-floating-card {
-                flex: 0 0 85% !important;
+                flex: 0 0 100% !important;
+                min-width: 100% !important;
+                scroll-snap-align: center;
+                margin-bottom: 0px !important;
+                border-radius: 20px !important; /* Keep some rounding but hide others */
+            }
+            .reviews-grid {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                scroll-snap-type: x mandatory !important;
+                gap: 0 !important;
+                padding: 20px 0 !important;
             }
             .testimonial-wrapper {
-                padding: 0 10px !important;
+                padding: 0 !important;
             }
-            .testi-nav {
+            .testimonial-wrapper .testi-nav {
+                display: flex !important;
+                width: 40px !important;
+                height: 40px !important;
+                background: rgba(255, 255, 255, 0.9) !important;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+                color: #004200 !important;
+            }
+            .testimonial-wrapper .testi-prev { left: 5px !important; }
+            .testimonial-wrapper .testi-next { right: 5px !important; }
+            
+            /* Best Sellers Slider for Mobile */
+            #bestsellers .product-grid {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                gap: 0 !important;
+                padding: 10px 0 20px !important;
+                scroll-snap-type: x mandatory !important;
+            }
+            #bestsellers .product-card {
+                flex: 0 0 100% !important;
+                min-width: 100% !important;
+                scroll-snap-align: center;
+                border-radius: 0 !important;
+            }
+            #bestsellers .product-slider-wrapper {
+                padding: 0 !important;
+            }
+            #bestsellers .testi-nav {
+                display: flex !important;
+                width: 40px !important;
+                height: 40px !important;
+                background: rgba(255, 255, 255, 0.9) !important;
+                color: #004200 !important;
+            }
+            #bestsellers .testi-prev { left: 5px !important; }
+            #bestsellers .testi-next { right: 5px !important; }
+            #bestsellers .sec-head {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center !important;
+                gap: 10px !important;
+                margin-bottom: 30px !important;
+                padding: 0 15px !important;
+            }
+            #bestsellers .sec-head h2 {
+                font-size: 1.8rem !important;
+                margin: 0 !important;
+            }
+            #bestsellers .link-view-all {
+                font-size: 0.9rem !important;
+            }
+
+            /* Our Approach Vertical */
+            .education-section .edu-grid {
+                flex-direction: column !important;
+                gap: 15px !important;
+            }
+            .edu-card {
+                flex: 0 0 auto !important;
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+
+            /* Order Steps Vertical Fix - STRICT RESET */
+            .steps-section .steps-flow {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 25px !important;
+                align-items: flex-start !important;
+                justify-content: flex-start !important;
+                padding: 0 15px !important;
+                margin: 0 !important;
+                width: 100% !important;
+            }
+            .step {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                width: 100% !important;
+                min-width: 100% !important;
+                margin: 0 0 10px 0 !important;
+                text-align: left !important;
+                background: transparent !important;
+                padding: 0 !important;
+            }
+            .step-num {
+                width: 50px !important;
+                height: 50px !important;
+                min-width: 50px !important;
+                font-size: 1.1rem !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin: 0 20px 0 0 !important; /* Forces circle to the far left */
+                flex-shrink: 0 !important;
+            }
+            .step h4 {
+                margin: 0 !important;
+                font-size: 1.1rem !important;
+                color: var(--primary) !important;
+                text-align: left !important;
+            }
+            .step-sub {
+                display: block !important;
+                font-size: 0.85rem !important;
+                color: #666 !important;
+                margin-top: 4px !important;
+                text-align: left !important;
+            }
+            .step-line {
                 display: none !important;
+            }
+
+            /* Footer Center Alignment for Mobile - EXTRA STRICT */
+            .footer-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center !important;
+                width: 100% !important;
+            }
+            .f-col {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 100% !important;
+                margin-bottom: 30px !important;
+            }
+            .f-line {
+                margin: 0 auto 20px !important;
+            }
+            .contact-list {
+                display: block !important;
+                width: fit-content !important;
+                margin: 0 auto !important;
+                padding: 0 !important;
+                text-align: left !important;
+            }
+            .contact-list li {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                margin-bottom: 12px !important;
+                width: 100% !important;
+            }
+            .contact-list i {
+                width: 25px !important;
+                margin-right: 15px !important;
+                flex-shrink: 0 !important;
+                text-align: center !important;
             }
         }
     </style>
