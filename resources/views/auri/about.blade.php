@@ -4,6 +4,81 @@
 @section('meta_description', 'Discover the ancient Ayurvedic wisdom behind Auvri Plus. Bridging tradition with modern living through the harmony of Panchabuthas.')
 
 @section('content')
+<style>
+    @media (max-width: 768px) {
+        /* Section Titles */
+        .sec-title {
+            font-size: 2.2rem !important;
+            line-height: 1.2 !important;
+        }
+        .about-hero-sec h1.sec-title {
+            font-size: 2.5rem !important;
+        }
+        .about-hero-sec {
+            padding: 60px 0 !important;
+            min-height: auto !important;
+        }
+        
+        /* Split Section */
+        .about-split {
+            flex-direction: column !important;
+            gap: 30px !important;
+        }
+        .split-img, .split-info {
+            width: 100% !important;
+        }
+        
+        /* Orbit/Panchabuthas */
+        .pancha-wrapper {
+            flex-direction: column !important;
+            gap: 30px !important;
+        }
+        .radial-container {
+            transform: scale(0.8) !important;
+            margin: -20px 0 !important;
+        }
+        .orbit-popup {
+            position: static !important;
+            width: 100% !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: none !important;
+            box-shadow: none !important;
+            border: 1px solid rgba(0,66,0,0.1) !important;
+            margin-top: 20px !important;
+        }
+        
+        /* Dosha Panels */
+        .dosha-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+        }
+        
+        /* Commitment */
+        .com-list {
+            grid-template-columns: 1fr !important;
+            gap: 30px !important;
+        }
+        
+        /* CTA */
+        .cta-btns {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 18px !important;
+            align-items: center !important;
+            padding: 0 15px !important;
+        }
+        .cta-btns .btn {
+            margin-left: 0 !important;
+            width: 100% !important;
+            max-width: 280px !important;
+            font-size: 1rem !important;
+            padding: 15px 30px !important;
+            border-radius: 50px !important;
+            margin-bottom: 0 !important;
+        }
+    }
+</style>
     <!-- 1. Immersive Hero -->
     <section class="about-hero-sec" style="background-image: linear-gradient(rgba(0, 66, 0, 0.5), rgba(0, 66, 0, 0.5)), url('{{ asset('auri-images/headers/about_v2.jpg') }}'); background-size: cover; background-position: center; min-height: 300px; display: flex; align-items: center; text-align: center; color: #fff; position: relative;">
         <div class="container hero-inner" style="max-width: 900px; margin: 0 auto; position: relative; z-index: 2;">

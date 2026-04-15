@@ -106,7 +106,7 @@
     min-height: 80vh;
 }
 
-.account-page-header { margin-bottom: 40px; }
+.account-page-header { margin-bottom: 40px;margin-top: 30px; }
 .account-title {font-size: 38px; color: var(--primary); margin-bottom: 10px; }
 .account-breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #888; }
 .account-breadcrumb a { color: var(--primary); font-weight: 600; }

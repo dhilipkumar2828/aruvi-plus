@@ -32,28 +32,47 @@
             </div>
             <nav>
                 <ul class="nav-links">
+                    <button class="mobile-menu-close" onclick="document.querySelector('.nav-links').classList.remove('mobile-open')">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <li class="mobile-logo-item" style="display: none; padding: 20px 0; border-bottom: 2px solid var(--primary); margin-bottom: 20px;">
+                        <img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus" style="height: 40px;">
+                    </li>
                     <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
                     <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About Us</a></li>
                     <li><a href="{{ route('shop') }}" class="{{ request()->routeIs('shop') ? 'active' : '' }}">Shop</a></li>
                     <li><a href="{{ route('blogs.index') }}" class="{{ request()->routeIs('blogs.index') ? 'active' : '' }}">Blogs</a></li>
                     <li><a href="{{ route('faq') }}" class="{{ request()->routeIs('faq') ? 'active' : '' }}">FAQ</a></li>
                     <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
+                    
+                    @guest
+                        <li class="mobile-auth-links" style="display: none; margin-top: 30px; gap: 10px; flex-direction: column;">
+                            <a href="{{ route('login') }}" class="btn-premium-cart" style="padding: 12px; font-size: 0.9rem; background: var(--primary); color: #fff !important; border-radius: 50px; text-align: center; box-shadow: none;">Login</a>
+                            <a href="{{ route('register') }}" class="btn-lx-outline" style="padding: 12px; font-size: 0.9rem; border: 1px solid var(--primary); color: var(--primary) !important; border-radius: 50px; text-align: center;">Register</a>
+                        </li>
+                    @else
+                        <li class="mobile-auth-links" style="display: none; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                            <a href="{{ route('customer.dashboard') }}" style="color: var(--primary) !important; font-weight: 700;">
+                                <i class="fas fa-user-circle"></i> My Dashboard
+                            </a>
+                        </li>
+                    @endguest
                 </ul>
+                <div class="mobile-menu-overlay" onclick="document.querySelector('.nav-links').classList.remove('mobile-open')"></div>
             </nav>
             <!-- Mobile Menu Toggle -->
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" onclick="document.querySelector('.nav-links').classList.add('mobile-open')">
                 <i class="fas fa-bars"></i>
             </button>
             <div class="header-icons">
-
                 <a href="{{ route('wishlist.index') }}" class="wishlist-widget" style="color: #fff; position: relative; margin-right: 15px;">
-                    <i class="far fa-heart" style="font-size: 1.2rem;"></i>
+                    <i class="far fa-heart" style="font-size: 1.25rem;"></i>
                     <span class="wishlist-count" style="position: absolute; top: -8px; right: -8px; background: #d4af37; color: #000; font-size: 0.7rem; font-weight: 700; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                         {{ Auth::check() ? App\Models\Wishlist::where('user_id', Auth::id())->count() : 0 }}
                     </span>
                 </a>
                 <a href="{{ route('cart.index') }}" class="cart-widget" style="position: relative;">
-                    <i class="fas fa-shopping-cart" style="font-size: 1.2rem;"></i>
+                    <i class="fas fa-shopping-cart" style="font-size: 1.25rem;"></i>
                     <span class="cart-count" style="position: absolute; top: -8px; right: -8px; background: #d4af37; color: #000; font-size: 0.7rem; font-weight: 700; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                         {{ session('cart') ? array_sum(array_column(session('cart'), 'quantity')) : 0 }}
                     </span>
@@ -97,6 +116,7 @@
                 </div>
                 
             </div>
+
         </div>
     </header>
 
@@ -184,6 +204,54 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <style>
+        /* Global Mobile Footer Fix */
+        @media (max-width: 768px) {
+            .footer-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center !important;
+                gap: 30px !important;
+            }
+            .f-col {
+                width: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center !important;
+            }
+            .f-line {
+                margin: 0 auto 20px !important;
+            }
+            .contact-list {
+                display: block !important;
+                width: fit-content !important;
+                margin: 0 auto !important;
+                padding: 0 !important;
+                text-align: left !important;
+            }
+            .contact-list li {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                margin-bottom: 12px !important;
+            }
+            .contact-list i {
+                width: 25px !important;
+                margin-right: 15px !important;
+                text-align: center !important;
+                flex-shrink: 0 !important;
+            }
+            .social-icons {
+                justify-content: center !important;
+            }
+            
+            /* General Responsive fixes */
+            .container { padding: 0 20px !important; }
+        }
+    </style>
     
     <!-- Auri Scripts -->
     <script src="{{ asset('auri-script.js') }}"></script>

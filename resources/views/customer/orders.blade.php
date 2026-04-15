@@ -103,6 +103,7 @@
 
 .account-page-header {
     margin-bottom: 40px;
+    margin-top: 30px;
 }
 
 .account-title {
