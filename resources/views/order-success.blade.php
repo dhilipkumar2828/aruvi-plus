@@ -3,239 +3,329 @@
 @section('title', 'Order Successful | Auvri Plus')
 
 @section('extra_css')
-<style>
-    :root {
-        --primary: #004200;
-        --accent: #d4af37;
-    }
-
-    .success-section {
-        padding: 120px 0 80px;
-        text-align: center;
-        background: #f8faf8;
-        min-height: 80vh;
-        display: flex;
-        align-items: center;
-    }
-
-    .success-container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 60px 40px;
-        border-radius: 32px;
-        background: #ffffff;
-        box-shadow: 0 20px 60px rgba(0, 66, 0, 0.06);
-        border: 1px solid rgba(0, 66, 0, 0.05);
-    }
-
-    .success-icon {
-        width: 100px;
-        height: 100px;
-        background: var(--primary);
-        color: var(--accent);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 50px;
-        margin: 0 auto 30px;
-        box-shadow: 0 10px 20px rgba(0, 66, 0, 0.15);
-        animation: scaleUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    @keyframes scaleUp {
-        0% { transform: scale(0); opacity: 0; }
-        100% { transform: scale(1); opacity: 1; }
-    }
-
-    .success-title {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: var(--primary);
-        margin-bottom: 15px;
-    }
-
-    .success-message {
-        font-size: 1.1rem;
-        color: #555;
-        line-height: 1.6;
-        margin-bottom: 35px;
-    }
-
-    .order-info {
-        background: #f0f4f0;
-        padding: 25px;
-        border-radius: 20px;
-        margin-bottom: 40px;
-        border: 1px dashed rgba(0, 66, 0, 0.2);
-    }
-
-    .order-info-item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 12px;
-        font-size: 1rem;
-    }
-
-    .order-info-label {
-        color: #666;
-        font-weight: 500;
-    }
-
-    .order-info-value {
-        color: var(--primary);
-        font-weight: 700;
-    }
-
-    .btn-continue-shop, .btn-view-order {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        min-width: 200px;
-        padding: 14px 25px;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 0.95rem;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        box-shadow: 0 8px 15px rgba(0, 66, 0, 0.15);
-        letter-spacing: 0.5px;
-    }
-
-    .btn-continue-shop {
-        background: var(--primary);
-        color: #fff !important;
-    }
-
-    .btn-continue-shop:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 30px rgba(0, 66, 0, 0.3);
-        background: #003300;
-    }
-
-    .btn-view-order {
-        background: #fff;
-        color: var(--primary) !important;
-        border: 1px solid var(--primary);
-        box-shadow: none; /* Secondary action */
-    }
-
-    .btn-view-order:hover {
-        background: var(--primary);
-        color: #fff !important;
-        box-shadow: 0 10px 20px rgba(0, 66, 0, 0.2);
-    }
-
-    .actions {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-top: 30px;
-    }
-
-    @media (max-width: 640px) {
-        .success-container {
-            margin: 0 15px;
-            padding: 40px 20px;
-        }
-        
-        .actions {
-            flex-direction: column;
-            gap: 15px;
+    <style>
+        :root {
+            --primary: #004200;
+            --accent: #d4af37;
         }
 
-        .btn-continue-shop, .btn-view-order {
+        .success-section {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: #f8faf8;
+            min-height: 80vh;
             display: flex;
-            margin: 10px 0;
-            width: 100%;
-            min-width: unset;
+            align-items: center;
+        }
+
+        .success-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            border-radius: 32px;
+            background: #ffffff;
+            box-shadow: 0 20px 60px rgba(0, 66, 0, 0.06);
+            border: 1px solid rgba(0, 66, 0, 0.05);
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--primary);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 20px rgba(0, 66, 0, 0.15);
+            animation: scaleUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes scaleUp {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .success-message {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .order-info {
+            background: #f0f4f0;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px dashed rgba(0, 66, 0, 0.2);
+        }
+
+        .order-info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .order-info-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .order-info-value {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .btn-continue-shop,
+        .btn-view-order {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-width: 200px;
+            padding: 14px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0, 66, 0, 0.15);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-continue-shop {
+            background: var(--primary);
+            color: #fff !important;
+        }
+
+        .btn-continue-shop:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 66, 0, 0.3);
+            background: #003300;
         }
 
         .btn-view-order {
-            margin-left: 0;
+            background: #fff;
+            color: var(--primary) !important;
+            border: 1px solid var(--primary);
+            box-shadow: none;
+            /* Secondary action */
         }
-    }
-</style>
+
+        .btn-view-order:hover {
+            background: var(--primary);
+            color: #fff !important;
+            box-shadow: 0 10px 20px rgba(0, 66, 0, 0.2);
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 640px) {
+            .success-container {
+                margin: 0 15px;
+                padding: 40px 20px;
+            }
+
+            .success-section {
+                padding: 30px 0 80px;
+                text-align: center;
+                background: #f8faf8;
+                min-height: 80vh;
+                display: flex;
+                align-items: center;
+            }
+
+            .container {
+                width: 100% !important;
+            }
+
+            .actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn-continue-shop,
+            .btn-view-order {
+                display: flex;
+                margin: 10px 0;
+                width: 100%;
+                min-width: unset;
+            }
+
+            .btn-view-order {
+                margin-left: 0;
+            }
+
+            /* Further refinements for very small screens */
+            @media (max-width: 480px) {
+                .success-container {
+                    padding: 35px 15px !important;
+                    margin: 0 !important;
+                    width: 100% !important;
+                    border-radius: 20px !important;
+                }
+
+                .success-icon {
+                    width: 80px !important;
+                    height: 80px !important;
+                    font-size: 35px !important;
+                }
+
+                .success-title {
+                    font-size: 1.6rem !important;
+                }
+
+                .success-message {
+                    font-size: 0.9rem !important;
+                    margin-bottom: 25px !important;
+                }
+
+                .order-info {
+                    padding: 20px 15px !important;
+                }
+
+                .order-info-item {
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                    gap: 5px !important;
+                    margin-bottom: 15px !important;
+                    text-align: left !important;
+                }
+
+                .order-info-value {
+                    font-size: 1rem !important;
+                }
+
+                /* Fix grand total stacking */
+                .order-info-item[style*="display: flex; align-items: center"] {
+                    display: flex !important;
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                }
+
+                /* Adjust grand total specific labels/values */
+                span[style*="font-size: 1.4rem"] {
+                    font-size: 1.1rem !important;
+                }
+
+                span[style*="font-size: 1.8rem"] {
+                    font-size: 1.4rem !important;
+                }
+            }
+        }
+    </style>
 @endsection
 
 @section('content')
-<section class="success-section">
-    <div class="container">
-        <div class="success-container">
-            <div class="success-icon">
-                <i class="fas fa-check"></i>
-            </div>
-            
-            <h1 class="success-title">Order Successful!</h1>
-            <p class="success-message" style="text-align: center; font-size: 16px;">
-                Thank you for your purchase. Your order has been successfully placed and is being processed.
-            </p>
-
-            <div class="order-info" style="background: white; border: 1px solid #eee; border-radius: 20px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); text-align: left; margin-bottom: 35px;">
-                <div class="order-info-item" style="border-bottom: 1px solid #f8f8f8; padding-bottom: 12px;">
-                    <span class="order-info-label" style="color: #888;">Order Number:</span>
-                    <span class="order-info-value" style="color: #333; font-weight: 800; font-size: 1.1rem;">#{{ $order->order_number }}</span>
+    <section class="success-section">
+        <div class="container">
+            <div class="success-container">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
                 </div>
 
-                <div class="order-info-item" style="margin-top: 15px;">
-                    <span class="order-info-label" style="color: #888;">Product Value :</span>
-                    <span class="order-info-value" style="color: #444; font-weight: 600;">₹{{ number_format(($order->amount - ($order->shipping_amount - $order->shipping_discount)) / 1.18, 2) }}</span>
-                </div>
+                <h1 class="success-title">Order Successful!</h1>
+                <p class="success-message" style="text-align: center; font-size: 16px;">
+                    Thank you for your purchase. Your order has been successfully placed and is being processed.
+                </p>
 
-                @if($order->discount_amount > 0)
-                <div class="order-info-item">
-                    <span class="order-info-label" style="color: #0d9488;">Coupon Discount:</span>
-                    <span class="order-info-value" style="color: #0d9488; font-weight: 700;">-₹{{ number_format($order->discount_amount, 2) }}</span>
-                </div>
-                @endif
+                <div class="order-info"
+                    style="background: white; border: 1px solid #eee; border-radius: 20px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); text-align: left; margin-bottom: 35px;">
+                    <div class="order-info-item" style="border-bottom: 1px solid #f8f8f8; padding-bottom: 12px;">
+                        <span class="order-info-label" style="color: #888;">Order Number:</span>
+                        <span class="order-info-value"
+                            style="color: #333; font-weight: 800; font-size: 1.1rem;">#{{ $order->order_number }}</span>
+                    </div>
 
-                <div class="order-info-item">
-                    <span class="order-info-label" style="color: #888;">Shipping Charges:</span>
-                    <span class="order-info-value" style="color: #444; font-weight: 600;">₹{{ number_format(($order->shipping_amount - $order->shipping_discount) / 1.18, 2) }}</span>
-                </div>
+                    <div class="order-info-item" style="margin-top: 15px;">
+                        <span class="order-info-label" style="color: #888;">Product Value :</span>
+                        <span class="order-info-value"
+                            style="color: #444; font-weight: 600;">₹{{ number_format(($order->amount - ($order->shipping_amount - $order->shipping_discount)) / 1.18, 2) }}</span>
+                    </div>
 
-                <div style="border-top: 1px solid #f0f0f0; margin: 15px 0; padding-top: 15px;">
+                    @if($order->discount_amount > 0)
+                        <div class="order-info-item">
+                            <span class="order-info-label" style="color: #0d9488;">Coupon Discount:</span>
+                            <span class="order-info-value"
+                                style="color: #0d9488; font-weight: 700;">-₹{{ number_format($order->discount_amount, 2) }}</span>
+                        </div>
+                    @endif
+
                     <div class="order-info-item">
-                        <span class="order-info-label" style="color: #1a1a1a; font-weight: 800;">Taxable Value:</span>
-                        <span class="order-info-value" style="color: #1a1a1a; font-weight: 800;">
-                            ₹{{ number_format($order->taxable_value > 0 ? $order->taxable_value : ($order->amount / 1.18), 2) }}
-                        </span>
+                        <span class="order-info-label" style="color: #888;">Shipping Charges:</span>
+                        <span class="order-info-value"
+                            style="color: #444; font-weight: 600;">₹{{ number_format(($order->shipping_amount - $order->shipping_discount) / 1.18, 2) }}</span>
+                    </div>
+
+                    <div style="border-top: 1px solid #f0f0f0; margin: 15px 0; padding-top: 15px;">
+                        <div class="order-info-item">
+                            <span class="order-info-label" style="color: #1a1a1a; font-weight: 800;">Taxable Value:</span>
+                            <span class="order-info-value" style="color: #1a1a1a; font-weight: 800;">
+                                ₹{{ number_format($order->taxable_value > 0 ? $order->taxable_value : ($order->amount / 1.18), 2) }}
+                            </span>
+                        </div>
+
+                        <div class="order-info-item">
+                            <span class="order-info-label" style="color: #888;">GST (18%):</span>
+                            <span class="order-info-value" style="color: #444; font-weight: 600;">
+                                ₹{{ number_format($order->gst_amount > 0 ? $order->gst_amount : ($order->amount - ($order->amount / 1.18)), 2) }}
+                            </span>
+                        </div>
                     </div>
 
                     <div class="order-info-item">
-                        <span class="order-info-label" style="color: #888;">GST (18%):</span>
-                        <span class="order-info-value" style="color: #444; font-weight: 600;">
-                            ₹{{ number_format($order->gst_amount > 0 ? $order->gst_amount : ($order->amount - ($order->amount / 1.18)), 2) }}
-                        </span>
+                        <span class="order-info-label" style="color: #888;">Payment Method:</span>
+                        <span class="order-info-value"
+                            style="color: #333; font-weight: 700;">{{ $order->payment_method ?? 'Cash On Delivery' }}</span>
+                    </div>
+
+                    <div class="order-info-item">
+                        <span class="order-info-label" style="color: #888;">Date:</span>
+                        <span class="order-info-value"
+                            style="color: #333; font-weight: 600;">{{ $order->created_at->format('M d, Y') }}</span>
+                    </div>
+
+                    <div class="order-info-item"
+                        style="border-top: 1px solid #f0f0f0; padding-top: 20px; margin-top: 20px; display: flex; align-items: center;">
+                        <span class="order-info-label" style="font-size: 1.4rem; color: #1a1a1a; font-weight: 800;">Grand
+                            Total:</span>
+                        <span class="order-info-value"
+                            style="font-size: 1.8rem; color: #b0185e; font-weight: 900;">₹{{ number_format($order->amount, 0) }}</span>
                     </div>
                 </div>
 
-                <div class="order-info-item">
-                    <span class="order-info-label" style="color: #888;">Payment Method:</span>
-                    <span class="order-info-value" style="color: #333; font-weight: 700;">{{ $order->payment_method ?? 'Cash On Delivery' }}</span>
+                <div class="actions">
+                    <a href="{{ route('shop') }}" class="btn-continue-shop">
+                        <i class="fas fa-shopping-cart"></i> CONTINUE SHOPPING
+                    </a>
+                    <a href="{{ route('customer.orders.show', $order->id) }}" class="btn-view-order">
+                        <i class="fas fa-file-invoice"></i> VIEW ORDER
+                    </a>
                 </div>
-
-                <div class="order-info-item">
-                    <span class="order-info-label" style="color: #888;">Date:</span>
-                    <span class="order-info-value" style="color: #333; font-weight: 600;">{{ $order->created_at->format('M d, Y') }}</span>
-                </div>
-
-                <div class="order-info-item" style="border-top: 1px solid #f0f0f0; padding-top: 20px; margin-top: 20px; display: flex; align-items: center;">
-                    <span class="order-info-label" style="font-size: 1.4rem; color: #1a1a1a; font-weight: 800;">Grand Total:</span>
-                    <span class="order-info-value" style="font-size: 1.8rem; color: #b0185e; font-weight: 900;">₹{{ number_format($order->amount, 0) }}</span>
-                </div>
-            </div>
-
-            <div class="actions">
-                <a href="{{ route('shop') }}" class="btn-continue-shop">
-                    <i class="fas fa-shopping-cart"></i> CONTINUE SHOPPING
-                </a>
-                <a href="{{ route('customer.orders.show', $order->id) }}" class="btn-view-order">
-                    <i class="fas fa-file-invoice"></i> VIEW ORDER
-                </a>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 @endsection

@@ -123,6 +123,9 @@
             .form-group-grid, .three-col {
                 grid-template-columns: 1fr;
             }
+            .container {
+                width: 100% !important;
+            }
         }
 
         /* Checkbox Fix */
@@ -211,6 +214,113 @@
             box-shadow: 0 15px 35px rgba(0, 66, 0, 0.35);
             background: #003300;
         }
+
+        /* Responsive Improvements */
+        @media (max-width: 480px) {
+            .checkout-hero {
+                padding: 60px 15px 40px !important;
+            }
+
+            .checkout-hero h1 {
+                font-size: 2.2rem !important;
+            }
+
+            .checkout-hero p {
+                font-size: 0.9rem !important;
+                line-height: 1.5;
+            }
+
+            .checkout-card, .summary-card {
+                padding: 20px 15px !important;
+                border-radius: 16px !important;
+            }
+
+            .checkout-title {
+                font-size: 1.25rem !important;
+                margin-bottom: 20px !important;
+            }
+
+            .form-control {
+                padding: 12px 15px !important;
+                font-size: 0.95rem !important;
+            }
+
+            .saved-address-trigger-card {
+                padding: 15px !important;
+                gap: 10px !important;
+            }
+
+            .saved-address-trigger-card h5 {
+                font-size: 0.85rem !important;
+            }
+
+            .saved-address-trigger-card .select-badge {
+                padding: 4px 8px !important;
+                font-size: 0.65rem !important;
+            }
+
+            .summary-total {
+                padding: 15px !important;
+            }
+
+            .summary-total span {
+                font-size: 1rem !important;
+            }
+
+            .summary-total div {
+                font-size: 1.5rem !important;
+            }
+
+            .btn-complete-order {
+                padding: 16px !important;
+                font-size: 1rem !important;
+            }
+        }
+
+        /* Saved Address Trigger Card Styles */
+        .saved-address-trigger-card {
+            background: #fff9fb;
+            border: 1px dashed #e91e63;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .saved-address-trigger-card:hover {
+            border-color: #004200;
+            background: #f0f4f0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+
+        .address-history-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(233, 30, 99, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e91e63;
+            flex-shrink: 0;
+        }
+
+        .select-badge {
+            background: #e91e63;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            flex-shrink: 0;
+        }
     </style>
 @endsection
 
@@ -257,10 +367,9 @@
                             </div>
                         </div>
 
-                        <!-- Previously Saved Address Section -->
-                        <div class="saved-address-trigger-card" id="savedAddressTrigger" style="background: #fff9fb; border: 1px dashed #e91e63; border-radius: 12px; padding: 18px; margin-bottom: 25px; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: space-between; gap: 15px;">
+                        <div class="saved-address-trigger-card" id="savedAddressTrigger">
                             <div style="display: flex; align-items: center; gap: 12px;">
-                                <div style="width: 40px; height: 40px; background: rgba(233, 30, 99, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #e91e63;">
+                                <div class="address-history-icon">
                                     <i class="fas fa-history" style="font-size: 1.1rem;"></i>
                                 </div>
                                 <div>
@@ -268,7 +377,7 @@
                                     <p style="margin: 0; font-size: 0.75rem; color: #888;">Select from your stored shipping addresses</p>
                                 </div>
                             </div>
-                            <div style="background: #e91e63; color: white; padding: 6px 12px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; letter-spacing: 1px;">SELECT</div>
+                            <div class="select-badge">SELECT</div>
                         </div>
 
                         <!-- Address Selection Modal -->
@@ -315,7 +424,6 @@
                         </div>
 
                         <style>
-                            .saved-address-trigger-card:hover { border-color: #004200; background: #f0f4f0; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transform: translateY(-2px); }
                             .address-card-option:hover { border-color: #e91e63; background: #fff9fb; transform: scale(1.01); box-shadow: 0 5px 15px rgba(233, 30, 99, 0.08); }
                             @keyframes modalFadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
                         </style>
@@ -503,7 +611,7 @@
                         </div>
                     </div>
 
-                    <div class="summary-total" style="background: #fff5f8; border: 1px solid #ffebeb; border-radius: 12px; padding: 5px 10px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
+                    <div class="summary-total" style="background: #fff5f8; border: 1px solid #ffebeb; border-radius: 12px; padding: 15px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
                         <span style="font-size: 1.2rem; font-weight: 800; color: #b0185e;">Total</span>
                         <div style="font-size: 2rem; font-weight: 900; color: #b0185e;" id="summary-total">₹{{ number_format($total, 0) }}</div>
                     </div>

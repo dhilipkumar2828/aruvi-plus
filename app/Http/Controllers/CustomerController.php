@@ -33,7 +33,7 @@ class CustomerController extends Controller
         $user = Auth::user();
         $orders = Order::where('customer_email', $user->email)
             ->orderByDesc('created_at')
-            ->paginate(10);
+            ->paginate(4);
             
         return view('customer.orders', compact('orders'));
     }
