@@ -311,7 +311,7 @@
                                 <img src="https://via.placeholder.com/100?text={{ urlencode($category->name[0]) }}"
                                     alt="{{ $category->name }}">
                             @endif
-                            <div class="ing-txt"><strong>{{ $category->name }}</strong><span>Collection</span></div>
+                            <div class="ing-txt"><strong>{{ $category->name }}</strong></div>
                         </a>
                     @empty
                         <p style="text-align:center; color:#888;">No categories available yet.</p>
@@ -445,18 +445,19 @@
                         border: 1.5px solid #f0f0f0 !important;
                         background: #fff !important;
                         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04) !important;
-                        padding: 30px 20px !important;
+                        padding: 45px 25px !important;
                         display: flex !important;
                         flex-direction: column !important;
                         align-items: center !important;
                         justify-content: center !important;
                         scroll-snap-align: center !important;
-                        gap: 12px !important;
+                        gap: 15px !important;
+                        min-height: 220px !important;
                     }
 
                     .ing-pill img {
-                        width: 50px !important;
-                        height: 50px !important;
+                        width: 80px !important;
+                        height: 80px !important;
                     }
 
                     .ing-txt strong {
@@ -797,7 +798,7 @@
                 }
 
                 .ing-txt strong {
-                    font-size: 0.9rem !important;
+                    font-size: 1rem !important;
                 }
 
                 .ing-txt span {
@@ -815,37 +816,47 @@
                 overflow: visible !important;
                 padding: 20px 0 !important;
             }
-            #bestsellers .shop-nav-prev, #bestsellers .shop-nav-next {
-                display: none !important; /* Hide arrows on desktop grid */
+
+            #bestsellers .shop-nav-prev,
+            #bestsellers .shop-nav-next {
+                display: none !important;
+                /* Hide arrows on desktop grid */
             }
+
             #bestsellers .sec-head {
                 display: flex !important;
                 justify-content: space-between !important;
                 align-items: center !important;
                 margin-bottom: 40px !important;
             }
+
             .steps-section {
-                background: #e9f5e9; /* Light green from image 1 */
+                background: #e9f5e9;
+                /* Light green from image 1 */
                 padding: 45px 0 !important;
                 margin: 40px 0 !important;
                 border-radius: 15px;
             }
+
             .steps-flow {
                 display: flex !important;
                 justify-content: space-between !important;
                 align-items: center !important;
                 gap: 20px !important;
             }
+
             .step {
                 flex: 1 !important;
                 text-align: center !important;
             }
+
             .step-sub {
                 display: block !important;
                 font-size: 0.8rem !important;
                 opacity: 0.8;
                 margin-top: 5px;
             }
+
             .step-line {
                 flex: 0.5 !important;
                 height: 1px !important;
@@ -865,7 +876,10 @@
                 scroll-snap-type: x mandatory !important;
                 scrollbar-width: none;
             }
-            #bestsellers .product-grid::-webkit-scrollbar { display: none; }
+
+            #bestsellers .product-grid::-webkit-scrollbar {
+                display: none;
+            }
 
             #bestsellers .product-card {
                 flex: 0 0 100% !important;
@@ -887,13 +901,18 @@
                 width: 40px !important;
                 height: 40px !important;
                 background: #fff !important;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
                 color: #004200 !important;
                 z-index: 10 !important;
             }
 
-            #bestsellers .testi-prev { left: 5px !important; }
-            #bestsellers .testi-next { right: 5px !important; }
+            #bestsellers .testi-prev {
+                left: 5px !important;
+            }
+
+            #bestsellers .testi-next {
+                right: 5px !important;
+            }
 
             #bestsellers .sec-head {
                 display: flex !important;
@@ -917,7 +936,8 @@
             .steps-section .steps-flow::before {
                 content: '';
                 position: absolute;
-                left: 40px; /* Aligned with circle centers */
+                left: 40px;
+                /* Aligned with circle centers */
                 top: 25px;
                 bottom: 25px;
                 width: 2px;
@@ -945,9 +965,9 @@
                 background: var(--primary) !important;
             }
 
-            .step h4 { 
-                margin: 0 !important; 
-                font-size: 1.2rem !important; 
+            .step h4 {
+                margin: 0 !important;
+                font-size: 1.2rem !important;
                 white-space: nowrap !important;
             }
 
@@ -958,15 +978,35 @@
                 margin-left: 10px;
             }
 
-            .step-line { display: none !important; }
+            .step-line {
+                display: none !important;
+            }
 
             /* Tiny Screen Adjustments (320px - 450px) */
             @media (max-width: 450px) {
-                .step h4 { font-size: 1rem !important; }
-                .step-sub { font-size: 0.75rem !important; margin-left: 5px; }
-                .step-num { width: 40px !important; height: 40px !important; min-width: 40px !important; font-size: 0.95rem !important; }
-                .steps-section .steps-flow::before { left: 35px !important; }
-                .step { gap: 12px !important; }
+                .step h4 {
+                    font-size: 1rem !important;
+                }
+
+                .step-sub {
+                    font-size: 0.75rem !important;
+                    margin-left: 5px;
+                }
+
+                .step-num {
+                    width: 40px !important;
+                    height: 40px !important;
+                    min-width: 40px !important;
+                    font-size: 0.95rem !important;
+                }
+
+                .steps-section .steps-flow::before {
+                    left: 35px !important;
+                }
+
+                .step {
+                    gap: 12px !important;
+                }
             }
         }
     </style>
