@@ -353,6 +353,10 @@
         }
 
         @media (max-width: 576px) {
+            .container {
+                width: 100% !important;
+            }
+
             .total-value {
                 font-size: 2rem;
                 font-weight: 900;
@@ -437,7 +441,6 @@
             .cart-grid {
                 grid-template-columns: 1fr;
                 position: relative;
-                right: 6%;
             }
 
             .total-value {

@@ -237,7 +237,7 @@
                                     <div style="border-top: 1px solid #cbd5e1; margin-bottom: 15px; width: 100%;"></div>
                                     <div style="font-weight: bold; font-size: 16px; color: #1e293b; margin-bottom: 5px;">
                                         Authorized Rep</div>
-                                    <div style="font-size: 13px; color: #94a3b8; line-height: 1.4; font-weight: 300;">Aruvi
+                                    <div style="font-size: 13px; color: #94a3b8; line-height: 1.4; font-weight: 300;">Auvri
                                         Plus</div>
                                 </div>
                             </div>

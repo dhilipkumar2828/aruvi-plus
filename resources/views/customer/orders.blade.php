@@ -32,53 +32,40 @@
                         </div>
 
                         @if($orders->count() > 0)
-                            <div class="luxury-table-wrapper">
-                                <table class="luxury-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Order ID</th>
-                                            <th>Date</th>
-                                            <th>Payment</th>
-                                            <th>Status</th>
-                                            <th>Total</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($orders as $order)
-                                            <tr>
-                                                <td data-label="Order ID"><span class="order-id">#{{ $order->order_number }}</span>
-                                                </td>
-                                                <td data-label="Date">{{ $order->created_at->format('M d, Y') }}</td>
-                                                <td data-label="Payment">
-                                                    <span
-                                                        class="pmt-badge {{ strtolower($order->payment_status) == 'paid' ? 'pmt-paid' : 'pmt-unpaid' }}">
-                                                        {{ ucfirst($order->payment_status) }}
-                                                    </span>
-                                                </td>
-                                                <td data-label="Status">
-                                                    <span class="status-badge status-{{ strtolower($order->status) }}">
-                                                        {{ ucfirst($order->status) }}
-                                                    </span>
-                                                </td>
-                                                <td data-label="Total" class="order-total">₹{{ number_format($order->amount, 2) }}
-                                                </td>
-                                                <td data-label="Actions">
-                                                    <div class="action-btns">
-                                                        <a href="{{ route('customer.orders.show', $order) }}" class="icon-btn"
-                                                            title="View Details">
-                                                            <i class="fas fa-eye"></i>
-                                                        </a>
-                                                        <a href="{{ route('customer.orders.download', $order) }}" class="icon-btn"
-                                                            title="Download Invoice">
-                                                            <i class="fas fa-file-download"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                            <div class="luxury-order-grid">
+                                @foreach($orders as $order)
+                                    <div class="luxury-order-card">
+                                        <div class="order-card-header">
+                                            <div class="id-date">
+                                                <span class="order-number">#{{ $order->order_number }}</span>
+                                                <span class="order-date">{{ $order->created_at->format('M d, Y') }}</span>
+                                            </div>
+                                            <span class="status-badge status-{{ strtolower($order->status) }}">
+                                                {{ ucfirst($order->status) }}
+                                            </span>
+                                        </div>
+                                        <div class="order-card-body">
+                                            <div class="info-item">
+                                                <span class="label">Payment Status:</span>
+                                                <span class="pmt-badge {{ strtolower($order->payment_status) == 'paid' ? 'pmt-paid' : 'pmt-unpaid' }}">
+                                                    {{ ucfirst($order->payment_status) }}
+                                                </span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="label">Order Amount:</span>
+                                                <span class="price">₹{{ number_format($order->amount, 2) }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="order-card-footer">
+                                            <a href="{{ route('customer.orders.show', $order) }}" class="btn-action view-btn">
+                                                <i class="fas fa-eye"></i> View Details
+                                            </a>
+                                            <a href="{{ route('customer.orders.download', $order) }}" class="btn-action download-btn" title="Download Invoice">
+                                                <i class="fas fa-file-download"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
 
                             <!-- Pagination -->
@@ -175,51 +162,125 @@
             border-radius: 50px;
         }
 
-        /* Luxury Table */
-        .luxury-table-wrapper {
-            overflow-x: auto;
+        /* Luxury Order Grid */
+        .luxury-order-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
         }
 
-        .luxury-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 10px;
+        .luxury-order-card {
+            background: #fff;
+            border: 1px solid var(--beige-soft);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        .luxury-table th {
-            padding: 15px 20px;
-            text-align: left;
-            color: #999;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
+        .luxury-order-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary);
         }
 
-        .luxury-table td {
+        .order-card-header {
             padding: 20px;
             background: var(--luxury-green-soft);
-            font-size: 15px;
-            color: #444;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
         }
 
-        .luxury-table tr td:first-child {
-            border-radius: 12px 0 0 12px;
+        .id-date {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
-        .luxury-table tr td:last-child {
-            border-radius: 0 12px 12px 0;
-        }
-
-        .order-id {
-            font-weight: 700;
+        .order-number {
+            font-weight: 800;
             color: var(--primary);
+            font-size: 16px;
+        }
+
+        .order-date {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .order-card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-item .label {
+            font-size: 13px;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .info-item .price {
+            font-weight: 800;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .order-card-footer {
+            padding: 15px 20px;
+            background: #fafafa;
+            border-top: 1px solid #f5f5f5;
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .view-btn {
+            background: var(--primary);
+            color: #fff !important;
+            flex: 1;
+            gap: 8px;
+        }
+
+        .view-btn:hover {
+            background: #003300;
+        }
+
+        .download-btn {
+            background: #fff;
+            color: var(--primary) !important;
+            border: 1px solid var(--beige-soft);
+            width: 42px;
+        }
+
+        .download-btn:hover {
+            background: #f8f8f8;
+            border-color: var(--primary);
         }
 
         .pmt-badge {
             padding: 4px 10px;
             border-radius: 4px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
         }
@@ -237,64 +298,87 @@
         .status-badge {
             padding: 6px 12px;
             border-radius: 50px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
         }
 
-        .status-pending {
-            background: #fff8e1;
-            color: #ffa000;
+        .status-pending { background: #fff8e1; color: #ffa000; }
+        .status-completed { background: #e8f5e9; color: #2e7d32; }
+        .status-shipped { background: #e3f2fd; color: #1976d2; }
+        .status-cancelled { background: #ffebee; color: #d32f2f; }
+
+        @media (max-width: 768px) {
+            .luxury-order-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .status-completed {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-
-        .status-shipped {
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-
-        .status-cancelled {
-            background: #ffebee;
-            color: #d32f2f;
-        }
-
-        .order-total {
-            font-weight: 700;
-        }
-
-        .action-btns {
+        /* Luxury Pagination */
+        .luxury-pagination {
+            margin-top: 50px;
             display: flex;
+            justify-content: center;
+        }
+
+        .luxury-pagination .pagination {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center;
             gap: 10px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .icon-btn {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            background: #fff;
-            display: flex;
+        .luxury-pagination .page-item {
+            margin: 0;
+        }
+
+        .luxury-pagination .page-link {
+            width: 44px;
+            height: 44px;
+            display: flex !important;
             align-items: center;
             justify-content: center;
-            color: var(--primary);
-            border: 1px solid var(--beige-soft);
-            transition: all 0.3s ease;
+            border-radius: 50% !important;
+            border: 1px solid var(--beige-soft) !important;
+            background: #fff !important;
+            color: var(--primary) !important;
+            font-weight: 700;
+            font-size: 15px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            padding: 0 !important;
+            line-height: 1;
         }
 
-        .icon-btn:hover {
-            background: var(--primary);
-            color: #fff;
-            transform: translateY(-3px);
+        .luxury-pagination .page-item.active .page-link {
+            background: var(--primary) !important;
+            color: #fff !important;
+            border-color: var(--primary) !important;
+            box-shadow: 0 8px 20px rgba(0, 66, 0, 0.2);
+            transform: scale(1.1);
         }
 
-        /* Pagination */
-        .luxury-pagination {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
+        .luxury-pagination .page-item:not(.active):not(.disabled):hover .page-link {
+            background: var(--primary) !important;
+            color: #fff !important;
+            border-color: var(--primary) !important;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .luxury-pagination .page-item.disabled .page-link {
+            opacity: 0.4;
+            background: #f9f9f9 !important;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Prev/Next Icon Adjustments */
+        .luxury-pagination .page-link span {
+            font-size: 18px;
         }
 
         /* Empty State */
@@ -356,56 +440,6 @@
                 padding-right: 15px !important;
                 width: 100% !important;
                 max-width: 100% !important;
-            }
-
-            /* Table to Card Stack Transformation */
-            .luxury-table,
-            .luxury-table thead,
-            .luxury-table tbody,
-            .luxury-table th,
-            .luxury-table td,
-            .luxury-table tr {
-                display: block;
-            }
-
-            .luxury-table thead tr {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-
-            .luxury-table tr {
-                border-radius: 15px;
-                background: #fdfdfd !important;
-                margin-bottom: 20px;
-                padding: 15px;
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-                border: 1px solid var(--beige-soft);
-            }
-
-            .luxury-table td {
-                padding: 12px 10px !important;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                background: transparent !important;
-                border-radius: 0 !important;
-                border-bottom: 1px solid #f5f5f5;
-                text-align: right;
-            }
-
-            .luxury-table td:last-child {
-                border-bottom: none;
-            }
-
-            .luxury-table td::before {
-                content: attr(data-label);
-                font-weight: 700;
-                color: #999;
-                font-size: 11px;
-                text-transform: uppercase;
-                margin-right: 15px;
-                text-align: left;
             }
         }
 
