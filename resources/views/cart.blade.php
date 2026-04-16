@@ -57,7 +57,7 @@
             color: #b0185e !important;
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 1080px) {
             .cart-grid {
                 grid-template-columns: 1fr;
             }
@@ -429,7 +429,7 @@
             }
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 600px) {
             .container {
                 padding: 0 12px !important;
             }
@@ -447,6 +447,15 @@
                 font-size: 1.5rem;
                 font-weight: 900;
                 color: #b0185e;
+            }
+
+            .cart-item-actions-corner {
+                position: static !important;
+                display: block !important;
+            }
+
+            .qty-box {
+                margin: 0 !important;
             }
         }
     </style>
@@ -562,15 +571,30 @@
                                     <div class="price">₹{{ number_format($item['price']) }} / unit</div>
                                 </div>
                                 <div class="cart-item-qty">
-                                    <div class="qty-box">
-                                        <button type="button" class="qty-btn"
-                                            onclick="updateQty('{{ $item['product_id'] }}', -1)"><i
-                                                class="fas fa-minus"></i></button>
-                                        <input type="text" class="qty-input" value="{{ $item['quantity'] }}" readonly
-                                            id="qty-{{ $item['product_id'] }}">
-                                        <button type="button" class="qty-btn" onclick="updateQty('{{ $item['product_id'] }}', 1)"><i
-                                                class="fas fa-plus"></i></button>
+                                    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                                        <div class="qty-box">
+                                            <button type="button" class="qty-btn"
+                                                onclick="updateQty('{{ $item['product_id'] }}', -1)"><i
+                                                    class="fas fa-minus"></i></button>
+                                            <input type="text" class="qty-input" value="{{ $item['quantity'] }}" readonly
+                                                id="qty-{{ $item['product_id'] }}">
+                                            <button type="button" class="qty-btn"
+                                                onclick="updateQty('{{ $item['product_id'] }}', 1)"><i
+                                                    class="fas fa-plus"></i></button>
+                                        </div>
+
+                                        <div class="cart-item-actions-corner">
+                                            <form action="{{ route('cart.remove') }}" method="POST" style="margin: 0;">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
+                                                <button type="submit" class="btn-action-small btn-remove-small confirm-delete"
+                                                    title="Remove Item">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
+
                                     <form id="form-{{ $item['product_id'] }}" action="{{ route('cart.update') }}" method="POST"
                                         style="display:none;">
                                         @csrf
@@ -581,18 +605,6 @@
                                 <div class="cart-item-subtotal">
                                     <div style="font-size: 1.4rem; font-weight: 800; color: #004200;">
                                         ₹{{ number_format($item['price'] * $item['quantity']) }}</div>
-                                </div>
-
-                                <div class="cart-item-actions-corner">
-
-                                    <form action="{{ route('cart.remove') }}" method="POST" style="margin: 0;">
-                                        @csrf
-                                        <input type="hidden" name="product_id" value="{{ $item['product_id'] }}">
-                                        <button type="submit" class="btn-action-small btn-remove-small confirm-delete"
-                                            title="Remove Item">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
                                 </div>
                             </div>
                         @endforeach
