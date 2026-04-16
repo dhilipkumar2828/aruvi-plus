@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Auvri Plus - Authentic Ayurvedic Remedies')</title>
-    <meta name="description" content="@yield('meta_description', 'Authentic Ayurvedic remedies crafted for your modern lifestyle. Pure, potent, and proven.')">
+    <meta name="description"
+        content="@yield('meta_description', 'Authentic Ayurvedic remedies crafted for your modern lifestyle. Pure, potent, and proven.')">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Script Font -->
@@ -23,57 +27,77 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     @yield('extra_css')
 </head>
+
 <body>
     <!-- Header -->
     <header id="main-header">
         <div class="container header-wrapper">
             <div class="logo">
-                <a href="{{ route('home') }}"><img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus" style="height: 50px;"></a>
+                <a href="{{ route('home') }}"><img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus"
+                        style="height: 50px;"></a>
             </div>
             <nav>
                 <ul class="nav-links">
-                    <button class="mobile-menu-close" onclick="document.querySelector('.nav-links').classList.remove('mobile-open')">
+                    <button class="mobile-menu-close"
+                        onclick="document.querySelector('.nav-links').classList.remove('mobile-open')">
                         <i class="fas fa-times"></i>
                     </button>
-                    <li class="mobile-logo-item" style="display: none; padding: 20px 0; border-bottom: 2px solid var(--primary); margin-bottom: 20px;">
+                    <li class="mobile-logo-item"
+                        style="display: none; padding: 20px 0; border-bottom: 2px solid var(--primary); margin-bottom: 20px;">
                         <img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus" style="height: 40px;">
                     </li>
-                    <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
-                    <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About Us</a></li>
-                    <li><a href="{{ route('shop') }}" class="{{ request()->routeIs('shop') ? 'active' : '' }}">Shop</a></li>
-                    <li><a href="{{ route('blogs.index') }}" class="{{ request()->routeIs('blogs.index') ? 'active' : '' }}">Blogs</a></li>
-                    <li><a href="{{ route('faq') }}" class="{{ request()->routeIs('faq') ? 'active' : '' }}">FAQ</a></li>
-                    <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
-                    
+                    <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
+                    </li>
+                    <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About
+                            Us</a></li>
+                    <li><a href="{{ route('shop') }}" class="{{ request()->routeIs('shop') ? 'active' : '' }}">Shop</a>
+                    </li>
+                    <li><a href="{{ route('blogs.index') }}"
+                            class="{{ request()->routeIs('blogs.index') ? 'active' : '' }}">Blogs</a></li>
+                    <li><a href="{{ route('faq') }}" class="{{ request()->routeIs('faq') ? 'active' : '' }}">FAQ</a>
+                    </li>
+                    <li><a href="{{ route('contact') }}"
+                            class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
+
                     @guest
-                        <li class="mobile-auth-links" style="display: none; margin-top: 30px; gap: 10px; flex-direction: column;">
-                            <a href="{{ route('login') }}" class="btn-premium-cart" style="padding: 12px; font-size: 0.9rem; background: var(--primary); color: #fff !important; border-radius: 50px; text-align: center; box-shadow: none;">Login</a>
-                            <a href="{{ route('register') }}" class="btn-lx-outline" style="padding: 12px; font-size: 0.9rem; border: 1px solid var(--primary); color: var(--primary) !important; border-radius: 50px; text-align: center;">Register</a>
+                        <li class="mobile-auth-links"
+                            style="display: none; margin-top: 30px; gap: 10px; flex-direction: column;">
+                            <a href="{{ route('login') }}" class="btn-premium-cart"
+                                style="padding: 12px; font-size: 0.9rem; background: var(--primary); color: #fff !important; border-radius: 50px; text-align: center; box-shadow: none;">Login</a>
+                            <a href="{{ route('register') }}" class="btn-lx-outline"
+                                style="padding: 12px; font-size: 0.9rem; border: 1px solid var(--primary); color: var(--primary) !important; border-radius: 50px; text-align: center;">Register</a>
                         </li>
                     @else
-                        <li class="mobile-auth-links" style="display: none; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-                            <a href="{{ route('customer.dashboard') }}" style="color: var(--primary) !important; font-weight: 700;">
+                        <li class="mobile-auth-links"
+                            style="display: none; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                            <a href="{{ route('customer.dashboard') }}"
+                                style="color: var(--primary) !important; font-weight: 700;">
                                 <i class="fas fa-user-circle"></i> My Dashboard
                             </a>
                         </li>
                     @endguest
                 </ul>
-                <div class="mobile-menu-overlay" onclick="document.querySelector('.nav-links').classList.remove('mobile-open')"></div>
+                <div class="mobile-menu-overlay"
+                    onclick="document.querySelector('.nav-links').classList.remove('mobile-open')"></div>
             </nav>
             <!-- Mobile Menu Toggle -->
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" onclick="document.querySelector('.nav-links').classList.add('mobile-open')">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle"
+                onclick="document.querySelector('.nav-links').classList.add('mobile-open')">
                 <i class="fas fa-bars"></i>
             </button>
             <div class="header-icons">
-                <a href="{{ route('wishlist.index') }}" class="wishlist-widget" style="color: #fff; position: relative; margin-right: 15px;">
+                <a href="{{ route('wishlist.index') }}" class="wishlist-widget"
+                    style="color: #fff; position: relative; margin-right: 15px;">
                     <i class="far fa-heart" style="font-size: 1.25rem;"></i>
-                    <span class="wishlist-count" style="position: absolute; top: -8px; right: -8px; background: #d4af37; color: #000; font-size: 0.7rem; font-weight: 700; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <span class="wishlist-count"
+                        style="position: absolute; top: -8px; right: -8px; background: #d4af37; color: #000; font-size: 0.7rem; font-weight: 700; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                         {{ Auth::check() ? App\Models\Wishlist::where('user_id', Auth::id())->count() : 0 }}
                     </span>
                 </a>
                 <a href="{{ route('cart.index') }}" class="cart-widget" style="position: relative;">
                     <i class="fas fa-shopping-cart" style="font-size: 1.25rem;"></i>
-                    <span class="cart-count" style="position: absolute; top: -8px; right: -8px; background: #d4af37; color: #000; font-size: 0.7rem; font-weight: 700; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <span class="cart-count"
+                        style="position: absolute; top: -13px; right: -8px; background: #d4af37; color: #000; font-size: 0.7rem; font-weight: 700; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                         {{ session('cart') ? array_sum(array_column(session('cart'), 'quantity')) : 0 }}
                     </span>
                 </a>
@@ -82,7 +106,8 @@
                         <div class="user-dropdown">
                             <div class="user-trigger" id="userDropdownTrigger">
                                 @if(Auth::user()->profile_image)
-                                    <img src="{{ asset(Auth::user()->profile_image) }}" alt="{{ Auth::user()->name }}" class="user-avatar-header">
+                                    <img src="{{ asset(Auth::user()->profile_image) }}" alt="{{ Auth::user()->name }}"
+                                        class="user-avatar-header">
                                 @else
                                     <i class="far fa-user-circle" style="font-size: 1.25rem; color: #d4af37;"></i>
                                 @endif
@@ -102,8 +127,10 @@
                                     <a href="{{ route('customer.orders') }}" class="dropdown-item-auri">
                                         <i class="fas fa-box-open"></i> My Orders
                                     </a>
-                                    <form action="{{ route('logout') }}" method="POST" id="logout-form" style="display: none;">@csrf</form>
-                                    <a href="#" class="dropdown-item-auri logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <form action="{{ route('logout') }}" method="POST" id="logout-form"
+                                        style="display: none;">@csrf</form>
+                                    <a href="#" class="dropdown-item-auri logout"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="fas fa-sign-out-alt"></i> Logout
                                     </a>
                                 </div>
@@ -114,7 +141,7 @@
                         <a href="{{ route('register') }}" class="auth-btn-register">Register</a>
                     @endauth
                 </div>
-                
+
             </div>
 
         </div>
@@ -130,8 +157,10 @@
         <div class="container footer-grid">
             <!-- Col 0: Logo -->
             <div class="f-col footer-brand">
-                <img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus" style="height: 60px; margin-bottom: 20px;">
-                <p style="color: #ccc; font-size: 0.9rem; line-height: 1.6;">Authentic Ayurvedic remedies crafted for your modern lifestyle. Pure, potent, and proven.</p>
+                <img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus"
+                    style="height: 60px; margin-bottom: 20px;">
+                <p style="color: #ccc; font-size: 0.9rem; line-height: 1.6;">Authentic Ayurvedic remedies crafted for
+                    your modern lifestyle. Pure, potent, and proven.</p>
             </div>
             <!-- Col 1: Help -->
             <div class="f-col">
@@ -168,16 +197,18 @@
                 </ul>
                 <div class="social-icons">
                     <a href="https://www.facebook.com/auvriplus/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/auvri_plus/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/auvriplus"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/channel/UC4ien1YbepYOpPN0pv_dEWQ?view_as=subscriber"><i
+                            class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-copy">
-            <div class="container" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; text-align: center;">
-                <span style="color: #ccc; font-size: 0.9rem; line-height: 1.6; font-weight: 500;">&copy; {{ date('Y') }} Auvri Plus. All rights reserved.</span>
-                {{-- <a href="{{ route('admin.login') }}" style="color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;">ADMIN LOGIN <i class="fas fa-lock" style="font-size: 0.65rem; margin-left: 5px;"></i></a> --}}
+            <div class="container footer-copy-wrapper">
+                <span class="copyright-text">&copy; {{ date('Y') }} Auvri Plus. All rights reserved.</span>
+                <span class="developer-text">Developed & Maintained by <a href="https://www.oceansoftwares.com/"
+                        target="_blank" class="brand-ocean">Ocean Softwares</a></span>
             </div>
         </div>
     </footer>
@@ -187,13 +218,16 @@
         <div id="premiumScrollBtn" class="premium-scroll-btn" onclick="scrollToTop()">
             <div class="progress-ring-circle">
                 <svg class="progress-ring" width="60" height="60">
-                    <circle class="progress-ring__circle" stroke="#2e7d32" stroke-width="4" fill="transparent" r="26" cx="30" cy="30" />
+                    <circle class="progress-ring__circle" stroke="#2e7d32" stroke-width="4" fill="transparent" r="26"
+                        cx="30" cy="30" />
                 </svg>
             </div>
             <div class="btn-content">
                 <div class="leaf-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20.2 17.6C21.7 13.6 20.8 9 17.8 6C14.8 3 10.2 2.1 6.2 3.6C6.2 3.6 15 12 17.6 20.2ZM6.2 3.6C3.9 9.3 4.5 15.9 8.5 20.9C9.2 21.8 10.5 21.9 11.4 21.2C11.9 20.8 14.2 18.8 14.2 18.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M20.2 17.6C21.7 13.6 20.8 9 17.8 6C14.8 3 10.2 2.1 6.2 3.6C6.2 3.6 15 12 17.6 20.2ZM6.2 3.6C3.9 9.3 4.5 15.9 8.5 20.9C9.2 21.8 10.5 21.9 11.4 21.2C11.9 20.8 14.2 18.8 14.2 18.8"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </div>
             </div>
@@ -204,70 +238,155 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
     <style>
         /* Global Mobile Footer Fix */
         @media (max-width: 768px) {
             .footer-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: center !important;
-                text-align: center !important;
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
                 gap: 30px !important;
+                align-items: start !important;
+                text-align: left !important;
             }
+
             .f-col {
                 width: 100% !important;
                 display: flex !important;
                 flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: left !important;
+            }
+
+            .f-col.footer-brand {
+                grid-column: 1 / -1;
                 align-items: center !important;
                 text-align: center !important;
             }
-            .f-line {
-                margin: 0 auto 20px !important;
+
+            .f-col:nth-child(4) {
+                grid-column: 1 / -1;
+                /* Make 'Reach Us' span full width to fit map/email/socials */
             }
+
+            .f-line {
+                margin: 0 0 20px 0 !important;
+            }
+
             .contact-list {
                 display: block !important;
-                width: fit-content !important;
-                margin: 0 auto !important;
+                width: 100% !important;
+                margin: 0 !important;
                 padding: 0 !important;
                 text-align: left !important;
             }
+
             .contact-list li {
                 display: flex !important;
-                align-items: center !important;
+                align-items: flex-start !important;
                 justify-content: flex-start !important;
                 margin-bottom: 12px !important;
             }
+
             .contact-list i {
                 width: 25px !important;
                 margin-right: 15px !important;
+                margin-top: 4px !important;
                 text-align: center !important;
                 flex-shrink: 0 !important;
             }
+
             .social-icons {
-                justify-content: center !important;
+                justify-content: flex-start !important;
+                margin-top: 15px !important;
             }
-            
+
             /* General Responsive fixes */
-            .container { padding: 0 20px !important; }
+            .container {
+                padding: 0 20px !important;
+            }
+
+            @media (max-width: 450px) {
+                .f-col h4 {
+                    font-size: 1.05rem !important;
+                }
+
+                .f-col p,
+                .f-col li,
+                .f-col a {
+                    font-size: 0.8rem !important;
+                }
+
+                .footer-copy span {
+                    font-size: 0.75rem !important;
+                }
+            }
+        }
+
+        /* Footer Copy Layout */
+        .footer-copy-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 20px 0;
+            gap: 15px;
+        }
+
+        .copyright-text {
+            color: #ccc;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .developer-text {
+            color: #aaa;
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        .brand-ocean {
+            color: #d4af37;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .brand-ocean:hover {
+            opacity: 0.8;
+            color: #d4af37;
+        }
+
+        @media (max-width: 880px) {
+            .footer-copy-wrapper {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                padding: 25px 0;
+            }
+
+            .developer-text {
+                font-size: 0.8rem;
+            }
         }
     </style>
-    
+
     <!-- Auri Scripts -->
     <script src="{{ asset('auri-script.js') }}"></script>
     <script>
         // User Dropdown Toggle
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const trigger = document.getElementById('userDropdownTrigger');
             const menu = document.getElementById('userDropdownMenu');
-            
+
             if (trigger && menu) {
-                trigger.addEventListener('click', function(e) {
+                trigger.addEventListener('click', function (e) {
                     e.stopPropagation();
                     menu.classList.toggle('show');
                 });
 
-                document.addEventListener('click', function(e) {
+                document.addEventListener('click', function (e) {
                     if (!trigger.contains(e.target) && !menu.contains(e.target)) {
                         menu.classList.remove('show');
                     }
@@ -279,7 +398,7 @@
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const btn = document.getElementById('premiumScrollBtn');
             const circle = document.querySelector('.progress-ring__circle');
             const scrollTop = window.scrollY;
@@ -323,7 +442,7 @@
         };
 
         // Global Wishlist AJAX
-        $(document).on('submit', '.wishlist-overlay-form', function(e) {
+        $(document).on('submit', '.wishlist-overlay-form', function (e) {
             e.preventDefault();
             const $form = $(this);
             const $btn = $form.find('button');
@@ -334,10 +453,10 @@
                 url: url,
                 method: 'POST',
                 data: data,
-                success: function(response) {
+                success: function (response) {
                     if (response.status === 'success') {
                         toastr.success(response.message);
-                        
+
                         // Update Wishlist Count Badge Instantly
                         const $countBadge = $('.wishlist-count');
                         let currentCount = parseInt($countBadge.text()) || 0;
@@ -353,7 +472,7 @@
                         toastr.info(response.message);
                     }
                 },
-                error: function(xhr) {
+                error: function (xhr) {
                     if (xhr.status === 401) {
                         toastr.warning('Please login to manage your wishlist.');
                         setTimeout(() => window.location.href = "{{ route('login') }}", 1500);
@@ -376,4 +495,5 @@
     </script>
     @yield('extra_js')
 </body>
+
 </html>
