@@ -61,30 +61,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const stepAngle = 360 / totalNodes;
 
         const updateOrbitStep = () => {
-            // Increase rotation for clockwise movement
-            currentRotation += stepAngle;
+            // Decrease rotation to pull the next element straight to the card
+            currentRotation -= stepAngle;
             centerpiece.style.transform = `rotate(${currentRotation}deg)`;
 
             nodes.forEach((node, index) => {
                 const element = node.getAttribute('data-element');
                 const info = node.getAttribute('data-info');
 
-                // Initial degree offsets for the 5 elements (must match CSS)
-                let initialOffset = 0;
-                if (node.classList.contains('node-ether')) initialOffset = 0;
-                if (node.classList.contains('node-air')) initialOffset = 72;
-                if (node.classList.contains('node-fire')) initialOffset = 144;
-                if (node.classList.contains('node-water')) initialOffset = 216;
-                if (node.classList.contains('node-earth')) initialOffset = 288;
+                // Perfectly space the elements (72 degrees apart for 5 nodes)
+                const initialOffset = index * (360 / totalNodes);
 
                 // Sync counter-rotation to keep icons upright
-                node.style.transform = `rotate(${initialOffset}deg) translate(250px) rotate(${-initialOffset - currentRotation}deg)`;
+                node.style.transform = `rotate(${initialOffset}deg) translate(var(--orbit-radius)) rotate(${-initialOffset - currentRotation}deg)`;
 
-                // Landing on the right means world angle is 0 (mod 360)
-                // World angle = initialOffset + currentRotation
-                const worldAngle = (initialOffset + currentRotation) % 360;
+                // Normalize angle to 0-360 range
+                let normalizedAngle = (initialOffset + currentRotation) % 360;
+                while (normalizedAngle < 0) normalizedAngle += 360;
 
-                if (Math.abs(worldAngle) < 1 || Math.abs(worldAngle - 360) < 1) {
+                // Active detection: triggers when a node lands at the RIGHT (0 deg)
+                if (Math.abs(normalizedAngle) < 1 || Math.abs(normalizedAngle - 360) < 1) {
                     node.classList.add('active');
 
                     // Update Dynamic Popup

@@ -166,6 +166,44 @@
         transform: translateX(5px);
     }
 
+    /* Hero Section */
+    .shop-hero {
+        background-image: linear-gradient(rgba(0, 66, 0, 0.6), rgba(0, 66, 0, 0.6)), url('{{ asset("auri-images/headers/shop_v2.jpg") }}');
+        background-size: cover;
+        background-position: center;
+        min-height: 350px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        margin-bottom: 30px;
+        padding: 60px 15px;
+    }
+
+    .shop-hero .sub-title {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.9rem;
+        opacity: 0.8;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .shop-hero h1.sec-title {
+        font-size: 3.5rem;
+        line-height: 1.2;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .shop-hero .p-text {
+        max-width: 800px;
+        margin: 15px auto 0;
+        opacity: 0.9;
+        font-size: 1.1rem;
+    }
+
     /* Slider specific for mobile */
     @media (max-width: 992px) {
         .articles-grid {
@@ -174,6 +212,15 @@
     }
 
     @media (max-width: 768px) {
+        .shop-hero {
+            min-height: 300px;
+        }
+        .shop-hero h1.sec-title {
+            font-size: 2.2rem;
+        }
+        .shop-hero .p-text {
+            font-size: 0.95rem;
+        }
         .articles-grid {
             display: flex;
             overflow-x: auto;
@@ -182,22 +229,28 @@
             padding: 10px 5px 30px;
         }
         .article-card {
-            min-width: 280px;
+            min-width: 300px;
             scroll-snap-align: center;
         }
-        .section-title {
+    }
+
+    @media (max-width: 480px) {
+        .shop-hero h1.sec-title {
             font-size: 1.8rem;
+        }
+        .article-card {
+            min-width: 280px;
         }
     }
 </style>
 @endsection
 
 @section('content')
-<section class="shop-hero" style="background-image: linear-gradient(rgba(0, 66, 0, 0.6), rgba(0, 66, 0, 0.6)), url('{{ asset('auri-images/headers/shop_v2.jpg') }}'); background-size: cover; background-position: center; min-height: 350px; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; margin-bottom: 30px;">
+<section class="shop-hero">
     <div class="container hero-inner">
-        <span class="sub-title" style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 10px;">Our Blogs</span>
-        <h1 class="sec-title" style="font-size: 3.5rem; line-height: 1.2;">Insights from the world of Auvri Plus wisdom.</h1>
-        <p class="p-text" style="max-width: 800px; margin: 15px auto 0; opacity: 0.9;">Sacred stories and spiritual guidance from Auvri Plus</p>
+        <span class="sub-title">Our Blogs</span>
+        <h1 class="sec-title">Insights from the world of Auvri Plus wisdom.</h1>
+        <p class="p-text">Sacred stories and spiritual guidance from Auvri Plus</p>
     </div>
 </section>
 

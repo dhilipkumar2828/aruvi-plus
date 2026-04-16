@@ -2112,10 +2112,10 @@ footer {
 }
 
 .white-floating-card {
-  background: #ffffff;
+  /* background: #ffffff; */
   padding: 45px 35px;
   border-radius: 20px;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15); */
   border-top: 5px solid #81c784;
   /* Soft green top accent instead of left line */
   position: relative;
@@ -2311,7 +2311,7 @@ footer {
   background-position: center;
   background-attachment: fixed;
   text-align: center;
-  padding: 40px 0 !important;
+ padding: 120px 20px !important;
   color: #fff;
   overflow: hidden;
 }
@@ -2398,18 +2398,24 @@ footer {
 }
 
 .radial-container {
+  --orbit-radius: 320px;
+  --hub-size: 230px;
+  --node-size: 130px;
   position: relative;
-  height: 650px;
+  height: 800px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.5s ease;
 }
 
 .radial-centerpiece {
-  position: relative;
-  width: 500px;
-  height: 500px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2418,8 +2424,8 @@ footer {
 
 .glow-core {
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: calc(var(--hub-size) * 0.9);
+  height: calc(var(--hub-size) * 0.9);
   background: radial-gradient(circle,
       rgba(129, 199, 132, 0.4) 0%,
       transparent 70%);
@@ -2429,30 +2435,30 @@ footer {
 
 .center-hub {
   position: absolute;
-  width: 220px;
-  height: 220px;
+  width: var(--hub-size);
+  height: var(--hub-size);
   background: #fff;
   border: 1px solid rgba(0, 66, 0, 0.1);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   z-index: 10;
   box-shadow: 0 20px 50px rgba(0, 66, 0, 0.08);
+  transition: all 0.5s ease;
 }
 
 .center-hub h3 {
-  font-size: 1.5rem;
-  margin-bottom: 16px;
+  font-size: clamp(1.2rem, 5vw, 1.8rem);
+  margin: 0;
+  line-height: 1.2;
 }
 
 .radial-node {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 110px;
-  height: 110px;
-  margin: -55px;
+  width: var(--node-size);
+  height: var(--node-size);
   background: #fff;
   border-radius: 50%;
   display: flex;
@@ -2460,30 +2466,26 @@ footer {
   align-items: center;
   justify-content: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  transition:
-    transform 1s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.3s,
-    border-color 0.3s;
+  transition: all 0.5s ease;
   z-index: 15;
   border: 1px solid rgba(0, 66, 0, 0.05);
   cursor: pointer;
 }
 
-.radial-node:hover,
-.radial-node.active {
-  box-shadow: 0 20px 40px rgba(0, 66, 0, 0.15);
-  border-color: var(--primary);
-  transform: scale(1.1);
-}
+.node-ether { transform: rotate(0deg) translate(var(--orbit-radius)) rotate(0deg); }
+.node-air   { transform: rotate(72deg) translate(var(--orbit-radius)) rotate(-72deg); }
+.node-fire  { transform: rotate(144deg) translate(var(--orbit-radius)) rotate(-144deg); }
+.node-water { transform: rotate(216deg) translate(var(--orbit-radius)) rotate(-216deg); }
+.node-earth { transform: rotate(288deg) translate(var(--orbit-radius)) rotate(-288deg); }
 
 .radial-node i {
-  font-size: 1.8rem;
+  font-size: calc(var(--node-size) * 0.35);
   color: var(--primary);
   margin-bottom: 5px;
 }
 
 .radial-node span {
-  font-size: 0.75rem;
+  font-size: calc(var(--node-size) * 0.15);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -2491,63 +2493,28 @@ footer {
 }
 
 .node-icon-vortex {
-  width: 50px;
-  height: 50px;
+  width: calc(var(--node-size) * 0.5);
+  height: calc(var(--node-size) * 0.5);
   margin-bottom: 5px;
-  /* Filter to convert #9c27b0 (purple) to #004200 (primary green) */
   filter: brightness(0) saturate(100%) invert(11%) sepia(99%) saturate(1469%) hue-rotate(85deg) brightness(95%) contrast(116%);
-  transition: transform 0.3s ease;
 }
 
-.radial-node:hover .node-icon-vortex,
-.radial-node.active .node-icon-vortex {
-  transform: scale(1.1);
+.radial-node:hover,
+.radial-node.active {
+  box-shadow: 0 20px 40px rgba(0, 66, 0, 0.15);
+  border-color: var(--primary);
+  /* Transform removed to allow JS control */
 }
 
-/* Orbit Animation */
-.radial-centerpiece {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+/* Orbit Animation - Controlled by JS for Stepped Focus */
+.radial-centerpiece.orbit-animation {
+  /* No continuous animation, only JS-driven steps */
 }
 
 @keyframes orbitRotate {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
-
-
-
-/* Individual Node Orbit Offsets */
-.node-ether {
-  transform: rotate(0deg) translate(250px) rotate(0deg);
-}
-
-.node-air {
-  transform: rotate(72deg) translate(250px) rotate(-72deg);
-}
-
-.node-fire {
-  transform: rotate(144deg) translate(250px) rotate(-144deg);
-}
-
-.node-water {
-  transform: rotate(216deg) translate(250px) rotate(-216deg);
-}
-
-.node-earth {
-  transform: rotate(288deg) translate(250px) rotate(-288deg);
-}
-
-/* To keep them upright during orbit, we use JS for precise counter-rotation */
 
 /* Orbit Popup Styling */
 .orbit-popup {
@@ -2561,13 +2528,16 @@ footer {
   border: 1px solid var(--primary-hover);
   box-shadow: 0 30px 80px rgba(0, 66, 0, 0.12);
   opacity: 0;
+  visibility: hidden;
   transform: translateX(30px);
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
+  z-index: 100;
 }
 
 .orbit-popup.active {
   opacity: 1;
+  visibility: visible;
   transform: translateX(0);
 }
 
@@ -2584,99 +2554,70 @@ footer {
   font-size: 1.1rem;
 }
 
-.radial-node.active {
-  border-color: var(--primary);
-  box-shadow: 0 15px 45px rgba(0, 66, 0, 0.15);
-}
 
-.node-sound:hover .node-popup,
-.node-sound.active .node-popup {
-  transform: translateX(-50%) translateY(0) scale(1.05);
-}
-
-.node-touch:hover .node-popup,
-.node-touch.active .node-popup {
-  transform: translateY(-50%) translateX(0) scale(1.05);
-}
-
-.node-smell:hover .node-popup,
-.node-smell.active .node-popup {
-  transform: translateY(-50%) translateX(0) scale(1.05);
-}
-
-.node-sight:hover .node-popup,
-.node-sight.active .node-popup {
-  transform: translateX(-50%) translateY(0) scale(1.05);
-}
-
-.node-taste:hover .node-popup,
-.node-taste.active .node-popup {
-  transform: translateX(-50%) translateY(0) scale(1.05);
-}
-
-@media (max-width: 1024px) {
+@media (max-width: 1046px) {
   .radial-container {
-    height: auto;
-  }
-
-  .radial-centerpiece {
-    width: 350px;
-    height: 350px;
-  }
-
-  .center-hub {
-    width: 150px;
-    height: 150px;
-  }
-
-  .center-hub h3 {
-  font-size: 1.5rem;
-  margin-bottom: 16px;
-}
-
-  .radial-node {
-    width: 100px;
-    height: 100px;
-  }
-
-  .radial-node i {
-    font-size: 1.4rem;
-  }
-
-  .radial-node span {
-    font-size: 0.75rem;
-  }
-
-  /* Adjust radius for tablet */
-  .node-sound {
-    top: calc(50% - 170px - 50px);
-  }
-
-  .node-touch {
-    top: calc(50% - 52px - 50px);
-    right: calc(50% - 162px - 50px);
-  }
-
-  .node-sight {
-    bottom: calc(50% - 138px - 50px);
-    right: calc(50% - 100px - 50px);
-  }
-
-  .node-taste {
-    bottom: calc(50% - 138px - 50px);
-    left: calc(50% - 100px - 50px);
-  }
-
-  .node-smell {
-    top: calc(50% - 52px - 50px);
-    left: calc(50% - 162px - 50px);
+    --orbit-radius: 190px;
+    --hub-size: 160px;
+    --node-size: 85px;
+    height: 500px;
   }
 }
 
 @media (max-width: 768px) {
   .radial-container {
-    display: none;
+    --orbit-radius: 170px;
+    --hub-size: 150px;
+    --node-size: 120px;
+    height: 520px;
   }
+  
+  .orbit-popup {
+    width: 100% !important;
+    max-width: 500px;
+    margin: 30px auto 0;
+    position: relative !important;
+    padding: 25px !important;
+    min-height: auto !important;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+  }
+  
+  .orbit-popup.active {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .radial-container {
+    --orbit-radius: 125px;
+    --hub-size: 110px;
+    --node-size: 90px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 360px) {
+  .radial-container {
+    --orbit-radius: 105px;
+    --hub-size: 100px;
+    --node-size: 60px;
+    height: 350px;
+  }
+}
+
+  .center-hub h3 {
+    font-size: 1rem;
+  }
+
+  .radial-node i {
+    margin-bottom: 2px;
+  }
+  
+  .radial-node span {
+    font-size: 0.55rem;
+  }
+
 
   /* Hide complex radial on mobile for better UX */
   .glass-philosophy-grid {
@@ -2686,7 +2627,7 @@ footer {
   .advanced-philosophy-sec .sec-title {
     font-size: 2.5rem;
   }
-}
+
 
 /* 5. Dosha Sections - Grid Layout with Floating Background */
 .dosha-panels {
@@ -2717,9 +2658,9 @@ footer {
 }
 
 .dosha-symbol {
-  width: 90px;
-  height: 90px;
-  margin: 0 auto 25px;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 30px;
   display: block;
 }
 
@@ -3758,7 +3699,10 @@ footer {
 
 /* --- MOBILE & TABLET RESPONSIVENESS FIXES --- */
 
-@media (max-width: 991px) {
+
+
+
+@media (max-width: 1060px) {
     body {
         padding-top: 60px !important;
     }
@@ -3779,6 +3723,11 @@ footer {
         color: #fff !important; 
         order: 1;
         margin-left: 15px;
+        font-size: 1.5rem !important; /* Increased from default */
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
     }
     
     .header-icons {
