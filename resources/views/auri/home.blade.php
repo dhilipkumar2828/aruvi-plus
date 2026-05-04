@@ -291,7 +291,7 @@
 
     <section class="ingredients-section shadow-text-sec">
         <div class="container" style="position: relative;">
-            <h2 class="sec-title-nature">Powered by Nature</h2>
+            <h2 class="sec-title-nature">Powered by Herbal Products</h2>
 
             <div class="category-wrapper" style="position: relative; padding: 0 30px;">
                 <button class="testi-nav testi-prev"
@@ -301,7 +301,7 @@
                 </button>
 
                 <div class="ing-scroller" style="scrollbar-width: none; -ms-overflow-style: none;">
-                    @forelse($categories as $category)
+                    @forelse($categories->where('is_herbal', true) as $category)
                         <a href="{{ route('category.show', $category->slug) }}" class="ing-pill"
                             style="text-decoration: none; color: inherit;">
                             @if($category->image)
@@ -314,7 +314,7 @@
                             <div class="ing-txt"><strong>{{ $category->name }}</strong></div>
                         </a>
                     @empty
-                        <p style="text-align:center; color:#888;">No categories available yet.</p>
+                        <p style="text-align:center; color:#888;">No Herbal products available yet.</p>
                     @endforelse
                 </div>
 
@@ -514,6 +514,46 @@
             </div>
             <div class="edu-action">
                 <a href="{{ route('about') }}" class="learn-more">Learn more about our approach</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Powered by Navapashanam Section -->
+    <section class="ingredients-section shadow-text-sec" style="background: #fdfdfd; padding-top: 0;">
+        <div class="container" style="position: relative;">
+            <br>
+            <h2 class="sec-title-nature">Powered by Navapashanam</h2>
+
+            <div class="category-wrapper" style="position: relative; padding: 0 30px;">
+                <button class="testi-nav testi-prev"
+                    onclick="this.parentElement.querySelector('.ing-scroller').scrollBy({left: -300, behavior: 'smooth'})"
+                    style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <div class="ing-scroller" style="scrollbar-width: none; -ms-overflow-style: none;">
+                    @forelse($categories->where('is_navapashanam', true) as $category)
+                        <a href="{{ route('category.show', $category->slug) }}" class="ing-pill"
+                            style="text-decoration: none; color: inherit;">
+                            @if($category->image)
+                                <img src="{{ asset($category->image) }}" alt="{{ $category->name }}"
+                                    onerror="this.src='https://via.placeholder.com/100?text={{ urlencode($category->name[0]) }}'">
+                            @else
+                                <img src="https://via.placeholder.com/100?text={{ urlencode($category->name[0]) }}"
+                                    alt="{{ $category->name }}">
+                            @endif
+                            <div class="ing-txt"><strong>{{ $category->name }}</strong></div>
+                        </a>
+                    @empty
+                        <p style="text-align:center; color:#888;">No Navapashanam products available yet.</p>
+                    @endforelse
+                </div>
+
+                <button class="testi-nav testi-next"
+                    onclick="this.parentElement.querySelector('.ing-scroller').scrollBy({left: 300, behavior: 'smooth'})"
+                    style="position: absolute; right: -20px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </section>

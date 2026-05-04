@@ -50,12 +50,11 @@
                     </li>
                     <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About
                             Us</a></li>
-                    <li><a href="{{ route('shop') }}" class="{{ request()->routeIs('shop') ? 'active' : '' }}">Shop</a>
-                    </li>
+                    <li><a href="{{ url('/category/herbal-products') }}" class="{{ request()->is('category/herbal-products') ? 'active' : '' }}">Herbal products</a></li>
+                    <li><a href="{{ url('/category/navapashanam') }}" class="{{ request()->is('category/navapashanam') ? 'active' : '' }}">Navapashanam</a></li>
                     <li><a href="{{ route('blogs.index') }}"
                             class="{{ request()->routeIs('blogs.index') ? 'active' : '' }}">Blogs</a></li>
-                    <li><a href="{{ route('faq') }}" class="{{ request()->routeIs('faq') ? 'active' : '' }}">FAQ</a>
-                    </li>
+
                     <li><a href="{{ route('contact') }}"
                             class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
 
@@ -169,7 +168,8 @@
                 <ul>
                     <li><a href="{{ route('home') }}">Home</a></li>
                     <li><a href="{{ route('about') }}">About Us</a></li>
-                    <li><a href="{{ route('shop') }}">Shop Now</a></li>
+                    <li><a href="{{ url('/category/herbal-products') }}">Herbal products</a></li>
+                    <li><a href="{{ url('/category/navapashanam') }}">Navapashanam</a></li>
                     <li><a href="{{ route('blogs.index') }}">Blogs</a></li>
                     <li><a href="{{ route('contact') }}">Contact Us</a></li>
                 </ul>

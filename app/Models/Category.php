@@ -11,5 +11,7 @@ class Category extends Model
         'slug',
         'image',
         'status',
+        'is_herbal',
+        'is_navapashanam',
     ];
 }

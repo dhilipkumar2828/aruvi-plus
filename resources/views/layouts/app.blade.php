@@ -132,8 +132,8 @@
                         <li class="{{ request()->is('/') ? 'active' : '' }}"><a href="{{ url('/') }}">Home</a></li>
                         <li class="{{ request()->is('about') ? 'active' : '' }}"><a href="{{ url('/about') }}">About
                                 us</a></li>
-                        <li class="{{ request()->is('shop') ? 'active' : '' }}"><a href="{{ url('/shop') }}">Shop
-                                Collections</a></li>
+                        <li class="{{ request()->is('category/herbal-products') ? 'active' : '' }}"><a href="{{ url('/category/herbal-products') }}">Herbal products</a></li>
+                        <li class="{{ request()->is('category/navapashanam') ? 'active' : '' }}"><a href="{{ url('/category/navapashanam') }}">Navapashanam</a></li>
                         <li class="{{ request()->is('blogs*') ? 'active' : '' }}"><a
                                 href="{{ route('blogs.index') }}">Blogs</a></li>
                         <li class="{{ request()->is('contact') ? 'active' : '' }}"><a
@@ -210,8 +210,8 @@
                     <li class="{{ request()->is('/') ? 'active' : '' }}"><a href="{{ url('/') }}">Home</a></li>
                     <li class="{{ request()->is('about') ? 'active' : '' }}"><a href="{{ url('/about') }}">About
                             us</a></li>
-                    <li class="{{ request()->is('shop') ? 'active' : '' }}"><a href="{{ url('/shop') }}">Shop
-                            Collections</a></li>
+                    <li class="{{ request()->is('category/herbal-products') ? 'active' : '' }}"><a href="{{ url('/category/herbal-products') }}">Herbal products</a></li>
+                    <li class="{{ request()->is('category/navapashanam') ? 'active' : '' }}"><a href="{{ url('/category/navapashanam') }}">Navapashanam</a></li>
                     <li class="{{ request()->is('blogs*') ? 'active' : '' }}"><a
                             href="{{ route('blogs.index') }}">Blogs</a></li>
                     <li class="{{ request()->is('contact') ? 'active' : '' }}"><a
@@ -258,7 +258,8 @@
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</a></li>
                                 <li><a href="{{ url('/about') }}">About Us</a></li>
-                                <li><a href="{{ url('/shop') }}">Shop Collections</a></li>
+                                <li><a href="{{ url('/category/herbal-products') }}">Herbal products</a></li>
+                                <li><a href="{{ url('/category/navapashanam') }}">Navapashanam</a></li>
                                 <li><a href="{{ route('blogs.index') }}">Blogs</a></li>
                             </ul>
                         </div>
