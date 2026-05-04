@@ -454,14 +454,15 @@ header.scrolled {
 .nav-center {
     flex-grow: 1;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-right: 30px;
     z-index: 20;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 20px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -502,12 +503,13 @@ header.scrolled {
     }
 
     .nav-center {
-        justify-content: center !important;
+        justify-content: flex-end !important;
+        padding-right: 30px !important;
         padding-left: 0 !important;
     }
 
     .nav-links {
-        gap: 30px !important;
+        gap: 20px !important;
     }
 
     .nav-links a {

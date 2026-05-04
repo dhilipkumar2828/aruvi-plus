@@ -243,6 +243,20 @@
                 </div>
 
                 <div class="field">
+                    <label>Category Group / Type</label>
+                    <div style="display: flex; gap: 20px; align-items: center; margin-top: 5px;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 14px; text-transform: none; color: #333; margin-bottom: 0;">
+                            <input type="checkbox" id="is_herbal" name="is_herbal" value="1" style="width: 16px; height: 16px; padding: 0; box-shadow: none; border-radius: 4px;" @checked(old('is_herbal', $category?->is_herbal ?? false)) onchange="if(this.checked) document.getElementById('is_navapashanam').checked = false;">
+                            Herbal products
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 14px; text-transform: none; color: #333; margin-bottom: 0;">
+                            <input type="checkbox" id="is_navapashanam" name="is_navapashanam" value="1" style="width: 16px; height: 16px; padding: 0; box-shadow: none; border-radius: 4px;" @checked(old('is_navapashanam', $category?->is_navapashanam ?? false)) onchange="if(this.checked) document.getElementById('is_herbal').checked = false;">
+                            Navapashanam
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field">
                     <label for="status">Status</label>
                     <select id="status" name="status">
                         <option value="active" @selected($statusValue === 'active')>Active</option>

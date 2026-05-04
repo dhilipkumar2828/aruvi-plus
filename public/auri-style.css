@@ -372,9 +372,16 @@ header .container {
   align-items: center;
 }
 
+nav {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 30px;
+}
+
 .nav-links {
   display: flex;
-  gap: 40px;
+  gap: 20px;
 }
 
 .nav-links a {

@@ -421,6 +421,8 @@ class AdminController extends Controller
             'slug' => $slug,
             'image' => $imagePath,
             'status' => $data['status'] ?? 'active',
+            'is_herbal' => $request->boolean('is_herbal'),
+            'is_navapashanam' => $request->boolean('is_navapashanam'),
         ]);
 
         return redirect()
@@ -458,6 +460,8 @@ class AdminController extends Controller
             'slug' => $slug,
             'image' => $imagePath,
             'status' => $data['status'] ?? 'active',
+            'is_herbal' => $request->boolean('is_herbal'),
+            'is_navapashanam' => $request->boolean('is_navapashanam'),
         ]);
 
         return redirect()
