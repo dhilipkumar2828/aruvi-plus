@@ -30,7 +30,7 @@
 
 <body>
     <!-- Header -->
-    <header id="main-header">
+    <header id="main-header" class="d-print-none">
         <div class="container header-wrapper">
             <div class="logo">
                 <a href="{{ route('home') }}"><img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus"
@@ -50,8 +50,8 @@
                     </li>
                     <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About
                             Us</a></li>
-                    <li><a href="{{ url('/category/herbal-products') }}" class="{{ request()->is('category/herbal-products') ? 'active' : '' }}">Herbal products</a></li>
-                    <li><a href="{{ url('/category/navapashanam') }}" class="{{ request()->is('category/navapashanam') ? 'active' : '' }}">Navapashanam</a></li>
+                    <li><a href="{{ route('herbal.products') }}" class="{{ request()->routeIs('herbal.products') ? 'active' : '' }}">Herbal products</a></li>
+                    <li><a href="{{ route('navapashanam.products') }}" class="{{ request()->routeIs('navapashanam.products') ? 'active' : '' }}">Navapashanam</a></li>
                     <li><a href="{{ route('blogs.index') }}"
                             class="{{ request()->routeIs('blogs.index') ? 'active' : '' }}">Blogs</a></li>
 
@@ -152,7 +152,7 @@
     </main>
 
     <!-- Footer -->
-    <footer id="main-footer">
+    <footer id="main-footer" class="d-print-none">
         <div class="container footer-grid">
             <!-- Col 0: Logo -->
             <div class="f-col footer-brand">
@@ -168,8 +168,8 @@
                 <ul>
                     <li><a href="{{ route('home') }}">Home</a></li>
                     <li><a href="{{ route('about') }}">About Us</a></li>
-                    <li><a href="{{ url('/category/herbal-products') }}">Herbal products</a></li>
-                    <li><a href="{{ url('/category/navapashanam') }}">Navapashanam</a></li>
+                    <li><a href="{{ route('herbal.products') }}">Herbal products</a></li>
+                    <li><a href="{{ route('navapashanam.products') }}">Navapashanam</a></li>
                     <li><a href="{{ route('blogs.index') }}">Blogs</a></li>
                     <li><a href="{{ route('contact') }}">Contact Us</a></li>
                 </ul>
@@ -214,7 +214,7 @@
     </footer>
 
     <!-- Premium Scroll Button -->
-    <div id="premiumScrollWrapper" class="premium-scroll-wrapper">
+    <div id="premiumScrollWrapper" class="premium-scroll-wrapper d-print-none">
         <div id="premiumScrollBtn" class="premium-scroll-btn" onclick="scrollToTop()">
             <div class="progress-ring-circle">
                 <svg class="progress-ring" width="60" height="60">

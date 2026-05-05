@@ -67,6 +67,12 @@
             overflow-x: hidden;
         }
 
+        @media print {
+            .d-print-none {
+                display: none !important;
+            }
+        }
+
         .admin-wrapper {
             display: flex;
             min-height: 100vh;
@@ -1085,7 +1091,7 @@
     <div class="admin-wrapper">
         <div class="sidebar-overlay"></div>
         <!-- Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar d-print-none">
             <div class="sidebar-header">
                 <a href="{{ route('admin.dashboard') }}" class="sidebar-brand">
                     <img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus" class="sidebar-logo">
@@ -1209,7 +1215,7 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <div class="top-bar">
+            <div class="top-bar d-print-none">
                 <div class="mobile-toggle">
                     <i class="fas fa-bars"></i>
                 </div>

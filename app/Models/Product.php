@@ -46,6 +46,8 @@ class Product extends Model
         'tags',
         'meta_title',
         'meta_description',
+        'is_herbal',
+        'is_navapashanam',
     ];
 
     protected $casts = [
@@ -57,6 +59,8 @@ class Product extends Model
         'price' => 'decimal:2',
         'compare_price' => 'decimal:2',
         'rating' => 'decimal:1',
+        'is_herbal' => 'boolean',
+        'is_navapashanam' => 'boolean',
     ];
 
     public function getRouteKeyName(): string

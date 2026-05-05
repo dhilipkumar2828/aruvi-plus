@@ -18,6 +18,8 @@ Route::get('/category', function() { return redirect()->route('shop'); });
 Route::get('/product/{product:slug}', [SiteController::class, 'product'])->name('product.show');
 Route::post('/product/{product}/review', [SiteController::class, 'storeReview'])->name('product.review.store')->middleware('auth');
 Route::get('/category/{slug}', [SiteController::class, 'category'])->name('category.show');
+Route::get('/herbal-products', [SiteController::class, 'herbalProducts'])->name('herbal.products');
+Route::get('/navapashanam', [SiteController::class, 'navapashanam'])->name('navapashanam.products');
 
 Route::get('/blogs', [SiteController::class, 'blogs'])->name('blogs.index');
 Route::get('/blogs/{blog:slug}', [SiteController::class, 'blog'])->name('blogs.show');
@@ -74,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders', [CustomerController::class, 'orders'])->name('customer.orders');
     Route::get('/orders/{order}', [CustomerController::class, 'orderDetail'])->name('customer.orders.show');
     Route::get('/orders/{order}/download', [CustomerController::class, 'downloadInvoice'])->name('customer.orders.download');
+    Route::get('/orders/{order}/print', [CustomerController::class, 'printInvoice'])->name('customer.orders.print');
     Route::get('/address', [CustomerController::class, 'address'])->name('customer.address');
     Route::post('/address/update', [CustomerController::class, 'updateAddress'])->name('customer.address.update');
     Route::get('/account-details', [CustomerController::class, 'accountDetails'])->name('customer.details');
@@ -115,6 +118,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/orders', [AdminController::class, 'orders'])->name('admin.orders');
     Route::get('/orders/{order}', [AdminController::class, 'showOrder'])->name('admin.orders.show');
     Route::get('/orders/{order}/download', [AdminController::class, 'downloadInvoice'])->name('admin.orders.download');
+    Route::get('/orders/{order}/print', [AdminController::class, 'printInvoice'])->name('admin.orders.print');
     Route::get('/reports/transactions', [AdminController::class, 'transactionReport'])->name('admin.reports.transactions');
     Route::get('/orders/{order}/edit', [AdminController::class, 'editOrder'])->name('admin.orders.edit');
     Route::put('/orders/{order}', [AdminController::class, 'updateOrder'])->name('admin.orders.update');

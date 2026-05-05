@@ -119,6 +119,40 @@ class SiteController extends Controller
         ]);
     }
 
+    public function herbalProducts()
+    {
+        $products = Product::active()
+            ->where('is_herbal', true)
+            ->with('category_rel')
+            ->get();
+        $categories = Category::where('status', 'active')->get();
+        $pageTitle = "Herbal Products";
+
+        return view('auri.shop', [
+            'products' => $products,
+            'categories' => $categories,
+            'pageTitle' => $pageTitle,
+            'selectedSort' => 'default'
+        ]);
+    }
+
+    public function navapashanam()
+    {
+        $products = Product::active()
+            ->where('is_navapashanam', true)
+            ->with('category_rel')
+            ->get();
+        $categories = Category::where('status', 'active')->get();
+        $pageTitle = "Navapashanam Products";
+
+        return view('auri.shop', [
+            'products' => $products,
+            'categories' => $categories,
+            'pageTitle' => $pageTitle,
+            'selectedSort' => 'default'
+        ]);
+    }
+
     public function faq()
     {
         return view('auri.faq');

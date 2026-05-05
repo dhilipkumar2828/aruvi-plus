@@ -61,6 +61,18 @@ class CustomerController extends Controller
         return $pdf->download('invoice-' . $order->order_number . '.pdf');
     }
 
+    public function printInvoice(Order $order)
+    {
+        if ($order->customer_email !== Auth::user()->email) {
+            abort(403);
+        }
+
+        $order->load('items');
+        $pdf = Pdf::loadView('pdf.invoice', compact('order'));
+        
+        return $pdf->stream('invoice-' . $order->order_number . '.pdf');
+    }
+
     public function address()
     {
         $user = Auth::user();

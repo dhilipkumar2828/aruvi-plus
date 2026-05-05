@@ -172,6 +172,8 @@ class AdminController extends Controller
             'badge_text' => ['nullable', 'string', 'max:50'],
             'rating' => ['nullable', 'numeric', 'min:0', 'max:5'],
             'reviews_count' => ['nullable', 'integer', 'min:0'],
+            'is_herbal' => ['nullable', 'boolean'],
+            'is_navapashanam' => ['nullable', 'boolean'],
         ]);
 
         $slug = $data['product_slug'] ?: Str::slug($data['product_name']);
@@ -239,6 +241,8 @@ class AdminController extends Controller
             'tags' => $data['product_tags'] ?? null,
             'meta_title' => $data['product_meta_title'] ?? null,
             'meta_description' => $data['product_meta_description'] ?? null,
+            'is_herbal' => $request->has('is_herbal') ? $request->boolean('is_herbal') : ($category?->is_herbal ?? false),
+            'is_navapashanam' => $request->has('is_navapashanam') ? $request->boolean('is_navapashanam') : ($category?->is_navapashanam ?? false),
         ]);
 
         return redirect()
@@ -287,6 +291,8 @@ class AdminController extends Controller
             'badge_text' => ['nullable', 'string', 'max:50'],
             'rating' => ['nullable', 'numeric', 'min:0', 'max:5'],
             'reviews_count' => ['nullable', 'integer', 'min:0'],
+            'is_herbal' => ['nullable', 'boolean'],
+            'is_navapashanam' => ['nullable', 'boolean'],
         ]);
 
         $slug = $data['product_slug'] ?: ($product->slug ?: Str::slug($data['product_name']));
@@ -359,6 +365,8 @@ class AdminController extends Controller
             'tags' => $data['product_tags'] ?? null,
             'meta_title' => $data['product_meta_title'] ?? null,
             'meta_description' => $data['product_meta_description'] ?? null,
+            'is_herbal' => $request->has('is_herbal') ? $request->boolean('is_herbal') : ($category?->is_herbal ?? false),
+            'is_navapashanam' => $request->has('is_navapashanam') ? $request->boolean('is_navapashanam') : ($category?->is_navapashanam ?? false),
         ]);
 
         return redirect()
@@ -718,6 +726,14 @@ class AdminController extends Controller
         $pdf = Pdf::loadView('pdf.invoice', compact('order'));
         
         return $pdf->download('invoice-' . $order->order_number . '.pdf');
+    }
+
+    public function printInvoice(Order $order)
+    {
+        $order->load('items');
+        $pdf = Pdf::loadView('pdf.invoice', compact('order'));
+        
+        return $pdf->stream('invoice-' . $order->order_number . '.pdf');
     }
 
     public function editOrder(Order $order)

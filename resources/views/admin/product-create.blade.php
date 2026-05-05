@@ -440,7 +440,7 @@
                         <select id="product_category" name="product_category" required>
                             <option value="">Select Category</option>
                             @foreach ($categories as $cat)
-                                <option value="{{ $cat->id }}" @selected($categoryValue == $cat->id)>{{ $cat->name }}</option>
+                                <option value="{{ $cat->id }}" @selected($categoryValue == $cat->id) data-is-herbal="{{ $cat->is_herbal ? 1 : 0 }}" data-is-navapashanam="{{ $cat->is_navapashanam ? 1 : 0 }}">{{ $cat->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -458,6 +458,8 @@
                         </select>
                     </div>
                 </div>
+
+                
             </section>
 
             <section class="section-card">
@@ -744,6 +746,18 @@
             
             if (!regex.test(pasteData)) {
                 e.preventDefault();
+            }
+        });
+
+        // Category Inheritance
+        $('#product_category').on('change', function() {
+            let selected = $(this).find('option:selected');
+            if (selected.val()) {
+                let isHerbal = selected.data('is-herbal') == 1;
+                let isNavapashanam = selected.data('is-navapashanam') == 1;
+                
+                $('#is_herbal').prop('checked', isHerbal);
+                $('#is_navapashanam').prop('checked', isNavapashanam);
             }
         });
     });
