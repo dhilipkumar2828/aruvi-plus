@@ -189,10 +189,10 @@
                         style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; border: none; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 0 20px; border-radius: 8px; font-weight: 600; font-size: 14px;">
                         <i class="fas fa-file-pdf" style="margin-right: 8px;"></i> PDF Invoice
                     </a>
-                    <button onclick="window.print()" class="admin-btn"
-                        style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; border: none; display: flex; align-items: center; justify-content: center; padding: 0 20px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer;">
+                    <a href="{{ route('admin.orders.print', $order) }}" target="_blank" class="admin-btn"
+                        style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; border: none; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 0 20px; border-radius: 8px; font-weight: 600; font-size: 14px;">
                         <i class="fas fa-print" style="margin-right: 8px;"></i> Print Invoice
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

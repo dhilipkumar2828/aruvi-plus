@@ -35,9 +35,9 @@
                                 <span class="order-date">{{ $order->created_at->format('M d, Y') }}</span>
                             </div>
                             <div class="action-buttons">
-                                <button onclick="window.print()" class="btn-icon-text">
+                                <a href="{{ route('customer.orders.print', $order) }}" target="_blank" class="btn-icon-text">
                                     <i class="fas fa-print"></i> Print Invoice
-                                </button>
+                                </a>
                                 <a href="{{ route('customer.orders.download', $order) }}"
                                     class="btn-icon-text download-btn">
                                     <i class="fas fa-file-pdf"></i> Download PDF
@@ -738,15 +738,35 @@
                         background: #fff;
                     }
 
+                    .luxury-account-page .container {
+                        width: 100% !important;
+                        max-width: 100% !important;
+                        padding: 0 !important;
+                        margin: 0 !important;
+                    }
+
+                    .account-grid {
+                        display: block !important;
+                    }
+
+                    .account-main-content {
+                        width: 100% !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+
                     .section-card {
                         border: none;
                         box-shadow: none;
                         padding: 0;
+                        margin: 0;
                     }
 
                     .luxury-invoice-box {
                         border: none;
                         padding: 0;
+                        margin: 0;
+                        width: 100% !important;
                     }
 
                     .d-print-none {

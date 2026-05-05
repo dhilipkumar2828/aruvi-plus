@@ -375,8 +375,7 @@ header .container {
 nav {
   flex-grow: 1;
   display: flex;
-  justify-content: flex-end;
-  padding-right: 30px;
+  justify-content: center;
 }
 
 .nav-links {
@@ -3979,3 +3978,16 @@ html, body {
 
 
 
+
+/* Print Styles */
+@media print {
+    .d-print-none {
+        display: none !important;
+    }
+    
+    body {
+        background-color: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+}
