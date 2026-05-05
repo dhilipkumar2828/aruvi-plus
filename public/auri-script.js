@@ -104,4 +104,63 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    // 5. Hero Slider Logic
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    const heroDots = document.querySelectorAll('.hero-dot');
+    const heroPrev = document.getElementById('hero-prev');
+    const heroNext = document.getElementById('hero-next');
+    let currentHeroSlide = 0;
+    let heroInterval;
+
+    if (heroSlides.length > 0) {
+        const showHeroSlide = (index) => {
+            heroSlides.forEach(slide => slide.classList.remove('active'));
+            heroDots.forEach(dot => dot.classList.remove('active'));
+
+            heroSlides[index].classList.add('active');
+            if (heroDots[index]) heroDots[index].classList.add('active');
+            currentHeroSlide = index;
+        };
+
+        const nextHeroSlide = () => {
+            let next = (currentHeroSlide + 1) % heroSlides.length;
+            showHeroSlide(next);
+        };
+
+        const prevHeroSlide = () => {
+            let prev = (currentHeroSlide - 1 + heroSlides.length) % heroSlides.length;
+            showHeroSlide(prev);
+        };
+
+        if (heroNext) {
+            heroNext.addEventListener('click', () => {
+                clearInterval(heroInterval);
+                nextHeroSlide();
+                startHeroInterval();
+            });
+        }
+
+        if (heroPrev) {
+            heroPrev.addEventListener('click', () => {
+                clearInterval(heroInterval);
+                prevHeroSlide();
+                startHeroInterval();
+            });
+        }
+
+        heroDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(heroInterval);
+                showHeroSlide(index);
+                startHeroInterval();
+            });
+        });
+
+        const startHeroInterval = () => {
+            heroInterval = setInterval(nextHeroSlide, 6000);
+        };
+
+        startHeroInterval();
+    }
+
 });

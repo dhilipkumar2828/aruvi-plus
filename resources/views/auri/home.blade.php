@@ -6,26 +6,58 @@
 @section('content')
     <!-- 1. Hero -->
     <section class="hero-section">
-        <div class="container hero-container">
-            <div class="hero-text-content">
-                <h1 class="hero-title">Nature's Wisdom for Modern Wellness</h1>
-                <p class="hero-subtitle">From herbal powders to nourishing oils and capsules, our Ayurvedic remedies are
-                    carefully prepared to support balance, vitality, and daily well-being.</p>
-                <div class="hero-btns-wrapper">
-                    <a href="{{ route('shop') }}" class="btn-hero-primary">Shop Now</a>
-                    <a href="https://wa.me/919818299669" class="btn-hero-outline" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Need help?
-                    </a>
+        <div class="hero-slider">
+            <!-- Slide 1 -->
+            <div class="hero-slide active"
+                style="background-image: var(--hero-bg), url('{{ asset('auri-images/background-main.png') }}');">
+                <div class="container hero-container">
+                    <div class="hero-text-content">
+                        <h1 class="hero-title">Nature's Wisdom for Modern Wellness</h1>
+                        <p class="hero-subtitle">From herbal powders to nourishing oils and capsules, our Ayurvedic remedies
+                            are
+                            carefully prepared to support balance, vitality, and daily well-being.</p>
+                        <div class="hero-btns-wrapper">
+                            <a href="{{ route('herbal.products') }}" class="btn-hero-primary">Explore Collection</a>
+                            <a href="https://wa.me/919818299669" class="btn-hero-outline" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Need Help
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-media-content">
+                        <div class="hero-video-wrapper">
+                            <video autoplay muted loop playsinline class="hero-video">
+                                <source src="{{ asset('auri-images/video/main.webm') }}" type="video/webm">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="hero-media-content">
-                <div class="hero-video-wrapper">
-                    <video autoplay muted loop playsinline class="hero-video">
-                        <source src="{{ asset('auri-images/video/main.webm') }}" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
+
+            <!-- Slide 2 -->
+            <div class="hero-slide" style="background-image: var(--hero-bg), url('{{ asset('images/hero_1.png') }}'); background-position: center center; background-size: cover; background-repeat: no-repeat; width: 100%; height: 100%;">
+                <div class="container hero-container">
+                    <div class="hero-text-content">
+                        <h1 class="hero-title">Divine Essence of Navapashanam</h1>
+                        <p class="hero-subtitle">Experience the sacred energy of the Navapashanam Shivalingam, a rare
+                            alchemical marvel crafted for spiritual awakening, inner peace, and holistic healing.</p>
+                        <div class="hero-btns-wrapper">
+                            <a href="{{ route('navapashanam.products') }}" class="btn-hero-primary">Explore Collection</a>
+                            <a href="https://wa.me/919818299669" class="btn-hero-outline" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Need Help
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+        </div>
+
+
+        <!-- Slider Dots -->
+        <div class="hero-dots">
+            <span class="hero-dot active" data-index="0"></span>
+            <span class="hero-dot" data-index="1"></span>
         </div>
     </section>
 
@@ -40,58 +72,114 @@
         }
 
         .hero-section {
-            background-image: var(--hero-bg), url('{{ asset('auri-images/background-main.png') }}');
-            background-size: cover;
-            background-position: center;
-            padding: clamp(140px, 10vw, 180px) 0 clamp(80px, 8vw, 120px);
             position: relative;
             overflow: hidden;
+            height: 100vh;
+            /* Full viewport height */
+            background: var(--primary-green);
+            padding: 0 !important;
+        }
+
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
-            min-height: 100vh;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+            padding: 120px 0 80px;
+            /* Increased top padding for gap under nav */
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 2;
         }
 
         .hero-container {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
+            grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
             position: relative;
-            z-index: 2;
+            z-index: 3;
+            width: 92%;
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            font-size: clamp(2.4rem, 4.5vw, 4rem);
             font-weight: 700;
             color: var(--white);
-            line-height: 1.1;
-            margin-bottom: 24px;
+            line-height: 1.15;
+            margin-bottom: 28px;
             font-family: 'Playfair Display', serif;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.8s ease 0.2s;
+        }
+
+        .hero-slide.active .hero-title {
+            transform: translateY(0);
+            opacity: 1;
         }
 
         .hero-subtitle {
-            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            font-size: clamp(0.95rem, 1.2vw, 1.15rem);
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 40px;
-            max-width: 520px;
+            max-width: 500px;
             line-height: 1.6;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.8s ease 0.4s;
+        }
+
+        .hero-slide.active .hero-subtitle {
+            transform: translateY(0);
+            opacity: 1;
         }
 
         .hero-btns-wrapper {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.8s ease 0.6s;
+        }
+
+        .hero-slide.active .hero-btns-wrapper {
+            transform: translateY(0);
+            opacity: 1;
         }
 
         .btn-hero-primary {
             background: var(--primary-green);
             color: var(--white);
-            padding: 16px 36px;
+            padding: 14px 32px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             border: 2px solid var(--primary-green);
             box-shadow: 0 10px 20px rgba(0, 66, 0, 0.3);
         }
@@ -106,15 +194,15 @@
         .btn-hero-outline {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
-            border: 2px solid var(--glass-border);
+            border: 1px solid var(--glass-border);
             color: var(--white);
-            padding: 16px 36px;
+            padding: 14px 32px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             transition: all 0.3s ease;
         }
 
@@ -126,104 +214,145 @@
 
         .hero-media-content {
             position: relative;
-            padding-top: 40px;
-            /* Moves video down slightly for better visibility as requested */
             display: flex;
             justify-content: center;
-            animation: fadeInRight 1s ease-out;
+            align-items: center;
+            transform: scale(0.95) translateX(20px);
+            opacity: 0;
+            transition: all 1s ease 0.3s;
         }
 
+        .hero-slide.active .hero-media-content {
+            transform: scale(1) translateX(0);
+            opacity: 1;
+        }
 
-        .hero-video-wrapper {
+        .hero-video-wrapper,
+        .hero-img-wrapper-premium {
             width: 100%;
             max-width: 550px;
+            aspect-ratio: 4/3;
+            border-radius: 25px;
             overflow: hidden;
-            transform-style: preserve-3d;
-            animation: floatVideo 6s ease-in-out infinite;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            animation: floatHero 6s ease-in-out infinite;
         }
 
-        .hero-video {
+        .hero-video,
+        .hero-display-img {
             width: 100%;
-            height: 450px;
+            height: 100%;
             display: block;
             object-fit: cover;
         }
 
-        /* Animations */
-        @keyframes floatVideo {
+        /* Arrows Styling */
+        .hero-arrows {
+            position: absolute;
+            bottom: 40px;
+            right: 5%;
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .hero-arrow-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .hero-arrow-btn:hover {
+            background: var(--accent-gold);
+            color: #000;
+            border-color: var(--accent-gold);
+            transform: scale(1.1);
+        }
+
+        /* Dots Styling */
+        .hero-dots {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .hero-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hero-dot.active {
+            background: var(--accent-gold);
+            width: 30px;
+            border-radius: 10px;
+        }
+
+        @keyframes floatHero {
 
             0%,
             100% {
-                transform: translateY(0) rotateX(2deg) rotateY(-2deg);
+                transform: translateY(0);
             }
 
             50% {
-                transform: translateY(-20px) rotateX(-2deg) rotateY(2deg);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* Responsive Breakpoints */
-        @media (min-width: 1800px) {
-            .hero-container {
-                max-width: 1600px;
-                gap: 100px;
-            }
-        }
-
-        @media (max-width: 1400px) {
-            .hero-container {
-                gap: 40px;
-            }
-
-            .hero-video-wrapper {
-                max-width: 480px;
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .hero-container {
-                gap: 30px;
-            }
-
-            .hero-title {
-                font-size: 3.2rem;
+                transform: translateY(-20px);
             }
         }
 
         @media (max-width: 991px) {
             .hero-section {
-                padding-top: 140px;
-                text-align: center;
+                min-height: auto;
+                padding: 120px 0 100px;
             }
 
-            .hero-video {
-                width: 100%;
-                height: auto;
+            .hero-slide {
+                position: relative;
+                display: none;
+                opacity: 1;
+                visibility: visible;
+                padding: 0;
+                min-height: auto;
+            }
+
+            .hero-slide.active {
                 display: block;
-                object-fit: cover;
             }
 
             .hero-container {
                 grid-template-columns: 1fr;
-                gap: 50px;
+                text-align: center;
+                gap: 40px;
             }
 
             .hero-text-content {
+                order: 1;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .hero-media-content {
+                order: 2;
+                transform: none !important;
+                opacity: 1 !important;
             }
 
             .hero-subtitle {
@@ -235,55 +364,19 @@
                 justify-content: center;
             }
 
-            .hero-media-content {
-                padding-top: 20px;
+            .hero-arrows {
+                bottom: 20px;
+                right: 20px;
             }
 
-            .hero-video-wrapper {
-                max-width: 600px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-section {
-                padding-top: 120px;
-                min-height: auto;
+            .hero-dots {
+                bottom: 20px;
             }
 
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-video-wrapper {
-                border-radius: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-section {
-                padding-top: 100px;
-            }
-
-            .hero-title {
-                font-size: 2.1rem;
-            }
-
-            .hero-btns-wrapper {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .btn-hero-primary,
-            .btn-hero-outline {
-                width: 100%;
-                justify-content: center;
-                padding: 14px 24px;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .hero-title {
-                font-size: 1.8rem;
+            .hero-video,
+            .hero-display-img {
+                height: auto;
+                aspect-ratio: 4/3;
             }
         }
     </style>

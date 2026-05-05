@@ -66,11 +66,16 @@ class SiteController extends Controller
             $query->orderBy('name');
         }
 
-        $products = $query->with('category_rel')->get();
+        $allProducts = $query->with('category_rel')->get();
+        
+        $herbalProducts = $allProducts->filter(fn($p) => $p->is_herbal);
+        $navapashanamProducts = $allProducts->filter(fn($p) => $p->is_navapashanam);
+        
         $categories = Category::where('status', 'active')->get();
 
         return view('auri.shop', [
-            'products' => $products,
+            'herbalProducts' => $herbalProducts,
+            'navapashanamProducts' => $navapashanamProducts,
             'categories' => $categories,
             'selectedSort' => $sort,
         ]);
