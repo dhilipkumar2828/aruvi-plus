@@ -224,8 +224,8 @@
                             <span class="label"
                                 style="text-transform: uppercase; font-size: 11px; letter-spacing: 2px; color: #999; font-weight: 700;">Investment
                                 in Wellness</span>
-                            <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px;">
-                                <div style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                            <div style="display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 15px;">
+                                <div style="display: flex; align-items: center; justify-content: flex-start; gap: 15px; flex-wrap: wrap;">
                                     <div class="price-val" style="font-size: 3.2rem; color: #004200; font-weight: 800; line-height: 1;">
                                         ₹{{ number_format($product->price) }}
                                     </div>
