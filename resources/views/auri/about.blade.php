@@ -89,7 +89,7 @@
     </style>
     <!-- 1. Immersive Hero -->
     <section class="about-hero-sec"
-        style="background-image: linear-gradient(rgba(0, 66, 0, 0.5), rgba(0, 66, 0, 0.5)), url('{{ asset('auri-images/headers/about_v2.png') }}'); background-size: cover; background-position: center; min-height: 300px; display: flex; align-items: center; text-align: center; color: #fff; position: relative;">
+        style="background-image: linear-gradient(rgba(0, 66, 0, 0.5), rgba(0, 66, 0, 0.5)), url('{{ asset('public/auri-images/headers/about_v2.png') }}'); background-size: cover; background-position: center; min-height: 300px; display: flex; align-items: center; text-align: center; color: #fff; position: relative;">
         <div class="container hero-inner" style="max-width: 900px; margin: 0 auto; position: relative; z-index: 2;">
             <span class="sub-title"
                 style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 15px;">AUVRIPLUS
@@ -112,7 +112,7 @@
             </div>
             <div class="about-split">
                 <div class="split-img">
-                    <img src="{{ asset('auri-images/about/image.png') }}" alt="Ayurvedic Ritual">
+                    <img src="{{ asset('public/auri-images/about/image.png') }}" alt="Ayurvedic Ritual">
                 </div>
                 <div class="split-info">
                     <div class="story-block">
@@ -153,7 +153,7 @@
                     <div class="radial-centerpiece orbit-animation">
                         <div class="radial-node node-ether" data-element="Ether"
                             data-info="Representing the spiritual expanse in which all creation exists. It is the foundation of sound and the source of pure vibration.">
-                            <img src="{{ asset('auri-images/icons/panchabuthas/ether_vortex.png') }}" alt="Ether"
+                            <img src="{{ asset('public/auri-images/icons/panchabuthas/ether_vortex.png') }}" alt="Ether"
                                 class="node-icon-vortex">
                             <span>Ether</span>
                         </div>
@@ -199,7 +199,7 @@
             <div class="dosha-grid">
                 <!-- Kapha -->
                 <div class="dosha-card" id="dosha-kapha">
-                    <img src="{{ asset('auri-images/icons/doshas/kapha_symbol.svg') }}" alt="Kapha Symbol"
+                    <img src="{{ asset('public/auri-images/icons/doshas/kapha_symbol.svg') }}" alt="Kapha Symbol"
                         class="dosha-symbol">
                     <h3 class="dosha-card-title">Kapha</h3>
                     <p class="dosha-card-text">Kapha represents calm, soft, and cool energy, like the gentle nature of
@@ -210,7 +210,7 @@
                 </div>
                 <!-- Pitta -->
                 <div class="dosha-card" id="dosha-pitta">
-                    <img src="{{ asset('auri-images/icons/doshas/pitta_symbol.svg') }}" alt="Pitta Symbol"
+                    <img src="{{ asset('public/auri-images/icons/doshas/pitta_symbol.svg') }}" alt="Pitta Symbol"
                         class="dosha-symbol">
                     <h3 class="dosha-card-title">Pitta</h3>
                     <p class="dosha-card-text">Pitta represents fire energy — strong, intense, and powerful. People with
@@ -221,7 +221,7 @@
                 </div>
                 <!-- Vatta -->
                 <div class="dosha-card" id="dosha-vatta">
-                    <img src="{{ asset('auri-images/icons/doshas/vatta_symbol.svg') }}" alt="Vatta Symbol"
+                    <img src="{{ asset('public/auri-images/icons/doshas/vatta_symbol.svg') }}" alt="Vatta Symbol"
                         class="dosha-symbol">
                     <h3 class="dosha-card-title">Vatta</h3>
                     <p class="dosha-card-text">Vata represents wind energy — light, active, and delicate. People with Vata
