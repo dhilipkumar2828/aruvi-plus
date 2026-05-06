@@ -213,7 +213,8 @@
 
     @media (max-width: 768px) {
         .shop-hero {
-            min-height: 300px;
+            min-height: auto;
+            padding: 80px 20px;
         }
         .shop-hero h1.sec-title {
             font-size: 2.2rem;
@@ -287,7 +288,7 @@
                     </div>
                 </div>
             @empty
-                <div style="grid-column: 1 / -1; text-align: center; color: #777;">No blog posts yet.</div>
+                <div style="grid-column: 1 / -1; width: 100%; text-align: center; color: #777; padding: 40px 0;">No blog posts yet.</div>
             @endforelse
         </div>
     </div>
