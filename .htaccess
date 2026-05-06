@@ -1,18 +1,21 @@
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
-
     RewriteEngine On
+    RewriteBase /aurvi/
 
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    # 1. Any direct link to /public/ folder stays as is
+    RewriteRule ^public/ - [L]
 
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
 
-    RewriteCond %{REQUEST_FILENAME} !-d
+    # 2. Redirect to public folder ONLY for existing files
+    # This ensures images, css, and js work correctly
     RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{DOCUMENT_ROOT}/aurvi/public/$1 -f
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # 3. Handle Routes: Send everything else to root index.php
+    # This solves the 404 on /about, /admin, etc.
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^ index.php [L]
 </IfModule>
