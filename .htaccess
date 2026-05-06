@@ -5,6 +5,7 @@
     # 1. Any direct link to /public/ folder stays as is
     RewriteRule ^public/ - [L]
 
+
     # 2. Redirect to public folder ONLY for existing files
     # This ensures images, css, and js work correctly
     RewriteCond %{REQUEST_FILENAME} !-f
