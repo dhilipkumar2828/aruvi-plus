@@ -4,6 +4,56 @@
 @section('meta_description', 'Explore our full range of herbal remedies designed for your holistic well-being. Pure, potent, and proven.')
 
 @section('content')
+    <style>
+        @media (min-width: 992px) {
+            .product-grid-shop {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 30px;
+            }
+        }
+        
+        .show-more-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100%;
+        }
+        
+        .btn-show-more {
+            background: var(--primary);
+            color: #fff !important;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none !important;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 66, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-show-more:hover {
+            background: #d4af37;
+            border-color: #d4af37;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+            color: #000 !important;
+        }
+        
+        .btn-show-more i {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-show-more:hover i {
+            transform: translateX(5px);
+        }
+    </style>
     <!-- Shop Hero -->
     @php
         $isNavapashanamPage = (isset($pageTitle) && str_contains(strtolower($pageTitle), 'navapashanam')) || (isset($category) && str_contains(strtolower($category->slug), 'navapashanam'));
@@ -46,12 +96,21 @@
                     Herbal Products
                     <span style="content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background: var(--accent-gold); border-radius: 2px;"></span>
                 </h2>
-                <div class="product-grid">
-                    @forelse($herbalProducts as $product)
+                <div class="product-grid product-grid-shop">
+                    @php
+                        $herbalDisplay = $herbalProducts->take(7);
+                    @endphp
+                    @foreach($herbalDisplay as $product)
                         @include('auri.partials.product-card', ['product' => $product])
-                    @empty
-                        <p style="text-align:center; color:#888; grid-column: 1/-1;">No Herbal products available in this view.</p>
-                    @endforelse
+                    @endforeach
+                    
+                    <!-- Show More Button -->
+                    <div class="show-more-wrapper">
+                        <a href="{{ route('herbal.products') }}" class="btn-show-more">
+                            <span>Show More</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -63,12 +122,15 @@
                     Navapashanam
                     <span style="content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background: var(--accent-gold); border-radius: 2px;"></span>
                 </h2>
-                <div class="product-grid">
-                    @forelse($navapashanamProducts as $product)
+                <div class="product-grid product-grid-shop">
+                    @php
+                        $navapashanamDisplay = $navapashanamProducts->take(7);
+                    @endphp
+                    @foreach($navapashanamDisplay as $product)
                         @include('auri.partials.product-card', ['product' => $product])
-                    @empty
-                        <p style="text-align:center; color:#888; grid-column: 1/-1;">No Navapashanam products available in this view.</p>
-                    @endforelse
+                    @endforeach
+
+                  
                 </div>
             </div>
         </section>
