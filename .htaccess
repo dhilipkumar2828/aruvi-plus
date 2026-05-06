@@ -5,16 +5,14 @@
 
     RewriteEngine On
 
-    # Handle Front Controller...
-    # If the request matches a file or directory that exists, serve it.
-    # Otherwise, if it's not a request for the public folder already, 
-    # rewrite it to the public folder.
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_URI} !^/public/
-    RewriteRule ^(.*)$ public/$1 [L,QSA]
-    
-    # If the file still doesn't exist and we are in the root index.php, 
-    # the root index.php will handle it via its own require.
+    RewriteRule ^ index.php [L]
 </IfModule>
-
