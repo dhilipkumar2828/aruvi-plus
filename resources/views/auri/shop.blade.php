@@ -90,7 +90,7 @@
     <!-- Main Shop Grid -->
     @if(isset($herbalProducts) && isset($navapashanamProducts))
         <!-- Herbal Products Section -->
-        <section class="shop-main-section" style="padding: 60px 0 30px;">
+        <section class="shop-main-section" style="padding: 20px 0 30px;">
             <div class="container">
                 <h2 style="color: var(--primary); margin-bottom: 45px; text-align: center; font-family: 'Playfair Display', serif; font-size: 2.8rem; position: relative; padding-bottom: 15px;">
                     Herbal Products
@@ -116,7 +116,7 @@
         </section>
 
         <!-- Navapashanam Section -->
-        <section class="shop-main-section" style="padding: 60px 0;">
+        <section class="shop-main-section" style="padding: 20px 0 60px;">
             <div class="container">
                 <h2 style="color: var(--primary); margin-bottom: 45px; text-align: center; font-family: 'Playfair Display', serif; font-size: 2.8rem; position: relative; padding-bottom: 15px;">
                     Navapashanam
@@ -136,7 +136,7 @@
         </section>
     @else
         <!-- Single Section View (Category or Specific List) -->
-        <section class="shop-main-section" style="padding: 60px 0;">
+        <section class="shop-main-section" style="padding: 20px 0 60px;">
             <div class="container">
                 @if(isset($pageTitle) || isset($category))
                 <h2 style="color: var(--primary); margin-bottom: 45px; text-align: center; font-family: 'Playfair Display', serif; font-size: 2.8rem; position: relative; padding-bottom: 15px;">

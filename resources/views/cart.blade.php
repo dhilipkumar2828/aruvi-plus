@@ -74,7 +74,7 @@
             background: white;
             border-radius: 24px;
             padding: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+            box-shadow: 15px 0 40px -15px rgba(0, 0, 0, 0.05), -15px 0 40px -15px rgba(0, 0, 0, 0.05);
         }
 
         .cart-item {
@@ -227,7 +227,7 @@
             background: white;
             border-radius: 24px;
             padding: 35px;
-            box-shadow: 0 15px 50px rgba(0, 66, 0, 0.08);
+            box-shadow: 20px 0 50px -20px rgba(0, 66, 0, 0.08), -20px 0 50px -20px rgba(0, 66, 0, 0.08);
             border: 1px solid rgba(0, 66, 0, 0.05);
             position: sticky;
             top: 100px;

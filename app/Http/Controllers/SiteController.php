@@ -17,10 +17,12 @@ class SiteController extends Controller
 {
     public function home()
     {
-        $featuredProducts = Product::active()
-            ->featured()
+        $bestSellingProducts = Product::active()
+            ->where(function($q) {
+                $q->where('is_herbal', true)
+                  ->orWhere('is_navapashanam', true);
+            })
             ->orderByDesc('created_at')
-            ->take(4)
             ->with('category_rel')
             ->get();
 
@@ -42,7 +44,7 @@ class SiteController extends Controller
 
         $categories = Category::where('status', 'active')->get();
 
-        return view('auri.home', compact('featuredProducts', 'newArrivals', 'latestBlogs', 'testimonials', 'categories'));
+        return view('auri.home', compact('bestSellingProducts', 'newArrivals', 'latestBlogs', 'testimonials', 'categories'));
     }
 
     public function about()

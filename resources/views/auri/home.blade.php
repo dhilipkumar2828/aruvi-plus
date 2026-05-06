@@ -319,8 +319,9 @@
 
         @media (max-width: 991px) {
             .hero-section {
-                min-height: auto;
-                padding: 120px 0 100px;
+                height: auto !important;
+                min-height: 100vh;
+                padding: 100px 0 60px !important;
             }
 
             .hero-slide {
@@ -328,18 +329,22 @@
                 display: none;
                 opacity: 1;
                 visibility: visible;
-                padding: 0;
-                min-height: auto;
+                padding: 40px 0;
+                height: auto !important;
+                min-height: 100vh;
             }
 
             .hero-slide.active {
-                display: block;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
             }
 
             .hero-container {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 40px;
+                gap: 30px;
+                padding-top: 20px;
             }
 
             .hero-text-content {
@@ -347,36 +352,51 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                padding: 0 10px;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+                margin-bottom: 20px;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 30px;
+                margin-left: auto;
+                margin-right: auto;
             }
 
             .hero-media-content {
                 order: 2;
                 transform: none !important;
                 opacity: 1 !important;
-            }
-
-            .hero-subtitle {
-                margin-left: auto;
-                margin-right: auto;
+                margin-top: 20px;
             }
 
             .hero-btns-wrapper {
                 justify-content: center;
+                gap: 10px;
             }
 
             .hero-arrows {
-                bottom: 20px;
-                right: 20px;
+                bottom: 15px;
+                right: 15px;
             }
 
             .hero-dots {
-                bottom: 20px;
+                bottom: 15px;
+            }
+
+            .hero-video-wrapper,
+            .hero-img-wrapper-premium {
+                max-width: 100%;
+                aspect-ratio: 16/9;
             }
 
             .hero-video,
             .hero-display-img {
                 height: auto;
-                aspect-ratio: 4/3;
             }
         }
     </style>
@@ -386,10 +406,10 @@
         <div class="container" style="position: relative;">
             <h2 class="sec-title-nature">Powered by Herbal Products</h2>
 
-            <div class="category-wrapper" style="position: relative; padding: 0 30px;">
+            <div class="category-wrapper" style="position: relative; padding: 0 60px; margin: 0 auto; max-width: 100%;">
                 <button class="testi-nav testi-prev"
-                    onclick="this.parentElement.querySelector('.ing-scroller').scrollBy({left: -300, behavior: 'smooth'})"
-                    style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    onclick="this.parentElement.querySelector('.ing-scroller').scrollBy({left: -350, behavior: 'smooth'})"
+                    style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
@@ -412,8 +432,8 @@
                 </div>
 
                 <button class="testi-nav testi-next"
-                    onclick="this.parentElement.querySelector('.ing-scroller').scrollBy({left: 300, behavior: 'smooth'})"
-                    style="position: absolute; right: -20px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    onclick="this.parentElement.querySelector('.ing-scroller').scrollBy({left: 350, behavior: 'smooth'})"
+                    style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -422,7 +442,7 @@
                 .sec-title-nature {
                     color: var(--primary);
                     text-align: center;
-                    margin-top: 0;
+                    margin-top: 60px;
                     margin-bottom: 40px;
                     font-family: var(--font-heading);
                     font-size: 2.5rem;
@@ -433,7 +453,9 @@
                     flex-wrap: nowrap !important;
                     overflow-x: auto !important;
                     gap: 15px !important;
-                    padding: 20px 25px !important;
+                    padding: 20px 0 !important;
+                    justify-content: flex-start;
+                    align-items: stretch;
                     scroll-behavior: smooth;
                     -webkit-overflow-scrolling: touch;
                     scroll-snap-type: x mandatory;
@@ -445,9 +467,10 @@
                 }
 
                 .ing-pill {
-                    flex: 0 0 calc(25% - 15px) !important;
+                    flex: 0 0 calc((100% - 40px) / 3) !important;
                     min-width: 200px !important;
-                    scroll-snap-align: start;
+                    max-width: calc((100% - 40px) / 3) !important;
+                    scroll-snap-align: center;
                     background: #fff;
                     border: 1.5px solid #f0f0f0;
                     border-radius: 25px;
@@ -468,8 +491,8 @@
                 }
 
                 .ing-pill img {
-                    width: 50px;
-                    height: 50px;
+                    width: 90px;
+                    height: 90px;
                     border-radius: 50%;
                     object-fit: cover;
                     flex-shrink: 0;
@@ -550,8 +573,8 @@
                     }
 
                     .ing-pill img {
-                        width: 80px !important;
-                        height: 80px !important;
+                        width: 110px !important;
+                        height: 110px !important;
                     }
 
                     .ing-txt strong {
@@ -615,13 +638,13 @@
     <!-- Powered by Navapashanam Section -->
     <section class="ingredients-section shadow-text-sec" style="background: #fdfdfd; padding-top: 0;">
         <div class="container" style="position: relative;">
-            <br>
+
             <h2 class="sec-title-nature">Powered by Navapashanam</h2>
 
-            <div class="category-wrapper" style="position: relative; padding: 0 30px;">
+            <div class="category-wrapper" style="position: relative; padding: 0 60px; margin: 0 auto; max-width: 100%;">
                 <button class="testi-nav testi-prev"
-                    onclick="this.parentElement.querySelector('.ing-scroller').scrollBy({left: -300, behavior: 'smooth'})"
-                    style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    onclick="this.parentElement.querySelector('.ing-scroller').scrollBy({left: -350, behavior: 'smooth'})"
+                    style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
@@ -644,8 +667,8 @@
                 </div>
 
                 <button class="testi-nav testi-next"
-                    onclick="this.parentElement.querySelector('.ing-scroller').scrollBy({left: 300, behavior: 'smooth'})"
-                    style="position: absolute; right: -20px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    onclick="this.parentElement.querySelector('.ing-scroller').scrollBy({left: 350, behavior: 'smooth'})"
+                    style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -655,19 +678,18 @@
     <!-- 4. Best Sellers -->
     <section class="products-section" id="bestsellers">
         <div class="container">
-            <div class="sec-head">
+            <div class="sec-head" style="justify-content: center;">
                 <h2 style="color: var(--primary);">Best Selling Products</h2>
-                <a href="{{ route('shop') }}" class="link-view-all">View All Products <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="product-slider-wrapper" style="position: relative;">
                 <button class="testi-nav testi-prev shop-nav-prev"
                     onclick="this.parentElement.querySelector('.product-grid').scrollBy({left: -350, behavior: 'smooth'})"
-                    style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: none; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    style="position: absolute; left: -25px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
-                <div class="product-grid">
-                    @forelse($featuredProducts as $product)
+                <div class="product-grid" style="scrollbar-width: none; -ms-overflow-style: none;">
+                    @forelse($bestSellingProducts as $product)
                         <div class="product-card">
                             <div class="p-img-wrap">
                                 <a href="{{ route('product.show', $product->slug) }}">
@@ -722,7 +744,7 @@
 
                 <button class="testi-nav testi-next shop-nav-next"
                     onclick="this.parentElement.querySelector('.product-grid').scrollBy({left: 350, behavior: 'smooth'})"
-                    style="position: absolute; right: -20px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: none; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    style="position: absolute; right: -25px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -815,11 +837,12 @@
             display: flex !important;
             overflow-x: auto !important;
             gap: 30px !important;
-            padding: 20px 25px 40px !important;
+            padding: 20px 0 40px !important;
             scroll-snap-type: x mandatory !important;
             -webkit-overflow-scrolling: touch !important;
             scrollbar-width: none !important;
             -ms-overflow-style: none !important;
+            overflow-y: hidden !important;
         }
 
         .reviews-grid::-webkit-scrollbar {
@@ -833,14 +856,16 @@
         }
 
         .white-floating-card {
-            flex: 0 0 calc(33.333% - 20px) !important;
+            flex: 0 0 calc((100% - 60px) / 3) !important;
             scroll-snap-align: start !important;
-            min-width: 300px !important;
+            min-width: 280px !important;
+            box-sizing: border-box !important;
         }
 
         @media (max-width: 1100px) {
             .white-floating-card {
-                flex: 0 0 calc(50% - 15px) !important;
+                flex: 0 0 calc((100% - 30px) / 2) !important;
+                min-width: 250px !important;
             }
         }
 
@@ -944,17 +969,31 @@
         /* Best Selling Products & Steps - Responsive Architecture */
         @media (min-width: 992px) {
             #bestsellers .product-grid {
-                display: grid !important;
-                grid-template-columns: repeat(4, 1fr) !important;
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
                 gap: 25px !important;
-                overflow: visible !important;
                 padding: 20px 0 !important;
+                scroll-behavior: smooth;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                scroll-snap-type: x mandatory;
+            }
+
+            #bestsellers .product-grid::-webkit-scrollbar {
+                display: none;
+            }
+
+            #bestsellers .product-card {
+                flex: 0 0 calc((100% - 75px) / 4) !important;
+                min-width: calc((100% - 75px) / 4) !important;
+                scroll-snap-align: start;
             }
 
             #bestsellers .shop-nav-prev,
             #bestsellers .shop-nav-next {
-                display: none !important;
-                /* Hide arrows on desktop grid */
+                display: flex !important;
+                /* Show arrows on desktop slider */
             }
 
             #bestsellers .sec-head {
