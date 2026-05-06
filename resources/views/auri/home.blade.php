@@ -74,8 +74,8 @@
         .hero-section {
             position: relative;
             overflow: hidden;
-            height: 100vh;
-            /* Full viewport height */
+            height: 85vh;
+            /* Reduced from 100vh */
             background: var(--primary-green);
             padding: 0 !important;
         }
@@ -100,8 +100,8 @@
             visibility: hidden;
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1;
-            padding: 120px 0 80px;
-            /* Increased top padding for gap under nav */
+            padding: 120px 0 40px;
+            /* Reduced bottom padding from 80px */
             will-change: transform, opacity;
             backface-visibility: hidden;
         }
@@ -382,7 +382,7 @@
     </style>
 
 
-    <section class="ingredients-section shadow-text-sec">
+    <section class="ingredients-section shadow-text-sec" style="padding-top: 0;">
         <div class="container" style="position: relative;">
             <h2 class="sec-title-nature">Powered by Herbal Products</h2>
 
@@ -422,6 +422,7 @@
                 .sec-title-nature {
                     color: var(--primary);
                     text-align: center;
+                    margin-top: 0;
                     margin-bottom: 40px;
                     font-family: var(--font-heading);
                     font-size: 2.5rem;
