@@ -17,14 +17,22 @@ class SiteController extends Controller
 {
     public function home()
     {
-        $bestSellingProducts = Product::active()
-            ->where(function($q) {
-                $q->where('is_herbal', true)
-                  ->orWhere('is_navapashanam', true);
-            })
-            ->orderByDesc('created_at')
+        $herbalProducts = Product::active()
+            ->where('is_herbal', true)
             ->with('category_rel')
+            ->orderByDesc('created_at')
+            ->take(10)
             ->get();
+
+        $navapashanamProducts = Product::active()
+            ->where('is_navapashanam', true)
+            ->with('category_rel')
+            ->orderByDesc('created_at')
+            ->take(10)
+            ->get();
+
+        // Merge them to ensure both types are present in "Best Selling Products"
+        $bestSellingProducts = $herbalProducts->merge($navapashanamProducts)->shuffle();
 
         $newArrivals = Product::active()
             ->newArrivals()
