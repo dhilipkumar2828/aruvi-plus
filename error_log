@@ -1,1 +1,123 @@
 [06-May-2026 06:09:28 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[07-May-2026 03:40:29 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:40:29 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:40:29 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/public/index.php:14
+Stack trace:
+#0 /home/aramchitfunds/public_html/aurvi/index.php(3): require()
+#1 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:40:30 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:40:30 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:40:30 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/public/index.php:14
+Stack trace:
+#0 /home/aramchitfunds/public_html/aurvi/index.php(3): require()
+#1 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:40:56 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:40:56 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:40:56 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/public/index.php:14
+Stack trace:
+#0 /home/aramchitfunds/public_html/aurvi/index.php(3): require()
+#1 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:40:59 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:40:59 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:40:59 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/public/index.php:14
+Stack trace:
+#0 /home/aramchitfunds/public_html/aurvi/index.php(3): require()
+#1 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:41:24 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:41:24 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:41:24 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/public/index.php:14
+Stack trace:
+#0 /home/aramchitfunds/public_html/aurvi/index.php(3): require()
+#1 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/public/index.php on line 14
+[07-May-2026 03:43:18 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[07-May-2026 03:43:18 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/artisan on line 10
+[07-May-2026 03:43:18 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/artisan on line 10
+[07-May-2026 03:43:18 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/artisan:10
+Stack trace:
+#0 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/artisan on line 10
+[07-May-2026 03:43:22 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[07-May-2026 03:43:22 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/artisan on line 10
+[07-May-2026 03:43:22 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/artisan on line 10
+[07-May-2026 03:43:22 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/artisan:10
+Stack trace:
+#0 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/artisan on line 10
+[07-May-2026 03:43:30 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 5
+[07-May-2026 03:43:30 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 5
+[07-May-2026 03:43:30 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/index.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/index.php on line 5
+[07-May-2026 03:43:47 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[07-May-2026 03:44:14 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[07-May-2026 03:44:26 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[07-May-2026 03:44:36 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[07-May-2026 03:45:19 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[07-May-2026 03:45:27 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[07-May-2026 03:46:36 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:36 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:36 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:38 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:38 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:38 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:39 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:39 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:39 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:48 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:48 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:48 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:49 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:49 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:49 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:53 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:53 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:46:53 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:47:04 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:47:04 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:47:04 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:54:03 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:54:03 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:54:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:54:23 UTC] PHP Warning:  PHP Startup: session.gc_divisor must be greater than 0 in Unknown on line 0
+[07-May-2026 03:54:27 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:54:27 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:54:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:54:27 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:54:27 UTC] PHP Warning:  require(/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/aramchitfunds/public_html/aurvi/index.php on line 14
+[07-May-2026 03:54:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/aramchitfunds/public_html/aurvi/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php84/root/usr/share/pear') in /home/aramchitfunds/public_html/aurvi/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/aramchitfunds/public_html/aurvi/index.php on line 14

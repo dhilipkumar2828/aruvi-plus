@@ -1310,7 +1310,7 @@ class AdminController extends Controller
     {
         $extension = $file->getClientOriginalExtension() ?: 'jpg';
         $filename = $prefix . '-' . Str::lower(Str::random(12)) . '-' . time() . '.' . $extension;
-        $targetDir = public_path('uploads/products');
+        $targetDir = 'uploads/products';
 
         if (!is_dir($targetDir)) {
             mkdir($targetDir, 0775, true);
@@ -1342,7 +1342,7 @@ class AdminController extends Controller
     {
         $extension = $file->getClientOriginalExtension() ?: 'jpg';
         $filename = $prefix . '-' . Str::lower(Str::random(12)) . '-' . time() . '.' . $extension;
-        $targetDir = public_path($folder);
+        $targetDir = $folder;
 
         if (!is_dir($targetDir)) {
             mkdir($targetDir, 0775, true);
