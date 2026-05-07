@@ -67,7 +67,6 @@
         background: #163e0a; /* Dark background as per image */
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         transition: all 0.4s ease;
         display: flex;
         flex-direction: column;
@@ -77,7 +76,6 @@
 
     .article-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0 20px 45px rgba(0,0,0,0.2);
     }
 
     .article-image-wrapper {
@@ -178,7 +176,7 @@
         text-align: center;
         color: #fff;
         margin-bottom: 30px;
-        padding: 60px 15px;
+        padding: 100px 15px 60px;
     }
 
     .shop-hero .sub-title {
@@ -187,7 +185,7 @@
         font-size: 0.9rem;
         opacity: 0.8;
         display: block;
-        margin-bottom: 15px;
+        margin-bottom: 30px;
     }
 
     .shop-hero h1.sec-title {
@@ -217,7 +215,8 @@
             padding: 80px 20px;
         }
         .shop-hero h1.sec-title {
-            font-size: 2.2rem;
+            font-size: 2rem;
+            word-break: break-word;
         }
         .shop-hero .p-text {
             font-size: 0.95rem;
@@ -228,6 +227,11 @@
             scroll-snap-type: x mandatory;
             gap: 20px;
             padding: 10px 5px 30px;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+        .articles-grid::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
         }
         .article-card {
             min-width: 300px;
@@ -237,7 +241,7 @@
 
     @media (max-width: 480px) {
         .shop-hero h1.sec-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
         }
         .article-card {
             min-width: 280px;

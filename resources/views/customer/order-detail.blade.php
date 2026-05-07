@@ -1082,25 +1082,49 @@
                         border-radius: 12px;
                     }
 
+                    .invoice-header {
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
+                        gap: 30px;
+                    }
+
+                    .invoice-meta {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                    }
+
                     .invoice-logo {
                         max-height: 50px;
+                        margin: 0 auto 15px;
                     }
 
                     .company-name {
                         font-size: 18px;
+                        text-align: center;
                     }
 
                     .company-sub {
                         font-size: 12px;
+                        text-align: center;
                     }
 
                     .invoice-label {
                         font-size: 20px;
                         margin-bottom: 10px;
+                        text-align: center;
                     }
 
                     .meta-item {
                         font-size: 12px;
+                        justify-content: center;
+                    }
+
+                    .invoice-addresses {
+                        grid-template-columns: 1fr;
+                        gap: 30px;
                     }
 
                     .address-title {
