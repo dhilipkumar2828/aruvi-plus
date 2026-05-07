@@ -4,13 +4,11 @@
 
 @section('extra_css')
     <style>
-                    --primary: #006400; /* Green primary color */
+        :root {
+            --primary: #006400;
+            --primary-hover: #005000;
             --accent: #d4af37;
-            --bg-light: #fffdf9; /* Slightly cream background */
-            --border: #f0f0f0;
-            
-            --accent: #d4af37;
-            --bg-light: #fffdf9; /* Slightly cream background */
+            --bg-light: #fffdf9;
             --border: #f0f0f0;
             --input-bg: #ffffff;
         }
@@ -50,6 +48,13 @@
         @media (max-width: 992px) {
             .checkout-grid {
                 grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .checkout-hero {
+                padding: 60px 0 40px;
+            }
+            .checkout-hero h1 {
+                font-size: 2.5rem !important;
             }
         }
 
@@ -169,24 +174,43 @@
         .summary-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 12px;
             font-size: 0.95rem;
             color: #555;
+            padding: 2px 0;
+        }
+
+        .summary-row.highlight {
+            border-top: 1px solid #f1f5f9;
+            padding-top: 10px;
+            margin-top: 5px;
+            color: #1e293b;
+            font-weight: 700;
         }
 
         .summary-total {
             margin-top: 20px;
-            padding-top: 20px;
+            padding: 20px;
             border-top: 2px dashed #eee;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: #fff5f8;
+            border: 1px solid #ffebeb;
+            border-radius: 16px;
+        }
+
+        .total-label {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #b0185e;
         }
 
         .total-value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #b0185e;
         }
 
         /* Complete Order Button */
@@ -216,63 +240,107 @@
 
         /* Responsive Improvements */
         @media (max-width: 480px) {
+            .container {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+
             .checkout-hero {
-                padding: 60px 15px 40px !important;
+                padding: 50px 0 35px !important;
+                margin-bottom: 25px !important;
             }
 
             .checkout-hero h1 {
-                font-size: 2.2rem !important;
+                font-size: 2rem !important;
+                letter-spacing: -0.5px;
             }
 
             .checkout-hero p {
-                font-size: 0.9rem !important;
-                line-height: 1.5;
+                font-size: 0.8rem !important;
+                opacity: 0.9;
+                max-width: 280px;
+                margin: 0 auto;
             }
 
             .checkout-card, .summary-card {
-                padding: 20px 15px !important;
-                border-radius: 16px !important;
+                padding: 22px 18px !important;
+                border-radius: 20px !important;
+                box-shadow: 0 10px 30px rgba(0, 66, 0, 0.04) !important;
             }
 
-            .checkout-title {
-                font-size: 1.25rem !important;
-                margin-bottom: 20px !important;
+            .checkout-title, .summary-title {
+                font-size: 1.3rem !important;
+                margin-bottom: 22px !important;
+                letter-spacing: -0.2px;
+            }
+
+            .form-group-grid {
+                gap: 15px !important;
+            }
+
+            .form-label {
+                font-size: 0.75rem !important;
+                margin-bottom: 6px !important;
             }
 
             .form-control {
-                padding: 12px 15px !important;
-                font-size: 0.95rem !important;
+                padding: 12px 16px !important;
+                font-size: 0.9rem !important;
+                border-radius: 10px !important;
             }
 
-            .saved-address-trigger-card {
-                padding: 15px !important;
-                gap: 10px !important;
+            .saved-addresses-container {
+                padding: 18px 15px !important;
+                margin-bottom: 25px !important;
             }
 
-            .saved-address-trigger-card h5 {
-                font-size: 0.85rem !important;
+            .address-card {
+                flex: 0 0 240px !important;
+                padding: 14px !important;
+                border-radius: 12px !important;
             }
 
-            .saved-address-trigger-card .select-badge {
-                padding: 4px 8px !important;
-                font-size: 0.65rem !important;
+            .address-card h5 {
+                font-size: 0.9rem !important;
+            }
+
+            .checkout-item-row {
+                padding: 12px 0 !important;
+                gap: 12px !important;
+            }
+
+            .checkout-item-name {
+                font-size: 13px !important;
+            }
+
+            .summary-row {
+                font-size: 0.88rem !important;
+                margin-bottom: 10px !important;
+            }
+
+            .summary-card {
+                position: relative !important;
+                top: 0 !important;
             }
 
             .summary-total {
-                padding: 15px !important;
+                padding: 18px 20px !important;
+                margin-bottom: 20px !important;
+                border-radius: 12px !important;
             }
 
-            .summary-total span {
-                font-size: 1rem !important;
+            .total-label {
+                font-size: 1.1rem !important;
             }
 
-            .summary-total div {
-                font-size: 1.5rem !important;
+            .total-value {
+                font-size: 1.8rem !important;
             }
 
             .btn-complete-order {
-                padding: 16px !important;
+                padding: 15px !important;
                 font-size: 1rem !important;
+                border-radius: 10px !important;
             }
         }
 
@@ -508,7 +576,6 @@
                                 <option value="Gujarat">Gujarat</option>
                                 <option value="Delhi">Delhi</option>
                                 <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                <!-- Other states can be added here -->
                             </select>
                         </div>
                     </div>
@@ -527,8 +594,6 @@
                         </div>
                     </div>
 
-                    
-
                     <label class="custom-check-container">
                         <input type="checkbox" name="save_address" id="save_address" value="1">
                         <span class="checkmark"></span>
@@ -537,119 +602,98 @@
                 </form>
             </div>
 
+            <!-- Order Summary -->
+            <div class="summary-card">
+                <h3 class="summary-title" style="color: var(--primary); font-size: 1.5rem; font-weight: 700; margin-bottom: 25px; font-family: 'Playfair Display', serif;">
+                    <i class="fas fa-shopping-bag"></i> Order Summary
+                </h3>
 
-                    <!-- Order Summary -->
-                    <div class="summary-card">
-                        <h3 class="summary-title">
-                            <i class="fas fa-shopping-bag"></i> Order Summary
-                        </h3>
-
-                        <!-- Cart Items Mini -->
-                        <div style="margin-bottom: 20px;">
-                            @foreach ($cart as $item)
-                                <div class="checkout-item-row"
-                                    style="display: flex; gap: 15px; align-items: center; padding: 15px 0; border-bottom: 1px solid #f0f0f0;">
-                                    <div
-                                        style="width: 60px; height: 60px; border-radius: 12px; background: #f9f9f9; overflow: hidden; flex-shrink: 0; border: 1px solid #eee; display: flex; align-items: center; justify-content: center;">
-                                        @if ($item['image'])
-                                            <img src="{{ asset($item['image']) }}" alt="{{ $item['name'] }}"
-                                                style="width: 100%; height: 100%; object-fit: contain; padding: 5px;">
-                                        @else
-                                            <i class="fas fa-image" style="color: #ddd;"></i>
-                                        @endif
-                                    </div>
-                                    <div style="flex: 1;">
-                                        <div class="checkout-item-name"
-                                            style="font-weight: 600; color: #333; font-size: 14px; margin-bottom: 4px;">
-                                            {{ $item['name'] }}</div>
-                                        <div style="font-size: 13px; color: #999;">Qty: {{ $item['quantity'] }}</div>
-                                    </div>
-                                    <div class="checkout-item-price" style="font-weight: 700; color: #1a1a1a;">
-                                        {{ format_inr($item['price'] * $item['quantity']) }}</div>
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; border-top: 1px solid #f0f0f0; padding-top: 20px;">
-                           
-                        
-                            @if ($discount > 0)
-                                <div class="summary-row" style="color: #2e7d32;">
-                                    <span>Coupon Discount</span>
-                                    <strong id="summary-coupon-discount">-{{ format_inr($discount) }}</strong>
-                                </div>
-                            @endif
-
-                            <div id="shipping-summary-wrapper" style="display: {{ $shipping_charges > 0 ? 'flex' : 'none' }}; flex-direction: column; gap: 12px;">
-                                @if ($shipping_discount > 0)
-                                    <div class="summary-row" style="color: #2e7d32;">
-                                        <span>Shipping Discount</span>
-                                        <strong id="summary-shipping-discount">-{{ format_inr($shipping_discount) }}</strong>
-                                    </div>
+                <!-- Cart Items Mini -->
+                <div style="margin-bottom: 20px;">
+                    @foreach ($cart as $item)
+                        <div class="checkout-item-row"
+                            style="display: flex; gap: 15px; align-items: center; padding: 15px 0; border-bottom: 1px solid #f0f0f0;">
+                            <div
+                                style="width: 60px; height: 60px; border-radius: 12px; background: #f9f9f9; overflow: hidden; flex-shrink: 0; border: 1px solid #eee; display: flex; align-items: center; justify-content: center;">
+                                @if ($item['image'])
+                                    <img src="{{ asset($item['image']) }}" alt="{{ $item['name'] }}"
+                                        style="width: 100%; height: 100%; object-fit: contain; padding: 5px;">
+                                @else
+                                    <i class="fas fa-image" style="color: #ddd;"></i>
                                 @endif
-                              
                             </div>
-
-                            <div style="border-top: 1px dashed #e2e8f0; padding-top: 15px; margin-top: 5px; display: flex; flex-direction: column; gap: 10px;">
-                                 <div class="summary-row">
-                                    <span style="color: #777; font-size: 0.9rem;">Product Value</span>
-                                    <strong id="summary-product-value" style="color: #444; font-weight: 600;">{{ format_inr($taxable_product_value) }}</strong>
-                                </div>
-
-                                <div class="summary-row">
-                                    <span style="color: #777; font-size: 0.9rem;">Shipping Charges</span>
-                                    <strong id="summary-shipping-taxable" style="color: #444; font-weight: 600;">{{ format_inr($taxable_shipping_value,2)}}</strong>
-                                </div>
-
-                                <div class="summary-row">
-                                    <span style="color: #333; font-weight: 700; font-size: 0.95rem;">Taxable Value</span>
-                                    <strong id="summary-taxable-value" style="color: #333; font-weight: 700;">{{ format_inr($taxable_value) }}</strong>
-                                </div>
-
-                                <div class="summary-row">
-                                    <span style="color: #777; font-size: 0.9rem;">GST (18%)</span>
-                                    <strong id="summary-gst-amount" style="color: #444; font-weight: 600;">{{ format_inr($gst_amount) }}</strong>
-                                </div>
+                            <div style="flex: 1;">
+                                <div class="checkout-item-name"
+                                    style="font-weight: 600; color: #333; font-size: 14px; margin-bottom: 4px;">
+                                    {{ $item['name'] }}</div>
+                                <div style="font-size: 13px; color: #999;">Qty: {{ $item['quantity'] }}</div>
                             </div>
+                            <div class="checkout-item-price" style="font-weight: 700; color: #1a1a1a;">
+                                {{ format_inr($item['price'] * $item['quantity']) }}</div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; border-top: 1px solid #f0f0f0; padding-top: 20px;">
+                    @if ($discount > 0)
+                        <div class="summary-row" style="color: #2e7d32; display: flex; justify-content: space-between;">
+                            <span>Coupon Discount</span>
+                            <strong id="summary-coupon-discount">-{{ format_inr($discount) }}</strong>
+                        </div>
+                    @endif
+
+                    <div id="shipping-summary-wrapper" style="display: {{ $shipping_charges > 0 ? 'flex' : 'none' }}; flex-direction: column; gap: 12px;">
+                        @if ($shipping_discount > 0)
+                            <div class="summary-row" style="color: #2e7d32; display: flex; justify-content: space-between;">
+                                <span>Shipping Discount</span>
+                                <strong id="summary-shipping-discount">-{{ format_inr($shipping_discount) }}</strong>
+                            </div>
+                        @endif
+                    </div>
+
+                    <div style="border-top: 1px dashed #e2e8f0; padding-top: 15px; margin-top: 5px; display: flex; flex-direction: column; gap: 10px;">
+                        <div class="summary-row">
+                            <span>Product Value</span>
+                            <strong id="summary-product-value">{{ format_inr($taxable_product_value) }}</strong>
                         </div>
 
-                        <div class="summary-total" style="background: #fff5f8; border: 1px solid #ffebeb; border-radius: 12px; padding: 15px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 1.2rem; font-weight: 800; color: #b0185e;">Total</span>
-                            <div style="font-size: 2rem; font-weight: 900; color: #b0185e;" id="summary-total">₹{{ number_format($total, 0) }}</div>
+                        <div class="summary-row">
+                            <span>Shipping Charges</span>
+                            <strong id="summary-shipping-taxable">{{ format_inr($taxable_shipping_value, 2) }}</strong>
                         </div>
 
-                        <button type="submit" form="checkoutForm" class="btn-premium btn-complete-order" style="width: 100%; padding: 18px; border-radius: 12px; font-weight: 800; font-size: 1rem; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--primary); color: white; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0, 66, 0, 0.15);">
-                            PLACE ORDER NOW <i class="fas fa-check-circle"></i>
-                        </button>
+                        <div class="summary-row highlight">
+                            <span>Taxable Value</span>
+                            <strong id="summary-taxable-value">{{ format_inr($taxable_value) }}</strong>
+                        </div>
 
-                        <div
-                            style="background: #fff9f0; border-radius: 16px; padding: 15px; border: 1px dashed #ffd8a8; margin-top: 10px;">
-                            <div style="display: flex; gap: 12px; align-items: flex-start;">
-                                <i class="fas fa-truck" style="color: #f59e0b; margin-top: 3px;"></i>
-                                <p style="margin: 0; font-size: 13px; color: #92400e; line-height: 1.4;">
-                                    Shipping costs vary by state. Enter your delivery address to see final charges.
-                                </p>
-                            </div>
+                        <div class="summary-row">
+                            <span>GST (18%)</span>
+                            <strong id="summary-gst-amount">{{ format_inr($gst_amount) }}</strong>
                         </div>
                     </div>
                 </div>
 
-                
-
-                    
-                            
-                          
-                        </div>
-
-                       
-                    </div>
-<br>
-                    
+                <div class="summary-total">
+                    <span class="total-label">Total</span>
+                    <div class="total-value" id="summary-total">₹{{ number_format($total, 0) }}</div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+                <button type="submit" form="checkoutForm" class="btn-premium btn-complete-order" style="width: 100%; padding: 18px; border-radius: 12px; font-weight: 800; font-size: 1rem; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--primary); color: white; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0, 66, 0, 0.15);">
+                    PLACE ORDER NOW <i class="fas fa-check-circle"></i>
+                </button>
+
+                <div style="background: #fff9f0; border-radius: 16px; padding: 15px; border: 1px dashed #ffd8a8; margin-top: 10px;">
+                    <div style="display: flex; gap: 12px; align-items: flex-start;">
+                        <i class="fas fa-truck" style="color: #f59e0b; margin-top: 3px;"></i>
+                        <p style="margin: 0; font-size: 13px; color: #92400e; line-height: 1.4;">
+                            Shipping costs vary by state. Enter your delivery address to see final charges.
+                        </p>
+                    </div>
+                </div>
+            </div> <!-- end checkout-grid -->
+    </div> <!-- end container -->
+</div> <!-- end checkout-page-wrapper -->
 @endsection
 
 @section('extra_js')    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>

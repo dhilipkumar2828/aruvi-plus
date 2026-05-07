@@ -15,19 +15,31 @@
 
         @media (max-width: 768px) {
             .shop-hero .sec-title {
-                font-size: 2.5rem !important;
+                font-size: 2rem !important;
+                word-break: break-word;
             }
             .shop-hero .container {
                 padding: 0 20px;
             }
             .shop-hero {
-                min-height: 280px !important;
+                min-height: 250px !important;
+                padding: 60px 0 !important;
+            }
+            .shop-main-section h2 {
+                font-size: 1.6rem !important;
+                word-break: break-word;
             }
         }
 
         @media (max-width: 480px) {
             .shop-hero .sec-title {
-                font-size: 2rem !important;
+                font-size: 1.5rem !important;
+            }
+            .shop-main-section h2 {
+                font-size: 1.3rem !important;
+            }
+            .shop-hero .p-text {
+                font-size: 0.9rem !important;
             }
         }
 
