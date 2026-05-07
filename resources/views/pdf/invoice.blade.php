@@ -167,7 +167,7 @@
         <table width="100%">
             <tr>
                 <td width="100">
-                    <img src="{{ public_path('auri-images/logo.png') }}" style="max-height: 70px;">
+                    <img src="{{base_path ('auri-images/logo.png') }}" style="max-height: 65px;">
                 </td>
                 <td>
                     <div style="font-size: 8pt; opacity: 0.6; margin-bottom: 2px;">TAX INVOICE</div>
