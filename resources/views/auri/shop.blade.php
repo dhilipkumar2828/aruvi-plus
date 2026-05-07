@@ -12,6 +12,29 @@
                 gap: 30px;
             }
         }
+
+        @media (max-width: 768px) {
+            .shop-hero .sec-title {
+                font-size: 2.5rem !important;
+            }
+            .shop-hero .container {
+                padding: 0 20px;
+            }
+            .shop-hero {
+                min-height: 280px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .shop-hero .sec-title {
+                font-size: 2rem !important;
+            }
+        }
+
+        .sec-title {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
         
         .show-more-wrapper {
             display: flex;
@@ -59,7 +82,7 @@
         $isNavapashanamPage = (isset($pageTitle) && str_contains(strtolower($pageTitle), 'navapashanam')) || (isset($category) && str_contains(strtolower($category->slug), 'navapashanam'));
         $heroBg = $isNavapashanamPage ? asset('images/navapashanam_bg.png') : asset('auri-images/headers/shop_v2.jpg');
     @endphp
-    <section class="shop-hero" style="background-image: linear-gradient(rgba(0, 40, 0, 0.7), rgba(0, 40, 0, 0.7)), url('{{ $heroBg }}'); background-size: cover; background-position: center; min-height: 350px; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; margin-bottom: 30px;">
+    <section class="shop-hero" style="background-image: linear-gradient(rgba(0, 40, 0, 0.7), rgba(0, 40, 0, 0.7)), url('{{ $heroBg }}'); background-size: cover; background-position: center; min-height: 350px; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; margin-bottom: 30px; width: 100%; overflow: hidden;">
         <div class="container hero-inner">
             <span class="sub-title" style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 10px;">Our Collection</span>
             <h1 class="sec-title" style="font-size: 3.5rem; line-height: 1.2;">{{ $pageTitle ?? ($category->name ?? 'Authentic Ayurvedic Solutions') }}</h1>
@@ -97,20 +120,9 @@
                     <span style="content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background: var(--accent-gold); border-radius: 2px;"></span>
                 </h2>
                 <div class="product-grid product-grid-shop">
-                    @php
-                        $herbalDisplay = $herbalProducts->take(7);
-                    @endphp
-                    @foreach($herbalDisplay as $product)
+                    @foreach($herbalProducts as $product)
                         @include('auri.partials.product-card', ['product' => $product])
                     @endforeach
-                    
-                    <!-- Show More Button -->
-                    <div class="show-more-wrapper">
-                        <a href="{{ route('herbal.products') }}" class="btn-show-more">
-                            <span>Show More</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
                 </div>
             </div>
         </section>
@@ -123,14 +135,9 @@
                     <span style="content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background: var(--accent-gold); border-radius: 2px;"></span>
                 </h2>
                 <div class="product-grid product-grid-shop">
-                    @php
-                        $navapashanamDisplay = $navapashanamProducts->take(7);
-                    @endphp
-                    @foreach($navapashanamDisplay as $product)
+                    @foreach($navapashanamProducts as $product)
                         @include('auri.partials.product-card', ['product' => $product])
                     @endforeach
-
-                  
                 </div>
             </div>
         </section>

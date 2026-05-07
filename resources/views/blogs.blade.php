@@ -178,7 +178,7 @@
         text-align: center;
         color: #fff;
         margin-bottom: 30px;
-        padding: 60px 15px;
+        padding: 100px 15px 60px;
     }
 
     .shop-hero .sub-title {
@@ -187,7 +187,7 @@
         font-size: 0.9rem;
         opacity: 0.8;
         display: block;
-        margin-bottom: 15px;
+        margin-bottom: 30px;
     }
 
     .shop-hero h1.sec-title {

@@ -130,7 +130,7 @@ class CartController extends Controller
                 ->with('success', 'Ready to checkout.');
         }
 
-        return back()->with('success', 'Item added to cart.');
+        return redirect()->route('shop')->with('success', 'Item added to cart.');
     }
 
     public function update(Request $request)
