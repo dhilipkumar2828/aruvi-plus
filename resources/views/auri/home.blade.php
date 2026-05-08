@@ -643,7 +643,7 @@
                     }
 
                     .ing-scroller {
-                        gap: 12px !important;
+                        gap: 15px !important; /* Consistent gap for medium cards */
                         padding: 15px 10px !important;
                         justify-content: flex-start !important;
                         overflow-x: auto !important;
@@ -652,36 +652,44 @@
                     }
 
                     .ing-pill {
-                        flex: 0 0 85% !important;
-                        min-width: 85% !important;
-                        max-width: 85% !important;
-                        border-radius: 16px !important;
-                        border: none !important;
-                        background: transparent !important;
-                        box-shadow: none !important;
-                        padding: 10px 8px !important;
+                        flex: 0 0 75% !important; /* "Medium" size to show next card peek */
+                        min-width: 250px !important;
+                        max-width: 75% !important;
+                        border-radius: 20px !important;
+                        border: 1px solid #f0f0f0 !important;
+                        background: #fff !important;
+                        box-shadow: 0 8px 20px rgba(0,0,0,0.03) !important;
+                        padding: 25px 20px !important; /* Increased horizontal padding */
                         display: flex !important;
                         flex-direction: column !important;
                         align-items: center !important;
                         justify-content: center !important;
                         scroll-snap-align: center !important;
-                        gap: 10px !important;
-                        min-height: unset !important;
+                        gap: 15px !important;
+                        min-height: 280px !important; /* Uniform card height */
+                        box-sizing: border-box !important;
+                        overflow: hidden !important;
                     }
 
                     .ing-pill img {
-                        width: 95% !important;
-                        height: auto !important;
-                        border-radius: 16px !important;
-                        max-width: 100% !important;
+                        width: 120px !important; /* Standardized medium image size */
+                        height: 120px !important;
+                        border-radius: 50% !important;
                         object-fit: cover !important;
-                        display: block !important;
+                        background: #f9f9f9 !important;
+                        padding: 5px !important;
+                        border: 1px solid #eee !important;
                     }
 
                     .ing-txt strong {
-                        font-size: 1rem !important;
-                        white-space: normal !important;
+                        font-size: 1.1rem !important;
                         text-align: center !important;
+                        display: block !important;
+                        line-height: 1.3 !important;
+                        white-space: normal !important; /* Force wrapping */
+                        word-wrap: break-word !important;
+                        overflow-wrap: break-word !important;
+                        width: 100% !important;
                     }
 
                     .ing-txt span {
@@ -1008,39 +1016,46 @@
         @media (max-width: 768px) {
             .p-info {
                 text-align: center !important;
-                padding: 15px !important;
+                padding: 10px !important; /* Reduced from 15px */
             }
 
             .p-rating {
                 justify-content: center !important;
                 display: flex !important;
-                margin-bottom: 10px !important;
+                margin-bottom: 5px !important; /* Reduced from 10px */
             }
 
             .p-title {
                 text-align: center !important;
-                margin-bottom: 15px !important;
-                font-size: 1rem !important;
+                margin-bottom: 10px !important; /* Reduced from 15px */
+                font-size: 0.95rem !important;
+                height: 2.8em !important;
+                white-space: normal !important;
+                word-wrap: break-word !important;
+                overflow: hidden !important;
+                display: -webkit-box !important;
+                -webkit-line-clamp: 2 !important;
+                -webkit-box-orient: vertical !important;
             }
 
             .p-bot {
                 flex-direction: column !important;
                 align-items: center !important;
                 justify-content: center !important;
-                gap: 12px !important;
-                padding-top: 15px !important;
+                gap: 8px !important; /* Reduced from 12px */
+                padding-top: 10px !important; /* Reduced from 15px */
+                margin-top: 5px !important;
             }
 
-            .p-bot > div:first-child {
-                justify-content: center !important;
+            .p-img-wrap img {
+                height: 180px !important; /* Fixed height for consistency */
                 width: 100% !important;
-                display: flex !important;
-                gap: 10px !important;
+                object-fit: contain !important;
             }
 
             .add-btn {
-                width: 40px !important;
-                height: 40px !important;
+                width: 38px !important;
+                height: 38px !important;
                 margin: 0 auto !important;
             }
             .secondary-btn-lx {
@@ -1233,7 +1248,7 @@
                 flex: 0 0 100% !important;
                 min-width: 100% !important;
                 scroll-snap-align: center;
-                padding: 15px !important;
+                padding: 10px !important; /* Reduced from 15px */
             }
 
             /* Show 2 cards on larger tablets */

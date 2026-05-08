@@ -4538,3 +4538,196 @@ footer .points_wrapper {
         font-size: 84px;
     }
 }
+
+/* ==========================================================================
+   MOBILE OVERFLOW FIX — Prevent elements jumping off screen on mobile
+   ========================================================================== */
+
+/* Ensure nothing can cause horizontal scroll */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden !important;
+}
+
+/* ── Section Title – too wide on 320px ─────────────────────────────────── */
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 20px !important;
+        letter-spacing: 0.5px !important;
+        white-space: normal !important;
+        word-break: break-word;
+    }
+
+    .premium-header-wrapper {
+        gap: 8px !important;
+        flex-wrap: wrap;
+    }
+
+    .title-decoration-line {
+        width: 30px !important;
+    }
+
+    .section-subtitle {
+        font-size: 13px !important;
+        padding: 0 10px;
+    }
+
+    /* Hero h1 – 48px is huge on 320px */
+    .hero h1 {
+        font-size: 26px !important;
+        margin-bottom: 20px;
+    }
+
+    /* Origin section – stacks but gap is too wide */
+    .origin-layout {
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+
+    .origin-title {
+        font-size: 26px !important;
+    }
+
+    /* Articles grid – minmax(300px) causes overflow on 320px */
+    .articles-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        margin-top: 20px !important;
+    }
+
+    /* Review slide – gap:80px causes horizontal overflow */
+    .review-slide {
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+
+    .review-layout {
+        gap: 20px !important;
+        min-height: auto !important;
+    }
+
+    .review-image-container {
+        width: 180px !important;
+        height: 180px !important;
+        min-height: 180px !important;
+        flex: 0 0 180px !important;
+    }
+
+    .review-title {
+        font-size: 14px !important;
+    }
+
+    /* Benefits grid */
+    .premium-benefits-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    /* Custom features stacking */
+    .custom-features-wrapper {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 20px !important;
+    }
+
+    .custom-feature-item {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        max-width: 100% !important;
+        gap: 10px !important;
+    }
+
+    .custom-feature-img {
+        width: 100% !important;
+        max-width: 260px;
+        height: 160px !important;
+    }
+
+    .custom-feature-text {
+        width: 100% !important;
+        font-size: 13px !important;
+    }
+
+    /* Origin section image */
+    .origin-image-main {
+        box-shadow: none !important;
+    }
+
+    /* Process flow container */
+    .process-flow-container {
+        grid-template-columns: 1fr !important;
+        gap: 25px !important;
+    }
+
+    /* Why container */
+    .why-container-split {
+        gap: 30px !important;
+    }
+
+    /* Hero small pages */
+    .hero-small h1 {
+        font-size: 26px !important;
+    }
+
+    /* Festival/Stats items */
+    .festival-item {
+        width: 130px !important;
+    }
+}
+
+/* ── 768px tweaks ───────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 22px !important;
+        letter-spacing: 0.8px !important;
+        white-space: normal !important;
+    }
+
+    .hero h1 {
+        font-size: 32px !important;
+    }
+
+    .articles-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    .review-slide {
+        gap: 30px !important;
+    }
+
+    .origin-title {
+        font-size: 28px !important;
+    }
+
+    /* Footer container padding */
+    footer .container {
+        padding: 0 20px !important;
+    }
+
+    .footer-columns {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 30px !important;
+    }
+
+    .bottom-bar {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .footer-copy {
+        grid-column: 1 !important;
+    }
+
+    .footer-bottom-links {
+        grid-column: 1 !important;
+        justify-content: center;
+    }
+
+    .bottom-bar .social-links {
+        grid-column: 1 !important;
+        justify-self: center !important;
+    }
+}

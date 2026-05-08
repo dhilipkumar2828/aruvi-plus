@@ -226,11 +226,13 @@
         .summary-card {
             background: white;
             border-radius: 24px;
-            padding: 35px;
+            padding: 30px;
             box-shadow: 20px 0 50px -20px rgba(0, 66, 0, 0.08), -20px 0 50px -20px rgba(0, 66, 0, 0.08);
             border: 1px solid rgba(0, 66, 0, 0.05);
             position: sticky;
             top: 100px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .summary-card h3 {
@@ -355,77 +357,93 @@
         @media (max-width: 576px) {
             .container {
                 width: 100% !important;
+                padding: 0 15px !important;
+                box-sizing: border-box;
             }
 
             .total-value {
-                font-size: 2rem;
+                font-size: 1.8rem; /* Reduced from 2rem */
                 font-weight: 900;
                 color: #b0185e !important;
             }
 
             .cart-hero {
-                padding: 80px 0 40px;
+                padding: 60px 0 30px;
             }
 
             .cart-hero h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
 
             .cart-item {
                 grid-template-columns: 80px 1fr;
-                gap: 15px;
-                padding: 20px 0;
+                gap: 12px;
+                padding: 15px 0;
             }
 
             .cart-item-qty {
                 grid-column: 2;
+                margin-top: 5px;
             }
 
             .cart-item-subtotal {
-                grid-column: 1 / -1;
+                grid-column: 2; /* Moved to col 2 to avoid full width row */
                 text-align: left;
-                border-top: 1px solid #f9f9f9;
-                padding-top: 15px;
+                padding-top: 10px;
                 margin-top: 5px;
             }
 
             .cart-hero p {
-                font-size: 0.95rem;
-                padding: 0 15px;
+                font-size: 0.9rem;
+                padding: 0 10px;
             }
         }
 
         @media (max-width: 480px) {
             .cart-item {
-                grid-template-columns: 70px 1fr;
-                gap: 12px;
+                grid-template-columns: 60px 1fr;
+                gap: 10px;
             }
 
             .cart-item-img {
-                width: 70px;
-                height: 70px;
+                width: 60px;
+                height: 60px;
+                padding: 5px;
             }
 
             .cart-item-info h4 {
-                font-size: 1rem;
+                font-size: 0.95rem;
             }
 
             .cart-items-container {
-                padding: 15px;
+                padding: 15px 10px;
             }
 
             .summary-card {
-                padding: 20px;
+                padding: 20px 15px; /* Significantly reduced padding */
+            }
+
+            .summary-row {
+                font-size: 0.9rem;
             }
 
             .total-value {
-                font-size: 1.5rem;
+                font-size: 1.3rem; /* Further reduced */
+            }
+
+            .summary-total span {
+                font-size: 1.1rem !important;
             }
 
             .cart-actions-header {
                 flex-direction: column !important;
-                gap: 15px !important;
-                align-items: flex-start !important;
+                gap: 12px !important;
+                align-items: stretch !important;
+            }
+            
+            .btn-continue-shopping {
+                justify-content: center;
+                font-size: 0.9rem;
             }
         }
 
@@ -613,7 +631,7 @@
                     <!-- Summary Panel -->
                     <div class="summary-card">
                         <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;">
-                            <div class="summary-row">
+                            <div class="summary-row" style="flex-wrap: wrap; gap: 5px;">
                                 <span style="color: #666;">Items Subtotal</span>
                                 <strong style="color: var(--primary);">₹{{ number_format($subtotal) }}</strong>
                             </div>
@@ -654,39 +672,39 @@
                         @if(!$coupon)
                             <div style="margin-bottom: 25px;">
                                 <form action="{{ route('cart.coupon.apply') }}" method="POST"
-                                    style="display: flex; align-items: center; background: white; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; padding: 4px;">
+                                    style="display: flex; align-items: center; flex-wrap: wrap; background: white; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; padding: 4px; gap: 4px;">
                                     @csrf
                                     <input type="text" name="code" placeholder="COUPON CODE"
-                                        style="flex: 1; padding: 10px 15px; border: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; outline: none;"
+                                        style="flex: 1; min-width: 120px; padding: 10px 15px; border: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; outline: none;"
                                         required>
                                     <button type="submit"
-                                        style="background: var(--primary); color: white; border: none; padding: 0 20px; border-radius: 8px; font-weight: 700; font-size: 0.75rem; cursor: pointer; height: 38px;">APPLY</button>
+                                        style="background: var(--primary); color: white; border: none; padding: 0 20px; border-radius: 8px; font-weight: 700; font-size: 0.75rem; cursor: pointer; height: 38px; flex: 0 0 auto;">APPLY</button>
                                 </form>
                             </div>
                         @endif
 
                         <div
                             style="border-top: 1px dashed #e2e8f0; padding-top: 20px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px;">
-                            <div class="summary-row">
+                            <div class="summary-row" style="flex-wrap: wrap; gap: 5px;">
                                 <span style="color: #718096; font-size: 0.95rem;">Product Value</span>
                                 <strong
                                     style="color: #2d3748; font-weight: 600;">₹{{ number_format($taxable_value, 2) }}</strong>
                             </div>
 
-                            <div class="summary-row">
+                            <div class="summary-row" style="flex-wrap: wrap; gap: 5px;">
                                 <span style="color: #2d3748; font-weight: 700; font-size: 0.95rem;">Taxable Value</span>
                                 <strong
                                     style="color: #2d3748; font-weight: 700;">₹{{ number_format($taxable_value, 2) }}</strong>
                             </div>
 
-                            <div class="summary-row">
+                            <div class="summary-row" style="flex-wrap: wrap; gap: 5px;">
                                 <span style="color: #718096; font-size: 0.95rem;">GST (18%)</span>
                                 <strong style="color: #2d3748; font-weight: 600;">₹{{ number_format($gst_amount, 2) }}</strong>
                             </div>
                         </div>
 
                         <div class="summary-total"
-                            style="background: #fff5f8; border: 1px solid #ffebeb; border-radius: 15px; padding: 5px 10px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
+                            style="background: #fff5f8; border: 1px solid #ffebeb; border-radius: 15px; padding: 10px 15px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                             <span style="font-size: 1.3rem; font-weight: 800; color: #b0185e;">Total</span>
                             <div class="total-value">₹{{ number_format($total, 0) }}</div>
                         </div>

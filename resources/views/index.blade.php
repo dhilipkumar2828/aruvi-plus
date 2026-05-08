@@ -417,7 +417,7 @@
             <div class="section-header">
                 <div class="premium-header-wrapper">
                     <span class="title-decoration-line left"></span>
-                    <h2 class="section-title" style="white-space: nowrap;">How Aurvi Plus Works</h2>
+                    <h2 class="section-title">How Aurvi Plus Works</h2>
                     <span class="title-decoration-line right"></span>
                 </div>
                 <p class="section-subtitle">Aurvi Plus products awaken divine connection, channeling ThalaVriksham's

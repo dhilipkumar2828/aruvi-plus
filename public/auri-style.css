@@ -1,4 +1,18 @@
 /* --- Variables --- */
+html, body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 :root {
   --font-body: 'Inter', sans-serif;
   --font-heading: 'Playfair Display', serif;
@@ -524,6 +538,7 @@ nav {
 
 .hero-image {
   position: relative;
+  overflow: hidden; /* Added to prevent transformed video from overflowing */
 }
 
 .hero-image video {
@@ -1427,6 +1442,12 @@ nav {
   background: #fcfcfc;
   text-align: center;
   position: relative;
+}
+
+@media (max-width: 768px) {
+  .p-img-wrap {
+    padding: 10px !important;
+  }
 }
 
 .p-img-wrap img {
@@ -4149,7 +4170,6 @@ body {
 
 
 
-/* Print Styles */
 @media print {
   .d-print-none {
     display: none !important;
@@ -4159,5 +4179,221 @@ body {
     background-color: white !important;
     margin: 0 !important;
     padding: 0 !important;
+  }
+}
+
+/* ==========================================================================
+   CRITICAL MOBILE OVERFLOW FIXES — 320px viewport
+   Prevents elements jumping off / overflowing the screen on mobile
+   ========================================================================== */
+
+/* Ensure nothing bleeds horizontally */
+*, *::before, *::after {
+  max-width: 100%;
+}
+
+html {
+  overflow-x: hidden !important;
+}
+
+/* ── Hero section: prevent video/image overflowing on narrow screens ─── */
+@media (max-width: 600px) {
+  .hero-section {
+    height: auto !important;
+    min-height: 100svh;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    text-align: center;
+    width: 100% !important;
+    padding: 0 15px !important;
+  }
+
+  .hero-media-content {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .hero-video-wrapper,
+  .hero-img-wrapper-premium {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Section titles */
+  h2 {
+    font-size: 1.6rem !important;
+    word-break: break-word;
+    white-space: normal !important;
+  }
+
+  .sec-head h2,
+  .sec-head .sec-title {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* ── Testimonial wrapper: arrows go out-of-bounds at padding: 0 40px ─── */
+@media (max-width: 500px) {
+  .testimonial-wrapper {
+    padding: 0 45px !important;
+  }
+
+  .testimonial-wrapper .testi-prev {
+    left: 0px !important;
+  }
+
+  .testimonial-wrapper .testi-next {
+    right: 0px !important;
+  }
+}
+
+/* ── Category wrapper: padding 60px too large on 320px ──────────────── */
+@media (max-width: 480px) {
+  .category-wrapper {
+    padding: 0 45px !important;
+  }
+
+  .category-wrapper .testi-prev {
+    left: 0px !important;
+  }
+
+  .category-wrapper .testi-next {
+    right: 0px !important;
+  }
+}
+
+/* ── Header: ensure header doesn't overflow ──────────────────────────── */
+@media (max-width: 480px) {
+  header .container {
+    padding: 0 15px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .header-wrapper {
+    gap: 10px !important;
+  }
+}
+
+/* ── Sections: prevent side-padding creating overflow ────────────────── */
+@media (max-width: 480px) {
+  section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow-x: hidden;
+  }
+
+  .container {
+    padding: 0 15px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+}
+
+/* ── Reviews section: handle overflow-x scroll container ─────────────── */
+@media (max-width: 480px) {
+  .reviews-section {
+    overflow: hidden !important;
+  }
+
+  .testimonial-wrapper {
+    overflow: hidden !important;
+  }
+}
+
+/* ── Blog section: edu grid 3-col too wide ──────────────────────────── */
+@media (max-width: 600px) {
+  .edu-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .edu-card {
+    padding: 20px !important;
+  }
+}
+
+/* ── Steps section: prevent overflow from fixed widths ─────────────── */
+@media (max-width: 480px) {
+  .steps-section {
+    overflow: hidden !important;
+  }
+
+  .step {
+    width: 100% !important;
+    flex-shrink: 0;
+  }
+
+  /* Fix for slider arrows jumping off screen */
+  .testi-nav.testi-prev, 
+  .testi-nav.testi-next,
+  .shop-nav-prev,
+  .shop-nav-next {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 20 !important;
+  }
+
+  .testi-prev, .shop-nav-prev {
+    left: 5px !important;
+  }
+
+  .testi-next, .shop-nav-next {
+    right: 5px !important;
+  }
+
+  /* Ensure the wrappers don't overflow */
+  .category-wrapper, 
+  .product-slider-wrapper {
+    padding: 0 5px !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Fix for the scrollers themselves */
+  .ing-scroller, 
+  .product-grid,
+  .reviews-grid {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 10px 0 !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Fix for images that might be too large */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  /* Global safety fixes for mobile alignment */
+  .flex-wrap-mobile {
+    flex-wrap: wrap !important;
+  }
+
+  /* Ensure text doesn't force overflow */
+  h1, h2, h3, h4, h5, h6, p, span, strong, div {
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Prevent table-like flex rows from clipping */
+  .summary-row, .price-row, .info-row {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* Reduce universal section padding for 320px */
+  section, .section {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
   }
 }
