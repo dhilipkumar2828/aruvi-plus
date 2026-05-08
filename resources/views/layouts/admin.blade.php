@@ -974,15 +974,17 @@
             box-shadow: none;
         }
 
-        .page-item .page-link:hover:not(.disabled .page-link) {
+        .page-item:not(.active):not(.disabled) .page-link:hover {
             transform: translateY(-2px);
             border-color: var(--primary);
             color: var(--primary);
+            background: #fff;
         }
 
         .page-item.active .page-link:hover {
             color: #fff;
             background: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
         /* Custom Scrollbar Styles */

@@ -319,25 +319,35 @@
 
         @media (max-width: 991px) {
             .hero-section {
-                height: auto !important;
-                min-height: 100vh;
+                height: 100svh !important;
+                min-height: 100svh !important;
+                max-height: 100svh !important;
                 padding: 0 !important;
+                overflow: hidden !important;
+            }
+
+            .hero-slider {
+                height: 100% !important;
+                width: 100% !important;
             }
 
             .hero-slide {
-                position: relative;
-                display: none;
-                opacity: 1;
-                visibility: visible;
-                padding: 140px 0 100px;
-                height: auto !important;
-                min-height: 100vh;
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                opacity: 0;
+                visibility: hidden;
+                padding: 100px 0 80px !important;
             }
 
             .hero-slide.active {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
+                opacity: 1 !important;
+                visibility: visible !important;
             }
 
             .hero-container {
@@ -406,7 +416,7 @@
             flex-wrap: nowrap !important;
             overflow-x: auto !important;
             gap: 25px !important;
-            padding: 20px 5px !important;
+            padding: 20px 15px !important;
             justify-content: flex-start !important;
             align-items: stretch !important;
             scroll-behavior: smooth !important;
@@ -463,7 +473,27 @@
                 </button>
 
                 <div class="ing-scroller" style="scrollbar-width: none; -ms-overflow-style: none;">
-                    @forelse($bestSellingProducts->where('is_herbal', true) as $product)
+                    @php
+                        $allowedHerbalKeywords = ['kamaayush', 'hair oil', 'detox'];
+                        $excludedKeywords = ['pack of 2'];
+                        $filteredHerbalProducts = $bestSellingProducts->where('is_herbal', true)
+                            ->filter(function ($product) use ($allowedHerbalKeywords, $excludedKeywords) {
+                                $name = strtolower($product->name);
+                                foreach ($excludedKeywords as $excluded) {
+                                    if (strpos($name, $excluded) !== false) {
+                                        return false;
+                                    }
+                                }
+                                foreach ($allowedHerbalKeywords as $keyword) {
+                                    if (strpos($name, $keyword) !== false) {
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            })
+                            ->unique('name');
+                    @endphp
+                    @forelse($filteredHerbalProducts as $product)
                         <a href="{{ route('product.show', $product->slug) }}" class="ing-pill"
                             style="text-decoration: none; color: inherit;">
                             @php
@@ -508,7 +538,7 @@
                     flex-wrap: nowrap !important;
                     overflow-x: auto !important;
                     gap: 15px !important;
-                    padding: 20px 0 !important;
+                    padding: 20px 15px !important;
                     justify-content: flex-start;
                     align-items: stretch;
                     scroll-behavior: smooth;
@@ -580,56 +610,72 @@
                         margin-bottom: 25px;
                     }
 
-                    .category-wrapper {
-                        padding: 0 50px !important;
-                        margin: 0 !important;
+                    .ingredients-section {
+                        overflow: hidden !important;
                     }
 
+                    .category-wrapper {
+                        padding: 0 !important;
+                        margin: 0 !important;
+                        overflow: hidden !important;
+                        position: relative !important;
+                    }
+
+                    /* Arrows overlay ON TOP of scroller */
                     .category-wrapper .testi-nav {
-                        width: 40px !important;
-                        height: 40px !important;
-                        position: absolute;
-                        top: 50%;
-                        transform: translateY(-50%);
+                        width: 36px !important;
+                        height: 36px !important;
+                        position: absolute !important;
+                        top: 50% !important;
+                        transform: translateY(-50%) !important;
                         z-index: 20 !important;
+                        background: rgba(255,255,255,0.85) !important;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.12) !important;
+                        font-size: 0.85rem !important;
                     }
 
                     .category-wrapper .testi-prev {
-                        left: 5px !important;
+                        left: 8px !important;
                     }
 
                     .category-wrapper .testi-next {
-                        right: 5px !important;
+                        right: 8px !important;
                     }
 
                     .ing-scroller {
-                        gap: 0 !important;
-                        padding: 20px 0 !important;
+                        gap: 12px !important;
+                        padding: 15px 10px !important;
                         justify-content: flex-start !important;
                         overflow-x: auto !important;
                         scroll-snap-type: x mandatory !important;
+                        width: 100% !important;
                     }
 
                     .ing-pill {
-                        flex: 0 0 100% !important;
-                        min-width: 100% !important;
-                        border-radius: 20px !important;
-                        border: 1.5px solid #f0f0f0 !important;
-                        background: #fff !important;
-                        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04) !important;
-                        padding: 45px 25px !important;
+                        flex: 0 0 85% !important;
+                        min-width: 85% !important;
+                        max-width: 85% !important;
+                        border-radius: 16px !important;
+                        border: none !important;
+                        background: transparent !important;
+                        box-shadow: none !important;
+                        padding: 10px 8px !important;
                         display: flex !important;
                         flex-direction: column !important;
                         align-items: center !important;
                         justify-content: center !important;
                         scroll-snap-align: center !important;
-                        gap: 15px !important;
-                        min-height: 220px !important;
+                        gap: 10px !important;
+                        min-height: unset !important;
                     }
 
                     .ing-pill img {
-                        width: 110px !important;
-                        height: 110px !important;
+                        width: 95% !important;
+                        height: auto !important;
+                        border-radius: 16px !important;
+                        max-width: 100% !important;
+                        object-fit: cover !important;
+                        display: block !important;
                     }
 
                     .ing-txt strong {
@@ -643,6 +689,7 @@
                         text-align: center !important;
                     }
                 }
+
 
                 .testi-nav {
                     display: flex !important;
@@ -751,9 +798,9 @@
 
                 <div class="product-grid" style="scrollbar-width: none; -ms-overflow-style: none;">
                     @forelse($bestSellingProducts as $product)
-                        <div class="product-card">
+                        <div class="product-card" onclick="window.location.href='{{ route('product.show', $product->slug) }}'" style="cursor: pointer;">
                             <div class="p-img-wrap">
-                                <a href="{{ route('product.show', $product->slug) }}">
+                                <a href="{{ route('product.show', $product->slug) }}" onclick="event.stopPropagation();">
                                     @php
                                         $img_path = $product->primary_image;
                                         if ($img_path && !str_starts_with($img_path, 'http') && !str_starts_with($img_path, '/')) {
@@ -768,7 +815,7 @@
                                             alt="{{ $product->name }}">
                                     @endif
                                 </a>
-                                <a href="{{ route('product.show', $product->slug) }}" class="quick-view-btn">Quick View</a>
+                                <a href="{{ route('product.show', $product->slug) }}" class="quick-view-btn" onclick="event.stopPropagation();">Quick View</a>
                             </div>
                             <div class="p-info">
                                 <div class="p-rating">
@@ -787,7 +834,7 @@
                                                 style="text-decoration: line-through; color: #999; font-size: 0.85rem; font-weight: 500;">₹{{ number_format($product->compare_price) }}</span>
                                         @endif
                                     </div>
-                                    <form action="{{ route('cart.add') }}" method="POST" style="display:inline;">
+                                    <form action="{{ route('cart.add') }}" method="POST" style="display:inline;" onclick="event.stopPropagation();">
                                         @csrf
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         <input type="hidden" name="quantity" value="1">
@@ -850,7 +897,7 @@
             <div class="testimonial-wrapper" style="position: relative; padding: 0 40px;">
                 <button class="testi-nav testi-prev"
                     onclick="this.parentElement.querySelector('.reviews-grid').scrollBy({left: -400, behavior: 'smooth'})"
-                    style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.2rem; transition: all 0.3s ease;">
+                    style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: #fff; border: 1px solid #eee; box-shadow: none; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.2rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
@@ -887,7 +934,7 @@
 
                 <button class="testi-nav testi-next"
                     onclick="this.parentElement.querySelector('.reviews-grid').scrollBy({left: 400, behavior: 'smooth'})"
-                    style="position: absolute; right: -20px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.2rem; transition: all 0.3s ease;">
+                    style="position: absolute; right: -20px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: #fff; border: 1px solid #eee; box-shadow: none; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.2rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -910,10 +957,18 @@
             display: none !important;
         }
 
-        .testi-nav:hover {
+        @media (hover: hover) {
+            .testi-nav:hover {
+                background: #004200 !important;
+                color: #fff !important;
+                transform: translateY(-50%) scale(1.1) !important;
+            }
+        }
+
+        .testi-nav:active {
             background: #004200 !important;
             color: #fff !important;
-            transform: translateY(-50%) scale(1.1) !important;
+            transform: translateY(-50%) scale(0.95) !important;
         }
 
         .white-floating-card {
@@ -921,6 +976,26 @@
             scroll-snap-align: start !important;
             min-width: 280px !important;
             box-sizing: border-box !important;
+            box-shadow: none !important;
+            border: 1px solid #e0e0e0 !important;
+            border-top: none !important;
+            transform: none !important;
+            background: #fff !important;
+        }
+
+        .white-floating-card:hover {
+            transform: none !important;
+            box-shadow: none !important;
+            background: #fff !important;
+        }
+
+        .white-floating-card::before,
+        .white-floating-card::after {
+            display: none !important;
+        }
+
+        .quote-watermark {
+            display: none !important;
         }
 
         @media (max-width: 1100px) {
@@ -931,6 +1006,43 @@
         }
 
         @media (max-width: 768px) {
+            .p-info {
+                text-align: center !important;
+                padding: 15px !important;
+            }
+
+            .p-rating {
+                justify-content: center !important;
+                display: flex !important;
+                margin-bottom: 10px !important;
+            }
+
+            .p-title {
+                text-align: center !important;
+                margin-bottom: 15px !important;
+                font-size: 1rem !important;
+            }
+
+            .p-bot {
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 12px !important;
+                padding-top: 15px !important;
+            }
+
+            .p-bot > div:first-child {
+                justify-content: center !important;
+                width: 100% !important;
+                display: flex !important;
+                gap: 10px !important;
+            }
+
+            .add-btn {
+                width: 40px !important;
+                height: 40px !important;
+                margin: 0 auto !important;
+            }
             .secondary-btn-lx {
                 padding: 10px 20px !important;
                 font-size: 0.9rem !important;
@@ -943,6 +1055,8 @@
                 margin-bottom: 0px !important;
                 border-radius: 20px !important;
                 padding: 20px 20px !important;
+                border: 1px solid #eee !important;
+                box-shadow: none !important;
             }
 
             .r-name {
@@ -980,11 +1094,11 @@
             }
 
             .testimonial-wrapper .testi-prev {
-                left: -25px !important;
+                left: 10px !important;
             }
 
             .testimonial-wrapper .testi-next {
-                right: -25px !important;
+                right: 10px !important;
             }
 
 
@@ -994,7 +1108,7 @@
 
                 .testimonial-wrapper,
                 .category-wrapper {
-                    padding: 0 0px !important;
+                    padding: 0 10px !important;
                 }
 
                 .white-floating-card {
@@ -1202,14 +1316,14 @@
             .step h4 {
                 margin: 0 !important;
                 font-size: 1.2rem !important;
-                white-space: nowrap !important;
+                white-space: normal !important;
             }
 
             .step-sub {
-                white-space: nowrap !important;
+                white-space: normal !important;
                 font-size: 0.9rem !important;
                 display: inline-block !important;
-                margin-left: 10px;
+                margin-left: 0px;
             }
 
             .step-line {

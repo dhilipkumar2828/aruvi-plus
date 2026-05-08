@@ -4099,6 +4099,33 @@ footer {
     margin-left: 0 !important;
     width: 100% !important;
   }
+
+  .p-info {
+    text-align: center !important;
+  }
+
+  .p-rating {
+    justify-content: center !important;
+    display: flex !important;
+  }
+
+  .p-title {
+    text-align: center !important;
+  }
+
+  .p-bot {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 15px !important;
+  }
+
+  .p-bot > div:first-child {
+    justify-content: center !important;
+    width: 100% !important;
+    display: flex !important;
+    gap: 10px !important;
+  }
 }
 
 /* Ensure body doesn't horizontal scroll */

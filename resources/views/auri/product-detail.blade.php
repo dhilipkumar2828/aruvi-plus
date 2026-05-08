@@ -54,15 +54,25 @@
                 text-align: center !important;
             }
 
-            .price-val {
-                font-size: 1.5rem !important;
+            .price-content-wrapper {
+                align-items: center !important;
+                text-align: center !important;
+            }
+
+            .price-row-detail {
                 justify-content: center !important;
             }
 
+            .price-val {
+                font-size: 2.2rem !important;
+                text-align: center !important;
+            }
+
             .price-badges {
-                flex-direction: column !important;
-                align-items: center !important;
-                gap: 10px !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 15px !important;
             }
 
             .container-qty-stepper {
@@ -224,8 +234,8 @@
                             <span class="label"
                                 style="text-transform: uppercase; font-size: 11px; letter-spacing: 2px; color: #999; font-weight: 700;">Investment
                                 in Wellness</span>
-                            <div style="display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 15px;">
-                                <div style="display: flex; align-items: center; justify-content: flex-start; gap: 15px; flex-wrap: wrap;">
+                            <div class="price-content-wrapper" style="display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 15px;">
+                                <div class="price-row-detail" style="display: flex; align-items: center; justify-content: flex-start; gap: 15px; flex-wrap: wrap;">
                                     <div class="price-val" style="font-size: 3.2rem; color: #004200; font-weight: 800; line-height: 1;">
                                         ₹{{ number_format($product->price) }}
                                     </div>
@@ -490,9 +500,9 @@
                     </div>
                     <div class="product-grid">
                         @foreach($relatedProducts as $related)
-                            <div class="product-card">
+                            <div class="product-card" onclick="window.location.href='{{ route('product.show', $related->slug) }}'" style="cursor: pointer;">
                                 <div class="p-img-wrap">
-                                    <a href="{{ route('product.show', $related->slug) }}">
+                                    <a href="{{ route('product.show', $related->slug) }}" onclick="event.stopPropagation();">
                                         @php
                                             $rel_img = $related->primary_image;
                                             if ($rel_img && !str_starts_with($rel_img, 'http') && !str_starts_with($rel_img, '/')) {
@@ -512,7 +522,7 @@
                                         $isRelInWishlist = Auth::check() && Auth::user()->wishlist->contains('product_id', $related->id);
                                     @endphp
                                     <form action="{{ route('wishlist.toggle') }}" method="POST" class="wishlist-overlay-form"
-                                        style="position: absolute; top: 15px; right: 15px; z-index: 5;">
+                                        style="position: absolute; top: 15px; right: 15px; z-index: 5;" onclick="event.stopPropagation();">
                                         @csrf
                                         <input type="hidden" name="product_id" value="{{ $related->id }}">
                                         <button type="submit"
@@ -525,7 +535,7 @@
                                     <h4 class="p-title">{{ $related->name }}</h4>
                                     <div class="p-bot">
                                         <span class="p-price">₹{{ number_format($related->price) }}</span>
-                                        <form action="{{ route('cart.add') }}" method="POST" style="display:inline;">
+                                        <form action="{{ route('cart.add') }}" method="POST" style="display:inline;" onclick="event.stopPropagation();">
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{ $related->id }}">
                                             <input type="hidden" name="quantity" value="1">

@@ -1,6 +1,6 @@
-<div class="product-card">
+<div class="product-card" onclick="window.location.href='{{ route('product.show', $product->slug) }}'" style="cursor: pointer;">
     <div class="p-img-wrap">
-        <a href="{{ route('product.show', $product->slug) }}">
+        <a href="{{ route('product.show', $product->slug) }}" onclick="event.stopPropagation();">
             @php
                 $img_path = $product->primary_image;
                 if ($img_path && !str_starts_with($img_path, 'http') && !str_starts_with($img_path, '/')) {
@@ -18,15 +18,15 @@
         @php
             $isInWishlist = Auth::check() && Auth::user()->wishlist->contains('product_id', $product->id);
         @endphp
-        <form action="{{ route('wishlist.toggle') }}" method="POST" class="wishlist-overlay-form" style="position: absolute; top: 15px; right: 15px; z-index: 5;">
+        <form action="{{ route('wishlist.toggle') }}" method="POST" class="wishlist-overlay-form" style="position: absolute; top: 15px; right: 15px; z-index: 5;" onclick="event.stopPropagation();">
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <button type="submit" style="width: 40px; height: 40px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; color: {{ $isInWishlist ? '#d4145a' : 'var(--primary)' }}; transition: all 0.3s ease;">
                 <i class="{{ $isInWishlist ? 'fas' : 'far' }} fa-heart"></i>
             </button>
         </form>
-
-        <a href="{{ route('product.show', $product->slug) }}" class="quick-view-btn">Quick View</a>
+ 
+        <a href="{{ route('product.show', $product->slug) }}" class="quick-view-btn" onclick="event.stopPropagation();">Quick View</a>
         @if($product->compare_price && $product->compare_price > $product->price)
             <div style="position: absolute; top: 15px; left: 15px; background: #e53935; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; z-index: 5; box-shadow: 0 4px 10px rgba(229,57,53,0.2);">
                 {{ round((($product->compare_price - $product->price) / $product->compare_price) * 100) }}% OFF
@@ -50,7 +50,7 @@
                     <span style="text-decoration: line-through; color: #999; font-size: 0.9rem; letter-spacing: 0.5px; opacity: 0.7;">₹{{ number_format($product->compare_price) }}</span>
                 @endif
             </div>
-            <form action="{{ route('cart.add') }}" method="POST" style="display:inline;">
+            <form action="{{ route('cart.add') }}" method="POST" style="display:inline;" onclick="event.stopPropagation();">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                 <input type="hidden" name="quantity" value="1">
