@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="hero hero-home" data-images='["{{ asset('images/hero_bg.jpg') }}", "{{ asset('images/hero_bg_2.jpg') }}"]'
+    <section class="hero-home" data-images='["{{ asset('images/hero_bg.jpg') }}", "{{ asset('images/hero_bg_2.jpg') }}"]'
         style="background-image: url('{{ asset('images/hero_bg.jpg') }}');">
         <div class="hero-content">
             <h1 class="hero-title">
@@ -15,19 +15,7 @@
             <button class="hero-arrow hero-next"><i class="fas fa-arrow-right"></i></button>
         </div>
 
-        <style>
-            @media (max-width: 991px) {
-                section {
-                    padding: 40px 0 !important;
-                }
 
-                .hero-home {
-                    height: 450px !important;
-                    /* Keep hero height reasonable */
-                    padding: 0 !important;
-                }
-            }
-        </style>
     </section>
 
     <!-- Product Showcase (Redesigned Spotlight Layout) -->
@@ -46,46 +34,16 @@
             <!-- Responsive Product Slide Scroll -->
             <div style="position: relative;">
                 <button class="article-slider-arrow prev nava-arrow"
-                    onclick="document.getElementById('Aurvi Plus-scroll-grid').scrollBy({left: -document.getElementById('Aurvi Plus-scroll-grid').clientWidth, behavior: 'smooth'})"
+                    onclick="document.getElementById('product-scroll-grid').scrollBy({left: -document.getElementById('product-scroll-grid').clientWidth, behavior: 'smooth'})"
                     style="display: flex !important; top: 50%; transform: translateY(-50%);"><i
                         class="fas fa-chevron-left"></i></button>
                 <button class="article-slider-arrow next nava-arrow"
-                    onclick="document.getElementById('Aurvi Plus-scroll-grid').scrollBy({left: document.getElementById('Aurvi Plus-scroll-grid').clientWidth, behavior: 'smooth'})"
+                    onclick="document.getElementById('product-scroll-grid').scrollBy({left: document.getElementById('product-scroll-grid').clientWidth, behavior: 'smooth'})"
                     style="display: flex !important; top: 50%; transform: translateY(-50%);"><i
                         class="fas fa-chevron-right"></i></button>
 
-                <div id="Aurvi Plus-scroll-grid"
-                    style="
-                display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-                padding-top: 20px;
-                padding-bottom: 20px;
-                gap: 20px;
-            ">
-                    <style>
-                        #Aurvi Plus-scroll-grid::-webkit-scrollbar {
-                            display: none;
-                        }
+                <div id="product-scroll-grid" class="product-scroll-grid">
 
-                        #Aurvi Plus-scroll-grid .premium-product-card {
-                            flex: 0 0 100%;
-                            scroll-snap-align: center;
-                            margin: 0;
-                        }
-
-                        @media (min-width: 992px) {
-                            .nava-arrow.prev {
-                                left: -50px !important;
-                            }
-
-                            .nava-arrow.next {
-                                right: -50px !important;
-                            }
-                        }
-                    </style>
 
                     @forelse ($featuredProducts as $index => $product)
                         @php

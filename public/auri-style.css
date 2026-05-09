@@ -205,9 +205,13 @@ body {
   line-height: 1.6;
   background-color: var(--white);
   padding-top: 80px;
-  /* Account for fixed header */
   overflow-x: hidden;
   font-size: 16px;
+}
+
+body.home-page {
+  padding-top: 0;
+  background-color: #003000;
 }
 
 a {
@@ -357,17 +361,27 @@ header {
   left: 0;
   right: 0;
   z-index: 10000;
-  background: var(--primary);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-  padding: 15px 0 22px;
-  transition: all 0.3s ease;
+  background: transparent;
+  padding: 25px 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: none;
 }
 
 header.scrolled {
-  padding: 10px 0 14px;
-  background: #003000;
-  /* Darker green on scroll */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+  background: rgba(0, 48, 0, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: none;
+  border-bottom: none;
+}
+
+@media (max-width: 991px) {
+  header {
+    background: rgba(0, 48, 0, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
 }
 
 header .container {
@@ -388,28 +402,91 @@ nav {
   flex-grow: 1;
   display: flex;
   justify-content: center;
+  order: 2;
 }
 
 .nav-links {
   display: flex;
-  gap: 20px;
+  gap: 30px;
+  align-items: center;
+}
+
+.mobile-menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--white);
+  cursor: pointer;
+  order: 1;
+}
+
+.mobile-menu-close {
+  display: none;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-size: 1.5rem;
+  color: var(--white);
+  cursor: pointer;
+}
+
+
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  display: none;
+  backdrop-filter: blur(5px);
+}
+
+.nav-links.mobile-open ~ .mobile-menu-overlay {
+  display: block;
 }
 
 .nav-links a {
-  font-weight: 500;
-  font-size: 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
   color: var(--white);
+  position: relative;
+  padding: 5px 0;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #d4af37;
+  transition: width 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: #f0e68c;
+  color: #d4af37;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+.nav-links a.active {
+  color: #d4af37;
 }
 
 .header-icons {
   display: flex;
-  gap: 25px;
+  gap: 20px;
   align-items: center;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
+  order: 3;
 }
 
 .header-icons a {
@@ -443,24 +520,24 @@ nav {
 }
 
 /* 1. Hero Section */
-.hero-section {
+.hero-home {
   background:
     linear-gradient(rgba(0, 66, 0, 0.4), rgba(0, 66, 0, 0.4)),
     url("auri-images/background-main.png");
   background-size: cover;
   background-position: center;
-  padding: 120px 0 140px;
+  padding: 100px 0 80px;
   position: relative;
   overflow: hidden;
   color: #ffffff;
 }
 
-.hero-section h1,
-.hero-section p {
+.hero-home h1,
+.hero-home p {
   color: #ffffff !important;
 }
 
-.hero-section::before {
+.hero-home::before {
   content: "";
   position: absolute;
   top: 0;
@@ -4114,5 +4191,485 @@ body {
     background-color: white !important;
     margin: 0 !important;
     padding: 0 !important;
+  }
+}
+
+/* --- Home Page Grid Layouts --- */
+.festival-grid, 
+.premium-benefits-grid, 
+.origin-grid, 
+.divine-flow-grid {
+  display: grid;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.festival-grid { grid-template-columns: repeat(3, 1fr); }
+.premium-benefits-grid { grid-template-columns: repeat(3, 1fr); }
+.origin-grid { grid-template-columns: repeat(4, 1fr); }
+.divine-flow-grid { grid-template-columns: repeat(5, 1fr); }
+
+/* ==========================================================================
+   SEPARATE RESPONSIVE CODING BY DEVICE TYPE
+   ========================================================================== */
+
+/* 1. SMALL MOBILE SCREENS (320px) - e.g., iPhone SE */
+@media screen and (max-width: 320px) {
+  .container {
+    width: 95%;
+    padding: 0 10px;
+  }
+
+  header .container {
+    padding: 0 10px !important;
+  }
+
+  .logo img {
+    height: 32px !important;
+  }
+
+  .hero-home {
+    height: 70vh;
+    min-height: 400px;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+  }
+
+  .festival-grid,
+  .premium-benefits-grid,
+  .origin-grid,
+  .divine-flow-grid,
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .premium-product-card {
+    flex: 0 0 260px;
+  }
+
+  .parallax-box {
+    height: 300px;
+  }
+}
+
+/* 2. NORMAL MODERN MOBILE SCREENS (Android/iPhone - 321px to 480px) */
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  .container {
+    width: 92%;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.7rem;
+  }
+
+  .festival-grid,
+  .premium-benefits-grid,
+  .origin-grid,
+  .divine-flow-grid,
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .premium-product-card {
+    flex: 0 0 290px;
+  }
+}
+
+/* 3. iOS MOBILE SPECIFIC (High Resolution Optimizations) */
+@media screen and (max-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  .hero-home {
+    background-attachment: scroll; /* Fix for iOS parallax jitter */
+  }
+  
+  .glass-card {
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+}
+
+/* 4. NORMAL ANDROID TABLETS (Portrait - 481px to 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .festival-grid,
+  .premium-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .origin-grid,
+  .divine-flow-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+}
+
+/* 5. iOS TABLETS / iPADS (769px to 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .festival-grid,
+  .premium-benefits-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .origin-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .divine-flow-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero-title {
+    font-size: 3.2rem;
+  }
+}
+
+/* 6. iOS LAPTOPS / MACBOOKS (1025px to 1440px) */
+@media screen and (min-width: 1025px) and (max-width: 1440px) {
+  .container {
+    max-width: 1140px;
+  }
+
+  .hero-title {
+    font-size: 3.8rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Alignment Fixes */
+.premium-header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.premium-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 66, 0, 0.1);
+}
+
+@media screen and (max-width: 768px) {
+  .premium-line {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   HOME PAGE RESPONSIVE SYSTEM
+   ========================================================================== */
+
+/* 1. Small Mobile Screens (320px) - iPhone SE, etc. */
+@media (max-width: 320px) {
+  header .container {
+    padding: 0 15px !important;
+  }
+
+  .logo img {
+    height: 35px !important;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .hero-home {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 60px 0 30px !important;
+  }
+
+  .btn-hero {
+    padding: 12px 30px;
+    font-size: 0.9rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .premium-benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .origin-sec .container {
+    padding: 0 15px;
+  }
+
+  .festival-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    gap: 20px;
+    padding: 0 10px;
+  }
+}
+
+/* 2. Normal Modern Mobile Screens (321px - 480px) */
+@media (min-width: 321px) and (max-width: 480px) {
+  header .container {
+    padding: 0 20px !important;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-home {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 65px 0 35px !important;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .premium-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .festival-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 3. iOS & Android Large Mobiles / Small Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero-title {
+    font-size: 2.8rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+
+  .premium-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .divine-flow-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 4. Android & iOS Tablets (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .premium-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .articles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .header-wrapper {
+    padding: 0 30px;
+  }
+}
+
+/* 5. iOS Laptops & Large Tablets (1025px - 1440px) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .hero-title {
+    font-size: 4rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .container {
+    max-width: 1200px;
+  }
+}
+
+/* Fix for Premium Product Scroll Grid Alignment */
+@media (max-width: 991px) {
+  #product-scroll-grid {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .product-scroll-grid .premium-product-card {
+    flex: 0 0 280px;
+  }
+}
+
+@media (max-width: 991px) {
+  /* Slim Header */
+  header, 
+  header.scrolled {
+    padding: 8px 0;
+    border-bottom: none;
+  }
+
+  .header-wrapper .logo {
+    order: 1;
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+    margin: 0;
+  }
+
+  .header-wrapper .logo img {
+    height: 38px;
+  }
+
+  .header-wrapper .header-icons {
+    order: 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin: 0;
+  }
+
+  .header-wrapper .mobile-menu-toggle {
+    order: 3;
+    display: block;
+    margin-left: 10px;
+  }
+
+  /* Drawer Menu */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    left: auto;
+    width: 80%;
+    height: 100vh;
+    background: var(--primary);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 80px 40px;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10001;
+    box-shadow: -20px 0 50px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-links.mobile-open {
+    right: 0;
+    left: auto;
+  }
+
+  .mobile-menu-close {
+    display: block;
+  }
+
+  .nav-links a {
+    font-size: 1.1rem;
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-logo-item {
+    display: block;
+  }
+
+  .header-wrapper .logo {
+    order: 1;
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .header-wrapper .logo img {
+    height: 36px;
+  }
+
+  .header-wrapper .header-icons {
+    order: 2;
+    display: flex;
+    gap: 12px;
+  }
+
+  .header-wrapper .mobile-menu-toggle {
+    order: 3;
+    display: block;
+    margin-left: 10px;
+  }
+
+  /* Compact Hero */
+  .hero-home {
+    height: auto;
+    min-height: 0;
+    padding: 50px 0 30px; /* Minimal top gap */
+    margin-top: -1px; /* Pull up to hide any sub-pixel gaps */
+  }
+
+  header, 
+  header.scrolled {
+    border-bottom: none;
+    box-shadow: none;
+    padding: 6px 0;
+    background: #003000; /* Solid background to prevent light leak */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-home {
+    padding: 60px 0 30px;
+  }
+}
+
+@media (max-width: 320px) {
+  .header-wrapper .logo img {
+    height: 32px;
+  }
+  
+  .hero-home {
+    padding: 60px 0 30px;
+  }
+  
+  .product-scroll-grid .premium-product-card {
+    flex: 0 0 260px;
   }
 }
