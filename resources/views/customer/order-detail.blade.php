@@ -256,17 +256,26 @@
             <style>
                 /* Order Details Redesign */
                 .luxury-account-page {
-                    background: var(--beige-light);
-                    padding: 60px 0 100px;
-                }
+            background-color: var(--bg-light);
+            padding: 120px 0 100px !important;
+            min-height: 100vh;
+        }
 
-                .account-page-header {
-                    margin-bottom: 40px;
-                    margin-top: 30px;
-                }
+        .account-page-header {
+            margin-bottom: 40px;
+            margin-top: 10px;
+        }
+
+        /* Navbar Visibility Hack for Wishlist/Account Pages */
+        #main-header:not(.scrolled) {
+            background: rgba(0, 48, 0, 0.95) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            padding: 15px 0 !important;
+        }
 
                 .account-title {
-                    font-size: 38px;
+                    font-size: 38px !important;
                     color: var(--primary);
                     margin-bottom: 10px;
                 }
@@ -807,12 +816,12 @@
 
                 @media (max-width: 768px) {
                     .luxury-account-page {
-                        padding: 30px 0 80px !important;
+                        padding: 90px 0 80px !important;
                     }
 
                     .luxury-account-page .container {
-                        padding-left: 15px !important;
-                        padding-right: 15px !important;
+                        padding-left: 20px !important;
+                        padding-right: 20px !important;
                         width: 100% !important;
                         max-width: 100% !important;
                     }
@@ -820,15 +829,16 @@
                     .account-page-header {
                         margin-bottom: 30px;
                         margin-top: 20px;
-                        text-align: center;
+                        text-align: left;
                     }
 
                     .account-title {
                         font-size: 28px !important;
+                        margin-bottom: 10px;
                     }
 
                     .account-breadcrumb {
-                        justify-content: center;
+                        justify-content: flex-start;
                     }
 
                     .account-grid {
@@ -972,7 +982,7 @@
 
                 @media (max-width: 570px) {
                     .luxury-account-page {
-                        padding: 30px 0 60px !important;
+                        padding: 110px 0 60px !important;
                     }
 
                     .luxury-account-page .container {

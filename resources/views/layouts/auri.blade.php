@@ -67,12 +67,9 @@
                                 style="padding: 12px; font-size: 0.9rem; border: 1px solid var(--primary); color: var(--primary) !important; border-radius: 50px; text-align: center;">Register</a>
                         </li>
                     @else
-                        <li class="mobile-auth-links"
-                            style="display: none; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                        <li class="mobile-only-nav">
                             <a href="{{ route('customer.dashboard') }}"
-                                style="color: var(--primary) !important; font-weight: 700;">
-                                <i class="fas fa-user-circle"></i> My Dashboard
-                            </a>
+                                class="{{ request()->routeIs('customer.dashboard') ? 'active' : '' }}">My Dashboard</a>
                         </li>
                     @endguest
                 </ul>
@@ -158,7 +155,7 @@
             <div class="f-col footer-brand">
                 <img src="{{ asset('auri-images/logo.png') }}" alt="Auvri Plus"
                     style="height: 60px; margin-bottom: 20px;">
-                <p style="color: #ccc; font-size: 0.9rem; line-height: 1.6;">Authentic Ayurvedic remedies crafted for
+                <p style="color: #ccc; line-height: 1.6;">Authentic Ayurvedic remedies crafted for
                     your modern lifestyle. Pure, potent, and proven.</p>
             </div>
             <!-- Col 1: Help -->
@@ -240,28 +237,67 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
+        .mobile-only-nav {
+            display: none;
+        }
+
+        @media (max-width: 991px) {
+            .mobile-only-nav {
+                display: block;
+            }
+            
+            .nav-links li a {
+                display: block;
+                padding: 15px 0;
+            }
+        }
+
+
+
         /* Global Mobile Footer Fix */
         @media (max-width: 768px) {
             .footer-grid {
                 display: grid !important;
                 grid-template-columns: repeat(2, 1fr) !important;
-                gap: 30px !important;
-                align-items: start !important;
-                text-align: left !important;
+                gap: 30px;
+                align-items: start;
+                text-align: left;
+            }
+
+            .f-col h4 {
+              font-size: 0.95rem;
+            }
+
+            .f-col p,
+            .f-col li,
+            .f-col a {
+              font-size: 0.75rem;
+            }
+
+            .f-col ul li a {
+                font-size: 0.75rem;
+            }
+
+            .footer-copy span {
+                font-size: 0.6rem;
+            }
+
+            .footer-copy {
+               padding-top: 10px;
             }
 
             .f-col {
-                width: 100% !important;
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: flex-start !important;
-                text-align: left !important;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
             }
 
             .f-col.footer-brand {
                 grid-column: 1 / -1;
-                align-items: center !important;
-                text-align: center !important;
+                align-items: center;
+                text-align: center;
             }
 
             .f-col:nth-child(4) {
@@ -270,58 +306,96 @@
             }
 
             .f-line {
-                margin: 0 0 20px 0 !important;
+                margin: 0 0 20px 0;
             }
 
             .contact-list {
-                display: block !important;
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                text-align: left !important;
+                display: block;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                text-align: left;
             }
 
             .contact-list li {
-                display: flex !important;
-                align-items: flex-start !important;
-                justify-content: flex-start !important;
-                margin-bottom: 12px !important;
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+                margin-bottom: 12px;
             }
 
             .contact-list i {
-                width: 25px !important;
-                margin-right: 15px !important;
-                margin-top: 4px !important;
-                text-align: center !important;
-                flex-shrink: 0 !important;
+                width: 25px;
+                margin-right: 15px;
+                margin-top: 4px;
+                text-align: center;
+                flex-shrink: 0;
             }
 
             .social-icons {
-                justify-content: flex-start !important;
-                margin-top: 15px !important;
+                justify-content: flex-start;
+                margin-top: 15px;
             }
 
             /* General Responsive fixes */
             .container {
-                padding: 0 20px !important;
+                padding: 0 20px;
             }
 
-            @media (max-width: 450px) {
-                .f-col h4 {
-                    font-size: 1.05rem !important;
+                .footer-copy-wrapper {
+                    flex-direction: column;
+                    text-align: center;
+                    gap: 10px;
+                    padding: 15px 0;
                 }
 
-                .f-col p,
-                .f-col li,
-                .f-col a {
-                    font-size: 0.8rem !important;
+                .copyright-text {
+                    margin-bottom: 5px;
+                    width: 100%;
                 }
 
-                .footer-copy span {
-                    font-size: 0.75rem !important;
+                .developer-text {
+                    width: 100%;
+                }
+
+                /* Footer Typography for Normal Mobiles (321px - 450px) */
+                @media (min-width: 321px) and (max-width: 450px) {
+                    .f-col h4 {
+                        font-size: 1.05rem !important;
+                    }
+
+                    .f-col p,
+                    .f-col li,
+                    .f-col a,
+                    .f-col ul li a {
+                        font-size: 0.85rem !important;
+                    }
+                    .footer-copy span {
+                        font-size: 0.75rem !important;
+                    }
+                }
+
+                /* Footer Typography for Small Mobiles (Up to 320px) */
+                @media (max-width: 320px) {
+                    .f-col h4 {
+                        font-size: 0.85rem;
+                    }
+
+                    .f-col p,
+                    .f-col li,
+                    .f-col a {
+                        font-size: 0.75rem !important;
+                    }
+
+                    .footer-copy span {
+                        font-size: 0.6rem !important;
+                    }
+
+                    .footer-grid {
+                        gap: 20px !important;
+                    }
                 }
             }
-        }
 
         /* Footer Copy Layout */
         .footer-copy-wrapper {

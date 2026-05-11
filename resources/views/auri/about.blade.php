@@ -6,6 +6,17 @@
 @section('content')
     <style>
         @media (max-width: 768px) {
+            .container, 
+            .hero-inner,
+            .about-story-sec .container,
+            .advanced-philosophy-sec .container,
+            .dosha-panels .container,
+            .commitment-sec .container,
+            .about-cta .container {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+                box-sizing: border-box !important;
+            }
 
             /* Section Titles */
             .sec-title {
@@ -18,7 +29,7 @@
             }
 
             .about-hero-sec {
-                padding: 60px 0 !important;
+                padding: 100px 0 60px 0 !important;
                 min-height: auto !important;
             }
 
@@ -73,7 +84,7 @@
                 flex-direction: column !important;
                 gap: 18px !important;
                 align-items: center !important;
-                padding: 0 15px !important;
+                padding: 0 10px !important;
             }
 
             .cta-btns .btn {
@@ -90,7 +101,7 @@
     <!-- 1. Immersive Hero -->
     <section class="about-hero-sec"
         style="background-image: linear-gradient(rgba(0, 66, 0, 0.5), rgba(0, 66, 0, 0.5)), url('{{ asset('auri-images/headers/about_v2.png') }}'); background-size: cover; background-position: center; min-height: 300px; display: flex; align-items: center; text-align: center; color: #fff; position: relative;">
-        <div class="container hero-inner" style="max-width: 900px; margin: 0 auto; position: relative; z-index: 2;">
+        <div class="container hero-inner" style="max-width: 900px; margin: 0 auto; position: relative; z-index: 2; text-align: center;">
             <span class="sub-title"
                 style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 15px;">AUVRIPLUS
                 TRADITION</span>

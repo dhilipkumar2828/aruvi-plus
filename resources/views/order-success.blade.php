@@ -143,19 +143,16 @@
             margin-top: 30px;
         }
 
+        @media (max-width: 768px) {
+            .success-section {
+                padding: 110px 0 60px !important;
+            }
+        }
+
         @media (max-width: 640px) {
             .success-container {
                 margin: 0 15px;
                 padding: 40px 20px;
-            }
-
-            .success-section {
-                padding: 30px 0 80px;
-                text-align: center;
-                background: #f8faf8;
-                min-height: 80vh;
-                display: flex;
-                align-items: center;
             }
 
             .container {
@@ -179,27 +176,26 @@
                 margin-left: 0;
             }
 
-            /* Further refinements for very small screens */
             @media (max-width: 480px) {
                 .success-container {
-                    padding: 35px 15px !important;
-                    margin: 0 !important;
-                    width: 100% !important;
+                    padding: 35px 20px !important;
+                    margin: 0 10px !important;
+                    width: calc(100% - 20px) !important;
                     border-radius: 20px !important;
                 }
 
                 .success-icon {
-                    width: 80px !important;
-                    height: 80px !important;
-                    font-size: 35px !important;
+                    width: 70px !important;
+                    height: 70px !important;
+                    font-size: 30px !important;
                 }
 
                 .success-title {
-                    font-size: 1.6rem !important;
+                    font-size: 1.5rem !important;
                 }
 
                 .success-message {
-                    font-size: 0.9rem !important;
+                    font-size: 0.85rem !important;
                     margin-bottom: 25px !important;
                 }
 
@@ -219,20 +215,51 @@
                     font-size: 1rem !important;
                 }
 
-                /* Fix grand total stacking */
                 .order-info-item[style*="display: flex; align-items: center"] {
                     display: flex !important;
                     flex-direction: column !important;
-                    align-items: flex-start !important;
+                    align-items: center !important;
+                    text-align: center !important;
                 }
 
-                /* Adjust grand total specific labels/values */
                 span[style*="font-size: 1.4rem"] {
-                    font-size: 1.1rem !important;
+                    font-size: 1.2rem !important;
                 }
 
                 span[style*="font-size: 1.8rem"] {
-                    font-size: 1.4rem !important;
+                    font-size: 1.5rem !important;
+                }
+            }
+
+            @media (max-width: 320px) {
+                .success-container {
+                    padding: 25px 15px !important;
+                    margin: 0 5px !important;
+                    width: calc(100% - 10px) !important;
+                }
+                .success-title {
+                    font-size: 1.3rem !important;
+                }
+                .success-message {
+                    font-size: 0.8rem !important;
+                }
+                .order-info {
+                    padding: 15px 10px !important;
+                }
+                .order-info-value {
+                    font-size: 0.9rem !important;
+                    word-break: break-all;
+                }
+                span[style*="font-size: 1.4rem"] {
+                    font-size: 1rem !important;
+                }
+                span[style*="font-size: 1.8rem"] {
+                    font-size: 1.3rem !important;
+                }
+                .btn-continue-shop,
+                .btn-view-order {
+                    padding: 12px 15px !important;
+                    font-size: 0.8rem !important;
                 }
             }
         }

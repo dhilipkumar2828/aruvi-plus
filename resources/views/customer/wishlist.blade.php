@@ -44,7 +44,7 @@
                                     <tbody>
                                         @foreach($wishlistItems as $item)
                                             <tr>
-                                                <td>
+                                                <td data-label="Product">
                                                     <div class="wishlist-product-cell">
                                                         <a href="{{ route('product.show', $item->product) }}" class="product-thumb">
                                                             @if($item->product->primary_image)
@@ -62,8 +62,8 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="product-price">₹{{ number_format($item->product->price, 2) }}</td>
-                                                <td>
+                                                <td class="product-price" data-label="Price">₹{{ number_format($item->product->price, 2) }}</td>
+                                                <td data-label="Action">
                                                     <div class="action-btns center">
                                                         <form action="{{ route('cart.add') }}" method="POST">
                                                             @csrf
@@ -103,19 +103,25 @@
 
     <style>
         /* Wishlist Page Specific Styles */
+        #main-header:not(.scrolled) {
+            background: rgba(0, 48, 0, 0.95) !important;
+            backdrop-filter: blur(10px) !important;
+            padding: 15px 0 !important;
+        }
+
         .luxury-account-page {
             background: var(--beige-light);
-            padding: 60px 0 100px;
+            padding: 120px 0 100px;
             min-height: 80vh;
         }
 
         .account-page-header {
             margin-bottom: 40px;
-            margin-top: 30px;
+            margin-top: 10px;
         }
 
         .account-title {
-            font-size: 38px;
+            font-size: 38px !important;
             color: var(--primary);
             margin-bottom: 10px;
         }
@@ -340,12 +346,51 @@
             .account-grid {
                 grid-template-columns: 1fr;
             }
+            .luxury-account-page {
+                padding-top: 90px !important;
+            }
         }
 
-        @media (max-width: 480px) {
-            .luxury-account-page .container {
-                padding-left: 15px !important;
-                padding-right: 15px !important;
+
+
+        @media (max-width: 768px) {
+            .luxury-table th {
+                padding: 10px 5px !important;
+                font-size: 11px !important;
+            }
+            .luxury-table td {
+                padding: 10px 5px !important;
+            }
+            .product-thumb {
+                width: 45px !important;
+                height: 45px !important;
+            }
+            .wishlist-product-cell {
+                gap: 8px !important;
+            }
+            .product-link {
+                font-size: 12px !important;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .product-category {
+                display: none; /* Hidden to save space */
+            }
+            .product-price {
+                font-size: 12px !important;
+                white-space: nowrap;
+            }
+            .action-btns.center {
+                flex-direction: column;
+                gap: 5px !important;
+            }
+            .icon-btn {
+                width: 30px !important;
+                height: 30px !important;
+                font-size: 12px !important;
+                border-radius: 6px !important;
             }
         }
 
@@ -364,11 +409,18 @@
             }
 
             .account-title {
-                font-size: 28px;
+                font-size: 28px !important;
             }
 
             .section-card {
                 padding: 20px;
+            }
+
+            .section-header-flex {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding-bottom: 15px;
             }
 
             .premium-section-title {
@@ -386,11 +438,16 @@
 
             .product-link {
                 font-size: 14px;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-height: 1.4;
+                max-height: 2.8em;
             }
 
-            .luxury-table td,
-            .luxury-table th {
-                padding: 10px;
+            .luxury-table td {
                 font-size: 13px;
             }
 
@@ -406,57 +463,13 @@
             }
         }
 
-        @media (max-width: 400px) {
-            .account-title {
-                font-size: 24px;
-            }
-
-            .product-price {
-                font-size: 14px;
-            }
-
-            .order-count {
-                display: none;
-            }
-
-            /* Extreme narrow screen fixes (320px - 370px) */
-            .section-card {
-                padding: 15px 10px;
-            }
-
-            .luxury-table td,
-            .luxury-table th {
-                padding: 10px 5px !important;
-            }
-
-            .wishlist-product-cell {
-                gap: 8px;
-            }
-
-            .product-thumb {
-                width: 45px;
-                height: 45px;
-                border-radius: 8px;
-            }
-
-            .product-link {
-                font-size: 13px;
-            }
-
-            .product-price {
-                font-size: 13px !important;
-            }
-
-            .icon-btn {
-                width: 32px;
-                height: 32px;
-                border-radius: 6px;
-                font-size: 12px;
-            }
-
-            .action-btns.center {
-                gap: 5px;
+        @media (max-width: 480px) {
+            .luxury-account-page .container {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
             }
         }
+
+
     </style>
 @endsection

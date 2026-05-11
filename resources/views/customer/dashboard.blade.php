@@ -5,8 +5,18 @@
 @section('content')
     <div class="luxury-account-page">
         <div class="container">
+            <!-- Page Header -->
+            <div class="account-page-header">
+                <h1 class="account-title">My Account</h1>
+                <div class="account-breadcrumb">
+                    <a href="{{ route('home') }}">Home</a>
+                    <i class="fas fa-chevron-right separator"></i>
+                    <span>My Account</span>
+                </div>
+            </div>
+
             <!-- Dashboard Hero -->
-            <div class="dashboard-hero" style="margin-top: 60px">
+            <div class="dashboard-hero">
                 <div class="dashboard-hero-content">
                     <span class="welcome-text">Welcome back,</span>
                     <h1 class="user-name">{{ $user->name }}</h1>
@@ -127,8 +137,46 @@
         /* Dashboard Specific Styles */
         .luxury-account-page {
             background: var(--beige-light);
-            padding: 60px 0 100px;
+            padding: 120px 0 100px !important;
             min-height: 80vh;
+        }
+
+        .account-page-header {
+            margin-bottom: 40px;
+            margin-top: 10px;
+        }
+
+        .account-title {
+            font-size: 24px !important;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .account-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .account-breadcrumb a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .account-breadcrumb .separator {
+            opacity: 0.3;
+            font-size: 0.7rem;
+        }
+
+        /* Navbar Visibility Hack for Wishlist/Account Pages */
+        #main-header:not(.scrolled) {
+            background: rgba(0, 48, 0, 0.95) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            padding: 15px 0 !important;
         }
 
         .dashboard-hero {
@@ -165,7 +213,7 @@
 
         .dashboard-stats {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
         }
 
@@ -441,7 +489,8 @@
             .dashboard-stats {
                 margin-top: 30px;
                 gap: 15px;
-                justify-content: center;
+                justify-content: flex-start;
+                width: 100%;
             }
 
             .account-grid {
@@ -500,48 +549,42 @@
         }
 
         @media (max-width: 600px) {
-            .dashboard-hero {
-                padding: 30px 15px;
-                border-radius: 20px;
-            }
-
-            .dashboard-hero .user-name {
-                font-size: 24px;
-            }
-
-            .stat-item {
-                width: calc(50% - 15px);
-                min-width: 140px;
-                padding: 15px 5px;
-            }
-
-            .stat-value {
-                font-size: 24px;
-            }
-
-            .luxury-table td,
-            .luxury-table th {
-                padding: 12px 10px;
-                font-size: 13px;
-            }
-
-            .icon-btn {
-                width: 32px;
-                height: 32px;
-                border-radius: 8px;
-            }
-
             .luxury-account-page {
                 background: var(--beige-light);
-                padding: 0px 0 100px;
+                padding: 90px 0 20px 0px!important;
                 min-height: 80vh;
+            }
+
+            .account-page-header {
+                text-align: left;
+                margin-bottom: 25px;
+            }
+
+            .account-breadcrumb {
+                justify-content: flex-start;
+            }
+
+            .account-title {
+                font-size: 28px !important;
+                margin-bottom: 10px;
+            }
+
+            .dashboard-hero {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 30px;
+                padding: 30px 20px !important;
+            }
+
+            .dashboard-hero-content {
+                text-align: left;
             }
         }
 
         @media (max-width: 480px) {
             .luxury-account-page .container {
-                padding-left: 15px !important;
-                padding-right: 15px !important;
+                padding-left: 25px !important;
+                padding-right: 25px !important;
                 width: 100% !important;
                 max-width: 100% !important;
             }
@@ -553,7 +596,15 @@
             }
 
             .stat-item {
-                width: 100%;
+                width: calc(50% - 8px);
+                padding: 15px 5px;
+            }
+
+            .section-header-flex {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding-bottom: 15px;
             }
 
             .premium-section-title {
@@ -562,6 +613,61 @@
 
             .section-card {
                 padding: 15px 10px !important;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .luxury-account-page .container {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+            .dashboard-hero {
+                padding: 20px 15px !important;
+                gap: 20px !important;
+            }
+            .dashboard-hero .user-name {
+                font-size: 1.5rem !important;
+            }
+            .dashboard-intro {
+                font-size: 0.8rem !important;
+            }
+            .stat-item {
+                width: 100% !important;
+                margin-bottom: 0px !important;
+                padding: 12px !important;
+            }
+            .dashboard-stats {
+                gap: 10px !important;
+            }
+            .section-card {
+                padding: 15px 10px !important;
+                border-radius: 12px !important;
+            }
+            .premium-section-title {
+                font-size: 1.1rem !important;
+            }
+            .view-all-link {
+                font-size: 0.75rem !important;
+            }
+            .luxury-table tr {
+                padding: 12px !important;
+            }
+            .luxury-table td {
+                padding: 10px 0 !important;
+                font-size: 0.85rem !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 5px !important;
+                text-align: left !important;
+            }
+            .luxury-table td::before {
+                margin-right: 0 !important;
+                margin-bottom: 2px !important;
+            }
+            .action-btns {
+                margin-top: 5px !important;
+                width: 100% !important;
+                justify-content: flex-start !important;
             }
         }
     </style>
