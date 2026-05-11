@@ -157,7 +157,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
             border-bottom: 1px solid var(--beige-light);
             padding-bottom: 20px;
         }
