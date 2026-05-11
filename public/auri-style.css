@@ -1,3 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+section {
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* --- Variables --- */
 :root {
   --font-body: 'Inter', sans-serif;
@@ -635,11 +657,11 @@ nav {
 .luxury-detail-wrapper {
   background: var(--beige-light);
   color: var(--text-charcoal);
-  padding-bottom: 80px;
+  padding-bottom: 30px;
 }
 
 .product-hero-premium {
-  padding: 100px 0 60px;
+  padding: 110px 0 60px;
   background: linear-gradient(to bottom, var(--white), var(--beige-light));
 }
 
@@ -878,7 +900,7 @@ nav {
 
 /* Benefits Section */
 .benefits-luxury-sec {
-  padding: 100px 0;
+  padding: 30px 0;
   background: var(--beige-soft);
 }
 
@@ -930,7 +952,7 @@ nav {
 
 /* Tabs Section */
 .tabs-luxury-sec {
-  padding: 100px 0;
+  padding: 20px 0;
   background: var(--white);
 }
 
@@ -939,12 +961,12 @@ nav {
   justify-content: center;
   gap: 50px;
   border-bottom: 1px solid var(--beige-soft);
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 .lx-tab-btn {
   padding: 20px 0;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: #aaa;
   position: relative;
@@ -953,16 +975,6 @@ nav {
 
 .lx-tab-btn.active {
   color: var(--primary);
-}
-
-.lx-tab-btn.active::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--primary);
 }
 
 .lx-content-pane {
@@ -1063,7 +1075,7 @@ nav {
 
 /* Trust Section */
 .trust-lx-sec {
-  padding: 60px 0;
+  padding: 30px 0;
   background: var(--primary);
   color: var(--white);
 }
@@ -1091,7 +1103,7 @@ nav {
 
 /* Related remedies */
 .related-lx-sec {
-  padding: 120px 0;
+  padding: 30px 0;
   background: var(--beige-light);
 }
 
@@ -1099,7 +1111,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 .lx-link {
@@ -1532,6 +1544,7 @@ nav {
   margin-bottom: 10px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   height: 2.8em;
@@ -1957,9 +1970,9 @@ footer {
 .footer-copy {
   text-align: center;
   color: #aaaaaa;
-  padding-top: 20px;
   border-top: 1px solid #005500;
   font-size: 0.9rem;
+  padding: 20px 0 0 0;
 }
 
 @media (max-width: 768px) {
@@ -2180,8 +2193,9 @@ footer {
 }
 
 /* --- Testimonials (Dark Green Grid) --- */
-.reviews-section {
-  padding: 100px 0;
+.reviews-section,
+#bestsellers.products-section {
+  padding: 30px 0;
   background: #ffffff;
   /* Deep Forest Green */
   overflow: hidden;
@@ -2481,9 +2495,11 @@ footer {
 
 .split-img img {
   width: 100%;
-  height: 600px;
-  object-fit: cover;
+  max-width: 450px;
+  height: auto;
+  object-fit: contain;
   display: block;
+  margin: 0 auto;
   transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -2637,9 +2653,9 @@ footer {
 }
 
 /* Orbit Animation - Controlled by JS for Stepped Focus */
-.radial-centerpiece.orbit-animation {
+/* .radial-centerpiece.orbit-animation { */
   /* No continuous animation, only JS-driven steps */
-}
+/* } */
 
 @keyframes orbitRotate {
   from {
@@ -2741,8 +2757,16 @@ footer {
   }
 }
 
-.center-hub h3 {
-  font-size: 1rem;
+@media (max-width: 768px) {
+  .center-hub h3 {
+    font-size: 1.4rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .center-hub h3 {
+    font-size: 1.1rem !important;
+  }
 }
 
 .radial-node i {
@@ -3312,7 +3336,7 @@ footer {
   font-family: var(--font-serif);
   font-size: 1.4rem;
   color: var(--white);
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   letter-spacing: 1px;
 }
 
@@ -3356,7 +3380,6 @@ footer {
 }
 
 .footer-copy {
-  padding-top: 30px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
   font-size: 0.85rem;
@@ -3710,6 +3733,7 @@ footer {
   padding: 0;
   margin: 0;
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 #qty-input::-webkit-outer-spin-button,
@@ -3895,11 +3919,7 @@ footer {
 }
 
 @media (max-width: 1250px) {
-  body {
-    padding-top: 60px !important;
-  }
-
-  .header-wrapper {
+ .header-wrapper {
     padding: 10px 20px;
   }
 
@@ -3943,7 +3963,7 @@ footer {
     background: #fff;
     z-index: 2000;
     flex-direction: column;
-    padding: 40px 30px;
+    padding: 0px 30px 60px 30px;
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
     animation: slideInRight 0.3s ease forwards;
     gap: 0;
@@ -4085,7 +4105,7 @@ footer {
 
   .premium-scroll-wrapper {
     right: 15px !important;
-    bottom: 15px !important;
+    bottom: 100px !important;
     transform: scale(0.8);
   }
 
@@ -4216,12 +4236,12 @@ body {
 /* 1. SMALL MOBILE SCREENS (320px) - e.g., iPhone SE */
 @media screen and (max-width: 320px) {
   .container {
-    width: 95%;
-    padding: 0 10px;
+    width: 100%;
+    padding: 0 20px !important;
   }
 
   header .container {
-    padding: 0 10px !important;
+    padding: 0 20px !important;
   }
 
   .logo img {
@@ -4263,7 +4283,8 @@ body {
 /* 2. NORMAL MODERN MOBILE SCREENS (Android/iPhone - 321px to 480px) */
 @media screen and (min-width: 321px) and (max-width: 480px) {
   .container {
-    width: 92%;
+    width: 100%;
+    padding: 0 20px !important;
   }
 
   .hero-title {
@@ -4436,6 +4457,7 @@ body {
     gap: 20px;
     padding: 0 10px;
   }
+
 }
 
 /* 2. Normal Modern Mobile Screens (321px - 480px) */
@@ -4469,6 +4491,8 @@ body {
   .festival-grid {
     grid-template-columns: 1fr;
   }
+
+  
 }
 
 /* 3. iOS & Android Large Mobiles / Small Tablets (481px - 768px) */
@@ -4582,7 +4606,8 @@ body {
     right: -100%;
     left: auto;
     width: 80%;
-    height: 100vh;
+    height: 100svh; /* Stable viewport height for mobile */
+    min-height: -webkit-fill-available;
     background: var(--primary);
     flex-direction: column;
     justify-content: flex-start;

@@ -183,17 +183,25 @@
         /* Account Details Redesign */
         .luxury-account-page {
             background: var(--beige-light);
-            padding: 60px 0 100px;
-            /* Reduced from 100px to avoid huge gap */
+            padding: 120px 0 100px !important;
+            min-height: 80vh;
         }
 
         .account-page-header {
             margin-bottom: 40px;
-            margin-top: 30px;
+            margin-top: 10px;
+        }
+
+        /* Navbar Visibility Hack for Wishlist/Account Pages */
+        #main-header:not(.scrolled) {
+            background: rgba(0, 48, 0, 0.95) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            padding: 15px 0 !important;
         }
 
         .account-title {
-            font-size: 38px;
+            font-size: 38px !important;
             color: var(--primary);
             margin-bottom: 10px;
         }
@@ -544,8 +552,26 @@
         @media (max-width: 600px) {
             .luxury-account-page {
                 background: var(--beige-light);
-                padding: 30px 0 100px;
-                /* Reduced from 100px to avoid huge gap */
+                padding: 90px 0 60px 0 !important;
+            }
+
+            .luxury-account-page .container {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+
+            .account-page-header {
+                text-align: left;
+                margin-bottom: 25px;
+            }
+
+            .account-breadcrumb {
+                justify-content: flex-start;
+            }
+
+            .account-title {
+                font-size: 28px !important;
+                margin-bottom: 10px;
             }
 
             .profile-upload-section {
@@ -596,8 +622,8 @@
 
         @media (max-width: 480px) {
             .luxury-account-page .container {
-                padding-left: 12px !important;
-                padding-right: 12px !important;
+                padding-left: 20px !important;
+                padding-right: 20px !important;
                 width: 100% !important;
                 max-width: 100% !important;
             }

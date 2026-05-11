@@ -175,7 +175,7 @@
         justify-content: center;
         text-align: center;
         color: #fff;
-        margin-bottom: 30px;
+        /* margin-bottom: 30px; */
         padding: 100px 15px 60px;
     }
 

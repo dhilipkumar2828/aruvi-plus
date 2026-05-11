@@ -190,40 +190,47 @@
 
         .luxury-account-page {
             background-color: var(--bg-light);
-            padding: 60px 0 100px;
+            padding: 120px 0 100px !important;
             min-height: 100vh;
         }
 
         .account-page-header {
             margin-bottom: 40px;
-            /* border-bottom: 2px solid var(--border-soft); */
             padding-bottom: 20px;
-            margin-top: 30px;
+            margin-top: 10px;
+        }
+
+        /* Navbar Visibility Hack for Wishlist/Account Pages */
+        #main-header:not(.scrolled) {
+            background: rgba(0, 48, 0, 0.95) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            padding: 15px 0 !important;
         }
 
         @media (max-width: 480px) {
             .luxury-account-page {
-                padding: 30px 0 60px;
+                padding: 90px 0 60px !important;
             }
 
             .luxury-account-page .container {
-                padding-left: 8px !important;
-                padding-right: 8px !important;
+                padding-left: 20px !important;
+                padding-right: 20px !important;
             }
 
             .account-page-header {
                 margin-bottom: 25px;
                 margin-top: 15px;
-                text-align: center;
+                text-align: left;
             }
 
             .account-title {
-                font-size: 24px;
+                font-size: 24px !important;
                 margin-bottom: 5px;
             }
 
             .account-breadcrumb {
-                justify-content: center;
+                justify-content: flex-start;
                 font-size: 12px;
             }
 
@@ -231,7 +238,7 @@
                 width: 100% !important;
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 15px !important;
+                gap: 20px !important;
             }
 
             .account-sidebar-col,
@@ -241,8 +248,17 @@
             }
 
             .section-card {
-                padding: 20px 10px !important;
+                padding: 30px 25px !important;
                 border-radius: 15px;
+            }
+
+            .section-header-flex {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding-bottom: 15px;
+                margin-bottom: 20px;
+                border-bottom: 1px solid var(--border-soft);
             }
 
             .premium-section-title {
@@ -259,22 +275,22 @@
             }
 
             .premium-address-card {
-                padding: 15px;
+                padding: 20px;
                 border-radius: 15px;
             }
 
             .recipient-name {
-                font-size: 18px;
-                margin-bottom: 8px;
+                font-size: 16px;
+                margin-bottom: 6px;
             }
 
             .phone-number {
-                font-size: 14px;
+                font-size: 13px;
                 margin-bottom: 10px;
             }
 
             .full-address {
-                font-size: 13px;
+                font-size: 12px;
                 line-height: 1.5;
                 margin-bottom: 15px;
             }
@@ -342,6 +358,11 @@
                 font-size: 14px;
                 margin-top: 10px;
             }
+
+            .input-with-icon + .input-with-icon,
+            .input-with-icon + .error-msg + .input-with-icon {
+                margin-top: 15px !important;
+            }
         }
 
         @media (max-width: 360px) {
@@ -375,7 +396,7 @@
         }
 
         .account-title {
-            font-size: 2.5rem;
+            font-size: 28px !important;
             color: var(--primary);
             margin-bottom: 10px;
         }
@@ -481,6 +502,12 @@
             color: var(--primary);
             margin-bottom: 12px;
             font-weight: 700;
+        }
+
+        .no-address {
+            color: #777;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
         }
 
         .phone-number {
@@ -600,6 +627,11 @@
             position: relative;
             display: flex;
             align-items: center;
+        }
+
+        .input-with-icon + .input-with-icon,
+        .input-with-icon + .error-msg + .input-with-icon {
+            margin-top: 15px !important;
         }
 
         .input-with-icon i {

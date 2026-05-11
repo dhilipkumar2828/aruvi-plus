@@ -15,7 +15,7 @@
             /* Hero */
             .contact-hero {
                 min-height: 220px !important;
-                padding: 40px 20px !important;
+                padding: 100px 0 60px 0 !important;
             }
 
             .contact-hero h1.sec-title {
@@ -95,6 +95,7 @@
             /* Map */
             .contact-map {
                 margin-top: 40px !important;
+                padding-bottom: 30px !important;
             }
 
             .contact-map iframe {

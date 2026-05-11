@@ -115,6 +115,14 @@
             <style>
                 @media (max-width: 991px) {
                     /* Mobile Layout Adjustments */
+                    .hero-small {
+                        height: 450px !important;
+                    }
+
+                    .hero-small .container {
+                        padding-top: 80px !important;
+                    }
+
                     section {
                         padding: 40px 0 !important;
                     }

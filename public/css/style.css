@@ -4540,3 +4540,14 @@ footer .points_wrapper {
         font-size: 84px;
     }
 }
+/* Toast Notification Alignment Fix */
+#toast-container.toast-top-right {
+    top: 110px !important;
+}
+
+@media (max-width: 768px) {
+    #toast-container.toast-top-right {
+        top: 85px !important;
+    }
+}
+

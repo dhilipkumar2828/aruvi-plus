@@ -4,20 +4,18 @@
 
 @section('extra_css')
     <style>
-                    --primary: #006400; /* Green primary color */
+        :root {
+            --primary: #004200;
+            --primary-rgb: 0, 66, 0;
             --accent: #d4af37;
-            --bg-light: #fffdf9; /* Slightly cream background */
-            --border: #f0f0f0;
-            
-            --accent: #d4af37;
-            --bg-light: #fffdf9; /* Slightly cream background */
+            --bg-light: #fffdf9;
             --border: #f0f0f0;
             --input-bg: #ffffff;
         }
 
         .checkout-page-wrapper {
             background-color: var(--bg-light);
-            padding-bottom: 80px;
+            padding-bottom: 20px;
             min-height: 100vh;
         }
 
@@ -215,64 +213,133 @@
         }
 
         /* Responsive Improvements */
-        @media (max-width: 480px) {
-            .checkout-hero {
-                padding: 60px 15px 40px !important;
+        /* Mobile Responsive Improvements */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px !important;
             }
-
+            .checkout-hero {
+                padding: 110px 15px 45px !important;
+            }
             .checkout-hero h1 {
                 font-size: 2.2rem !important;
             }
+            .checkout-card, .summary-card {
+                padding: 25px 15px !important;
+                border-radius: 20px !important;
+            }
+            .checkout-title {
+                font-size: 1.4rem !important;
+            }
+            .form-group-grid {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .checkout-hero {
+                padding: 100px 15px 40px !important;
+            }
+
+            .checkout-hero h1 {
+                font-size: 1.8rem !important;
+            }
 
             .checkout-hero p {
-                font-size: 0.9rem !important;
+                font-size: 0.8rem !important;
                 line-height: 1.5;
             }
 
             .checkout-card, .summary-card {
-                padding: 20px 15px !important;
+                padding: 20px 12px !important;
                 border-radius: 16px !important;
             }
 
             .checkout-title {
-                font-size: 1.25rem !important;
+                font-size: 1.2rem !important;
                 margin-bottom: 20px !important;
             }
 
             .form-control {
                 padding: 12px 15px !important;
-                font-size: 0.95rem !important;
-            }
-
-            .saved-address-trigger-card {
-                padding: 15px !important;
-                gap: 10px !important;
-            }
-
-            .saved-address-trigger-card h5 {
-                font-size: 0.85rem !important;
-            }
-
-            .saved-address-trigger-card .select-badge {
-                padding: 4px 8px !important;
-                font-size: 0.65rem !important;
+                font-size: 0.9rem !important;
             }
 
             .summary-total {
-                padding: 15px !important;
+                padding: 15px 12px !important;
+                flex-direction: column !important;
+                gap: 8px !important;
+                text-align: center !important;
             }
 
             .summary-total span {
-                font-size: 1rem !important;
+                font-size: 0.85rem !important;
             }
 
-            .summary-total div {
+            #summary-total {
                 font-size: 1.5rem !important;
             }
 
             .btn-complete-order {
                 padding: 16px !important;
-                font-size: 1rem !important;
+                font-size: 0.9rem !important;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .container {
+                padding: 0 10px !important;
+            }
+            .checkout-hero {
+                padding: 90px 10px 30px !important;
+            }
+            .checkout-hero h1 {
+                font-size: 1.6rem !important;
+            }
+            .checkout-hero p {
+                font-size: 0.75rem !important;
+            }
+            .checkout-card, .summary-card {
+                padding: 15px 10px !important;
+                border-radius: 12px !important;
+            }
+            .checkout-title {
+                font-size: 1.1rem !important;
+            }
+            .form-label {
+                font-size: 0.7rem !important;
+            }
+            .form-control {
+                padding: 10px !important;
+                font-size: 0.85rem !important;
+            }
+            .summary-total {
+                flex-direction: column !important;
+                gap: 5px !important;
+                text-align: center !important;
+                padding: 12px !important;
+            }
+            #summary-total {
+                font-size: 1.5rem !important;
+            }
+            .btn-complete-order {
+                font-size: 0.8rem !important;
+                padding: 14px !important;
+                letter-spacing: 0.5px !important;
+            }
+            .saved-addresses-container {
+                padding: 15px 10px !important;
+            }
+            .address-card {
+                flex: 0 0 240px !important;
+                padding: 12px !important;
+            }
+            .address-card h5 {
+                font-size: 0.9rem !important;
+            }
+            .address-card p {
+                font-size: 0.75rem !important;
             }
         }
 

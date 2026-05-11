@@ -5,74 +5,107 @@
 
 @section('content')
     <style>
+        /* Mobile Premium Redesign */
         @media (max-width: 768px) {
+            .product-hero-premium {
+                padding-top: 100px !important;
+                padding-bottom: 40px !important;
+            }
+
+            .product-hero-premium .container[style*="max-width: 1600px"] {
+                padding: 0 20px !important;
+            }
+
+            .luxury-breadcrumbs {
+                margin-top: 15px !important;
+            }
+
             .hero-grid-luxury {
-                grid-template-columns: 1fr !important;
-                gap: 30px !important;
-                padding: 0 15px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 25px !important;
+                padding: 0 0px !important;
             }
 
-            .container {
-                width: 100% !important;
-                max-width: 100% !important;
+            .lx-content-pane {
+                font-size: 0.95rem;
             }
 
-            .main-img-luxury {
-                width: 100% !important;
-                height: auto !important;
-                border-radius: 20px !important;
+            .lx-trust-item{
+                font-size: 0.95rem;
+
+            }
+
+            .gallery-luxury {
+                display: flex !important;
+                flex-direction: column-reverse !important;
+                gap: 15px !important;
             }
 
             .thumb-strip-vertical {
                 flex-direction: row !important;
                 justify-content: flex-start !important;
-                overflow-x: auto !important;
+                width: 100% !important;
                 padding: 10px 0 !important;
-                gap: 10px !important;
+                gap: 12px !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
             }
 
             .v-thumb {
-                width: 60px !important;
-                height: 60px !important;
-                flex-shrink: 0 !important;
+                width: 70px !important;
+                height: 70px !important;
+                border-radius: 12px !important;
+                border: 2px solid transparent !important;
+            }
+
+            .v-thumb.active {
+                border-color: var(--primary) !important;
+                box-shadow: 0 4px 12px rgba(0, 66, 0, 0.15) !important;
+            }
+
+            .main-img-luxury {
+                width: 100% !important;
+                height: 380px !important;
+                border-radius: 25px !important;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08) !important;
             }
 
             .luxury-title {
-                font-size: 2.2rem !important;
-                margin-bottom: 15px !important;
-                text-align: center !important;
+                font-size: 1.8rem !important;
+                text-align: left !important;
+                margin-top: 10px !important;
             }
 
             .luxury-rating {
-                justify-content: center !important;
-                margin-bottom: 20px !important;
+                justify-content: flex-start !important;
+                margin-bottom: 25px !important;
             }
 
             .luxury-price-card {
-                padding: 20px !important;
-                text-align: center !important;
+                padding: 25px !important;
+                text-align: left !important;
+                margin-bottom: 30px !important;
+                border-radius: 24px !important;
+                background: #ffffff !important;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04) !important;
+                border: 1px solid rgba(0, 66, 0, 0.05) !important;
             }
 
-            .price-val {
-                font-size: 1.5rem !important;
-                justify-content: center !important;
+            .price-val, .price-main {
+                font-size: 2rem !important;
+                justify-content: flex-start !important;
             }
 
             .price-badges {
-                flex-direction: column !important;
-                align-items: center !important;
-                gap: 10px !important;
+                justify-content: flex-start !important;
+                flex-wrap: wrap !important;
+                gap: 15px !important;
             }
 
-            .container-qty-stepper {
-                margin: 0 auto !important;
-            }
-
-            .luxury-actions form>div {
-                flex-direction: column !important;
-                align-items: center !important;
-                text-align: center !important;
+            .luxury-actions {
+                margin-bottom: 40px !important;
             }
 
             .buy-now-wrapper-premium {
@@ -83,72 +116,146 @@
             .btn-premium-cart-lx,
             .btn-premium-buy-lx {
                 width: 100% !important;
+                height: 60px !important;
+                font-size: 1rem !important;
+                border-radius: 50px !important;
                 justify-content: center !important;
-                padding: 16px !important;
             }
 
             .contact-buttons-luxury {
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 10px !important;
-            }
-
-            .btn-lx-outline {
-                width: 100% !important;
-                justify-content: center !important;
+                gap: 12px !important;
             }
 
             .benefit-highlights-row {
-                justify-content: center !important;
-                flex-wrap: wrap !important;
-            }
-
-            /* Benefits Section */
-            .benefits-glass-grid {
-                grid-template-columns: 1fr !important;
-                gap: 20px !important;
-            }
-
-            /* Tabs */
-            .lx-tabs-header {
-                display: flex !important;
-                overflow-x: auto !important;
-                white-space: nowrap !important;
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
                 gap: 15px !important;
-                padding-bottom: 10px !important;
-                scrollbar-width: none;
+                text-align: left !important;
+            }
+
+            .btn-lx-outline {
+                padding: 12px !important;
+                font-size: 0.85rem !important;
+                text-align: center !important;
+                justify-content: center !important;
+            }
+
+            /* Tabs and Content */
+            .lx-tabs-header {
                 justify-content: flex-start !important;
+                gap: 10px !important;
+                padding-bottom: 15px !important;
             }
 
             .lx-tab-btn {
-                padding: 10px 20px !important;
-                font-size: 0.9rem !important;
-                flex-shrink: 0 !important;
+                padding: 12px 20px !important;
+                font-size: 0.75rem !important;
+                background: #f9fbf9 !important;
+                border-radius: 50px !important;
+                border: 1px solid #f0f0f0 !important;
             }
 
-            /* Reviews */
-            #lx-reviews>div {
-                grid-template-columns: 1fr !important;
-                gap: 30px !important;
+            .lx-tab-btn::after {
+                display: none !important;
             }
 
-            #lx-reviews .review-form-sticky {
-                position: static !important;
+            .lx-tab-btn.active {
+                background: #004200 !important;
+                color: #fff !important;
+                border-color: #004200 !important;
             }
+        }
 
-            /* Trust Indicators */
-            .lx-trust-flex {
-                grid-template-columns: 1fr 1fr !important;
-                gap: 15px !important;
-            }
+        /* Ensure header is visible on this light-themed page */
+        #main-header:not(.scrolled) {
+            background: rgba(0, 48, 0, 0.95) !important;
+            backdrop-filter: blur(10px) !important;
+            padding: 15px 0 !important;
+        }
+
+        /* Luxury Price Card Refinement */
+        .luxury-price-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 30px 35px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 66, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .price-label-premium {
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--primary);
+            font-weight: 800;
+            opacity: 0.6;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .price-val-container {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .price-main {
+            font-size: 3.5rem;
+            color: var(--primary);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+
+        .price-strike {
+            text-decoration: line-through;
+            color: #bbb;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .price-discount-pill {
+            background: #e53935;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            box-shadow: 0 5px 15px rgba(229, 57, 53, 0.2);
+            text-transform: uppercase;
+        }
+
+        .price-desc-luxury {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-top: 20px;
+            border-top: 1px solid #f5f5f5;
+            padding-top: 20px;
         }
     </style>
     <div class="luxury-detail-wrapper animate-fade">
         <!-- 1. Product Hero Section -->
         <section class="product-hero-premium">
-            <div class="container hero-grid-luxury">
-                <!-- Left: Gallery -->
-                <div class="gallery-luxury">
+            <!-- [BREADCRUMB PADDING] Adjust the '40px' below for desktop side spacing -->
+            <div class="container" style="max-width: 1600px; width: 100%; padding: 0 40px; text-align: left !important;">
+                <nav class="luxury-breadcrumbs" style="margin-bottom: 30px; text-align: left !important; display: block !important; width: 100% !important; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 700;">
+                    <a href="{{ route('home') }}" style="color: var(--primary); text-decoration: none;">Home</a> / 
+                    <a href="{{ route('shop') }}" style="color: var(--primary); text-decoration: none;">Shop</a> /
+                    <span style="color: #999;">{{ $product->name }}</span>
+                </nav>
+            </div>
+            <div class="container">
+                <div class="hero-grid-luxury">
+                    <!-- Left: Gallery -->
+                    <div class="gallery-luxury">
                     <div class="thumb-strip-vertical">
                         @php
                             $main_img = $product->primary_image;
@@ -200,11 +307,6 @@
 
                 <!-- Right: Product Info -->
                 <div class="info-luxury">
-                    <nav class="luxury-breadcrumbs">
-                        <a href="{{ route('home') }}">Home</a> / <a href="{{ route('shop') }}">Shop</a> /
-                        <span>{{ $product->category_rel->name ?? $product->category ?? 'Products' }}</span>
-                    </nav>
-
                     <h1 class="luxury-title">{{ $product->name }}</h1>
 
                     <div class="luxury-rating">
@@ -218,35 +320,25 @@
                         @endif
                     </div>
 
-                    <div class="luxury-price-card"
-                        style="background: white; border-radius: 20px; padding: 25px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); margin-bottom: 35px; border: 1px solid #f0f0f0;">
-                        <div style="display: flex; flex-direction: column; gap: 10px;">
-                            <span class="label"
-                                style="text-transform: uppercase; font-size: 11px; letter-spacing: 2px; color: #999; font-weight: 700;">Investment
-                                in Wellness</span>
-                            <div style="display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 15px;">
-                                <div style="display: flex; align-items: center; justify-content: flex-start; gap: 15px; flex-wrap: wrap;">
-                                    <div class="price-val" style="font-size: 3.2rem; color: #004200; font-weight: 800; line-height: 1;">
-                                        ₹{{ number_format($product->price) }}
-                                    </div>
-                                    @if($product->compare_price && $product->compare_price > 0)
-                                        <span style="text-decoration: line-through; color: #bbb; font-size: 1.1rem; font-weight: 500;">
-                                            ₹{{ number_format($product->compare_price) }}
-                                        </span>
-                                        @if($product->compare_price > $product->price)
-                                            <span style="background: #e53935; color: #fff; padding: 4px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 800; box-shadow: 0 5px 15px rgba(229,57,53,0.2);">
-                                                {{ round((($product->compare_price - $product->price) / $product->compare_price) * 100) }}% OFF
-                                            </span>
-                                        @endif
-                                    @endif
-                                </div>
-                                <p style="color: #666; font-size: 0.85rem; line-height: 1.6; max-width: 100%; margin: 0;">
-                                    {{ $product->short_description }}
-                                </p>
-                            </div>
+                    <div class="luxury-price-card">
+                        <span class="price-label-premium">Investment in Wellness</span>
+                        <div class="price-val-container">
+                            <div class="price-main">₹{{ number_format($product->price) }}</div>
+                            @if($product->compare_price && $product->compare_price > 0)
+                                <span class="price-strike">₹{{ number_format($product->compare_price) }}</span>
+                                @if($product->compare_price > $product->price)
+                                    <span class="price-discount-pill">
+                                        {{ round((($product->compare_price - $product->price) / $product->compare_price) * 100) }}% OFF
+                                    </span>
+                                @endif
+                            @endif
                         </div>
-                        <div class="price-badges"
-                            style="margin-top: 20px; display: flex; gap: 25px; border-top: 1px solid #f5f5f5; padding-top: 20px;">
+                        @if($product->short_description)
+                            <p class="price-desc-luxury">
+                                {{ $product->short_description }}
+                            </p>
+                        @endif
+                        <div class="price-badges" style="margin-top: 20px; display: flex; gap: 25px;">
                             <span style="color: #666; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;"><i
                                     class="fas fa-leaf" style="color: #81c784;"></i> 100% Organic</span>
                             <span style="color: #666; font-size: 0.85rem; display: flex; align-items: center; gap: 8px;"><i

@@ -25,8 +25,9 @@
                     </div>
                     <div class="hero-media-content">
                         <div class="hero-video-wrapper">
-                            <video autoplay muted loop playsinline class="hero-video">
+                            <video autoplay muted loop playsinline webkit-playsinline preload="auto" class="hero-video" poster="{{ asset('auri-images/background-main.png') }}">
                                 <source src="{{ asset('auri-images/video/main.webm') }}" type="video/webm">
+                                <source src="{{ asset('auri-images/video/main.mp4') }}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
                         </div>
@@ -71,9 +72,16 @@
             --glass-border: rgba(255, 255, 255, 0.2);
         }
 
+        html, body {
+            overflow-x: hidden !important;
+            width: 100%;
+            position: relative;
+        }
+
         .hero-section {
             position: relative;
             overflow: hidden;
+            width: 100%;
             height: 85vh;
             /* Reduced from 100vh */
             background: var(--primary-green);
@@ -319,19 +327,21 @@
 
         @media (max-width: 991px) {
             .hero-section {
-                height: auto !important;
-                min-height: 100vh;
+                height: 780px !important; /* Fixed height to prevent jumps */
+                min-height: 780px !important;
                 padding: 0 !important;
             }
 
             .hero-slide {
-                position: relative;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
                 display: none;
                 opacity: 1;
                 visibility: visible;
-                padding: 140px 0 100px;
-                height: auto !important;
-                min-height: 100vh;
+                padding: 120px 0 60px;
+                height: 100% !important; /* Force same height as section */
             }
 
             .hero-slide.active {
@@ -422,7 +432,7 @@
         #bestsellers .product-card {
             flex: 0 0 calc((100% - 50px) / 3) !important;
             min-width: 300px !important;
-            scroll-snap-align: center !important;
+            scroll-snap-align: start !important;
             margin-bottom: 0 !important;
         }
 
@@ -456,9 +466,9 @@
             <h2 class="sec-title-nature">Powered by Herbal Products</h2>
 
             <div class="category-wrapper" style="position: relative; padding: 0 60px; margin: 0 auto; max-width: 100%;">
-                <button class="testi-nav testi-prev"
-                    onclick="const g=this.parentElement.querySelector('.ing-scroller'); const c=g.querySelector('.ing-pill'); if(c) g.scrollBy({left: -(c.offsetWidth + 15), behavior: 'smooth'})"
-                    style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                <button class="testi-nav testi-prev" ontouchstart=""
+                    onclick="const g=this.parentElement.querySelector('.ing-scroller'); const cs=g.querySelectorAll('.ing-pill'); if(cs.length > 1){ const s=cs[1].offsetLeft - cs[0].offsetLeft; g.scrollBy({left: -s, behavior: 'smooth'}); } else if(cs.length > 0){ g.scrollBy({left: -cs[0].offsetWidth, behavior: 'smooth'}); }"
+                    style="position: absolute; left: -2px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
@@ -486,9 +496,9 @@
                     @endforelse
                 </div>
 
-                <button class="testi-nav testi-next"
-                    onclick="const g=this.parentElement.querySelector('.ing-scroller'); const c=g.querySelector('.ing-pill'); if(c) g.scrollBy({left: (c.offsetWidth + 15), behavior: 'smooth'})"
-                    style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                <button class="testi-nav testi-next" ontouchstart=""
+                    onclick="const g=this.parentElement.querySelector('.ing-scroller'); const cs=g.querySelectorAll('.ing-pill'); if(cs.length > 1){ const s=cs[1].offsetLeft - cs[0].offsetLeft; g.scrollBy({left: s, behavior: 'smooth'}); } else if(cs.length > 0){ g.scrollBy({left: cs[0].offsetWidth, behavior: 'smooth'}); }"
+                    style="position: absolute; right: -2px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -497,7 +507,7 @@
                 .sec-title-nature {
                     color: var(--primary);
                     text-align: center;
-                    margin-top: 60px;
+                    padding-top: 30px;
                     margin-bottom: 40px;
                     font-family: var(--font-heading);
                     font-size: 2.5rem;
@@ -525,7 +535,7 @@
                     flex: 0 0 calc((100% - 30px) / 3) !important;
                     min-width: 200px !important;
                     max-width: calc((100% - 30px) / 3) !important;
-                    scroll-snap-align: center;
+                    scroll-snap-align: start;
                     background: #fff;
                     border: 1.5px solid #f0f0f0;
                     border-radius: 25px;
@@ -580,39 +590,78 @@
                         margin-bottom: 25px;
                     }
 
+                    .ingredients-section .container {
+                        padding: 0 10px !important;
+                        max-width: 100% !important;
+                    }
+
                     .category-wrapper {
-                        padding: 0 50px !important;
+                        padding: 0 0px !important;
                         margin: 0 !important;
+                        width: 100% !important;
+                        position: relative;
                     }
 
                     .category-wrapper .testi-nav {
-                        width: 40px !important;
-                        height: 40px !important;
+                        width: 45px !important;
+                        height: 45px !important;
                         position: absolute;
                         top: 50%;
                         transform: translateY(-50%);
-                        z-index: 20 !important;
+                        z-index: 100 !important;
+                        background: rgba(255, 255, 255, 0.9) !important; /* Premium translucent background */
+                        color: #004200 !important;
+                        border-radius: 50%;
+                        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                        display: flex !important;
+                        align-items: center;
+                        justify-content: center;
+                        border: none !important;
+                    }
+                    .category-wrapper .testi-nav:hover {
+                        background: rgba(255, 255, 255, 0.9) !important;
+                        color: #004200 !important;
                     }
 
+                    .category-wrapper .testi-nav:active {
+                        background: #004200 !important;
+                        color: #fff !important;
+                        transform: translateY(-50%) scale(0.9) !important;
+                    }
                     .category-wrapper .testi-prev {
-                        left: 5px !important;
+                        left: 13px !important;
                     }
 
                     .category-wrapper .testi-next {
-                        right: 5px !important;
+                        right: 13px !important;
+                    }
+
+                    .ing-scroller::-webkit-scrollbar {
+                        display: none !important;
                     }
 
                     .ing-scroller {
-                        gap: 0 !important;
-                        padding: 20px 0 !important;
-                        justify-content: flex-start !important;
+                        display: flex !important;
+                        flex-wrap: nowrap !important;
                         overflow-x: auto !important;
+                        -ms-overflow-style: none !important;
+                        scrollbar-width: none !important;
+                        gap: 0 !important;
+                        padding: 20px 0 !important; 
+                        box-sizing: border-box !important;
+                        justify-content: flex-start !important;
                         scroll-snap-type: x mandatory !important;
+                        -webkit-overflow-scrolling: touch !important;
+                        -webkit-transform: translate3d(0,0,0);
+                        backface-visibility: hidden;
                     }
 
                     .ing-pill {
-                        flex: 0 0 100% !important;
-                        min-width: 100% !important;
+                        flex: 0 0 calc(100% - 20px) !important;
+                        min-width: calc(100% - 20px) !important;
+                        margin: 0 10px !important;
+                        scroll-snap-align: center !important;
+                        scroll-snap-stop: always !important;
                         border-radius: 20px !important;
                         border: 1.5px solid #f0f0f0 !important;
                         background: #fff !important;
@@ -622,9 +671,9 @@
                         flex-direction: column !important;
                         align-items: center !important;
                         justify-content: center !important;
-                        scroll-snap-align: center !important;
                         gap: 15px !important;
                         min-height: 220px !important;
+                        box-sizing: border-box !important;
                     }
 
                     .ing-pill img {
@@ -697,9 +746,9 @@
             <h2 class="sec-title-nature">Powered by Navapashanam</h2>
 
             <div class="category-wrapper" style="position: relative; padding: 0 60px; margin: 0 auto; max-width: 100%;">
-                <button class="testi-nav testi-prev"
-                    onclick="const g=this.parentElement.querySelector('.ing-scroller'); const c=g.querySelector('.ing-pill'); if(c) g.scrollBy({left: -(c.offsetWidth + 15), behavior: 'smooth'})"
-                    style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                <button class="testi-nav testi-prev" ontouchstart=""
+                    onclick="const g=this.parentElement.querySelector('.ing-scroller'); const cs=g.querySelectorAll('.ing-pill'); if(cs.length > 1){ const s=cs[1].offsetLeft - cs[0].offsetLeft; g.scrollBy({left: -s, behavior: 'smooth'}); } else if(cs.length > 0){ g.scrollBy({left: -cs[0].offsetWidth, behavior: 'smooth'}); }"
+                    style="position: absolute; left: -2px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
@@ -716,20 +765,20 @@
                             @if($img_path)
                                 <img src="{{ $img_path }}" alt="{{ $product->name }}"
                                     onerror="this.src='https://via.placeholder.com/100?text={{ urlencode(substr($product->name, 0, 1)) }}'">
-                            @else
-                                <img src="https://via.placeholder.com/100?text={{ urlencode(substr($product->name, 0, 1)) }}"
-                                    alt="{{ $product->name }}">
-                            @endif
-                            <div class="ing-txt"><strong>{{ $product->name }}</strong></div>
-                        </a>
+                                @else
+                                    <img src="https://via.placeholder.com/100?text={{ urlencode(substr($product->name, 0, 1)) }}"
+                                        alt="{{ $product->name }}">
+                                @endif
+                                <div class="ing-txt"><strong>{{ $product->name }}</strong></div>
+                            </a>
                     @empty
                         <p style="text-align:center; color:#888;">No Navapashanam products available yet.</p>
                     @endforelse
                 </div>
 
-                <button class="testi-nav testi-next"
-                    onclick="const g=this.parentElement.querySelector('.ing-scroller'); const c=g.querySelector('.ing-pill'); if(c) g.scrollBy({left: (c.offsetWidth + 15), behavior: 'smooth'})"
-                    style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                <button class="testi-nav testi-next" ontouchstart=""
+                    onclick="const g=this.parentElement.querySelector('.ing-scroller'); const cs=g.querySelectorAll('.ing-pill'); if(cs.length > 1){ const s=cs[1].offsetLeft - cs[0].offsetLeft; g.scrollBy({left: s, behavior: 'smooth'}); } else if(cs.length > 0){ g.scrollBy({left: cs[0].offsetWidth, behavior: 'smooth'}); }"
+                    style="position: absolute; right: -2px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -743,8 +792,8 @@
                 <h2 style="color: var(--primary);">Best Selling Products</h2>
             </div>
             <div class="product-slider-wrapper" style="position: relative;">
-                <button class="testi-nav testi-prev shop-nav-prev"
-                    onclick="const g=this.parentElement.querySelector('.product-grid'); const c=g.querySelector('.product-card'); g.scrollBy({left: -(c.offsetWidth + 25), behavior: 'smooth'})"
+                <button class="testi-nav testi-prev shop-nav-prev" ontouchstart=""
+                    onclick="const g=this.parentElement.querySelector('.product-grid'); const cs=g.querySelectorAll('.product-card'); if(cs.length > 1){ const s=cs[1].offsetLeft - cs[0].offsetLeft; g.scrollBy({left: -s, behavior: 'smooth'}); } else if(cs.length > 0){ g.scrollBy({left: -cs[0].offsetWidth, behavior: 'smooth'}); }"
                     style="position: absolute; left: -25px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
@@ -803,8 +852,8 @@
                     @endforelse
                 </div>
 
-                <button class="testi-nav testi-next shop-nav-next"
-                    onclick="const g=this.parentElement.querySelector('.product-grid'); const c=g.querySelector('.product-card'); g.scrollBy({left: (c.offsetWidth + 25), behavior: 'smooth'})"
+                <button class="testi-nav testi-next shop-nav-next" ontouchstart=""
+                    onclick="const g=this.parentElement.querySelector('.product-grid'); const cs=g.querySelectorAll('.product-card'); if(cs.length > 1){ const s=cs[1].offsetLeft - cs[0].offsetLeft; g.scrollBy({left: s, behavior: 'smooth'}); } else if(cs.length > 0){ g.scrollBy({left: cs[0].offsetWidth, behavior: 'smooth'}); }"
                     style="position: absolute; right: -25px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
@@ -818,24 +867,32 @@
             <div class="steps-flow">
                 <div class="step">
                     <div class="step-num">01</div>
-                    <h4>Choose Product</h4>
+                    <div class="step-content">
+                        <h4>Choose Product</h4>
+                    </div>
                 </div>
                 <div class="step-line"></div>
                 <div class="step">
                     <div class="step-num">02</div>
-                    <h4>Easy Order</h4>
-                    <span class="step-sub">Web / Phone / WhatsApp</span>
+                    <div class="step-content">
+                        <h4>Easy Order</h4>
+                        <span class="step-sub">Web / Phone / WhatsApp</span>
+                    </div>
                 </div>
                 <div class="step-line"></div>
                 <div class="step">
                     <div class="step-num">03</div>
-                    <h4>Quick Delivery</h4>
-                    <span class="step-sub">3-5 Days</span>
+                    <div class="step-content">
+                        <h4>Quick Delivery</h4>
+                        <span class="step-sub">3-5 Days</span>
+                    </div>
                 </div>
                 <div class="step-line"></div>
                 <div class="step">
                     <div class="step-num">04</div>
-                    <h4>Lifelong Support</h4>
+                    <div class="step-content">
+                        <h4>Lifelong Support</h4>
+                    </div>
                 </div>
             </div>
         </div>
@@ -849,7 +906,7 @@
             </div>
             <div class="testimonial-wrapper" style="position: relative; padding: 0 40px;">
                 <button class="testi-nav testi-prev"
-                    onclick="this.parentElement.querySelector('.reviews-grid').scrollBy({left: -400, behavior: 'smooth'})"
+                    onclick="const g=this.parentElement.querySelector('.reviews-grid'); g.scrollBy({left: -g.offsetWidth, behavior: 'smooth'});"
                     style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.2rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
@@ -886,7 +943,7 @@
                 </div>
 
                 <button class="testi-nav testi-next"
-                    onclick="this.parentElement.querySelector('.reviews-grid').scrollBy({left: 400, behavior: 'smooth'})"
+                    onclick="const g=this.parentElement.querySelector('.reviews-grid'); g.scrollBy({left: g.offsetWidth, behavior: 'smooth'});"
                     style="position: absolute; right: -20px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.2rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
@@ -904,6 +961,8 @@
             scrollbar-width: none !important;
             -ms-overflow-style: none !important;
             overflow-y: hidden !important;
+            -webkit-transform: translate3d(0,0,0); /* Safari stability */
+            backface-visibility: hidden;
         }
 
         .reviews-grid::-webkit-scrollbar {
@@ -937,12 +996,14 @@
             }
 
             .white-floating-card {
-                flex: 0 0 100% !important;
-                min-width: 100% !important;
-                scroll-snap-align: center;
+                flex: 0 0 calc(100% - 20px) !important;
+                min-width: calc(100% - 20px) !important;
+                margin: 0 10px !important;
+                scroll-snap-align: center !important;
                 margin-bottom: 0px !important;
                 border-radius: 20px !important;
                 padding: 20px 20px !important;
+                box-sizing: border-box !important;
             }
 
             .r-name {
@@ -957,17 +1018,30 @@
                 font-size: 0.95rem !important;
             }
 
+            .testimonial-wrapper {
+                padding: 0 10px !important; 
+                overflow: hidden !important;
+            }
+
+            .reviews-grid::-webkit-scrollbar {
+                display: none !important;
+            }
+
             .reviews-grid {
                 display: flex !important;
                 flex-wrap: nowrap !important;
                 overflow-x: auto !important;
+                -ms-overflow-style: none !important;
+                scrollbar-width: none !important;
                 scroll-snap-type: x mandatory !important;
                 gap: 0 !important;
                 padding: 40px 0 !important;
+                box-sizing: border-box !important;
+                -webkit-overflow-scrolling: touch !important;
             }
 
             .testimonial-wrapper {
-                padding: 0 50px !important;
+                padding: 0 10px !important; 
             }
 
             .testimonial-wrapper .testi-nav {
@@ -978,13 +1052,28 @@
                 color: #004200 !important;
                 z-index: 20 !important;
             }
-
-            .testimonial-wrapper .testi-prev {
-                left: -25px !important;
+            .testimonial-wrapper .testi-nav:hover {
+                background: rgba(255, 255, 255, 0.9) !important;
+                color: #004200 !important;
             }
 
+            .testimonial-wrapper .testi-nav:active {
+                background: #004200 !important;
+                color: #fff !important;
+                transform: translateY(-50%) scale(0.9) !important;
+            }
+            /* 
+               TESTIMONIAL SPECIFIC BUTTON POSITIONS 
+               Adjust these values to move the buttons independently
+            */
+            .category-wrapper .testi-prev, 
+            .testimonial-wrapper .testi-prev {
+                left: 12px !important;
+            }
+
+            .category-wrapper .testi-next, 
             .testimonial-wrapper .testi-next {
-                right: -25px !important;
+                right: 12px !important;
             }
 
 
@@ -994,15 +1083,15 @@
 
                 .testimonial-wrapper,
                 .category-wrapper {
-                    padding: 0 0px !important;
+                    padding: 0 10px;
                 }
 
                 .white-floating-card {
-                    padding: 20px 15px !important;
+                    padding: 20px 15px;
                 }
 
                 .r-name {
-                    font-size: 0.9rem !important;
+                    font-size: 0.9rem;
                 }
 
                 .r-loc {
@@ -1023,6 +1112,26 @@
 
                 .ing-txt span {
                     font-size: 0.65rem !important;
+                }
+            }
+            
+            /* Small Mobiles (Up to 320px) */
+            @media (max-width: 320px) {
+                .testimonial-wrapper,
+                .category-wrapper {
+                    padding: 0 0px;
+                }
+
+                .white-floating-card {
+                    padding: 15px 10px;
+                }
+
+                .r-name {
+                    font-size: 0.8rem;
+                }
+
+                .r-text {
+                    font-size: 0.7rem;
                 }
             }
         }
@@ -1058,57 +1167,81 @@
             }
 
             #bestsellers .sec-head {
-                display: flex !important;
-                justify-content: space-between !important;
-                align-items: center !important;
-                margin-bottom: 40px !important;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
             }
 
             .steps-section {
                 background: #e9f5e9;
                 /* Light green from image 1 */
-                padding: 45px 0 !important;
-                margin: 40px 0 !important;
+                padding: 45px 0;
                 border-radius: 15px;
             }
 
             .steps-flow {
-                display: flex !important;
-                justify-content: space-between !important;
-                align-items: center !important;
-                gap: 20px !important;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 20px;
             }
 
             .step {
-                flex: 1 !important;
-                text-align: center !important;
+                flex: 1;
+                text-align: center;
             }
 
             .step-sub {
-                display: block !important;
-                font-size: 0.8rem !important;
+                display: block;
+                font-size: 0.8rem;
                 opacity: 0.8;
                 margin-top: 5px;
             }
 
             .step-line {
-                flex: 0.5 !important;
-                height: 1px !important;
-                background: rgba(0, 66, 0, 0.1) !important;
-                display: block !important;
+                flex: 0.5;
+                height: 1px;
+                background: rgba(0, 66, 0, 0.1);
+                display: block;
             }
         }
 
         /* Mobile & Tablet Overrides (Slider Mode) */
         @media (max-width: 991px) {
+            #bestsellers .product-slider-wrapper {
+                overflow: hidden !important;
+            }
+
+            #bestsellers .product-grid::-webkit-scrollbar {
+                display: none !important;
+            }
+
             #bestsellers .product-grid {
                 display: flex !important;
                 flex-wrap: nowrap !important;
                 overflow-x: auto !important;
-                gap: 0 !important;
-                padding: 10px 0 20px !important;
+                -ms-overflow-style: none !important;
+                scrollbar-width: none !important;
+                gap: 0 !important; /* Switched to margin-right for exact Herbal sync */
+                padding: 10px 0px 20px !important; /* Removed side padding to rely on slide padding */
+                box-sizing: border-box !important;
                 scroll-snap-type: x mandatory !important;
+                -webkit-overflow-scrolling: touch !important;
                 scrollbar-width: none;
+                -webkit-transform: translate3d(0,0,0);
+                backface-visibility: hidden;
+            }
+
+            #bestsellers .container {
+                padding: 0 10px !important;
+                max-width: 100% !important;
+            }
+
+            #bestsellers .product-slider-wrapper {
+                padding: 0 10px !important;
+                margin: 0 !important;
+                width: 100% !important;
             }
 
             #bestsellers .product-grid::-webkit-scrollbar {
@@ -1116,10 +1249,15 @@
             }
 
             #bestsellers .product-card {
-                flex: 0 0 100% !important;
-                min-width: 100% !important;
-                scroll-snap-align: center;
-                padding: 15px !important;
+                flex: 0 0 calc(100% - 20px) !important;
+                min-width: calc(100% - 20px) !important;
+                margin: 0 10px !important;
+                scroll-snap-align: center !important;
+                padding: 15px !important; /* Internal card padding */
+                box-sizing: border-box !important;
+                border: 1px solid #eeeeee !important; /* Subtle gray border */
+                border-radius: 15px !important; /* Rounded corners for premium feel */
+                background: #fff !important;
             }
 
             /* Show 2 cards on larger tablets */
@@ -1140,12 +1278,22 @@
                 z-index: 10 !important;
             }
 
+            #bestsellers .testi-nav:hover {
+                background: rgba(255, 255, 255, 0.9) !important;
+                color: #004200 !important;
+            }
+
+            #bestsellers .testi-nav:active {
+                background: #004200 !important;
+                color: #fff !important;
+                transform: translateY(-50%) scale(0.9) !important;
+            }
             #bestsellers .testi-prev {
-                left: 5px !important;
+                left: 11px !important;
             }
 
             #bestsellers .testi-next {
-                right: 5px !important;
+                right: 11px !important;
             }
 
             #bestsellers .sec-head {
@@ -1172,8 +1320,8 @@
                 position: absolute;
                 left: 40px;
                 /* Aligned with circle centers */
-                top: 25px;
-                bottom: 25px;
+                top: 40px !important;
+                bottom: 40px !important;
                 width: 2px;
                 background: var(--primary);
                 opacity: 0.2;
@@ -1182,65 +1330,104 @@
 
             .step {
                 display: flex !important;
-                align-items: center !important;
+                align-items: center !important; /* Centered vertically */
                 gap: 20px !important;
                 text-align: left !important;
                 width: 100% !important;
                 position: relative !important;
                 z-index: 1 !important;
+                margin-bottom: 35px !important;
+            }
+
+            .step-content {
+                display: flex;
+                flex-direction: column;
+                gap: 2px; /* Tighter gap for better centering */
             }
 
             .step-num {
-                width: 50px !important;
-                height: 50px !important;
-                min-width: 50px !important;
-                font-size: 1.1rem !important;
+                width: 55px !important;
+                height: 55px !important;
+                min-width: 55px !important;
+                font-size: 1.3rem !important;
                 margin: 0 !important;
                 background: var(--primary) !important;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                border-radius: 50%;
+                border: 3px solid #fff; /* Added white border for premium look */
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             }
 
             .step h4 {
                 margin: 0 !important;
-                font-size: 1.2rem !important;
-                white-space: nowrap !important;
+                font-size: 1.25rem !important;
+                white-space: normal !important;
+                line-height: 1.2;
+                font-weight: 700;
+                color: var(--primary);
             }
 
             .step-sub {
-                white-space: nowrap !important;
-                font-size: 0.9rem !important;
-                display: inline-block !important;
-                margin-left: 10px;
+                white-space: normal !important;
+                font-size: 0.95rem !important;
+                display: block !important;
+                color: #555;
+                font-weight: 500;
             }
 
             .step-line {
                 display: none !important;
             }
 
-            /* Tiny Screen Adjustments (320px - 450px) */
+            /* Normal Mobiles (321px - 450px) */
             @media (max-width: 450px) {
+                .steps-section .steps-flow::before {
+                    left: 42px; /* (padding 15 + half of 54) */
+                }
+
                 .step h4 {
-                    font-size: 1rem !important;
+                    font-size: 1.25rem !important;
                 }
 
                 .step-sub {
-                    font-size: 0.75rem !important;
-                    margin-left: 5px;
+                    font-size: 1rem !important;
                 }
 
                 .step-num {
-                    width: 40px !important;
-                    height: 40px !important;
-                    min-width: 40px !important;
-                    font-size: 0.95rem !important;
+                    width: 54px !important;
+                    height: 54px !important;
+                    min-width: 54px !important;
+                    font-size: 1.3rem !important;
                 }
+            }
 
+            /* Small Mobiles (Up to 320px) */
+            @media (max-width: 320px) {
                 .steps-section .steps-flow::before {
-                    left: 35px !important;
+                    left: 39px; /* (padding 15 + half of 48) */
                 }
 
-                .step {
-                    gap: 12px !important;
+                .step h4 {
+                    font-size: 1.15rem !important;
                 }
+
+                .step-sub {
+                    font-size: 0.9rem !important;
+                }
+
+                .step-num {
+                    width: 48px !important;
+                    height: 48px !important;
+                    min-width: 48px !important;
+                    font-size: 1.2rem !important;
+                }
+            }
+
+            .step {
+                gap: 12px !important;
             }
         }
     </style>
@@ -1255,44 +1442,53 @@
             ];
 
             scrollerConfigs.forEach(config => {
-                const el = document.querySelector(config.selector);
-                if (!el) return;
+                const elements = document.querySelectorAll(config.selector);
+                
+                elements.forEach(el => {
+                    let autoScrollTimer;
+                    let isPaused = false;
 
-                let autoScrollTimer;
-                let isPaused = false;
+                    const startAutoScroll = () => {
+                        autoScrollTimer = setInterval(() => {
+                            if (isPaused) return;
 
-                const startAutoScroll = () => {
-                    autoScrollTimer = setInterval(() => {
-                        if (isPaused) return;
+                            const items = el.children;
+                            if (items.length === 0) return;
 
-                        const maxScroll = el.scrollWidth - el.clientWidth;
-                        if (el.scrollLeft >= maxScroll - 20) {
-                            el.scrollTo({ left: 0, behavior: 'smooth' });
-                        } else {
-                            el.scrollBy({ left: config.step, behavior: 'smooth' });
-                        }
-                    }, config.interval);
-                };
+                            // Calculate current visible index
+                            let currentIndex = Math.round(el.scrollLeft / items[0].offsetWidth);
+                            let nextIndex = currentIndex + 1;
 
-                const stopAutoScroll = () => {
-                    clearInterval(autoScrollTimer);
-                };
+                            if (nextIndex >= items.length) {
+                                el.scrollTo({ left: 0, behavior: 'smooth' });
+                            } else {
+                                // Use scrollTo on the element only, to prevent page jumping
+                                const targetLeft = items[nextIndex].offsetLeft - items[0].offsetLeft;
+                                el.scrollTo({ 
+                                    left: targetLeft,
+                                    behavior: 'smooth'
+                                });
+                            }
+                        }, config.interval);
+                    };
 
-                // Pause on interaction
-                el.addEventListener('mouseenter', () => isPaused = true);
-                el.addEventListener('mouseleave', () => isPaused = false);
-                el.addEventListener('touchstart', () => isPaused = true, { passive: true });
-                el.addEventListener('touchend', () => {
-                    setTimeout(() => isPaused = false, 2000);
-                }, { passive: true });
+                    const stopAutoScroll = () => {
+                        clearInterval(autoScrollTimer);
+                    };
 
-                startAutoScroll();
+                    // Pause on interaction
+                    el.addEventListener('mouseenter', () => isPaused = true);
+                    el.addEventListener('mouseleave', () => isPaused = false);
+                    el.addEventListener('touchstart', () => isPaused = true, { passive: true });
+                    el.addEventListener('touchend', () => {
+                        setTimeout(() => isPaused = false, 2000);
+                    }, { passive: true });
 
-                // Re-start timer on manual scroll/button click to prevent immediate auto-scroll after manual action
-                el.addEventListener('scroll', () => {
-                    stopAutoScroll();
-                    startAutoScroll();
-                }, { passive: true });
+                    // Only start auto-scroll on desktop (above 991px)
+                    if (window.innerWidth > 991) {
+                        startAutoScroll();
+                    }
+                });
             });
         });
     </script>

@@ -89,19 +89,27 @@
         /* Orders Page Specific Styles */
         .luxury-account-page {
             background: var(--beige-light);
-            padding: 60px 0 100px;
+            padding: 120px 0 100px !important;
             min-height: 80vh;
         }
 
         .account-page-header {
             margin-bottom: 40px;
-            margin-top: 30px;
+            margin-top: 10px;
         }
 
         .account-title {
-            font-size: 38px;
+            font-size: 38px !important;
             color: var(--primary);
             margin-bottom: 10px;
+        }
+
+        /* Navbar Visibility Hack for Wishlist/Account Pages */
+        #main-header:not(.scrolled) {
+            background: rgba(0, 48, 0, 0.95) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            padding: 15px 0 !important;
         }
 
         .account-breadcrumb {
@@ -296,7 +304,6 @@
         }
 
         .status-badge {
-            padding: 6px 12px;
             border-radius: 50px;
             font-size: 10px;
             font-weight: 700;
@@ -445,11 +452,25 @@
 
         @media (max-width: 600px) {
             .luxury-account-page {
-                padding: 30px 0 80px;
+                padding: 90px 0 80px !important;
+            }
+
+            .luxury-account-page .container {
+                padding-left: 25px !important;
+                padding-right: 25px !important;
+            }
+
+            .account-page-header {
+                text-align: left;
+                margin-bottom: 25px;
+            }
+
+            .account-breadcrumb {
+                justify-content: flex-start;
             }
 
             .account-title {
-                font-size: 28px;
+                font-size: 28px !important;
             }
 
             .section-card {
@@ -457,14 +478,32 @@
             }
 
             .premium-section-title {
-                font-size: 18px;
+                font-size: 22px !important;
             }
         }
 
         @media (max-width: 480px) {
             .luxury-account-page .container {
-                padding-left: 15px !important;
-                padding-right: 15px !important;
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .section-header-flex {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .order-card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .order-number {
+                word-break: break-all;
             }
         }
     </style>
