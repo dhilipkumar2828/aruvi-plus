@@ -448,6 +448,10 @@
                 width: 100% !important;
                 max-width: 100% !important;
             }
+
+            .luxury-pagination{
+                margin-top: 0px;
+            }
         }
 
         @media (max-width: 600px) {
@@ -460,6 +464,9 @@
                 padding-right: 25px !important;
             }
 
+            .luxury-pagination{
+                margin-top: 0px;
+            }
             .account-page-header {
                 text-align: left;
                 margin-bottom: 25px;
@@ -487,6 +494,10 @@
                 padding-left: 20px !important;
                 padding-right: 20px !important;
             }
+
+            .luxury-pagination{
+                margin-top: 0px;
+            }
         }
 
         @media (max-width: 320px) {
@@ -494,6 +505,10 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 15px;
+            }
+
+            .luxury-pagination{
+                margin-top: 0px;
             }
 
             .order-card-header {

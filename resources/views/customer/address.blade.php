@@ -213,6 +213,9 @@
                 padding: 90px 0 60px !important;
             }
 
+            .address-cards-grid{
+                margin-bottom: 0px !important;
+            }
             .luxury-account-page .container {
                 padding-left: 20px !important;
                 padding-right: 20px !important;
@@ -238,7 +241,7 @@
                 width: 100% !important;
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 20px !important;
+                gap: 15px !important;
             }
 
             .account-sidebar-col,
@@ -248,7 +251,7 @@
             }
 
             .section-card {
-                padding: 30px 25px !important;
+                padding: 20px 10px !important;
                 border-radius: 15px;
             }
 
@@ -275,22 +278,22 @@
             }
 
             .premium-address-card {
-                padding: 20px;
+                padding: 15px;
                 border-radius: 15px;
             }
 
             .recipient-name {
-                font-size: 16px;
-                margin-bottom: 6px;
+                font-size: 18px;
+                margin-bottom: 8px;
             }
 
             .phone-number {
-                font-size: 13px;
+                font-size: 14px;
                 margin-bottom: 10px;
             }
 
             .full-address {
-                font-size: 12px;
+                font-size: 13px;
                 line-height: 1.5;
                 margin-bottom: 15px;
             }
@@ -502,12 +505,6 @@
             color: var(--primary);
             margin-bottom: 12px;
             font-weight: 700;
-        }
-
-        .no-address {
-            color: #777;
-            font-size: 1.1rem;
-            margin-bottom: 25px;
         }
 
         .phone-number {

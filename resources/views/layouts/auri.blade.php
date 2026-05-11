@@ -283,7 +283,7 @@
             }
 
             .footer-copy {
-               padding-top: 10px;
+               padding-top: 20px;
             }
 
             .f-col {
@@ -404,7 +404,7 @@
             align-items: center;
             flex-wrap: wrap;
             padding: 20px 0;
-            gap: 15px;
+            gap: 10px;
         }
 
         .copyright-text {
@@ -511,7 +511,7 @@
         toastr.options = {
             "closeButton": true,
             "progressBar": true,
-            "positionClass": "toast-top-right",
+            "positionClass": "toast-bottom-right",
             "timeOut": "3000"
         };
 
