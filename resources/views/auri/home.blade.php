@@ -26,7 +26,7 @@
                     <div class="hero-media-content">
                         <div class="hero-video-wrapper">
                             <video autoplay muted loop playsinline webkit-playsinline class="hero-video">
-                                <source src="{{ asset('auri-images/video/main.mp4') }}" type="video/mp4">
+                                <source src="{{ asset('auri-images/video/main.webm') }}" type="video/webm">
                                 Your browser does not support the video tag.
                             </video>
                         </div>
@@ -415,12 +415,11 @@
             flex-wrap: nowrap !important;
             overflow-x: auto !important;
             gap: 25px !important;
-            padding: 20px 5px !important;
+            padding: 20px 0 !important;
             justify-content: flex-start !important;
             align-items: stretch !important;
             scroll-behavior: smooth !important;
             -webkit-overflow-scrolling: touch !important;
-            scroll-snap-type: x mandatory !important;
             scrollbar-width: none !important;
         }
 
@@ -431,7 +430,6 @@
         #bestsellers .product-card {
             flex: 0 0 calc((100% - 50px) / 3) !important;
             min-width: 300px !important;
-            scroll-snap-align: start !important;
             margin-bottom: 0 !important;
         }
 
@@ -450,17 +448,17 @@
         <div class="container" style="position: relative;">
             <h2 class="sec-title-nature">Powered by Herbal Products</h2>
 
-            <div class="category-wrapper" style="position: relative; padding: 0 50px; margin: 0 auto; max-width: 100%; overflow: hidden;">
-                <button class="testi-nav testi-prev" ontouchstart=""
-                    onclick="handleSliderPrev(this, '.ing-scroller', '.ing-pill')"
-                    style="position: absolute; left: 0px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+            <div class="category-wrapper" style="position: relative; padding: 0 70px; margin: 0 auto; max-width: 100%; overflow: hidden;">
+                <button class="testi-nav testi-prev" onclick="scrollHerbal('prev')"
+                    style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
-                <div class="ing-scroller" style="scrollbar-width: none; -ms-overflow-style: none;">
-                    @forelse($categories->where('is_herbal', true) as $category)
-                        <a href="{{ route('category.show', $category->slug) }}" class="ing-pill"
-                            style="text-decoration: none; color: inherit;">
+                <div class="ing-scroller" id="scroller-herbal" style="scrollbar-width: none; -ms-overflow-style: none;">
+                    @foreach($categories as $category)
+                        @if($category->is_herbal)
+                            <a href="{{ route('category.show', $category->slug) }}" class="ing-pill herbal-card" id="scroller-herbal-item"
+                                style="text-decoration: none; color: inherit;">
                             @php
                                 $img_path = $category->image;
                                 if ($img_path && !str_starts_with($img_path, 'http') && !str_starts_with($img_path, '/')) {
@@ -475,14 +473,12 @@
                                     alt="{{ $category->name }}">
                             @endif
                             <div class="ing-txt"><strong>{{ $category->name }}</strong></div>
-                        </a>
-                    @empty
-                        <p style="text-align:center; color:#888;">No Herbal categories available yet.</p>
-                    @endforelse
+                            </a>
+                        @endif
+                    @endforeach
                 </div>
 
-                <button class="testi-nav testi-next" ontouchstart=""
-                    onclick="handleSliderNext(this, '.ing-scroller', '.ing-pill')"
+                <button class="testi-nav testi-next" onclick="scrollHerbal('next')"
                     style="position: absolute; right: 0px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
@@ -503,40 +499,41 @@
                     flex-wrap: nowrap !important;
                     overflow-x: auto !important;
                     gap: 25px !important;
-                    padding: 40px 10px !important;
+                    padding: 40px 0 !important;
                     margin: 0 !important;
-                    justify-content: flex-start;
+                    justify-content: flex-start !important;
                     align-items: stretch;
                     scroll-behavior: smooth;
                     -webkit-overflow-scrolling: touch;
-                    scroll-snap-type: x mandatory;
                     scrollbar-width: none;
                 }
 
                 @media (min-width: 992px) {
-                    .ing-scroller, .product-grid {
+                    .ing-scroller, .product-grid, .reviews-grid {
                         justify-content: flex-start !important;
                         overflow-x: auto !important;
+                        scroll-snap-type: x mandatory !important;
                         padding-left: 0 !important;
                         padding-right: 0 !important;
                         scrollbar-width: none !important;
                         display: flex !important;
                         flex-wrap: nowrap !important;
+                        gap: 25px !important; /* Standard gap for perfect 3-col math */
                     }
-                    .ing-scroller::-webkit-scrollbar, .product-grid::-webkit-scrollbar {
+                    .ing-scroller::-webkit-scrollbar, .product-grid::-webkit-scrollbar, .reviews-grid::-webkit-scrollbar {
                         display: none !important;
                     }
-                    .category-wrapper, .product-slider-wrapper {
+                    .category-wrapper, .product-slider-wrapper, .testimonial-wrapper {
                         overflow: hidden !important;
-                        padding: 0 50px !important;
+                        padding: 0 70px !important;
                     }
-                    .product-card {
-                        flex: 0 0 calc((100% - 60px) / 3) !important;
-                        width: calc((100% - 60px) / 3) !important;
+                    .product-card, .ing-pill, .white-floating-card, .testimonial-card {
+                        flex: 0 0 calc((100% - 50px) / 3) !important;
+                        width: calc((100% - 50px) / 3) !important;
                         min-width: 0 !important;
+                        scroll-snap-align: start !important;
+                        margin: 0 !important; /* Ensure no extra deviation */
                     }
-                    .shop-nav-prev { left: 0 !important; }
-                    .shop-nav-next { right: 0 !important; }
                 }
 
                 .ing-scroller::-webkit-scrollbar {
@@ -544,10 +541,6 @@
                 }
 
                 .ing-pill {
-                    flex: 0 0 calc((100% - 50px) / 3) !important;
-                    width: calc((100% - 50px) / 3) !important;
-                    min-width: 0 !important;
-                    scroll-snap-align: center;
                     background: #fff;
                     border: 1.5px solid #f0f0f0;
                     border-radius: 25px;
@@ -608,27 +601,10 @@
                     }
 
                     .category-wrapper {
-                        padding: 0 !important;
+                        padding: 0 0px !important;
                         margin: 0 !important;
                         width: 100% !important;
                         position: relative;
-                        overflow: hidden !important;
-                    }
-                    @media (min-width: 700px) and (max-width: 991px) {
-                        .category-wrapper {
-                            padding: 0 60px !important;
-                        }
-                        .ing-scroller {
-                            gap: 10px !important;
-                            padding: 20px 0 !important;
-                        }
-                        .ing-pill {
-                            flex: 0 0 calc(50% - 5px) !important;
-                            min-width: calc(50% - 5px) !important;
-                            margin: 0 !important;
-                        }
-                        .category-wrapper .testi-prev { left: 10px !important; }
-                        .category-wrapper .testi-next { right: 10px !important; }
                     }
 
                     .category-wrapper .testi-nav {
@@ -675,20 +651,21 @@
                         overflow-x: auto !important;
                         -ms-overflow-style: none !important;
                         scrollbar-width: none !important;
-                        gap: 10px !important;
-                        padding: 20px 5px !important; 
-                        margin: 0 !important;
+                        gap: 0 !important;
+                        padding: 20px 0 !important; 
                         box-sizing: border-box !important;
                         justify-content: flex-start !important;
                         scroll-snap-type: x mandatory !important;
                         -webkit-overflow-scrolling: touch !important;
+                        -webkit-transform: translate3d(0,0,0);
+                        backface-visibility: hidden;
                     }
 
                     .ing-pill {
-                        flex: 0 0 100% !important;
-                        min-width: 100% !important;
-                        margin: 0 !important;
-                        scroll-snap-align: start !important;
+                        flex: 0 0 calc(100% - 20px) !important;
+                        min-width: calc(100% - 20px) !important;
+                        margin: 0 10px !important;
+                        scroll-snap-align: center !important;
                         scroll-snap-stop: always !important;
                         border-radius: 20px !important;
                         border: 1.5px solid #f0f0f0 !important;
@@ -704,12 +681,24 @@
                         box-sizing: border-box !important;
                     }
 
-                    /* Tablet - 2 cards visible */
+                    .ing-txt {
+                        flex: 1 !important;
+                        display: flex !important;
+                        align-items: center !important;
+                    }
+
+                    /* Tablet - 2 cards visible with desktop-like alignment */
                     @media (min-width: 700px) {
                         .ing-pill {
-                            flex: 0 0 calc(50% - 5px) !important;
-                            min-width: calc(50% - 5px) !important;
+                            flex: 0 0 calc((100% - 25px) / 2) !important;
+                            min-width: calc((100% - 25px) / 2) !important;
+                            margin: 0 !important;
                             scroll-snap-align: start !important;
+                        }
+                        .ing-scroller {
+                            gap: 25px !important;
+                            padding: 20px 0 !important;
+                            justify-content: flex-start !important;
                         }
                     }
 
@@ -741,11 +730,11 @@
                 }
 
                 .testi-prev {
-                    left: 0px !important;
+                    left: 10px !important;
                 }
 
                 .testi-next {
-                    right: 0px !important;
+                    right: 10px !important;
                 }
                 
             </style>
@@ -782,17 +771,17 @@
 
             <h2 class="sec-title-nature">Powered by Navapashanam</h2>
 
-            <div class="category-wrapper" style="position: relative; padding: 0 50px; margin: 0 auto; max-width: 100%; overflow: hidden;">
-                <button class="testi-nav testi-prev" ontouchstart=""
-                    onclick="handleSliderPrev(this, '.ing-scroller', '.ing-pill')"
-                    style="position: absolute; left: 0px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+            <div class="category-wrapper" style="position: relative; padding: 0 70px; margin: 0 auto; max-width: 100%; overflow: hidden;">
+                <button class="testi-nav testi-prev" onclick="scrollNavapashanam('prev')"
+                    style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
-                <div class="ing-scroller" style="scrollbar-width: none; -ms-overflow-style: none;">
-                    @forelse($categories->where('is_navapashanam', true) as $category)
-                        <a href="{{ route('category.show', $category->slug) }}" class="ing-pill"
-                            style="text-decoration: none; color: inherit;">
+                <div class="ing-scroller navapashanam-scroller" id="scroller-navapashanam" style="scrollbar-width: none; -ms-overflow-style: none;">
+                    @foreach($categories as $category)
+                        @if($category->is_navapashanam)
+                            <a href="{{ route('category.show', $category->slug) }}" class="ing-pill navapashanam-pill" id="scroller-navapashanam-item"
+                                style="text-decoration: none; color: inherit;">
                             @php
                                 $img_path = $category->image;
                                 if ($img_path && !str_starts_with($img_path, 'http') && !str_starts_with($img_path, '/')) {
@@ -807,15 +796,13 @@
                                     alt="{{ $category->name }}">
                             @endif
                             <div class="ing-txt"><strong>{{ $category->name }}</strong></div>
-                        </a>
-                    @empty
-                        <p style="text-align:center; color:#888;">No Navapashanam categories available yet.</p>
-                    @endforelse
+                            </a>
+                        @endif
+                    @endforeach
                 </div>
 
-                <button class="testi-nav testi-next" ontouchstart=""
-                    onclick="handleSliderNext(this, '.ing-scroller', '.ing-pill')"
-                    style="position: absolute; right: 0px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                <button class="testi-nav testi-next" onclick="scrollNavapashanam('next')"
+                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -828,16 +815,15 @@
             <div class="sec-head" style="justify-content: center;">
                 <h2 style="color: var(--primary);">Best Selling Products</h2>
             </div>
-            <div class="product-slider-wrapper" style="position: relative;">
-                <button class="testi-nav testi-prev shop-nav-prev" ontouchstart=""
-                    onclick="handleSliderPrev(this, '.product-grid', '.product-card')"
-                    style="position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+            <div class="product-slider-wrapper" style="position: relative; padding: 0 50px;">
+                <button class="testi-nav testi-prev shop-nav-prev" onclick="scrollBestsellers('prev')"
+                    style="position: absolute; left: 0px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
-                <div class="product-grid" style="scrollbar-width: none; -ms-overflow-style: none;">
+                <div class="product-grid" id="scroller-bestsellers" style="scrollbar-width: none; -ms-overflow-style: none;">
                     @forelse($bestSellingProducts as $product)
-                        <div class="product-card">
+                        <div class="product-card bestseller-card">
                             <a href="{{ route('product.show', $product->slug) }}" class="product-card-link"></a>
                             <div class="p-img-wrap">
                                 @php
@@ -888,9 +874,8 @@
                     @endforelse
                 </div>
 
-                <button class="testi-nav testi-next shop-nav-next" ontouchstart=""
-                    onclick="handleSliderNext(this, '.product-grid', '.product-card')"
-                    style="position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                <button class="testi-nav testi-next shop-nav-next" onclick="scrollBestsellers('next')"
+                    style="position: absolute; right: 0px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -941,15 +926,14 @@
                 <h2>Trusted by Our Wellness Community</h2>
             </div>
             <div class="testimonial-wrapper" style="position: relative; padding: 0 50px;">
-                <button class="testi-nav testi-prev"
-                    onclick="handleSliderPrev(this, '.reviews-grid', '.white-floating-card')"
+                <button class="testi-nav testi-prev" onclick="scrollTestimonials('prev')"
                     style="position: absolute; left: 0px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.2rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
-                <div class="reviews-grid">
+                <div class="reviews-grid" id="scroller-testimonials">
                     @forelse($testimonials as $testimonial)
-                        <div class="review-card white-floating-card">
+                        <div class="review-card white-floating-card testimonial-card">
                             <div class="reviewer-top">
                                 <div class="r-initials"
                                     style="width: 60px; height: 60px; border-radius: 50%; overflow: hidden; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
@@ -978,8 +962,7 @@
                     @endforelse
                 </div>
 
-                <button class="testi-nav testi-next"
-                    onclick="handleSliderNext(this, '.reviews-grid', '.white-floating-card')"
+                <button class="testi-nav testi-next" onclick="scrollTestimonials('next')"
                     style="position: absolute; right: 0px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.2rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
@@ -991,11 +974,14 @@
             display: flex !important;
             overflow-x: auto !important;
             gap: 30px !important;
-            padding: 20px 25px 40px !important;
+            padding: 20px 0 40px !important;
             scroll-snap-type: x mandatory !important;
             -webkit-overflow-scrolling: touch !important;
             scrollbar-width: none !important;
             -ms-overflow-style: none !important;
+            overflow-y: hidden !important;
+            -webkit-transform: translate3d(0,0,0); /* Safari stability */
+            backface-visibility: hidden;
         }
 
         .reviews-grid::-webkit-scrollbar {
@@ -1009,20 +995,17 @@
         }
 
         .white-floating-card {
-            flex: 0 0 calc(33.333% - 20px) !important;
-            scroll-snap-align: start !important;
-            min-width: 300px !important;
-            background: #fff;
-            border: 1px solid #eee;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            flex: 0 0 calc((100% - 60px) / 3);
+            scroll-snap-align: start;
+            min-width: 280px;
+            box-sizing: border-box;
         }
 
-        @media (max-width: 1100px) {
+        @media (min-width: 700px) and (max-width: 991px) {
             .white-floating-card {
-                flex: 0 0 calc(50% - 15px) !important;
+                flex: 0 0 calc((100% - 25px) / 2) !important;
+                min-width: 0 !important;
+                scroll-snap-align: start !important;
             }
         }
 
@@ -1032,14 +1015,29 @@
                 font-size: 0.9rem !important;
             }
 
+            .reviews-section .container {
+                padding: 0 10px !important;
+                max-width: 100% !important;
+            }
+
             .white-floating-card {
-                flex: 0 0 100% !important;
-                min-width: 100% !important;
-                scroll-snap-align: center;
+                flex: 0 0 calc(100% - 20px) !important;
+                min-width: calc(100% - 20px) !important;
+                margin: 0 10px !important;
+                scroll-snap-align: center !important;
                 margin-bottom: 0px !important;
                 border-radius: 20px !important;
                 padding: 20px 20px !important;
+                box-sizing: border-box !important;
+                display: flex !important;
+                flex-direction: column !important;
             }
+
+            .review-card .review-text {
+                flex: 1 !important;
+            }
+
+
 
             .r-name {
                 font-size: 1rem !important;
@@ -1053,35 +1051,30 @@
                 font-size: 0.95rem !important;
             }
 
+            .testimonial-wrapper {
+                padding: 0 10px !important; 
+                overflow: hidden !important;
+            }
+
+            .reviews-grid::-webkit-scrollbar {
+                display: none !important;
+            }
+
             .reviews-grid {
                 display: flex !important;
                 flex-wrap: nowrap !important;
                 overflow-x: auto !important;
+                -ms-overflow-style: none !important;
+                scrollbar-width: none !important;
                 scroll-snap-type: x mandatory !important;
                 gap: 0 !important;
                 padding: 40px 0 !important;
+                box-sizing: border-box !important;
+                -webkit-overflow-scrolling: touch !important;
             }
 
             .testimonial-wrapper {
-                padding: 0 50px !important;
-            }
-            @media (min-width: 700px) and (max-width: 991px) {
-                .testimonial-wrapper {
-                    padding: 0 60px !important;
-                    overflow: hidden !important;
-                }
-                .reviews-grid {
-                    gap: 10px !important;
-                    padding: 20px 0 !important;
-                }
-                .white-floating-card {
-                    flex: 0 0 calc(50% - 5px) !important;
-                    min-width: calc(50% - 5px) !important;
-                    margin: 0 !important;
-                    scroll-snap-align: start !important;
-                }
-                .testimonial-wrapper .testi-prev { left: 10px !important; }
-                .testimonial-wrapper .testi-next { right: 10px !important; }
+                padding: 0 10px !important; 
             }
 
             .testimonial-wrapper .testi-nav {
@@ -1092,28 +1085,78 @@
                 color: #004200 !important;
                 z-index: 20 !important;
             }
-
-            .testimonial-wrapper .testi-prev {
-                left: -25px !important;
+            .testimonial-wrapper .testi-nav:hover {
+                background: rgba(255, 255, 255, 0.9) !important;
+                color: #004200 !important;
             }
 
-            .testimonial-wrapper .testi-next {
-                right: -25px !important;
+            .testimonial-wrapper .testi-nav:active {
+                background: #004200 !important;
+                color: #fff !important;
+                transform: translateY(-50%) scale(0.9) !important;
+            }
+            /* 
+               TESTIMONIAL SPECIFIC BUTTON POSITIONS 
+               Adjust these values to move the buttons independently
+            */
+            @media (min-width: 768px) {
+                .category-wrapper, .testimonial-wrapper {
+                    padding: 0 !important;
+                    margin-left: 0 !important;
+                }
+                .ing-scroller, .product-grid, .reviews-grid {
+                    justify-content: flex-start !important;
+                    padding-left: 0 !important;
+                }
+                .testi-prev { left: 10px !important; }
+                .testi-next { right: 10px !important; }
+            }
+            
+            /* Best Selling Products - Dedicated Alignment */
+            @media (min-width: 768px) {
+                #bestsellers .product-slider-wrapper {
+                    padding: 0 50px !important;
+                }
+                #bestsellers .shop-nav-prev {
+                    left: 0 !important;
+                }
+                #bestsellers .shop-nav-next {
+                    right: 0 !important;
+                }
+                #bestsellers .product-grid {
+                    padding-left: 0 !important;
+                    padding-right: 0 !important;
+                    justify-content: flex-start !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    overflow: hidden !important;
+                }
+            }
+
+
+            /* Tablet - 2 cards visible with Navapashanam-like alignment */
+            @media (min-width: 768px) and (max-width: 991px) {
+                .product-card, .ing-pill, .white-floating-card {
+                    flex: 0 0 calc((100% - 25px) / 2) !important;
+                    width: calc((100% - 25px) / 2) !important;
+                    min-width: 0 !important;
+                }
             }
 
             /* Small Phone Optimizations (320px - 450px) */
             @media (max-width: 450px) {
+
                 .testimonial-wrapper,
                 .category-wrapper {
-                    padding: 0 0px !important;
+                    padding: 0 10px;
                 }
 
                 .white-floating-card {
-                    padding: 20px 15px !important;
+                    padding: 20px 15px;
                 }
 
                 .r-name {
-                    font-size: 0.9rem !important;
+                    font-size: 0.9rem;
                 }
 
                 .r-loc {
@@ -1136,6 +1179,26 @@
                     font-size: 0.65rem !important;
                 }
             }
+            
+            /* Small Mobiles (Up to 320px) */
+            @media (max-width: 320px) {
+                .testimonial-wrapper,
+                .category-wrapper {
+                    padding: 0 0px;
+                }
+
+                .white-floating-card {
+                    padding: 15px 10px;
+                }
+
+                .r-name {
+                    font-size: 0.8rem;
+                }
+
+                .r-text {
+                    font-size: 0.7rem;
+                }
+            }
         }
 
         /* Best Selling Products & Steps - Responsive Architecture */
@@ -1149,7 +1212,8 @@
                 scroll-behavior: smooth;
                 scrollbar-width: none;
                 -ms-overflow-style: none;
-                scroll-snap-type: x mandatory;
+                scroll-snap-type: none !important;
+                justify-content: flex-start !important;
             }
 
             #bestsellers .product-grid::-webkit-scrollbar {
@@ -1157,8 +1221,6 @@
             }
 
             #bestsellers .product-card {
-                flex: 0 0 calc((100% - 50px) / 3) !important;
-                min-width: calc((100% - 50px) / 3) !important;
                 scroll-snap-align: start;
             }
 
@@ -1225,12 +1287,14 @@
                 overflow-x: auto !important;
                 -ms-overflow-style: none !important;
                 scrollbar-width: none !important;
-                gap: 0 !important;
-                padding: 10px 0px 20px !important;
+                gap: 0 !important; /* Switched to margin-right for exact Herbal sync */
+                padding: 10px 0px 20px !important; /* Removed side padding to rely on slide padding */
                 box-sizing: border-box !important;
                 scroll-snap-type: x mandatory !important;
                 -webkit-overflow-scrolling: touch !important;
-                margin: 0 !important;
+                scrollbar-width: none;
+                -webkit-transform: translate3d(0,0,0);
+                backface-visibility: hidden;
             }
 
             #bestsellers .container {
@@ -1239,56 +1303,49 @@
             }
 
             #bestsellers .product-slider-wrapper {
-                padding: 0 !important;
+                padding: 0 10px !important;
                 margin: 0 !important;
                 width: 100% !important;
-                overflow: hidden !important;
-            }
-            @media (min-width: 700px) and (max-width: 991px) {
-                #bestsellers .product-slider-wrapper {
-                    padding: 0 60px !important;
-                }
-                #bestsellers .product-grid {
-                    gap: 10px !important;
-                    padding: 20px 0 !important;
-                }
-                #bestsellers .product-card {
-                    flex: 0 0 calc(50% - 5px) !important;
-                    min-width: calc(50% - 5px) !important;
-                    margin: 0 !important;
-                    scroll-snap-align: start !important;
-                }
-                #bestsellers .testi-prev { left: 10px !important; }
-                #bestsellers .testi-next { right: 10px !important; }
             }
 
             #bestsellers .product-grid::-webkit-scrollbar {
                 display: none;
             }
 
-            #bestsellers .product-card {
+                #bestsellers .product-card {
                 flex: 0 0 calc(100% - 20px) !important;
                 min-width: calc(100% - 20px) !important;
                 margin: 0 10px !important;
                 scroll-snap-align: center !important;
-                padding: 15px !important;
+                padding: 15px !important; /* Internal card padding */
                 box-sizing: border-box !important;
-                border: 1px solid #eeeeee !important;
-                border-radius: 15px !important;
+                border: 1px solid #eeeeee !important; /* Subtle gray border */
+                border-radius: 15px !important; /* Rounded corners for premium feel */
                 background: #fff !important;
-                position: relative !important;
+                display: flex !important;
+                flex-direction: column !important;
             }
 
-            /* Show 2 cards on larger tablets */
-            @media (min-width: 700px) {
+            #bestsellers .p-info {
+                flex: 1 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+            }
+
+            /* Tablet (700px - 991px) - 2 cards visible */
+            @media (min-width: 700px) and (max-width: 991px) {
                 #bestsellers .product-card {
-                    flex: 0 0 calc(50% - 20px) !important;
-                    min-width: calc(50% - 20px) !important;
+                    flex: 0 0 calc((100% - 25px) / 2) !important;
+                    min-width: calc((100% - 25px) / 2) !important;
+                    margin: 0 !important;
                     scroll-snap-align: start !important;
                 }
+                #bestsellers .product-grid {
+                    gap: 25px !important;
+                    justify-content: flex-start !important;
+                }
             }
-
-
 
             #bestsellers .testi-nav {
                 display: flex !important;
@@ -1325,6 +1382,19 @@
                 text-align: center !important;
                 gap: 10px !important;
                 margin-bottom: 30px !important;
+            }
+
+            @media (min-width: 700px) and (max-width: 991px) {
+                #bestsellers .sec-head {
+                    flex-direction: column !important;
+                    justify-content: center !important;
+                    text-align: center !important;
+                    align-items: center !important;
+                    margin-bottom: 30px !important;
+                }
+                #bestsellers .container {
+                    padding: 0 10px !important; /* Match Navapashanam container padding */
+                }
             }
 
             .steps-section .steps-flow {
@@ -1456,104 +1526,60 @@
 @endsection
 @section('extra_js')
     <script>
-        function handleSliderPrev(btn, scrollerClass, itemClass) {
-            const g = btn.parentElement.querySelector(scrollerClass);
-            const cs = g.querySelectorAll(itemClass);
-            if (cs.length > 0) {
-                const s = cs.length > 1 ? cs[1].offsetLeft - cs[0].offsetLeft : g.offsetWidth;
-                if (g.scrollLeft <= 10) {
-                    if (window.innerWidth > 991) {
-                        g.scrollTo({ left: g.scrollWidth, behavior: 'smooth' });
-                    }
-                } else {
-                    g.scrollBy({ left: -s, behavior: 'smooth' });
-                }
+        function scrollHerbal(dir) {
+            const scroller = document.getElementById('scroller-herbal');
+            const items = scroller.querySelectorAll('.ing-pill');
+            if (items.length < 2) return;
+            const step = items[1].offsetLeft - items[0].offsetLeft;
+            let index = Math.round(scroller.scrollLeft / step);
+            if (dir === 'next') {
+                index = (scroller.scrollLeft + scroller.offsetWidth >= scroller.scrollWidth - 10) ? 0 : index + 1;
+            } else {
+                index = (scroller.scrollLeft <= 10) ? 0 : index - 1;
             }
+            scroller.scrollTo({ left: index * step, behavior: 'smooth' });
         }
 
-        function handleSliderNext(btn, scrollerClass, itemClass) {
-            const g = btn.parentElement.querySelector(scrollerClass);
-            const cs = g.querySelectorAll(itemClass);
-            if (cs.length > 0) {
-                const s = cs.length > 1 ? cs[1].offsetLeft - cs[0].offsetLeft : g.offsetWidth;
-                if (g.scrollLeft + g.offsetWidth >= g.scrollWidth - 10) {
-                    if (window.innerWidth > 991) {
-                        g.scrollTo({ left: 0, behavior: 'smooth' });
-                    }
-                } else {
-                    g.scrollBy({ left: s, behavior: 'smooth' });
-                }
+        function scrollNavapashanam(dir) {
+            const scroller = document.getElementById('scroller-navapashanam');
+            const items = scroller.querySelectorAll('.navapashanam-pill');
+            if (items.length < 2) return;
+            const step = items[1].offsetLeft - items[0].offsetLeft;
+            let index = Math.round(scroller.scrollLeft / step);
+            if (dir === 'next') {
+                index = (scroller.scrollLeft + scroller.offsetWidth >= scroller.scrollWidth - 10) ? 0 : index + 1;
+            } else {
+                index = (scroller.scrollLeft <= 10) ? 0 : index - 1;
             }
+            scroller.scrollTo({ left: index * step, behavior: 'smooth' });
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const scrollerConfigs = [
-                { selector: '.ing-scroller', step: 300, interval: 3500 },
-                { selector: '.product-grid', step: 350, interval: 4500 },
-                { selector: '.reviews-grid', step: 400, interval: 5500 }
-            ];
+        function scrollBestsellers(dir) {
+            const scroller = document.getElementById('scroller-bestsellers');
+            const items = scroller.querySelectorAll('.product-card');
+            if (items.length < 2) return;
+            const step = items[1].offsetLeft - items[0].offsetLeft;
+            let index = Math.round(scroller.scrollLeft / step);
+            if (dir === 'next') {
+                index = (scroller.scrollLeft + scroller.offsetWidth >= scroller.scrollWidth - 10) ? 0 : index + 1;
+            } else {
+                index = (scroller.scrollLeft <= 10) ? 0 : index - 1;
+            }
+            scroller.scrollTo({ left: index * step, behavior: 'smooth' });
+        }
 
-            scrollerConfigs.forEach(config => {
-                const elements = document.querySelectorAll(config.selector);
-                
-                elements.forEach(el => {
-                    let autoScrollTimer;
-                    let isPaused = false;
-                    let pauseTimeout;
-
-                    const startAutoScroll = () => {
-                        autoScrollTimer = setInterval(() => {
-                            if (isPaused) return;
-
-                            const items = el.children;
-                            if (items.length < 2) return;
-
-                            const step = items[1].offsetLeft - items[0].offsetLeft;
-                            const isAtEnd = el.scrollLeft + el.offsetWidth >= el.scrollWidth - 10;
-
-                            if (isAtEnd) {
-                                el.scrollTo({ left: 0, behavior: 'smooth' });
-                            } else {
-                                el.scrollBy({ left: step, behavior: 'smooth' });
-                            }
-                        }, config.interval);
-                    };
-
-                    const stopAutoScroll = () => {
-                        clearInterval(autoScrollTimer);
-                    };
-
-                    // Pause on interaction
-                    el.addEventListener('mouseenter', () => isPaused = true);
-                    el.addEventListener('mouseleave', () => isPaused = false);
-                    el.addEventListener('touchstart', () => isPaused = true, { passive: true });
-                    el.addEventListener('touchend', () => {
-                        setTimeout(() => isPaused = false, 2000);
-                    }, { passive: true });
-
-                    // Pause for 5 seconds on button click
-                    const wrapper = el.parentElement;
-                    if (wrapper) {
-                        const navBtns = wrapper.querySelectorAll('.testi-nav, .shop-nav-prev, .shop-nav-next');
-                        navBtns.forEach(btn => {
-                            btn.addEventListener('click', () => {
-                                if (window.innerWidth > 991) {
-                                    isPaused = true;
-                                    clearTimeout(pauseTimeout);
-                                    pauseTimeout = setTimeout(() => {
-                                        isPaused = false;
-                                    }, 5000);
-                                }
-                            });
-                        });
-                    }
-
-                    // Only start auto-scroll on desktop (above 991px)
-                    if (window.innerWidth > 991) {
-                        startAutoScroll();
-                    }
-                });
-            });
-        });
+        function scrollTestimonials(dir) {
+            const scroller = document.getElementById('scroller-testimonials');
+            const items = scroller.querySelectorAll('.testimonial-card');
+            if (items.length < 2) return;
+            const step = items[1].offsetLeft - items[0].offsetLeft;
+            let index = Math.round(scroller.scrollLeft / step);
+            if (dir === 'next') {
+                index = (scroller.scrollLeft + scroller.offsetWidth >= scroller.scrollWidth - 10) ? 0 : index + 1;
+            } else {
+                index = (scroller.scrollLeft <= 10) ? 0 : index - 1;
+            }
+            scroller.scrollTo({ left: index * step, behavior: 'smooth' });
+        }
     </script>
 @endsection
