@@ -85,18 +85,19 @@
                                 </div>
                                 <div class="invoice-meta">
                                     <h3 class="invoice-label">Tax Invoice</h3>
-                                    <div class="meta-item">
-                                        <span class="label">Invoice No:</span>
-                                        <span class="value">#{{ $order->order_number }}</span>
-                                    </div>
-                                    <div class="meta-item">
-                                        <span class="label">Date:</span>
-                                        <span class="value">{{ $order->created_at->format('d M, Y') }}</span>
-                                    </div>
-                                    <div class="meta-item">
-                                        <span class="label">Status:</span>
-                                        <span
-                                            class="status-value {{ strtolower($order->status) }}">{{ strtoupper($order->status) }}</span>
+                                    <div class="meta-wrapper">
+                                        <div class="meta-item">
+                                            <span class="label">Invoice No:</span>
+                                            <span class="value">#{{ $order->order_number }}</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <span class="label">Date:</span>
+                                            <span class="value">{{ $order->created_at->format('d M, Y') }}</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <span class="label">Status:</span>
+                                            <span class="status-value {{ strtolower($order->status) }}">{{ strtoupper($order->status) }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -157,8 +158,8 @@
                                                         <div class="product-sku">SKU: {{ $item->product?->sku ?? 'N/A' }}</div>
                                                     </div>
                                                 </td>
-                                                <td data-label="Quantity" class="text-center">{{ $item->quantity }}</td>
-                                                <td data-label="Rate" class="text-right">
+                                                <td data-label="Quantity" class="text-center font-bold">{{ $item->quantity }}</td>
+                                                <td data-label="Rate" class="text-right font-bold">
                                                     ₹{{ number_format($item->unit_price, 2) }}</td>
                                                 <td data-label="Line Total" class="text-right font-bold">
                                                     ₹{{ number_format($item->line_total, 2) }}</td>
@@ -200,8 +201,8 @@
                                         <span class="value">₹{{ number_format($shipping_taxable, 2) }}</span>
                                     </div>
 
-                                    <div class="calc-row taxable-value-row">
-                                        <span class="label" style="font-weight: 700; color: #333;">Taxable Value</span>
+                                    <div class="calc-row">
+                                        <span class="label">Taxable Value</span>
                                         <span class="value"
                                             style="font-weight: 700; color: #333;">₹{{ number_format($taxable_value, 2) }}</span>
                                     </div>
@@ -479,6 +480,18 @@
                     color: #888;
                 }
 
+                .invoice-meta {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                }
+
+                .meta-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                }
+
                 .invoice-label {
                     font-size: 28px;
                     color: var(--primary);
@@ -489,6 +502,7 @@
                 .meta-item {
                     display: flex;
                     justify-content: flex-end;
+                    align-items: center;
                     gap: 10px;
                     margin-bottom: 8px;
                     font-size: 14px;
@@ -510,6 +524,25 @@
                     font-weight: 800;
                 }
 
+                .status-value.placed {
+                    padding: 0;
+                    background: transparent;
+                    color: #333;
+                    font-size: 14px;
+                    font-weight: 700;
+                }
+
+                .status-value.shipped {
+                    background: #f3e5f5;
+                    color: #7b1fa2;
+                }
+
+                .status-value.out_for_delivery,
+                .status-value.out-for-delivery {
+                    background: #fff3e0;
+                    color: #e65100;
+                }
+
                 .status-value.processing {
                     background: #fff8e1;
                     color: #ffa000;
@@ -519,6 +552,11 @@
                 .status-value.completed {
                     background: #e8f5e9;
                     color: #2e7d32;
+                }
+
+                .status-value.cancelled {
+                    background: #ffebee;
+                    color: #c62828;
                 }
 
                 /* Addresses */
@@ -619,6 +657,7 @@
                     color: #888;
                     text-transform: uppercase;
                     letter-spacing: 0.5px;
+                    white-space: nowrap;
                 }
 
                 .invoice-table td {
@@ -905,10 +944,7 @@
                     .invoice-meta {
                         text-align: center;
                         width: 100%;
-                    }
-
-                    .meta-item {
-                        justify-content: center;
+                        align-items: center;
                     }
 
                     .invoice-label {
@@ -995,7 +1031,7 @@
                     .account-page-header {
                         margin-bottom: 25px;
                         margin-top: 15px;
-                        text-align: center;
+                        text-align: left;
                     }
 
                     .account-title {
@@ -1004,7 +1040,7 @@
                     }
 
                     .account-breadcrumb {
-                        justify-content: center;
+                        justify-content: flex-start;
                         font-size: 11px;
                         flex-wrap: wrap;
                         line-height: 1.5;
@@ -1128,7 +1164,6 @@
                     }
 
                     .meta-item {
-                        font-size: 12px;
                         justify-content: center;
                     }
 
@@ -1181,6 +1216,12 @@
                         text-align: left !important;
                     }
 
+                    .invoice-table td:not(:first-child) {
+                        display: flex !important;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+
                     .invoice-table td::before {
                         content: attr(data-label);
                         font-weight: 700;
@@ -1189,12 +1230,16 @@
                         text-transform: uppercase;
                         margin-right: 10px;
                         display: inline-block;
-                        width: 80px;
+                    }
+
+                    .invoice-table td:first-child::before {
+                        display: block;
+                        margin-bottom: 5px;
                     }
 
                     .invoice-table td.text-right,
                     .invoice-table td.text-center {
-                        text-align: left !important;
+                        text-align: right !important;
                     }
 
                     .product-info {

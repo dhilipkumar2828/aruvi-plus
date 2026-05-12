@@ -241,6 +241,10 @@
             display: none;
         }
 
+        #toast-container.toast-top-right {
+            top: 110px !important;
+        }
+
         @media (max-width: 991px) {
             .mobile-only-nav {
                 display: block;
@@ -249,6 +253,10 @@
             .nav-links li a {
                 display: block;
                 padding: 15px 0;
+            }
+
+            #toast-container.toast-top-right {
+                top: 60px !important; /* Mobile specific height */
             }
         }
 
@@ -357,7 +365,6 @@
                 .developer-text {
                     width: 100%;
                 }
-
                 /* Footer Typography for Normal Mobiles (321px - 450px) */
                 @media (min-width: 321px) and (max-width: 450px) {
                     .f-col h4 {
@@ -511,7 +518,7 @@
         toastr.options = {
             "closeButton": true,
             "progressBar": true,
-            "positionClass": "toast-bottom-right",
+            "positionClass": "toast-top-right",
             "timeOut": "3000"
         };
 

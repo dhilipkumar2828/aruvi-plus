@@ -79,8 +79,8 @@
 
         .cart-item {
             display: grid;
-            grid-template-columns: 100px 1fr auto auto;
-            gap: 25px;
+            grid-template-columns: 100px 1fr auto auto 50px;
+            gap: 10px;
             align-items: center;
             padding: 30px 0;
             border-bottom: 1px solid #f0f0f0;
@@ -97,20 +97,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            position: relative;
         }
 
         .cart-item-img img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            font-size: 10px; /* Smaller font for alt text */
+            color: #ccc;
         }
 
         .cart-item-actions-corner {
-            position: absolute;
-            top: 20px;
-            right: 0;
+            position: relative;
             display: flex;
+            justify-content: center;
+            align-items: center;
             gap: 8px;
+            order: 5;
+        }
+
+        .cart-item-qty, .qty-actions-row {
+            display: contents !important;
+        }
+
+        .qty-box {
+            order: 3;
         }
 
         .btn-action-small {
@@ -147,7 +160,7 @@
         }
 
         .cart-item-info h4 {
-            color: var(--primary) !important;
+            color: var(--accent) !important;
             font-size: 1.2rem;
             margin-bottom: 5px;
         }
@@ -194,15 +207,19 @@
             color: var(--primary);
         }
 
+        .total-label-mobile {
+            display: none !important;
+        }
+
         .cart-item-subtotal {
             font-weight: 700;
             font-size: 1.1rem;
             color: var(--primary);
-            min-width: 130px;
-            text-align: center;
-            display: flex;
+            min-width: 110px;
+            text-align: right;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-end;
+            order: 4;
         }
 
         .btn-remove {
@@ -369,9 +386,9 @@
             .cart-item-subtotal {
                 grid-column: 1 / -1 !important;
                 text-align: right !important;
-                border-top: 1px dashed #eee !important;
                 padding-top: 15px !important;
                 margin-top: 10px !important;
+                font-size: 1rem !important;
             }
             .cart-item-subtotal div {
                 justify-content: flex-end !important;
@@ -396,8 +413,9 @@
                 padding: 15px 0 !important;
             }
             .cart-item-img {
-                width: 60px !important;
-                height: 60px !important;
+                width: 80px !important;
+                height: 80px !important;
+                border-radius: 12px !important;
             }
             .cart-item-info h4 {
                 font-size: 0.9rem !important;
@@ -411,9 +429,10 @@
                 border-radius: 16px !important;
             }
             .summary-total {
-                flex-direction: column !important;
-                gap: 8px !important;
-                text-align: center !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                text-align: left !important;
                 padding: 15px 12px !important;
             }
             .total-value {
@@ -464,16 +483,29 @@
 
             .cart-item-actions-corner {
                 position: static !important;
-                display: block !important;
+                display: flex !important;
+                align-items: center !important;
             }
 
-            .qty-box {
-                margin: 0 !important;
+            .cart-item-qty {
+                grid-column: 1 / -1 !important;
+                display: flex !important;
+                justify-content: center !important;
+                margin-top: 10px !important;
+            }
+
+            .qty-actions-row {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                justify-content: center !important;
+                width: auto !important;
+                align-items: center !important;
+                gap: 15px !important;
             }
         }
-        @media (max-width: 320px) {
+        @media (max-width: 480px) {
             .container {
-                padding: 0 10px !important;
+                padding: 0 8px !important;
             }
             .cart-hero {
                 padding: 100px 0 20px !important;
@@ -494,8 +526,8 @@
                 gap: 5px !important;
             }
             .btn-continue-shopping {
-                padding: 6px 10px !important;
-                font-size: 0.65rem !important;
+                padding: 6px 12px !important;
+                font-size: 0.8rem !important;
                 margin: 0 !important;
                 white-space: nowrap !important;
                 height: 34px !important;
@@ -503,7 +535,7 @@
                 align-items: center !important;
             }
             .btn-clear-cart {
-                font-size: 0.75rem !important;
+                font-size: 0.9rem !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 height: 34px !important;
@@ -511,36 +543,60 @@
                 align-items: center !important;
             }
             .cart-items-container {
-                padding: 10px !important;
+                padding: 8px !important;
                 border-radius: 12px !important;
                 box-shadow: none !important;
                 border: 1px solid #f0f0f0 !important;
+                overflow: hidden !important;
             }
             .cart-item {
                 display: grid !important;
-                grid-template-columns: 45px 1fr !important;
-                gap: 12px !important;
+                grid-template-columns: 80px 1fr !important;
+                gap: 10px 12px !important; /* Increased row gap for breathing room */
                 padding: 15px 0 !important;
-                align-items: flex-start !important;
+                align-items: center !important;
+                position: relative !important;
             }
             .cart-item-img {
-                width: 45px !important;
-                height: 45px !important;
+                width: 80px !important;
+                height: 80px !important;
+                border-radius: 12px !important;
+                background: #fff !important;
+                border: 1px solid #f0f0f0 !important;
+                padding: 5px !important;
+                overflow: hidden !important;
+                grid-row: 1 / 3 !important; /* Span two rows */
+            }
+            .cart-item-img img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: contain !important;
             }
             .cart-item-info {
                 grid-column: 2 !important;
-            }
-            .cart-item-info h4 {
-                font-size: 0.8rem !important;
-                line-height: 1.3 !important;
+                padding-right: 35px !important;
             }
             .cart-item-info .price {
-                font-size: 0.75rem !important;
-                margin-top: 2px !important;
+                margin-top: 6px !important;
+                margin-bottom: 2px !important;
+                display: block !important;
             }
             .cart-item-qty {
                 grid-column: 2 !important;
-                margin-top: 5px !important;
+                text-align: left !important;
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+                display: flex !important;
+                justify-content: flex-start !important;
+            }
+            .cart-item-actions-corner {
+                position: absolute !important;
+                top: 15px !important;
+                right: 0 !important;
+                order: unset !important;
+            }
+            .total-label-mobile {
+                display: inline !important;
             }
             .cart-item-subtotal {
                 grid-column: 1 / -1 !important;
@@ -550,19 +606,32 @@
                 margin-top: 10px !important;
             }
             .cart-item-subtotal div {
-                font-size: 1.15rem !important;
-                justify-content: flex-end !important;
+                font-size: 1rem !important;
+                justify-content: space-between !important;
                 display: flex !important;
-                align-items: baseline !important;
+                align-items: center !important;
+                width: 100% !important;
+            }
+            .qty-actions-row {
+                justify-content: flex-start !important;
+                width: 100% !important;
+                gap: 10px !important;
             }
             .qty-box {
-                transform: scale(0.85) !important;
-                transform-origin: left !important;
                 margin: 0 !important;
             }
-            .btn-remove-small {
+            .qty-btn {
                 width: 30px !important;
                 height: 30px !important;
+                font-size: 0.7rem !important;
+            }
+            .qty-input {
+                width: 32px !important;
+                font-size: 0.8rem !important;
+            }
+            .btn-remove-small {
+                width: 32px !important;
+                height: 32px !important;
                 background: #fff0f0 !important;
                 color: #ff4d4d !important;
                 border-radius: 50% !important;
@@ -575,17 +644,18 @@
                 border-radius: 15px !important;
             }
             .summary-row {
-                font-size: 0.8rem !important;
+                font-size: 1rem !important;
             }
             .summary-total {
-                flex-direction: column !important;
-                gap: 5px !important;
-                text-align: center !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                text-align: left !important;
                 padding: 12px !important;
                 margin: 15px 0 !important;
             }
             .total-value {
-                font-size: 1.5rem !important;
+                font-size: 1.3rem !important;
             }
             .btn-checkout {
                 padding: 15px !important;
@@ -706,7 +776,7 @@
                                     <div class="price">₹{{ number_format($item['price']) }} / unit</div>
                                 </div>
                                 <div class="cart-item-qty">
-                                    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                                    <div class="qty-actions-row" style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
                                         <div class="qty-box">
                                             <button type="button" class="qty-btn"
                                                 onclick="updateQty('{{ $item['product_id'] }}', -1)"><i
@@ -739,7 +809,9 @@
                                 </div>
                                 <div class="cart-item-subtotal">
                                     <div style="font-size: 1.4rem; font-weight: 800; color: #004200;">
-                                        <span style="font-size: 0.85rem; font-weight: 600; color: #666; margin-right: 4px; vertical-align: middle;">Total:</span>₹{{ number_format($item['price'] * $item['quantity']) }}</div>
+                                        <span class="total-label-mobile" style="font-size: 1rem; font-weight: 600; color: var(--primary);">Total:</span>
+                                        <span>₹{{ number_format($item['price'] * $item['quantity']) }}</span>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
@@ -749,7 +821,7 @@
                     <div class="summary-card">
                         <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;">
                             <div class="summary-row">
-                                <span style="color: #666;">Items Subtotal</span>
+                                <span style="color: var(--primary); font-weight: 600;">Items Subtotal</span>
                                 <strong style="color: var(--primary);">₹{{ number_format($subtotal) }}</strong>
                             </div>
 
@@ -803,19 +875,19 @@
                         <div
                             style="border-top: 1px dashed #e2e8f0; padding-top: 20px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px;">
                             <div class="summary-row">
-                                <span style="color: #718096; font-size: 0.95rem;">Product Value</span>
+                                <span style="color: var(--primary); font-weight: 600; font-size: 0.95rem;">Product Value</span>
                                 <strong
                                     style="color: #2d3748; font-weight: 600;">₹{{ number_format($taxable_value, 2) }}</strong>
                             </div>
 
                             <div class="summary-row">
-                                <span style="color: #2d3748; font-weight: 700; font-size: 0.95rem;">Taxable Value</span>
+                                <span style="color: var(--primary); font-weight: 700; font-size: 0.95rem;">Taxable Value</span>
                                 <strong
                                     style="color: #2d3748; font-weight: 700;">₹{{ number_format($taxable_value, 2) }}</strong>
                             </div>
 
                             <div class="summary-row">
-                                <span style="color: #718096; font-size: 0.95rem;">GST (18%)</span>
+                                <span style="color: var(--primary); font-weight: 600; font-size: 0.95rem;">GST (18%)</span>
                                 <strong style="color: #2d3748; font-weight: 600;">₹{{ number_format($gst_amount, 2) }}</strong>
                             </div>
                         </div>

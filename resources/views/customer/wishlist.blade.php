@@ -38,7 +38,7 @@
                                         <tr>
                                             <th>Product</th>
                                             <th>Price</th>
-                                            <th class="text-center">Action</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -64,7 +64,7 @@
                                                 </td>
                                                 <td class="product-price" data-label="Price">₹{{ number_format($item->product->price, 2) }}</td>
                                                 <td data-label="Action">
-                                                    <div class="action-btns center">
+                                                    <div class="action-btns">
                                                         <form action="{{ route('cart.add') }}" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="product_id" value="{{ $item->product_id }}">
@@ -142,7 +142,7 @@
         .account-grid {
             display: grid;
             grid-template-columns: 320px 1fr;
-            gap: 40px;
+            gap: 20px;
         }
 
         .section-card {
@@ -268,14 +268,20 @@
         }
 
         .text-center {
-            text-align: center;
+            text-align: center !important;
+        }
+
+        .luxury-table th.text-center, 
+        .luxury-table td.text-center {
+            text-align: center !important;
         }
 
         /* Action Buttons */
-        .action-btns.center {
-            justify-content: center;
+        .action-btns {
             display: flex;
             gap: 12px;
+            justify-content: flex-start;
+            align-items: center;
         }
 
         .icon-btn {

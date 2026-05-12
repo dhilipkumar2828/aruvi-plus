@@ -25,8 +25,7 @@
                     </div>
                     <div class="hero-media-content">
                         <div class="hero-video-wrapper">
-                            <video autoplay muted loop playsinline webkit-playsinline preload="auto" class="hero-video" poster="{{ asset('auri-images/background-main.png') }}">
-                                <source src="{{ asset('auri-images/video/main.webm') }}" type="video/webm">
+                            <video autoplay muted loop playsinline webkit-playsinline class="hero-video">
                                 <source src="{{ asset('auri-images/video/main.mp4') }}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
@@ -443,21 +442,7 @@
             }
         }
 
-        @media (max-width: 768px) {
-            #bestsellers .product-card {
-                flex: 0 0 100% !important;
-                min-width: 100% !important;
-            }
-            #bestsellers .product-slider-wrapper {
-                padding: 0 10px;
-            }
-            #bestsellers .shop-nav-prev {
-                left: 0 !important;
-            }
-            #bestsellers .shop-nav-next {
-                right: 0 !important;
-            }
-        }
+
     </style>
 
 
@@ -465,40 +450,40 @@
         <div class="container" style="position: relative;">
             <h2 class="sec-title-nature">Powered by Herbal Products</h2>
 
-            <div class="category-wrapper" style="position: relative; padding: 0 60px; margin: 0 auto; max-width: 100%;">
+            <div class="category-wrapper" style="position: relative; padding: 0 50px; margin: 0 auto; max-width: 100%; overflow: hidden;">
                 <button class="testi-nav testi-prev" ontouchstart=""
-                    onclick="const g=this.parentElement.querySelector('.ing-scroller'); const cs=g.querySelectorAll('.ing-pill'); if(cs.length > 1){ const s=cs[1].offsetLeft - cs[0].offsetLeft; g.scrollBy({left: -s, behavior: 'smooth'}); } else if(cs.length > 0){ g.scrollBy({left: -cs[0].offsetWidth, behavior: 'smooth'}); }"
-                    style="position: absolute; left: -2px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    onclick="handleSliderPrev(this, '.ing-scroller', '.ing-pill')"
+                    style="position: absolute; left: 0px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
                 <div class="ing-scroller" style="scrollbar-width: none; -ms-overflow-style: none;">
-                    @forelse($bestSellingProducts->where('is_herbal', true) as $product)
-                        <a href="{{ route('product.show', $product->slug) }}" class="ing-pill"
+                    @forelse($categories->where('is_herbal', true) as $category)
+                        <a href="{{ route('category.show', $category->slug) }}" class="ing-pill"
                             style="text-decoration: none; color: inherit;">
                             @php
-                                $img_path = $product->primary_image;
+                                $img_path = $category->image;
                                 if ($img_path && !str_starts_with($img_path, 'http') && !str_starts_with($img_path, '/')) {
                                     $img_path = asset($img_path);
                                 }
                             @endphp
                             @if($img_path)
-                                <img src="{{ $img_path }}" alt="{{ $product->name }}"
-                                    onerror="this.src='https://via.placeholder.com/100?text={{ urlencode(substr($product->name, 0, 1)) }}'">
+                                <img src="{{ $img_path }}" alt="{{ $category->name }}"
+                                    onerror="this.src='https://via.placeholder.com/150?text={{ urlencode(substr($category->name, 0, 1)) }}'">
                             @else
-                                <img src="https://via.placeholder.com/100?text={{ urlencode(substr($product->name, 0, 1)) }}"
-                                    alt="{{ $product->name }}">
+                                <img src="https://via.placeholder.com/150?text={{ urlencode(substr($category->name, 0, 1)) }}"
+                                    alt="{{ $category->name }}">
                             @endif
-                            <div class="ing-txt"><strong>{{ $product->name }}</strong></div>
+                            <div class="ing-txt"><strong>{{ $category->name }}</strong></div>
                         </a>
                     @empty
-                        <p style="text-align:center; color:#888;">No Herbal products available yet.</p>
+                        <p style="text-align:center; color:#888;">No Herbal categories available yet.</p>
                     @endforelse
                 </div>
 
                 <button class="testi-nav testi-next" ontouchstart=""
-                    onclick="const g=this.parentElement.querySelector('.ing-scroller'); const cs=g.querySelectorAll('.ing-pill'); if(cs.length > 1){ const s=cs[1].offsetLeft - cs[0].offsetLeft; g.scrollBy({left: s, behavior: 'smooth'}); } else if(cs.length > 0){ g.scrollBy({left: cs[0].offsetWidth, behavior: 'smooth'}); }"
-                    style="position: absolute; right: -2px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    onclick="handleSliderNext(this, '.ing-scroller', '.ing-pill')"
+                    style="position: absolute; right: 0px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -517,8 +502,9 @@
                     display: flex !important;
                     flex-wrap: nowrap !important;
                     overflow-x: auto !important;
-                    gap: 15px !important;
-                    padding: 20px 0 !important;
+                    gap: 25px !important;
+                    padding: 40px 10px !important;
+                    margin: 0 !important;
                     justify-content: flex-start;
                     align-items: stretch;
                     scroll-behavior: smooth;
@@ -527,15 +513,41 @@
                     scrollbar-width: none;
                 }
 
+                @media (min-width: 992px) {
+                    .ing-scroller, .product-grid {
+                        justify-content: flex-start !important;
+                        overflow-x: auto !important;
+                        padding-left: 0 !important;
+                        padding-right: 0 !important;
+                        scrollbar-width: none !important;
+                        display: flex !important;
+                        flex-wrap: nowrap !important;
+                    }
+                    .ing-scroller::-webkit-scrollbar, .product-grid::-webkit-scrollbar {
+                        display: none !important;
+                    }
+                    .category-wrapper, .product-slider-wrapper {
+                        overflow: hidden !important;
+                        padding: 0 50px !important;
+                    }
+                    .product-card {
+                        flex: 0 0 calc((100% - 60px) / 3) !important;
+                        width: calc((100% - 60px) / 3) !important;
+                        min-width: 0 !important;
+                    }
+                    .shop-nav-prev { left: 0 !important; }
+                    .shop-nav-next { right: 0 !important; }
+                }
+
                 .ing-scroller::-webkit-scrollbar {
                     display: none !important;
                 }
 
                 .ing-pill {
-                    flex: 0 0 calc((100% - 30px) / 3) !important;
-                    min-width: 200px !important;
-                    max-width: calc((100% - 30px) / 3) !important;
-                    scroll-snap-align: start;
+                    flex: 0 0 calc((100% - 50px) / 3) !important;
+                    width: calc((100% - 50px) / 3) !important;
+                    min-width: 0 !important;
+                    scroll-snap-align: center;
                     background: #fff;
                     border: 1.5px solid #f0f0f0;
                     border-radius: 25px;
@@ -584,7 +596,7 @@
                     letter-spacing: 0.5px;
                 }
 
-                @media (max-width: 768px) {
+                @media (max-width: 991px) {
                     .sec-title-nature {
                         font-size: 1.8rem;
                         margin-bottom: 25px;
@@ -596,10 +608,27 @@
                     }
 
                     .category-wrapper {
-                        padding: 0 0px !important;
+                        padding: 0 !important;
                         margin: 0 !important;
                         width: 100% !important;
                         position: relative;
+                        overflow: hidden !important;
+                    }
+                    @media (min-width: 700px) and (max-width: 991px) {
+                        .category-wrapper {
+                            padding: 0 60px !important;
+                        }
+                        .ing-scroller {
+                            gap: 10px !important;
+                            padding: 20px 0 !important;
+                        }
+                        .ing-pill {
+                            flex: 0 0 calc(50% - 5px) !important;
+                            min-width: calc(50% - 5px) !important;
+                            margin: 0 !important;
+                        }
+                        .category-wrapper .testi-prev { left: 10px !important; }
+                        .category-wrapper .testi-next { right: 10px !important; }
                     }
 
                     .category-wrapper .testi-nav {
@@ -629,11 +658,11 @@
                         transform: translateY(-50%) scale(0.9) !important;
                     }
                     .category-wrapper .testi-prev {
-                        left: 13px !important;
+                        left: 0 !important;
                     }
 
                     .category-wrapper .testi-next {
-                        right: 13px !important;
+                        right: 0 !important;
                     }
 
                     .ing-scroller::-webkit-scrollbar {
@@ -646,21 +675,20 @@
                         overflow-x: auto !important;
                         -ms-overflow-style: none !important;
                         scrollbar-width: none !important;
-                        gap: 0 !important;
-                        padding: 20px 0 !important; 
+                        gap: 10px !important;
+                        padding: 20px 5px !important; 
+                        margin: 0 !important;
                         box-sizing: border-box !important;
                         justify-content: flex-start !important;
                         scroll-snap-type: x mandatory !important;
                         -webkit-overflow-scrolling: touch !important;
-                        -webkit-transform: translate3d(0,0,0);
-                        backface-visibility: hidden;
                     }
 
                     .ing-pill {
-                        flex: 0 0 calc(100% - 20px) !important;
-                        min-width: calc(100% - 20px) !important;
-                        margin: 0 10px !important;
-                        scroll-snap-align: center !important;
+                        flex: 0 0 100% !important;
+                        min-width: 100% !important;
+                        margin: 0 !important;
+                        scroll-snap-align: start !important;
                         scroll-snap-stop: always !important;
                         border-radius: 20px !important;
                         border: 1.5px solid #f0f0f0 !important;
@@ -674,6 +702,15 @@
                         gap: 15px !important;
                         min-height: 220px !important;
                         box-sizing: border-box !important;
+                    }
+
+                    /* Tablet - 2 cards visible */
+                    @media (min-width: 700px) {
+                        .ing-pill {
+                            flex: 0 0 calc(50% - 5px) !important;
+                            min-width: calc(50% - 5px) !important;
+                            scroll-snap-align: start !important;
+                        }
                     }
 
                     .ing-pill img {
@@ -704,11 +741,11 @@
                 }
 
                 .testi-prev {
-                    left: 10px !important;
+                    left: 0px !important;
                 }
 
                 .testi-next {
-                    right: 10px !important;
+                    right: 0px !important;
                 }
                 
             </style>
@@ -745,40 +782,40 @@
 
             <h2 class="sec-title-nature">Powered by Navapashanam</h2>
 
-            <div class="category-wrapper" style="position: relative; padding: 0 60px; margin: 0 auto; max-width: 100%;">
+            <div class="category-wrapper" style="position: relative; padding: 0 50px; margin: 0 auto; max-width: 100%; overflow: hidden;">
                 <button class="testi-nav testi-prev" ontouchstart=""
-                    onclick="const g=this.parentElement.querySelector('.ing-scroller'); const cs=g.querySelectorAll('.ing-pill'); if(cs.length > 1){ const s=cs[1].offsetLeft - cs[0].offsetLeft; g.scrollBy({left: -s, behavior: 'smooth'}); } else if(cs.length > 0){ g.scrollBy({left: -cs[0].offsetWidth, behavior: 'smooth'}); }"
-                    style="position: absolute; left: -2px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    onclick="handleSliderPrev(this, '.ing-scroller', '.ing-pill')"
+                    style="position: absolute; left: 0px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
                 <div class="ing-scroller" style="scrollbar-width: none; -ms-overflow-style: none;">
-                    @forelse($bestSellingProducts->where('is_navapashanam', true) as $product)
-                        <a href="{{ route('product.show', $product->slug) }}" class="ing-pill"
+                    @forelse($categories->where('is_navapashanam', true) as $category)
+                        <a href="{{ route('category.show', $category->slug) }}" class="ing-pill"
                             style="text-decoration: none; color: inherit;">
                             @php
-                                $img_path = $product->primary_image;
+                                $img_path = $category->image;
                                 if ($img_path && !str_starts_with($img_path, 'http') && !str_starts_with($img_path, '/')) {
                                     $img_path = asset($img_path);
                                 }
                             @endphp
                             @if($img_path)
-                                <img src="{{ $img_path }}" alt="{{ $product->name }}"
-                                    onerror="this.src='https://via.placeholder.com/100?text={{ urlencode(substr($product->name, 0, 1)) }}'">
-                                @else
-                                    <img src="https://via.placeholder.com/100?text={{ urlencode(substr($product->name, 0, 1)) }}"
-                                        alt="{{ $product->name }}">
-                                @endif
-                                <div class="ing-txt"><strong>{{ $product->name }}</strong></div>
-                            </a>
+                                <img src="{{ $img_path }}" alt="{{ $category->name }}"
+                                    onerror="this.src='https://via.placeholder.com/150?text={{ urlencode(substr($category->name, 0, 1)) }}'">
+                            @else
+                                <img src="https://via.placeholder.com/150?text={{ urlencode(substr($category->name, 0, 1)) }}"
+                                    alt="{{ $category->name }}">
+                            @endif
+                            <div class="ing-txt"><strong>{{ $category->name }}</strong></div>
+                        </a>
                     @empty
-                        <p style="text-align:center; color:#888;">No Navapashanam products available yet.</p>
+                        <p style="text-align:center; color:#888;">No Navapashanam categories available yet.</p>
                     @endforelse
                 </div>
 
                 <button class="testi-nav testi-next" ontouchstart=""
-                    onclick="const g=this.parentElement.querySelector('.ing-scroller'); const cs=g.querySelectorAll('.ing-pill'); if(cs.length > 1){ const s=cs[1].offsetLeft - cs[0].offsetLeft; g.scrollBy({left: s, behavior: 'smooth'}); } else if(cs.length > 0){ g.scrollBy({left: cs[0].offsetWidth, behavior: 'smooth'}); }"
-                    style="position: absolute; right: -2px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    onclick="handleSliderNext(this, '.ing-scroller', '.ing-pill')"
+                    style="position: absolute; right: 0px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -793,30 +830,29 @@
             </div>
             <div class="product-slider-wrapper" style="position: relative;">
                 <button class="testi-nav testi-prev shop-nav-prev" ontouchstart=""
-                    onclick="const g=this.parentElement.querySelector('.product-grid'); const cs=g.querySelectorAll('.product-card'); if(cs.length > 1){ const s=cs[1].offsetLeft - cs[0].offsetLeft; g.scrollBy({left: -s, behavior: 'smooth'}); } else if(cs.length > 0){ g.scrollBy({left: -cs[0].offsetWidth, behavior: 'smooth'}); }"
-                    style="position: absolute; left: -25px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    onclick="handleSliderPrev(this, '.product-grid', '.product-card')"
+                    style="position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
                 <div class="product-grid" style="scrollbar-width: none; -ms-overflow-style: none;">
                     @forelse($bestSellingProducts as $product)
                         <div class="product-card">
+                            <a href="{{ route('product.show', $product->slug) }}" class="product-card-link"></a>
                             <div class="p-img-wrap">
-                                <a href="{{ route('product.show', $product->slug) }}">
-                                    @php
-                                        $img_path = $product->primary_image;
-                                        if ($img_path && !str_starts_with($img_path, 'http') && !str_starts_with($img_path, '/')) {
-                                            $img_path = asset($img_path);
-                                        }
-                                    @endphp
-                                    @if($img_path)
-                                        <img src="{{ $img_path }}" alt="{{ $product->name }}"
-                                            onerror="this.src='https://via.placeholder.com/300?text=Auvri+Product'">
-                                    @else
-                                        <img src="https://via.placeholder.com/300?text={{ urlencode($product->name) }}"
-                                            alt="{{ $product->name }}">
-                                    @endif
-                                </a>
+                                @php
+                                    $img_path = $product->primary_image;
+                                    if ($img_path && !str_starts_with($img_path, 'http') && !str_starts_with($img_path, '/')) {
+                                        $img_path = asset($img_path);
+                                    }
+                                @endphp
+                                @if($img_path)
+                                    <img src="{{ $img_path }}" alt="{{ $product->name }}"
+                                        onerror="this.src='https://via.placeholder.com/300?text=Auvri+Product'">
+                                @else
+                                    <img src="https://via.placeholder.com/300?text={{ urlencode($product->name) }}"
+                                        alt="{{ $product->name }}">
+                                @endif
                                 <a href="{{ route('product.show', $product->slug) }}" class="quick-view-btn">Quick View</a>
                             </div>
                             <div class="p-info">
@@ -853,8 +889,8 @@
                 </div>
 
                 <button class="testi-nav testi-next shop-nav-next" ontouchstart=""
-                    onclick="const g=this.parentElement.querySelector('.product-grid'); const cs=g.querySelectorAll('.product-card'); if(cs.length > 1){ const s=cs[1].offsetLeft - cs[0].offsetLeft; g.scrollBy({left: s, behavior: 'smooth'}); } else if(cs.length > 0){ g.scrollBy({left: cs[0].offsetWidth, behavior: 'smooth'}); }"
-                    style="position: absolute; right: -25px; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
+                    onclick="handleSliderNext(this, '.product-grid', '.product-card')"
+                    style="position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.08); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.1rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -904,10 +940,10 @@
             <div class="sec-head">
                 <h2>Trusted by Our Wellness Community</h2>
             </div>
-            <div class="testimonial-wrapper" style="position: relative; padding: 0 40px;">
+            <div class="testimonial-wrapper" style="position: relative; padding: 0 50px;">
                 <button class="testi-nav testi-prev"
-                    onclick="const g=this.parentElement.querySelector('.reviews-grid'); g.scrollBy({left: -g.offsetWidth, behavior: 'smooth'});"
-                    style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.2rem; transition: all 0.3s ease;">
+                    onclick="handleSliderPrev(this, '.reviews-grid', '.white-floating-card')"
+                    style="position: absolute; left: 0px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.2rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
@@ -943,8 +979,8 @@
                 </div>
 
                 <button class="testi-nav testi-next"
-                    onclick="const g=this.parentElement.querySelector('.reviews-grid'); g.scrollBy({left: g.offsetWidth, behavior: 'smooth'});"
-                    style="position: absolute; right: -20px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.2rem; transition: all 0.3s ease;">
+                    onclick="handleSliderNext(this, '.reviews-grid', '.white-floating-card')"
+                    style="position: absolute; right: 0px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: #004200; font-size: 1.2rem; transition: all 0.3s ease;">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -955,14 +991,11 @@
             display: flex !important;
             overflow-x: auto !important;
             gap: 30px !important;
-            padding: 20px 0 40px !important;
+            padding: 20px 25px 40px !important;
             scroll-snap-type: x mandatory !important;
             -webkit-overflow-scrolling: touch !important;
             scrollbar-width: none !important;
             -ms-overflow-style: none !important;
-            overflow-y: hidden !important;
-            -webkit-transform: translate3d(0,0,0); /* Safari stability */
-            backface-visibility: hidden;
         }
 
         .reviews-grid::-webkit-scrollbar {
@@ -976,34 +1009,36 @@
         }
 
         .white-floating-card {
-            flex: 0 0 calc((100% - 60px) / 3) !important;
+            flex: 0 0 calc(33.333% - 20px) !important;
             scroll-snap-align: start !important;
-            min-width: 280px !important;
-            box-sizing: border-box !important;
+            min-width: 300px !important;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
 
         @media (max-width: 1100px) {
             .white-floating-card {
-                flex: 0 0 calc((100% - 30px) / 2) !important;
-                min-width: 250px !important;
+                flex: 0 0 calc(50% - 15px) !important;
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 991px) {
             .secondary-btn-lx {
                 padding: 10px 20px !important;
                 font-size: 0.9rem !important;
             }
 
             .white-floating-card {
-                flex: 0 0 calc(100% - 20px) !important;
-                min-width: calc(100% - 20px) !important;
-                margin: 0 10px !important;
-                scroll-snap-align: center !important;
+                flex: 0 0 100% !important;
+                min-width: 100% !important;
+                scroll-snap-align: center;
                 margin-bottom: 0px !important;
                 border-radius: 20px !important;
                 padding: 20px 20px !important;
-                box-sizing: border-box !important;
             }
 
             .r-name {
@@ -1018,30 +1053,35 @@
                 font-size: 0.95rem !important;
             }
 
-            .testimonial-wrapper {
-                padding: 0 10px !important; 
-                overflow: hidden !important;
-            }
-
-            .reviews-grid::-webkit-scrollbar {
-                display: none !important;
-            }
-
             .reviews-grid {
                 display: flex !important;
                 flex-wrap: nowrap !important;
                 overflow-x: auto !important;
-                -ms-overflow-style: none !important;
-                scrollbar-width: none !important;
                 scroll-snap-type: x mandatory !important;
                 gap: 0 !important;
                 padding: 40px 0 !important;
-                box-sizing: border-box !important;
-                -webkit-overflow-scrolling: touch !important;
             }
 
             .testimonial-wrapper {
-                padding: 0 10px !important; 
+                padding: 0 50px !important;
+            }
+            @media (min-width: 700px) and (max-width: 991px) {
+                .testimonial-wrapper {
+                    padding: 0 60px !important;
+                    overflow: hidden !important;
+                }
+                .reviews-grid {
+                    gap: 10px !important;
+                    padding: 20px 0 !important;
+                }
+                .white-floating-card {
+                    flex: 0 0 calc(50% - 5px) !important;
+                    min-width: calc(50% - 5px) !important;
+                    margin: 0 !important;
+                    scroll-snap-align: start !important;
+                }
+                .testimonial-wrapper .testi-prev { left: 10px !important; }
+                .testimonial-wrapper .testi-next { right: 10px !important; }
             }
 
             .testimonial-wrapper .testi-nav {
@@ -1052,46 +1092,28 @@
                 color: #004200 !important;
                 z-index: 20 !important;
             }
-            .testimonial-wrapper .testi-nav:hover {
-                background: rgba(255, 255, 255, 0.9) !important;
-                color: #004200 !important;
-            }
 
-            .testimonial-wrapper .testi-nav:active {
-                background: #004200 !important;
-                color: #fff !important;
-                transform: translateY(-50%) scale(0.9) !important;
-            }
-            /* 
-               TESTIMONIAL SPECIFIC BUTTON POSITIONS 
-               Adjust these values to move the buttons independently
-            */
-            .category-wrapper .testi-prev, 
             .testimonial-wrapper .testi-prev {
-                left: 12px !important;
+                left: -25px !important;
             }
 
-            .category-wrapper .testi-next, 
             .testimonial-wrapper .testi-next {
-                right: 12px !important;
+                right: -25px !important;
             }
-
-
 
             /* Small Phone Optimizations (320px - 450px) */
             @media (max-width: 450px) {
-
                 .testimonial-wrapper,
                 .category-wrapper {
-                    padding: 0 10px;
+                    padding: 0 0px !important;
                 }
 
                 .white-floating-card {
-                    padding: 20px 15px;
+                    padding: 20px 15px !important;
                 }
 
                 .r-name {
-                    font-size: 0.9rem;
+                    font-size: 0.9rem !important;
                 }
 
                 .r-loc {
@@ -1112,26 +1134,6 @@
 
                 .ing-txt span {
                     font-size: 0.65rem !important;
-                }
-            }
-            
-            /* Small Mobiles (Up to 320px) */
-            @media (max-width: 320px) {
-                .testimonial-wrapper,
-                .category-wrapper {
-                    padding: 0 0px;
-                }
-
-                .white-floating-card {
-                    padding: 15px 10px;
-                }
-
-                .r-name {
-                    font-size: 0.8rem;
-                }
-
-                .r-text {
-                    font-size: 0.7rem;
                 }
             }
         }
@@ -1223,14 +1225,12 @@
                 overflow-x: auto !important;
                 -ms-overflow-style: none !important;
                 scrollbar-width: none !important;
-                gap: 0 !important; /* Switched to margin-right for exact Herbal sync */
-                padding: 10px 0px 20px !important; /* Removed side padding to rely on slide padding */
+                gap: 0 !important;
+                padding: 10px 0px 20px !important;
                 box-sizing: border-box !important;
                 scroll-snap-type: x mandatory !important;
                 -webkit-overflow-scrolling: touch !important;
-                scrollbar-width: none;
-                -webkit-transform: translate3d(0,0,0);
-                backface-visibility: hidden;
+                margin: 0 !important;
             }
 
             #bestsellers .container {
@@ -1239,9 +1239,27 @@
             }
 
             #bestsellers .product-slider-wrapper {
-                padding: 0 10px !important;
+                padding: 0 !important;
                 margin: 0 !important;
                 width: 100% !important;
+                overflow: hidden !important;
+            }
+            @media (min-width: 700px) and (max-width: 991px) {
+                #bestsellers .product-slider-wrapper {
+                    padding: 0 60px !important;
+                }
+                #bestsellers .product-grid {
+                    gap: 10px !important;
+                    padding: 20px 0 !important;
+                }
+                #bestsellers .product-card {
+                    flex: 0 0 calc(50% - 5px) !important;
+                    min-width: calc(50% - 5px) !important;
+                    margin: 0 !important;
+                    scroll-snap-align: start !important;
+                }
+                #bestsellers .testi-prev { left: 10px !important; }
+                #bestsellers .testi-next { right: 10px !important; }
             }
 
             #bestsellers .product-grid::-webkit-scrollbar {
@@ -1253,20 +1271,24 @@
                 min-width: calc(100% - 20px) !important;
                 margin: 0 10px !important;
                 scroll-snap-align: center !important;
-                padding: 15px !important; /* Internal card padding */
+                padding: 15px !important;
                 box-sizing: border-box !important;
-                border: 1px solid #eeeeee !important; /* Subtle gray border */
-                border-radius: 15px !important; /* Rounded corners for premium feel */
+                border: 1px solid #eeeeee !important;
+                border-radius: 15px !important;
                 background: #fff !important;
+                position: relative !important;
             }
 
             /* Show 2 cards on larger tablets */
             @media (min-width: 700px) {
                 #bestsellers .product-card {
-                    flex: 0 0 50% !important;
-                    min-width: 50% !important;
+                    flex: 0 0 calc(50% - 20px) !important;
+                    min-width: calc(50% - 20px) !important;
+                    scroll-snap-align: start !important;
                 }
             }
+
+
 
             #bestsellers .testi-nav {
                 display: flex !important;
@@ -1289,11 +1311,11 @@
                 transform: translateY(-50%) scale(0.9) !important;
             }
             #bestsellers .testi-prev {
-                left: 11px !important;
+                left: 0 !important;
             }
 
             #bestsellers .testi-next {
-                right: 11px !important;
+                right: 0 !important;
             }
 
             #bestsellers .sec-head {
@@ -1434,6 +1456,36 @@
 @endsection
 @section('extra_js')
     <script>
+        function handleSliderPrev(btn, scrollerClass, itemClass) {
+            const g = btn.parentElement.querySelector(scrollerClass);
+            const cs = g.querySelectorAll(itemClass);
+            if (cs.length > 0) {
+                const s = cs.length > 1 ? cs[1].offsetLeft - cs[0].offsetLeft : g.offsetWidth;
+                if (g.scrollLeft <= 10) {
+                    if (window.innerWidth > 991) {
+                        g.scrollTo({ left: g.scrollWidth, behavior: 'smooth' });
+                    }
+                } else {
+                    g.scrollBy({ left: -s, behavior: 'smooth' });
+                }
+            }
+        }
+
+        function handleSliderNext(btn, scrollerClass, itemClass) {
+            const g = btn.parentElement.querySelector(scrollerClass);
+            const cs = g.querySelectorAll(itemClass);
+            if (cs.length > 0) {
+                const s = cs.length > 1 ? cs[1].offsetLeft - cs[0].offsetLeft : g.offsetWidth;
+                if (g.scrollLeft + g.offsetWidth >= g.scrollWidth - 10) {
+                    if (window.innerWidth > 991) {
+                        g.scrollTo({ left: 0, behavior: 'smooth' });
+                    }
+                } else {
+                    g.scrollBy({ left: s, behavior: 'smooth' });
+                }
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const scrollerConfigs = [
                 { selector: '.ing-scroller', step: 300, interval: 3500 },
@@ -1447,27 +1499,22 @@
                 elements.forEach(el => {
                     let autoScrollTimer;
                     let isPaused = false;
+                    let pauseTimeout;
 
                     const startAutoScroll = () => {
                         autoScrollTimer = setInterval(() => {
                             if (isPaused) return;
 
                             const items = el.children;
-                            if (items.length === 0) return;
+                            if (items.length < 2) return;
 
-                            // Calculate current visible index
-                            let currentIndex = Math.round(el.scrollLeft / items[0].offsetWidth);
-                            let nextIndex = currentIndex + 1;
+                            const step = items[1].offsetLeft - items[0].offsetLeft;
+                            const isAtEnd = el.scrollLeft + el.offsetWidth >= el.scrollWidth - 10;
 
-                            if (nextIndex >= items.length) {
+                            if (isAtEnd) {
                                 el.scrollTo({ left: 0, behavior: 'smooth' });
                             } else {
-                                // Use scrollTo on the element only, to prevent page jumping
-                                const targetLeft = items[nextIndex].offsetLeft - items[0].offsetLeft;
-                                el.scrollTo({ 
-                                    left: targetLeft,
-                                    behavior: 'smooth'
-                                });
+                                el.scrollBy({ left: step, behavior: 'smooth' });
                             }
                         }, config.interval);
                     };
@@ -1483,6 +1530,23 @@
                     el.addEventListener('touchend', () => {
                         setTimeout(() => isPaused = false, 2000);
                     }, { passive: true });
+
+                    // Pause for 5 seconds on button click
+                    const wrapper = el.parentElement;
+                    if (wrapper) {
+                        const navBtns = wrapper.querySelectorAll('.testi-nav, .shop-nav-prev, .shop-nav-next');
+                        navBtns.forEach(btn => {
+                            btn.addEventListener('click', () => {
+                                if (window.innerWidth > 991) {
+                                    isPaused = true;
+                                    clearTimeout(pauseTimeout);
+                                    pauseTimeout = setTimeout(() => {
+                                        isPaused = false;
+                                    }, 5000);
+                                }
+                            });
+                        });
+                    }
 
                     // Only start auto-scroll on desktop (above 991px)
                     if (window.innerWidth > 991) {
