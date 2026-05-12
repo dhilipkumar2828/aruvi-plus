@@ -1,24 +1,12 @@
 <div class="product-card">
+    <a href="{{ route('product.show', $product->slug) }}" class="product-card-link"></a>
+    
     <div class="p-img-wrap">
-        <a href="{{ route('product.show', $product->slug) }}">
-            @php
-                $img_path = $product->primary_image;
-                if ($img_path && !str_starts_with($img_path, 'http') && !str_starts_with($img_path, '/')) {
-                    $img_path = asset($img_path);
-                }
-            @endphp
-            @if($img_path)
-                <img src="{{ $img_path }}" alt="{{ $product->name }}" onerror="this.src='https://via.placeholder.com/300?text=Auvri+Product'">
-            @else
-                <img src="https://via.placeholder.com/300?text={{ urlencode($product->name) }}" alt="{{ $product->name }}">
-            @endif
-        </a>
-        
         <!-- Wishlist Overlay -->
         @php
             $isInWishlist = Auth::check() && Auth::user()->wishlist->contains('product_id', $product->id);
         @endphp
-        <form action="{{ route('wishlist.toggle') }}" method="POST" class="wishlist-overlay-form" style="position: absolute; top: 15px; right: 15px; z-index: 5;">
+        <form action="{{ route('wishlist.toggle') }}" method="POST" class="wishlist-overlay-form" style="position: absolute; top: 15px; right: 15px; z-index: 20;">
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <button type="submit" style="width: 40px; height: 40px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; color: {{ $isInWishlist ? '#d4145a' : 'var(--primary)' }}; transition: all 0.3s ease;">
@@ -26,7 +14,21 @@
             </button>
         </form>
 
-        <a href="{{ route('product.show', $product->slug) }}" class="quick-view-btn">Quick View</a>
+        @php
+            $img_path = $product->primary_image;
+            if ($img_path && !str_starts_with($img_path, 'http') && !str_starts_with($img_path, '/')) {
+                $img_path = asset($img_path);
+            }
+        @endphp
+        @if($img_path)
+            <img src="{{ $img_path }}" alt="{{ $product->name }}" onerror="this.src='https://via.placeholder.com/300?text=Auvri+Product'">
+        @else
+            <img src="https://via.placeholder.com/300?text={{ urlencode($product->name) }}" alt="{{ $product->name }}">
+        @endif
+        
+        @if(!isset($hideQuickView) || !$hideQuickView)
+            <a href="{{ route('product.show', $product->slug) }}" class="quick-view-btn">Quick View</a>
+        @endif
         @if($product->compare_price && $product->compare_price > $product->price)
             <div style="position: absolute; top: 15px; left: 15px; background: #e53935; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; z-index: 5; box-shadow: 0 4px 10px rgba(229,57,53,0.2);">
                 {{ round((($product->compare_price - $product->price) / $product->compare_price) * 100) }}% OFF

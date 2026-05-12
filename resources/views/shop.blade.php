@@ -69,6 +69,7 @@
                             $images = count($gallery) ? $gallery : ($product->primary_image ? [$product->primary_image] : []);
                         @endphp
                         <div class="premium-product-card">
+                            <a href="{{ route('product.show', $product->slug) }}" class="premium-card-link"></a>
                             @if ($product->badge_text)
                                 <div class="premium-badge">{{ $product->badge_text }}</div>
                             @endif
@@ -103,7 +104,7 @@
                                         <div class="premium-category">{{ $product->category ?? 'Collection' }}</div>
                                     @endif
                                 </div>
-                                <h3 class="premium-title"><a href="{{ route('product.show', $product->slug) }}">{{ $product->name }}</a></h3>
+                                <h3 class="premium-title">{{ $product->name }}</h3>
                                 <div class="premium-rating" style="display: flex; gap: 4px; justify-content: center; margin-bottom: 8px; color: #ff9100; font-size: 13px;">
                                     @for($i=1; $i<=5; $i++)
                                         <i class="{{ $i <= round($product->rating) ? 'fas' : 'far' }} fa-star"></i>
@@ -361,6 +362,22 @@
         min-height: unset !important;
         border: 1px solid #f0f0f0 !important;
         box-shadow: 0 5px 15px rgba(0,0,0,0.05) !important;
+        position: relative;
+    }
+    .premium-card-link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10; /* Definitive overlay on top of images/text */
+    }
+    .wishlist-btn, .premium-add-btn, .category-pill-card-small {
+        position: relative;
+        z-index: 20; /* Keep buttons above the card overlay */
+    }
+    .wishlist-btn:hover, .premium-add-btn:hover {
+        z-index: 21;
     }
     .shop-product-grid .premium-img-box {
         width: 100% !important;

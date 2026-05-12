@@ -143,6 +143,28 @@
             margin-top: 30px;
         }
 
+        /* Force Dark Header for this page */
+        #main-header {
+            background: #003000 !important;
+            padding: 15px 0 !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links a, 
+        .header-icons > a, 
+        .user-trigger,
+        .auth-box > a.auth-btn-login {
+            color: #ffffff !important;
+        }
+
+        .dropdown-menu-auri a {
+            color: #333333 !important;
+        }
+
+        .dropdown-menu-auri a:hover {
+            color: var(--primary) !important;
+        }
+
         @media (max-width: 768px) {
             .success-section {
                 padding: 110px 0 60px !important;
@@ -178,10 +200,10 @@
 
             @media (max-width: 480px) {
                 .success-container {
-                    padding: 35px 20px !important;
-                    margin: 0 10px !important;
-                    width: calc(100% - 20px) !important;
-                    border-radius: 20px !important;
+                    padding: 25px 12px !important;
+                    margin: 0 !important;
+                    width: 100% !important;
+                    border-radius: 15px !important;
                 }
 
                 .success-icon {
@@ -200,26 +222,38 @@
                 }
 
                 .order-info {
-                    padding: 20px 15px !important;
+                    padding: 20px 12px !important;
+                    margin-bottom: 25px !important;
                 }
 
                 .order-info-item {
-                    flex-direction: column !important;
-                    align-items: flex-start !important;
-                    gap: 5px !important;
+                    display: flex !important;
+                    flex-direction: row !important;
+                    justify-content: space-between !important;
+                    align-items: center !important;
                     margin-bottom: 15px !important;
                     text-align: left !important;
+                    flex-wrap: nowrap !important;
+                    gap: 10px !important;
+                }
+
+                .order-info-label {
+                    white-space: nowrap !important;
                 }
 
                 .order-info-value {
                     font-size: 1rem !important;
+                    white-space: normal !important;
+                    text-align: right !important;
+                    word-break: break-word !important;
                 }
 
                 .order-info-item[style*="display: flex; align-items: center"] {
                     display: flex !important;
-                    flex-direction: column !important;
+                    flex-direction: row !important;
+                    justify-content: space-between !important;
                     align-items: center !important;
-                    text-align: center !important;
+                    text-align: left !important;
                 }
 
                 span[style*="font-size: 1.4rem"] {
@@ -233,9 +267,9 @@
 
             @media (max-width: 320px) {
                 .success-container {
-                    padding: 25px 15px !important;
-                    margin: 0 5px !important;
-                    width: calc(100% - 10px) !important;
+                    padding: 20px 10px !important;
+                    margin: 0 !important;
+                    width: 100% !important;
                 }
                 .success-title {
                     font-size: 1.3rem !important;
@@ -248,7 +282,7 @@
                 }
                 .order-info-value {
                     font-size: 0.9rem !important;
-                    word-break: break-all;
+                    word-break: normal !important;
                 }
                 span[style*="font-size: 1.4rem"] {
                     font-size: 1rem !important;
@@ -290,7 +324,7 @@
                     <div class="order-info-item" style="margin-top: 15px;">
                         <span class="order-info-label" style="color: #888;">Product Value :</span>
                         <span class="order-info-value"
-                            style="color: #444; font-weight: 600;">₹{{ number_format(($order->amount - ($order->shipping_amount - $order->shipping_discount)) / 1.18, 2) }}</span>
+                            style="color: #1a1a1a; font-weight: 800;">₹{{ number_format(($order->amount - ($order->shipping_amount - $order->shipping_discount)) / 1.18, 2) }}</span>
                     </div>
 
                     @if($order->discount_amount > 0)
@@ -304,12 +338,12 @@
                     <div class="order-info-item">
                         <span class="order-info-label" style="color: #888;">Shipping Charges:</span>
                         <span class="order-info-value"
-                            style="color: #444; font-weight: 600;">₹{{ number_format(($order->shipping_amount - $order->shipping_discount) / 1.18, 2) }}</span>
+                            style="color: #1a1a1a; font-weight: 800;">₹{{ number_format(($order->shipping_amount - $order->shipping_discount) / 1.18, 2) }}</span>
                     </div>
 
                     <div style="border-top: 1px solid #f0f0f0; margin: 15px 0; padding-top: 15px;">
                         <div class="order-info-item">
-                            <span class="order-info-label" style="color: #1a1a1a; font-weight: 800;">Taxable Value:</span>
+                            <span class="order-info-label" style="color: #888;">Taxable Value:</span>
                             <span class="order-info-value" style="color: #1a1a1a; font-weight: 800;">
                                 ₹{{ number_format($order->taxable_value > 0 ? $order->taxable_value : ($order->amount / 1.18), 2) }}
                             </span>
@@ -317,7 +351,7 @@
 
                         <div class="order-info-item">
                             <span class="order-info-label" style="color: #888;">GST (18%):</span>
-                            <span class="order-info-value" style="color: #444; font-weight: 600;">
+                            <span class="order-info-value" style="color: #1a1a1a; font-weight: 800;">
                                 ₹{{ number_format($order->gst_amount > 0 ? $order->gst_amount : ($order->amount - ($order->amount / 1.18)), 2) }}
                             </span>
                         </div>
@@ -326,19 +360,18 @@
                     <div class="order-info-item">
                         <span class="order-info-label" style="color: #888;">Payment Method:</span>
                         <span class="order-info-value"
-                            style="color: #333; font-weight: 700;">{{ $order->payment_method ?? 'Cash On Delivery' }}</span>
+                            style="color: #1a1a1a; font-weight: 800;">{{ $order->payment_method ?? 'Cash On Delivery' }}</span>
                     </div>
 
                     <div class="order-info-item">
                         <span class="order-info-label" style="color: #888;">Date:</span>
                         <span class="order-info-value"
-                            style="color: #333; font-weight: 600;">{{ $order->created_at->format('M d, Y') }}</span>
+                            style="color: #1a1a1a; font-weight: 800;">{{ $order->created_at->format('M d, Y') }}</span>
                     </div>
 
                     <div class="order-info-item"
-                        style="border-top: 1px solid #f0f0f0; padding-top: 20px; margin-top: 20px; display: flex; align-items: center;">
-                        <span class="order-info-label" style="font-size: 1.4rem; color: #1a1a1a; font-weight: 800;">Grand
-                            Total:</span>
+                        style="border-top: 1px solid #f0f0f0; padding-top: 20px; margin-top: 20px; display: flex; align-items: center; justify-content: space-between;">
+                        <span class="order-info-label" style="font-size: 1.4rem; color: #1a1a1a; font-weight: 800;">Grand Total:</span>
                         <span class="order-info-value"
                             style="font-size: 1.8rem; color: #b0185e; font-weight: 900;">₹{{ number_format($order->amount, 0) }}</span>
                     </div>

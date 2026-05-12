@@ -235,6 +235,17 @@
                 grid-template-columns: 1fr !important;
                 gap: 15px !important;
             }
+            .saved-addresses-scroll {
+                scroll-snap-type: x mandatory !important;
+                -webkit-overflow-scrolling: touch !important;
+                gap: 10px !important;
+            }
+            .address-card {
+                flex: 0 0 100% !important;
+                scroll-snap-align: center !important;
+                padding: 15px !important;
+                box-sizing: border-box !important;
+            }
         }
 
         @media (max-width: 480px) {
@@ -257,8 +268,16 @@
             }
 
             .checkout-title {
-                font-size: 1.2rem !important;
+                font-size: 22px !important;
                 margin-bottom: 20px !important;
+            }
+            .section-label {
+                font-size: 14px !important;
+                margin-bottom: 12px !important;
+            }
+            .saved-addresses-container {
+                padding: 15px 12px !important;
+                margin-bottom: 25px !important;
             }
 
             .form-control {
@@ -268,13 +287,14 @@
 
             .summary-total {
                 padding: 15px 12px !important;
-                flex-direction: column !important;
-                gap: 8px !important;
-                text-align: center !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                text-align: left !important;
             }
 
             .summary-total span {
-                font-size: 0.85rem !important;
+                font-size: 1.2rem !important;
             }
 
             #summary-total {
@@ -292,54 +312,53 @@
                 padding: 0 10px !important;
             }
             .checkout-hero {
-                padding: 90px 10px 30px !important;
+                padding: 100px 10px 30px !important;
             }
             .checkout-hero h1 {
-                font-size: 1.6rem !important;
+                font-size: 1.8rem !important;
             }
             .checkout-hero p {
-                font-size: 0.75rem !important;
+                font-size: 14px !important;
             }
             .checkout-card, .summary-card {
                 padding: 15px 10px !important;
                 border-radius: 12px !important;
             }
             .checkout-title {
-                font-size: 1.1rem !important;
+                font-size: 22px !important;
+            }
+            .section-label {
+                font-size: 14px !important;
             }
             .form-label {
-                font-size: 0.7rem !important;
+                font-size: 0.75rem !important;
             }
             .form-control {
                 padding: 10px !important;
-                font-size: 0.85rem !important;
+                font-size: 0.9rem !important;
             }
             .summary-total {
-                flex-direction: column !important;
-                gap: 5px !important;
-                text-align: center !important;
                 padding: 12px !important;
             }
             #summary-total {
                 font-size: 1.5rem !important;
             }
             .btn-complete-order {
-                font-size: 0.8rem !important;
+                font-size: 0.9rem !important;
                 padding: 14px !important;
                 letter-spacing: 0.5px !important;
             }
-            .saved-addresses-container {
-                padding: 15px 10px !important;
+            .saved-addresses-scroll {
+                gap: 10px !important;
             }
             .address-card {
-                flex: 0 0 240px !important;
-                padding: 12px !important;
+                padding: 15px !important;
             }
             .address-card h5 {
-                font-size: 0.9rem !important;
+                font-size: 1rem !important;
             }
             .address-card p {
-                font-size: 0.75rem !important;
+                font-size: 13px !important;
             }
         }
 
@@ -475,6 +494,14 @@
             letter-spacing: 1px;
             margin-bottom: 15px;
             display: block;
+        }
+        .checkout-item-name {
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            line-height: 1.4 !important;
         }
     </style>
 @endsection
@@ -669,7 +696,7 @@
                                 </div>
 
                                 <div class="summary-row">
-                                    <span style="color: #333; font-weight: 700; font-size: 0.95rem;">Taxable Value</span>
+                                    <span style="color: #777; font-size: 0.9rem;">Taxable Value</span>
                                     <strong id="summary-taxable-value" style="color: #333; font-weight: 700;">{{ format_inr($taxable_value) }}</strong>
                                 </div>
 
@@ -682,7 +709,7 @@
 
                         <div class="summary-total" style="background: #fff5f8; border: 1px solid #ffebeb; border-radius: 12px; padding: 15px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
                             <span style="font-size: 1.2rem; font-weight: 800; color: #b0185e;">Total</span>
-                            <div style="font-size: 2rem; font-weight: 900; color: #b0185e;" id="summary-total">₹{{ number_format($total, 0) }}</div>
+                            <div style="font-size: 1.6rem; font-weight: 900; color: #b0185e;" id="summary-total">₹{{ number_format($total, 0) }}</div>
                         </div>
 
                         <button type="submit" form="checkoutForm" class="btn-premium btn-complete-order" style="width: 100%; padding: 18px; border-radius: 12px; font-weight: 800; font-size: 1rem; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--primary); color: white; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0, 66, 0, 0.15);">

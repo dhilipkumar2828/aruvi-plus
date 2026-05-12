@@ -214,7 +214,7 @@
             }
 
             .address-cards-grid{
-                margin-bottom: 0px !important;
+                margin-bottom: 25px !important;
             }
             .luxury-account-page .container {
                 padding-left: 20px !important;
@@ -259,20 +259,29 @@
                 flex-direction: row;
                 align-items: center;
                 justify-content: space-between;
-                padding-bottom: 15px;
                 margin-bottom: 20px;
                 border-bottom: 1px solid var(--border-soft);
             }
 
             .premium-section-title {
-                font-size: 20px;
+                font-size: 22px !important;
             }
 
             .section-subtitle {
-                font-size: 13px;
-                margin-bottom: 20px;
+                font-size: 14px !important;
             }
 
+            .full-address{
+                font-size: 0.85rem !important;
+            }
+
+            .recipient-name{
+                font-size: 1.2rem !important;
+            }
+
+            .card-type-badge{
+                font-size: 0.6rem !important;
+            }
             .address-cards-grid {
                 gap: 15px;
             }
@@ -320,7 +329,7 @@
             }
 
             .form-title {
-                font-size: 16px !important;
+                font-size: 1rem !important;
                 font-weight: 700;
                 line-height: 1.2;
             }
@@ -341,7 +350,7 @@
             }
 
             .premium-form label {
-                font-size: 11px !important;
+                font-size: 13px !important;
                 margin-bottom: 5px !important;
             }
 
@@ -394,7 +403,13 @@
             }
 
             .form-title {
-                font-size: 15px !important;
+                font-size: 1rem !important;
+            }
+        }
+
+        @media(max-width: 768px){
+            .form-title {
+                font-size: 1.2rem !important;
             }
         }
 
@@ -456,7 +471,7 @@
         .section-subtitle {
             color: #555;
             font-size: 1rem;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         /* Address Cards */
@@ -610,7 +625,7 @@
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 10px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }

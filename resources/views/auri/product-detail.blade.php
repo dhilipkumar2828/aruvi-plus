@@ -27,55 +27,45 @@
                 padding: 0 0px !important;
             }
 
-            .lx-content-pane {
-                font-size: 0.95rem;
-            }
-
-            .lx-trust-item{
-                font-size: 0.95rem;
-
-            }
-
             .gallery-luxury {
                 display: flex !important;
                 flex-direction: column-reverse !important;
                 gap: 15px !important;
+                align-items: center !important;
+                width: 100% !important;
             }
 
             .thumb-strip-vertical {
                 flex-direction: row !important;
-                justify-content: flex-start !important;
+                justify-content: center !important;
                 width: 100% !important;
-                padding: 10px 0 !important;
+                padding: 15px 0 !important;
                 gap: 12px !important;
                 overflow-x: auto !important;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
             }
 
-            .v-thumb {
-                width: 70px !important;
-                height: 70px !important;
-                border-radius: 12px !important;
-                border: 2px solid transparent !important;
-            }
-
-            .v-thumb.active {
-                border-color: var(--primary) !important;
-                box-shadow: 0 4px 12px rgba(0, 66, 0, 0.15) !important;
-            }
-
             .main-img-luxury {
                 width: 100% !important;
-                height: 380px !important;
+                height: auto !important;
+                min-height: 350px !important;
+                max-height: 450px !important;
+                aspect-ratio: 1/1 !important;
                 border-radius: 25px !important;
                 box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08) !important;
+                margin: 0 auto !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                background: #fff !important;
             }
 
             .luxury-title {
                 font-size: 1.8rem !important;
                 text-align: left !important;
                 margin-top: 10px !important;
+                width: 100% !important;
             }
 
             .luxury-rating {
@@ -93,9 +83,10 @@
                 border: 1px solid rgba(0, 66, 0, 0.05) !important;
             }
 
-            .price-val, .price-main {
+            .price-val, .price-main, .price-val-container {
                 font-size: 2rem !important;
                 justify-content: flex-start !important;
+                text-align: left !important;
             }
 
             .price-badges {
@@ -106,11 +97,16 @@
 
             .luxury-actions {
                 margin-bottom: 40px !important;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch !important;
+                width: 100% !important;
             }
-
+            
             .buy-now-wrapper-premium {
                 flex-direction: column !important;
                 gap: 15px !important;
+                width: 100% !important;
             }
 
             .btn-premium-cart-lx,
@@ -120,12 +116,26 @@
                 font-size: 1rem !important;
                 border-radius: 50px !important;
                 justify-content: center !important;
+                display: flex !important;
+                align-items: center !important;
             }
 
             .contact-buttons-luxury {
                 display: flex !important;
                 flex-direction: column !important;
                 gap: 12px !important;
+                width: 100% !important;
+                align-items: stretch !important;
+            }
+
+            .btn-lx-outline {
+                width: 100% !important;
+                padding: 12px !important;
+                font-size: 0.85rem !important;
+                text-align: center !important;
+                justify-content: center !important;
+                display: flex !important;
+                align-items: center !important;
             }
 
             .benefit-highlights-row {
@@ -135,18 +145,34 @@
                 text-align: left !important;
             }
 
-            .btn-lx-outline {
-                padding: 12px !important;
-                font-size: 0.85rem !important;
-                text-align: center !important;
-                justify-content: center !important;
+            .lx-sec-title {
+                text-align: left !important;
+            }
+            
+            .product-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+            
+            .product-card {
+                max-width: 320px !important;
+                width: 100% !important;
+                margin: 0 auto !important;
             }
 
-            /* Tabs and Content */
             .lx-tabs-header {
                 justify-content: flex-start !important;
                 gap: 10px !important;
                 padding-bottom: 15px !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                flex-wrap: nowrap !important;
+            }
+        }
+    .lx-tabs-header::-webkit-scrollbar {
+                display: none;
             }
 
             .lx-tab-btn {
@@ -155,6 +181,8 @@
                 background: #f9fbf9 !important;
                 border-radius: 50px !important;
                 border: 1px solid #f0f0f0 !important;
+                white-space: nowrap !important;
+                flex-shrink: 0 !important;
             }
 
             .lx-tab-btn::after {
@@ -239,6 +267,74 @@
             margin-top: 20px;
             border-top: 1px solid #f5f5f5;
             padding-top: 20px;
+        }
+
+        .lx-reviews-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* Consistent Image Sizing for Detail Page */
+        .main-img-luxury {
+            height: 500px !important;
+            aspect-ratio: 1/1 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: #fff !important;
+            overflow: hidden !important;
+        }
+
+        .main-img-luxury img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important;
+        }
+
+        .v-thumb {
+            width: 90px !important;
+            height: 90px !important;
+            aspect-ratio: 1/1 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 10px !important;
+        }
+
+        .v-thumb img {
+            max-width: 100% !important;
+            max-height: 100% !important;
+            object-fit: contain !important;
+        }
+
+        .related-lx-sec .p-img-wrap {
+            height: 250px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: #fcfcfc !important;
+            aspect-ratio: 1/1 !important;
+        }
+
+        .related-lx-sec .p-img-wrap img {
+            max-width: 100% !important;
+            max-height: 180px !important;
+            object-fit: contain !important;
+        }
+
+        @media (max-width: 768px) {
+            .lx-reviews-grid {
+                grid-template-columns: 1fr !important;
+                gap: 25px !important;
+            }
+            .review-form-sticky {
+                position: static !important;
+            }
+            .main-img-luxury {
+                height: 380px !important;
+            }
         }
     </style>
     <div class="luxury-detail-wrapper animate-fade">
@@ -457,7 +553,7 @@
                         </div>
                     @endif
                     <div id="lx-reviews" class="lx-content-pane">
-                        <div style="display: grid; grid-template-columns: 1fr 350px; gap: 40px; align-items: start;">
+                        <div class="lx-reviews-grid">
                             <!-- Review List -->
                             <div>
                                 <h4 style="font-size: 1.5rem; margin-bottom: 25px; color: #004200;">Community Experiences
@@ -581,54 +677,8 @@
                                 class="fas fa-long-arrow-alt-right"></i></a>
                     </div>
                     <div class="product-grid">
-                        @foreach($relatedProducts as $related)
-                            <div class="product-card">
-                                <div class="p-img-wrap">
-                                    <a href="{{ route('product.show', $related->slug) }}">
-                                        @php
-                                            $rel_img = $related->primary_image;
-                                            if ($rel_img && !str_starts_with($rel_img, 'http') && !str_starts_with($rel_img, '/')) {
-                                                $rel_img = asset($rel_img);
-                                            }
-                                        @endphp
-                                        @if($rel_img)
-                                            <img src="{{ $rel_img }}" alt="{{ $related->name }}"
-                                                onerror="this.src='https://via.placeholder.com/300'">
-                                        @else
-                                            <img src="https://via.placeholder.com/300?text={{ urlencode($related->name) }}"
-                                                alt="{{ $related->name }}">
-                                        @endif
-                                    </a>
-                                    <!-- Wishlist Overlay -->
-                                    @php
-                                        $isRelInWishlist = Auth::check() && Auth::user()->wishlist->contains('product_id', $related->id);
-                                    @endphp
-                                    <form action="{{ route('wishlist.toggle') }}" method="POST" class="wishlist-overlay-form"
-                                        style="position: absolute; top: 15px; right: 15px; z-index: 5;">
-                                        @csrf
-                                        <input type="hidden" name="product_id" value="{{ $related->id }}">
-                                        <button type="submit"
-                                            style="width: 35px; height: 35px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; color: {{ $isRelInWishlist ? '#d4145a' : 'var(--primary)' }}; transition: all 0.3s ease; font-size: 0.9rem;">
-                                            <i class="{{ $isRelInWishlist ? 'fas' : 'far' }} fa-heart"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                                <div class="p-info">
-                                    <h4 class="p-title">{{ $related->name }}</h4>
-                                    <div class="p-bot">
-                                        <span class="p-price">₹{{ number_format($related->price) }}</span>
-                                        <form action="{{ route('cart.add') }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            <input type="hidden" name="product_id" value="{{ $related->id }}">
-                                            <input type="hidden" name="quantity" value="1">
-                                            <button type="submit" class="add-btn-pill" title="Add to Cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                <span>Add</span>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                        @foreach($relatedProducts as $product)
+                            @include('auri.partials.product-card', ['product' => $product, 'hideQuickView' => true])
                         @endforeach
                     </div>
                 </div>

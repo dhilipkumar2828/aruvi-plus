@@ -608,7 +608,7 @@
             }
 
             .premium-section-title {
-                font-size: 18px;
+                font-size: 1.2rem;
             }
 
             .section-card {
