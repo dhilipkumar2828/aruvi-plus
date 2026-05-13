@@ -618,7 +618,29 @@
                             <div style="font-size: 2rem; font-weight: 900; color: #b0185e;" id="summary-total">₹{{ number_format($total, 0) }}</div>
                         </div>
 
-                        <button type="submit" form="checkoutForm" class="btn-premium btn-complete-order" style="width: 100%; padding: 18px; border-radius: 12px; font-weight: 800; font-size: 1rem; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--primary); color: white; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0, 66, 0, 0.15);">
+                        <div style="margin-bottom: 25px;">
+                            <span class="section-label">SELECT PAYMENT METHOD</span>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <label class="custom-check-container" style="background: #fdfdfd; border: 1.5px solid #eee; padding: 15px; border-radius: 12px; transition: 0.3s;" id="label-cod">
+                                    <input type="radio" name="payment_method" value="Cash On Delivery" form="checkoutForm" checked onclick="togglePaymentUI('cod')">
+                                    <span class="checkmark" style="border-radius: 50%;"></span>
+                                    <div style="display: flex; flex-direction: column; gap: 2px;">
+                                        <span style="font-weight: 700; color: #333;">Cash On Delivery</span>
+                                        <span style="font-size: 0.75rem; color: #888;">Pay when you receive the order</span>
+                                    </div>
+                                </label>
+                                <label class="custom-check-container" style="background: #fdfdfd; border: 1.5px solid #eee; padding: 15px; border-radius: 12px; transition: 0.3s;" id="label-online">
+                                    <input type="radio" name="payment_method" value="Online Payment" form="checkoutForm" onclick="togglePaymentUI('online')">
+                                    <span class="checkmark" style="border-radius: 50%;"></span>
+                                    <div style="display: flex; flex-direction: column; gap: 2px;">
+                                        <span style="font-weight: 700; color: #333;">PhonePe</span>
+                                        <span style="font-size: 0.75rem; color: #888;">Pay securely via UPI, Cards, or NetBanking</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" form="checkoutForm" class="btn-premium btn-complete-order" id="submit-btn" style="width: 100%; padding: 18px; border-radius: 12px; font-weight: 800; font-size: 1rem; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--primary); color: white; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0, 66, 0, 0.15);">
                             PLACE ORDER NOW <i class="fas fa-check-circle"></i>
                         </button>
 
@@ -756,6 +778,30 @@
                     }
                 });
             }
+
+            // Payment Method UI
+            window.togglePaymentUI = function(method) {
+                const codLabel = document.getElementById('label-cod');
+                const onlineLabel = document.getElementById('label-online');
+                const submitBtn = document.getElementById('submit-btn');
+
+                if (method === 'cod') {
+                    codLabel.style.borderColor = 'var(--primary)';
+                    codLabel.style.background = '#f9fcf9';
+                    onlineLabel.style.borderColor = '#eee';
+                    onlineLabel.style.background = '#fdfdfd';
+                    submitBtn.innerHTML = 'PLACE ORDER NOW <i class="fas fa-check-circle"></i>';
+                } else {
+                    onlineLabel.style.borderColor = 'var(--primary)';
+                    onlineLabel.style.background = '#f9fcf9';
+                    codLabel.style.borderColor = '#eee';
+                    codLabel.style.background = '#fdfdfd';
+                    submitBtn.innerHTML = 'PROCEED TO PAYMENT <i class="fas fa-arrow-right"></i>';
+                }
+            };
+            
+            // Initial call to set UI
+            togglePaymentUI('cod');
         });
     </script>
     <style>

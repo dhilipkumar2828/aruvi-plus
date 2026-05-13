@@ -277,7 +277,7 @@ const app = {
         (p) => `
             <div class="product-card" onclick="window.location.hash = '#product/${p.id}'">
                 <div class="p-img-wrap">
-                    <img src="${p.image}" onerror="this.src='https://via.placeholder.com/300?text=Auvri+Product'" alt="${p.name}">
+                    <img src="${p.image}" onerror="this.src='https://placehold.jp/300?text=Auvri+Product'" alt="${p.name}">
                     <button class="quick-view-btn" onclick="event.stopPropagation(); app.openModal(${p.id})">Quick View</button>
                 </div>
                 <div class="p-info">
@@ -715,7 +715,7 @@ const app = {
     const product = this.state.products.find((p) => p.id === id);
     const modalBody = document.getElementById("modal-body");
     modalBody.innerHTML = `
-            <img src="${product.image}" onerror="this.src='https://via.placeholder.com/300'" style="height:200px; margin:0 auto 20px;">
+            <img src="${product.image}" onerror="this.src='https://placehold.jp/300'" style="height:200px; margin:0 auto 20px;">
             <h2>${product.name}</h2>
             <p  style="color:#555; margin-bottom:20px;">Authentic herbal remedy for ${product.type}</p>
             <h3 style="color:#004200;">₹${product.price.toFixed(2)}</h3>

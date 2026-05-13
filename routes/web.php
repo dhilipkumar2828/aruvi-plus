@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\SiteAuthController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\ShippingInfoController;
+use App\Http\Controllers\PhonePeController;
 
 Route::get('/', [SiteController::class, 'home'])->name('home');
 
@@ -66,6 +67,10 @@ Route::get('/checkout', [CartController::class, 'showCheckout'])->middleware('au
 Route::post('/checkout', [CartController::class, 'checkout'])->middleware('auth')->name('checkout.process');
 Route::post('/cart/shipping-calc', [CartController::class, 'calculateShippingAjax'])->name('cart.shipping.calc');
 Route::get('/order-success/{order}', [CartController::class, 'orderSuccess'])->name('order.success')->middleware('auth');
+
+// PhonePe
+Route::post('/phonepe/payment', [PhonePeController::class, 'initiatePayment'])->name('phonepe.payment');
+Route::match(['get', 'post'], '/phonepe/callback', [PhonePeController::class, 'callback'])->name('phonepe.callback');
 
 // Customer Routes
 use App\Http\Controllers\CustomerController;

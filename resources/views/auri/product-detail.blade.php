@@ -176,7 +176,7 @@
                         @endif
                     </div>
                     <div class="main-img-luxury">
-                        <img src="{{ $main_img ?: 'https://via.placeholder.com/500?text=' . urlencode($product->name) }}"
+                        <img src="{{ $main_img ?: 'https://placehold.jp/500?text=' . urlencode($product->name) }}"
                             id="main-product-img-luxury" alt="{{ $product->name }}">
 
                         <div class="wishlist-overlay-badge-detail"
@@ -501,9 +501,9 @@
                                         @endphp
                                         @if($rel_img)
                                             <img src="{{ $rel_img }}" alt="{{ $related->name }}"
-                                                onerror="this.src='https://via.placeholder.com/300'">
+                                                onerror="this.src='https://placehold.jp/300'">
                                         @else
-                                            <img src="https://via.placeholder.com/300?text={{ urlencode($related->name) }}"
+                                            <img src="https://placehold.jp/300?text={{ urlencode($related->name) }}"
                                                 alt="{{ $related->name }}">
                                         @endif
                                     </a>

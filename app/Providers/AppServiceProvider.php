@@ -11,10 +11,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Bind the public path to always point to the 'public' directory
-        // This ensures asset() and public_path() work correctly in root-proxy environments
+        // Bind the public path to the root directory
         $this->app->bind('path.public', function() {
-            return base_path('public');
+            return base_path();
         });
     }
 

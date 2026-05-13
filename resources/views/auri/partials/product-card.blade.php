@@ -8,9 +8,9 @@
                 }
             @endphp
             @if($img_path)
-                <img src="{{ $img_path }}" alt="{{ $product->name }}" onerror="this.src='https://via.placeholder.com/300?text=Auvri+Product'">
+                <img src="{{ $img_path }}" alt="{{ $product->name }}" onerror="this.src='https://placehold.jp/300?text=Auvri+Product'">
             @else
-                <img src="https://via.placeholder.com/300?text={{ urlencode($product->name) }}" alt="{{ $product->name }}">
+                <img src="https://placehold.jp/300?text={{ urlencode($product->name) }}" alt="{{ $product->name }}">
             @endif
         </a>
         
