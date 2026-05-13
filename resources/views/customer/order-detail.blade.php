@@ -853,7 +853,89 @@
                     }
                 }
 
-                @media (max-width: 768px) {
+                @media (min-width: 768px) and (max-width: 1024px) {
+                    .luxury-account-page .container {
+                        padding-left: 20px !important;
+                        padding-right: 20px !important;
+                        max-width: 100% !important;
+                        width: 100% !important;
+                    }
+                }
+
+                @media (min-width: 601px) and (max-width: 1024px) {
+                    .invoice-header {
+                        flex-direction: column !important;
+                        align-items: center !important;
+                        text-align: center !important;
+                        gap: 30px !important;
+                    }
+
+                    .brand-info {
+                        text-align: center !important;
+                    }
+
+                    .invoice-logo {
+                        margin: 0 auto 15px !important;
+                    }
+
+                    .invoice-meta {
+                        align-items: center !important;
+                        width: 100% !important;
+                    }
+
+                    .invoice-label {
+                        text-align: center !important;
+                        margin-bottom: 20px !important;
+                    }
+
+                    .meta-wrapper {
+                        align-items: center !important;
+                    }
+
+                    .meta-item {
+                        justify-content: center !important;
+                        margin-bottom: 12px !important;
+                    }
+
+                    .order-action-bar {
+                        text-align: center !important;
+                        align-items: center !important;
+                    }
+
+                    .order-meta-summary {
+                        display: flex !important;
+                        flex-direction: row !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        gap: 15px !important;
+                    }
+
+                    .order-number-badge {
+                        margin-right: 0 !important;
+                        font-size: 15px !important;
+                    }
+
+                    .action-buttons {
+                        justify-content: center !important;
+                        gap: 10px !important;
+                    }
+
+                    .order-tracker-container {
+                        padding: 0 !important;
+                        margin-bottom: 40px !important;
+                    }
+
+                    .tracker-steps {
+                        justify-content: space-between !important;
+                    }
+
+                    .step {
+                        width: auto !important;
+                        flex: 1 !important;
+                    }
+                }
+
+                @media (max-width: 600px) {
                     .luxury-account-page {
                         padding: 90px 0 80px !important;
                     }
@@ -1288,6 +1370,23 @@
 
                     .support-contact-web b {
                         font-size: 16px;
+                    }
+                }
+
+                @media (min-width: 768px) and (max-width: 1024px) {
+                    .order-action-bar {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: 20px;
+                    }
+                    .action-buttons {
+                        width: 100%;
+                        display: flex;
+                        gap: 15px;
+                    }
+                    .btn-icon-text {
+                        flex: 1;
+                        justify-content: center;
                     }
                 }
 

@@ -431,6 +431,15 @@
             }
         }
 
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .luxury-account-page .container {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+
         @media (max-width: 991px) {
             .account-grid {
                 grid-template-columns: 1fr;
@@ -519,6 +528,7 @@
             
             .order-number {
                 word-break: break-all;
+                font-size: 15px !important;
             }
         }
     </style>

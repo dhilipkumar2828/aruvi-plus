@@ -6,7 +6,7 @@
 @section('content')
     <style>
         /* Mobile Premium Redesign */
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
             .product-hero-premium {
                 padding-top: 100px !important;
                 padding-bottom: 40px !important;
@@ -193,6 +193,30 @@
                 background: #004200 !important;
                 color: #fff !important;
                 border-color: #004200 !important;
+            }
+        }
+
+        /* Tablet Specific: 2 buttons in a row */
+        @media (min-width: 768px) and (max-width: 1366px) {
+            .buy-now-wrapper-premium, 
+            .contact-buttons-luxury {
+                display: flex !important;
+                flex-direction: row !important;
+                gap: 15px !important;
+                width: 100% !important;
+            }
+            .btn-premium-cart-lx, 
+            .btn-premium-buy-lx,
+            .btn-lx-outline {
+                flex: 1 !important;
+                width: 50% !important;
+                margin-bottom: 0 !important;
+            }
+            .benefit-highlights-row {
+                display: flex !important;
+                flex-direction: row !important;
+                gap: 20px !important;
+                justify-content: flex-start !important;
             }
         }
 

@@ -245,6 +245,10 @@
             top: 110px !important;
         }
 
+        .contact-list li{
+            color: rgba(255, 255, 255, 0.7);
+        }
+
         @media (max-width: 991px) {
             .mobile-only-nav {
                 display: block;
@@ -302,6 +306,36 @@
                 text-align: left;
             }
 
+            /* Tablet Specific Footer Overrides */
+            @media (min-width: 768px) and (max-width: 1024px) {
+                .f-col p, .f-col li a, .f-col li {
+                    font-size: 0.95rem !important; /* Original 0.85rem + 2px approx */
+                }
+                .f-col h4 {
+                    font-size: 1.15rem !important;
+                }
+                .copyright-text {
+                    font-size: 0.85rem !important; /* Desktop 0.9rem + 2px approx */
+                    text-transform: uppercase !important;
+                    letter-spacing: 1px !important;
+                }
+                .developer-text {
+                    font-size: 0.85rem !important; /* Desktop 0.85rem + 2px approx */
+                    text-transform: uppercase !important;
+                    letter-spacing: 1px !important;
+                }
+                .footer-copy-wrapper {
+                    flex-direction: row !important;
+                    justify-content: space-between !important;
+                    text-align: center !important;
+                    gap: 20px !important;
+                    padding: 25px 0 !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                }
+            }
+
+
             .f-col.footer-brand {
                 grid-column: 1 / -1;
                 align-items: center;
@@ -327,6 +361,7 @@
 
             .contact-list li {
                 display: flex;
+                color: rgba(255, 255, 255, 0.7);
                 align-items: flex-start;
                 justify-content: flex-start;
                 margin-bottom: 12px;
@@ -439,7 +474,7 @@
             color: #d4af37;
         }
 
-        @media (max-width: 880px) {
+        @media (max-width: 767px) {
             .footer-copy-wrapper {
                 flex-direction: column;
                 justify-content: center;

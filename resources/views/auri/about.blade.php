@@ -39,9 +39,13 @@
                 gap: 30px !important;
             }
 
-            .split-img,
             .split-info {
                 width: 100% !important;
+            }
+
+            .split-img {
+                width: 65% !important;
+                height: auto !important;
             }
 
             /* Orbit/Panchabuthas */
@@ -95,6 +99,32 @@
                 padding: 15px 30px !important;
                 border-radius: 50px !important;
                 margin-bottom: 0 !important;
+            }
+            /* Tablet Split Section Optimization */
+            @media (min-width: 769px) and (max-width: 1024px) {
+                .about-split {
+                    display: flex !important;
+                    flex-direction: row !important;
+                    align-items: center !important;
+                    gap: 50px !important;
+                    margin-top: 40px !important;
+                }
+                .split-img {
+                    width: 50% !important;
+                    height: 450px !important;
+                    border-radius: 30px !important;
+                    overflow: hidden !important;
+                    box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+                }
+                .split-img img {
+                    width: 100% !important;
+                    height: 100% !important;
+                    object-fit: cover !important;
+                    display: block !important;
+                }
+                .split-info {
+                    width: 50% !important;
+                }
             }
         }
     </style>
