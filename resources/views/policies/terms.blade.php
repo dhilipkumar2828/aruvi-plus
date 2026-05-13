@@ -13,14 +13,14 @@
             background: linear-gradient(rgba(0, 66, 0, 0.7), rgba(0, 66, 0, 0.7)), url('{{ asset('auri-images/headers/terms_v2.jpg') }}');
             background-size: cover;
             background-position: center;
-            padding: 80px 0;
+            padding: 120px 0 60px 0;
             text-align: center;
             color: white;
             margin-bottom: 50px;
         }
 
         .policy-hero h1 {
-            color: #d4af37 !important;
+            color: #fff !important;
             font-size: 3.5rem;
         }
 
@@ -53,7 +53,7 @@
 
         @media (max-width: 768px) {
             .policy-hero {
-                padding: 60px 0;
+                padding: 120px 0 60px 0;
             }
 
             .policy-hero h1 {
@@ -76,7 +76,7 @@
 
         @media (max-width: 480px) {
             .policy-hero {
-                padding: 40px 0;
+                padding: 100px 0 50px 0;
             }
 
             .policy-hero h1 {

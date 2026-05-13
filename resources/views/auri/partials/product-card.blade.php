@@ -26,9 +26,6 @@
             <img src="https://via.placeholder.com/300?text={{ urlencode($product->name) }}" alt="{{ $product->name }}">
         @endif
         
-        @if(!isset($hideQuickView) || !$hideQuickView)
-            <a href="{{ route('product.show', $product->slug) }}" class="quick-view-btn">Quick View</a>
-        @endif
         @if($product->compare_price && $product->compare_price > $product->price)
             <div style="position: absolute; top: 15px; left: 15px; background: #e53935; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; z-index: 5; box-shadow: 0 4px 10px rgba(229,57,53,0.2);">
                 {{ round((($product->compare_price - $product->price) / $product->compare_price) * 100) }}% OFF

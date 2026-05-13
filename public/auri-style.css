@@ -4731,3 +4731,91 @@ body {
     flex: 0 0 260px;
   }
 }
+
+/* Tablet Specific Overrides */
+@media (min-width: 768px) and (max-width: 1366px) {
+  .lx-trust-flex {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 30px !important;
+    width: 100% !important;
+  }
+  .lx-trust-item {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+}
+
+
+/* Tablet Header Fix */
+@media (min-width: 768px) and (max-width: 1366px) {
+  .lx-sec-header-flex {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+}
+
+
+/* Tablet Gallery Fix */
+@media (min-width: 768px) and (max-width: 1366px) {
+  .hero-grid-luxury {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 30px !important;
+    align-items: flex-start !important;
+  }
+  .gallery-luxury {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 20px !important;
+    align-items: flex-start !important;
+    width: 50% !important;
+  }
+  .thumb-strip-vertical {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    width: 100px !important;
+  }
+  .main-img-luxury {
+    flex: 1 !important;
+    width: auto !important;
+  }
+  .info-luxury {
+    width: 50% !important;
+  }
+}
+
+
+/* Tablet Gallery Row with Details Bottom Fix */
+@media (min-width: 768px) and (max-width: 1366px) {
+  .hero-grid-luxury {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 30px !important;
+  }
+  .gallery-luxury {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 20px !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .thumb-strip-vertical {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    width: 100px !important;
+  }
+  .main-img-luxury {
+    flex: 1 !important;
+    width: auto !important;
+    max-width: 600px !important;
+  }
+  .info-luxury {
+    width: 100% !important;
+  }
+}

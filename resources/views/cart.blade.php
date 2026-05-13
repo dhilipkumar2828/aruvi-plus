@@ -24,15 +24,15 @@
             background: linear-gradient(rgba(0, 66, 0, 0.7), rgba(0, 66, 0, 0.7)), url('{{ asset('auri-images/headers/shop_v2.jpg') }}');
             background-size: cover;
             background-position: center;
-            padding: 100px 0 60px;
+            padding: 120px 0 60px;
             text-align: center;
             color: white;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
         }
 
         .cart-hero h1 {
             font-size: 3rem;
-            color: var(--accent) !important;
+            color: #fff !important;
             margin-bottom: 10px;
         }
 
@@ -82,7 +82,7 @@
             grid-template-columns: 100px 1fr auto auto 50px;
             gap: 10px;
             align-items: center;
-            padding: 30px 0;
+            padding: 0px 0;
             border-bottom: 1px solid #f0f0f0;
             position: relative;
             /* For absolute positioning of actions */
@@ -369,43 +369,89 @@
             margin-bottom: 15px;
         }
 
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .cart-item {
+                grid-template-columns: 110px 1fr !important;
+                grid-template-rows: auto auto !important;
+                gap: 15px 25px !important;
+                align-items: center !important;
+                padding: 25px 0 !important;
+                position: relative !important;
+            }
+            .cart-item-img {
+                grid-row: 1 / 3 !important;
+                grid-column: 1 !important;
+            }
+            .cart-item-info {
+                grid-row: 1 !important;
+                grid-column: 2 !important;
+                padding-right: 50px !important;
+            }
+            .cart-item-actions-corner {
+                position: absolute !important;
+                top: 25px !important;
+                right: 0 !important;
+                display: flex !important;
+                justify-content: flex-end !important;
+                margin: 0 !important;
+                z-index: 5 !important;
+            }
+            .qty-box {
+                grid-column: 2 !important;
+                grid-row: 2 !important;
+                margin: 0 !important;
+                justify-self: start !important;
+            }
+            .cart-item-subtotal {
+                grid-column: 2 !important;
+                grid-row: 2 !important;
+                justify-self: end !important;
+                text-align: right !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                display: flex !important;
+                align-items: center !important;
+            }
+            .cart-item-subtotal div {
+                font-size: 1.3rem !important;
+                font-weight: 800 !important;
+            }
+            .total-label-mobile {
+                display: none !important;
+            }
+            .cart-hero {
+                padding: 120px 0 60px 0 !important;
+                margin-bottom: 25px !important;
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 0 15px !important;
             }
             .cart-hero {
-                padding: 110px 0 40px !important;
+                padding: 120px 0 60px 0 !important;
+                margin-bottom: 25px !important;
             }
             .cart-hero h1 {
                 font-size: 2.2rem !important;
             }
             .cart-hero p {
-                font-size: 0.95rem !important;
+                font-size: 1.2rem !important;
                 padding: 0 15px !important;
-            }
-            .cart-item-subtotal {
-                grid-column: 1 / -1 !important;
-                text-align: right !important;
-                padding-top: 15px !important;
-                margin-top: 10px !important;
-                font-size: 1rem !important;
-            }
-            .cart-item-subtotal div {
-                justify-content: flex-end !important;
-                display: flex !important;
-                align-items: baseline !important;
             }
         }
 
         @media (max-width: 480px) {
             .cart-hero {
-                padding: 100px 0 30px !important;
+                padding: 100px 0 40px 0 !important;
+                margin-bottom: 20px !important;
             }
             .cart-hero h1 {
                 font-size: 1.8rem !important;
             }
             .cart-hero p {
-                font-size: 0.85rem !important;
+                font-size: 1.1rem !important;
             }
             .cart-item {
                 grid-template-columns: 60px 1fr !important;
@@ -427,6 +473,9 @@
             .summary-card {
                 padding: 20px 15px !important;
                 border-radius: 16px !important;
+                width: 100% !important;
+                margin: 0 !important;
+                box-sizing: border-box !important;
             }
             .summary-total {
                 flex-direction: row !important;
@@ -437,6 +486,30 @@
             }
             .total-value {
                 font-size: 1.6rem !important;
+            }
+            .coupon-form {
+                flex-direction: row !important;
+                background: white !important;
+                border: 1px solid #e2e8f0 !important;
+                padding: 4px !important;
+                gap: 0 !important;
+                display: flex !important;
+                border-radius: 12px !important;
+            }
+            .coupon-form input {
+                flex: 1 !important;
+                padding: 8px 10px !important;
+                font-size: 0.75rem !important;
+                border: none !important;
+                background: white !important;
+                width: auto !important;
+            }
+            .coupon-form button {
+                width: auto !important;
+                padding: 0 15px !important;
+                height: 34px !important;
+                font-size: 0.7rem !important;
+                border-radius: 8px !important;
             }
             .cart-actions-header {
                 display: flex !important;
@@ -508,13 +581,13 @@
                 padding: 0 8px !important;
             }
             .cart-hero {
-                padding: 100px 0 20px !important;
+                padding: 100px 0 40px !important;
             }
             .cart-hero h1 {
-                font-size: 1.5rem !important;
+                font-size: 2rem !important;
             }
             .cart-hero p {
-                font-size: 0.7rem !important;
+                font-size: 0.85rem !important;
                 margin-top: 5px !important;
             }
             .cart-actions-header {
@@ -548,6 +621,7 @@
                 box-shadow: none !important;
                 border: 1px solid #f0f0f0 !important;
                 overflow: hidden !important;
+                width: 100%;
             }
             .cart-item {
                 display: grid !important;
@@ -859,8 +933,8 @@
 
                         <!-- Coupon Input (only if NOT applied) -->
                         @if(!$coupon)
-                            <div style="margin-bottom: 25px;">
-                                <form action="{{ route('cart.coupon.apply') }}" method="POST"
+                            <div class="coupon-section" style="margin-bottom: 25px;">
+                                <form action="{{ route('cart.coupon.apply') }}" method="POST" class="coupon-form"
                                     style="display: flex; align-items: center; background: white; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; padding: 4px;">
                                     @csrf
                                     <input type="text" name="code" placeholder="COUPON CODE"

@@ -147,7 +147,7 @@
         }
 
         .account-title {
-            font-size: 24px !important;
+            font-size: 38px !important;
             color: var(--primary);
             margin-bottom: 10px;
         }
@@ -475,10 +475,50 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .luxury-account-page .container {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .account-grid {
+                grid-template-columns: 1fr !important;
+                gap: 30px !important;
+            }
+
+            .dashboard-hero {
+                flex-direction: column !important;
+                text-align: center !important;
+                padding: 40px 20px !important;
+            }
+
+            .dashboard-hero .user-name {
+                font-size: 30px !important;
+            }
+
+            .dashboard-stats {
+                margin-top: 30px !important;
+                justify-content: center !important;
+                width: 100% !important;
+            }
+
+            .luxury-table td {
+                padding: 15px 10px !important;
+                font-size: 13px !important;
+            }
+
+            .order-id {
+                font-size: 13px !important;
+                word-break: break-all !important;
+            }
+        }
+
+        @media (max-width: 600px) {
             .dashboard-hero {
                 flex-direction: column;
-                text-align: center;
+                text-align: center ;
                 padding: 40px 20px;
             }
 

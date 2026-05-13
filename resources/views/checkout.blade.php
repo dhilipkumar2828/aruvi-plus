@@ -15,7 +15,7 @@
 
         .checkout-page-wrapper {
             background-color: var(--bg-light);
-            padding-bottom: 20px;
+            padding-bottom: 30px;
             min-height: 100vh;
         }
 
@@ -24,7 +24,7 @@
             background: linear-gradient(rgba(0, 66, 0, 0.75), rgba(0, 66, 0, 0.75)), url('{{ asset('auri-images/headers/shop_v2.jpg') }}');
             background-size: cover;
             background-position: center;
-            padding: 80px 0 50px;
+            padding: 120px 0 60px;
             text-align: center;
             color: white;
             margin-bottom: 40px;
@@ -219,14 +219,17 @@
                 padding: 0 15px !important;
             }
             .checkout-hero {
-                padding: 110px 15px 45px !important;
+                padding: 140px 15px 65px !important;
+            }
+            .checkout-page-wrapper {
+                padding-bottom: 30px !important;
             }
             .checkout-hero h1 {
                 font-size: 2.2rem !important;
             }
             .checkout-card, .summary-card {
                 padding: 25px 15px !important;
-                border-radius: 20px !important;
+                border-radius: 20px !important; 
             }
             .checkout-title {
                 font-size: 1.4rem !important;
@@ -238,7 +241,32 @@
             .saved-addresses-scroll {
                 scroll-snap-type: x mandatory !important;
                 -webkit-overflow-scrolling: touch !important;
-                gap: 10px !important;
+                gap: 15px !important;
+                padding: 10px 0 5px !important;
+                overflow-x: auto !important;
+                scrollbar-width: none !important; /* Hide native scrollbar */
+                -ms-overflow-style: none !important;
+            }
+            .saved-addresses-scroll::-webkit-scrollbar {
+                display: none !important; /* Hide native scrollbar */
+            }
+            .scroll-indicator-container {
+                display: block !important;
+                height: 4px;
+                background: #f0f0f0;
+                border-radius: 10px;
+                margin: 5px 0 20px;
+                position: relative;
+                overflow: hidden;
+            }
+            .scroll-indicator-bar {
+                position: absolute;
+                height: 100%;
+                background: var(--primary);
+                border-radius: 10px;
+                width: 30%;
+                left: 0;
+                transition: left 0.05s linear;
             }
             .address-card {
                 flex: 0 0 100% !important;
@@ -248,9 +276,15 @@
             }
         }
 
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .address-card {
+                flex: 0 0 calc((100% - 15px) / 2) !important; /* Two visible on tablet */
+            }
+        }
+
         @media (max-width: 480px) {
             .checkout-hero {
-                padding: 100px 15px 40px !important;
+                padding: 120px 15px 60px !important;
             }
 
             .checkout-hero h1 {
@@ -309,23 +343,30 @@
 
         @media (max-width: 320px) {
             .container {
-                padding: 0 10px !important;
+                padding: 0 12px !important;
             }
             .checkout-hero {
-                padding: 100px 10px 30px !important;
+                padding: 100px 12px 40px !important;
             }
             .checkout-hero h1 {
                 font-size: 1.8rem !important;
             }
-            .checkout-hero p {
-                font-size: 14px !important;
+            .checkout-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 20px !important;
+                width: 100% !important;
+                margin: 0 !important;
             }
             .checkout-card, .summary-card {
-                padding: 15px 10px !important;
-                border-radius: 12px !important;
+                padding: 20px 12px !important;
+                border-radius: 16px !important;
+                width: 100% !important;
+                margin: 0 !important;
+                box-sizing: border-box !important;
             }
             .checkout-title {
-                font-size: 22px !important;
+                font-size: 20px !important;
             }
             .section-label {
                 font-size: 14px !important;
@@ -546,7 +587,7 @@
                         
                         <span class="section-label">CHOOSE ANY ONE ADDRESS</span>
                         
-                        <div class="saved-addresses-scroll">
+                        <div class="saved-addresses-scroll" id="addressScroller">
                             @foreach ($addresses as $index => $addr)
                                 <div class="address-card {{ $addr->is_default ? 'active' : '' }}" onclick="selectStoredAddress({{ $index }}, this)">
                                     <div class="check-icon"><i class="fas fa-check-circle"></i></div>
@@ -557,6 +598,9 @@
                                     <p>{{ $addr->city }}, {{ $addr->postal_code }}</p>
                                 </div>
                             @endforeach
+                        </div>
+                        <div class="scroll-indicator-container">
+                            <div class="scroll-indicator-bar" id="scrollIndicator"></div>
                         </div>
                     </div>
                     @endif
@@ -826,11 +870,38 @@
             if (sameAsShipping && billingNotice) {
                 sameAsShipping.addEventListener('change', function() {
                     billingNotice.style.display = this.checked ? 'flex' : 'none';
-                    if (!this.checked) {
-                        // In a real app, you might show another form here.
-                        // For now, we follow the UI request which just shows a notice.
-                    }
                 });
+            }
+
+            // Custom Scroll Indicator for Addresses
+            const scroller = document.getElementById('addressScroller');
+            const indicator = document.getElementById('scrollIndicator');
+            
+            function updateIndicator() {
+                if (scroller && indicator) {
+                    const scrollWidth = scroller.scrollWidth;
+                    const clientWidth = scroller.clientWidth;
+                    const scrollLeft = scroller.scrollLeft;
+                    
+                    if (scrollWidth > clientWidth) {
+                        indicator.parentElement.style.display = 'block';
+                        const ratio = clientWidth / scrollWidth;
+                        indicator.style.width = (ratio * 100) + '%';
+                        
+                        const maxScroll = scrollWidth - clientWidth;
+                        const percentage = scrollLeft / maxScroll;
+                        const maxLeft = 100 - (ratio * 100);
+                        indicator.style.left = (percentage * maxLeft) + '%';
+                    } else {
+                        indicator.parentElement.style.display = 'none';
+                    }
+                }
+            }
+
+            if (scroller) {
+                scroller.addEventListener('scroll', updateIndicator);
+                window.addEventListener('resize', updateIndicator);
+                setTimeout(updateIndicator, 300); // Wait for rendering
             }
 
             // Recalculate on state change
