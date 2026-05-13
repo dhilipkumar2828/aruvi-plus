@@ -370,9 +370,10 @@ class CartController extends Controller
             'taxable_value' => $taxable_value,
             'gst_amount' => $gst_amount,
             'gst_rate' => 18,
-            'payment_method' => 'Cash On Delivery',
+            'payment_method' => $request->payment_method ?? 'Cash On Delivery',
         ]);
 
+        // ... (rest of the item loop remains the same) ...
         // Prepare Product/HSN lookup for performance
         $productsMap = Product::whereIn('id', array_column($cart, 'product_id'))
             ->get()
@@ -442,7 +443,12 @@ class CartController extends Controller
                 ->delete();
         }
 
-        // Send Emails
+        // Handle Online Payment redirection
+        if ($request->payment_method === 'Online Payment') {
+            return app(\App\Http\Controllers\PhonePeController::class)->initiatePayment($order);
+        }
+
+        // Send Emails for COD
         try {
             // To Customer
             Mail::to($order->customer_email)->send(new CustomerOrderConfirmation($order));

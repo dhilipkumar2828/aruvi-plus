@@ -149,6 +149,7 @@
         /* Order Summary Mini */
         .summary-card {
             background: #fff;
+            max-width: 367px;
             border-radius: 24px;
             padding: 35px;
             border: 1px solid var(--border);
@@ -213,75 +214,6 @@
         }
 
         /* Responsive Improvements */
-        /* Mobile Responsive Improvements */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 15px !important;
-            }
-            .checkout-hero {
-                padding: 140px 15px 65px !important;
-            }
-            .checkout-page-wrapper {
-                padding-bottom: 30px !important;
-            }
-            .checkout-hero h1 {
-                font-size: 2.2rem !important;
-            }
-            .checkout-card, .summary-card {
-                padding: 25px 15px !important;
-                border-radius: 20px !important; 
-            }
-            .checkout-title {
-                font-size: 1.4rem !important;
-            }
-            .form-group-grid {
-                grid-template-columns: 1fr !important;
-                gap: 15px !important;
-            }
-            .saved-addresses-scroll {
-                scroll-snap-type: x mandatory !important;
-                -webkit-overflow-scrolling: touch !important;
-                gap: 15px !important;
-                padding: 10px 0 5px !important;
-                overflow-x: auto !important;
-                scrollbar-width: none !important; /* Hide native scrollbar */
-                -ms-overflow-style: none !important;
-            }
-            .saved-addresses-scroll::-webkit-scrollbar {
-                display: none !important; /* Hide native scrollbar */
-            }
-            .scroll-indicator-container {
-                display: none;
-                height: 4px;
-                background: #f0f0f0;
-                border-radius: 10px;
-                margin: 5px 0 20px;
-                position: relative;
-                overflow: hidden;
-            }
-            .scroll-indicator-bar {
-                position: absolute;
-                height: 100%;
-                background: var(--primary);
-                border-radius: 10px;
-                width: 30%;
-                left: 0;
-                transition: left 0.05s linear;
-            }
-            .address-card {
-                flex: 0 0 100% !important;
-                scroll-snap-align: center !important;
-                padding: 15px !important;
-                box-sizing: border-box !important;
-            }
-        }
-
-        @media (min-width: 768px) and (max-width: 1024px) {
-            .address-card {
-                flex: 0 0 calc((100% - 15px) / 2) !important; /* Two visible on tablet */
-            }
-        }
-
         @media (max-width: 480px) {
             .checkout-hero {
                 padding: 120px 15px 60px !important;
@@ -385,18 +317,18 @@
                 font-size: 1.5rem !important;
             }
             .btn-complete-order {
-                font-size: 0.9rem !important;
-                padding: 14px !important;
-                letter-spacing: 0.5px !important;
-            }
-            .saved-addresses-scroll {
-                gap: 10px !important;
-            }
-            .address-card {
-                padding: 15px !important;
-            }
-            .address-card h5 {
+                padding: 16px !important;
                 font-size: 1rem !important;
+                margin-bottom: 5px !important;
+            }
+            .address-card p {
+                font-size: 0.85rem !important;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .address-card {
+                flex: 0 0 95% !important;
             }
             .address-card p {
                 font-size: 13px !important;
@@ -407,22 +339,30 @@
         .saved-addresses-container {
             background: #fff9fb;
             border: 1px solid #ffebeb;
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 25px;
             margin-bottom: 30px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
         }
 
         .saved-addresses-scroll {
             display: flex;
             gap: 15px;
             overflow-x: auto;
-            padding: 10px 5px 20px;
+            padding: 10px 5px 25px;
             scrollbar-width: thin;
-            scrollbar-color: var(--primary) #eee;
+            scrollbar-color: var(--primary) #f5f5f5;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
         }
 
         .saved-addresses-scroll::-webkit-scrollbar {
             height: 6px;
+        }
+
+        .saved-addresses-scroll::-webkit-scrollbar-track {
+            background: #f5f5f5;
+            border-radius: 10px;
         }
 
         .saved-addresses-scroll::-webkit-scrollbar-thumb {
@@ -431,28 +371,43 @@
         }
 
         .address-card {
-            flex: 0 0 280px;
+            flex: 0 0 calc(65% - 15px);
+            min-width: 180px;
             background: #fff;
             border: 2px solid #eee;
-            border-radius: 15px;
-            padding: 18px;
+            border-radius: 18px;
+            padding: 20px;
             position: relative;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            scroll-snap-align: start;
+        }
+
+        .address-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 66, 0, 0.08);
+            border-color: #ddd;
         }
 
         .address-card.active {
             border-color: var(--primary);
             background: #fff;
+            box-shadow: 0 10px 25px rgba(0, 66, 0, 0.1);
         }
 
         .address-card .check-icon {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            color: #28a745;
-            font-size: 1.2rem;
+            top: 15px;
+            right: 15px;
+            color: var(--primary);
+            font-size: 1.3rem;
             display: none;
+            background: #fff;
+            border-radius: 50%;
+            line-height: 1;
         }
 
         .address-card.active .check-icon {
@@ -461,28 +416,40 @@
 
         .address-badge {
             display: inline-block;
-            background: #fff0f3;
-            color: #d81b60;
+            background: rgba(0, 66, 0, 0.05);
+            color: var(--primary);
             font-size: 0.65rem;
             font-weight: 800;
-            padding: 3px 10px;
-            border-radius: 4px;
-            margin-bottom: 10px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            margin-bottom: 15px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            width: fit-content;
+        }
+
+        .address-card.active .address-badge {
+            background: var(--primary);
+            color: #fff;
         }
 
         .address-card h5 {
-            margin: 0 0 5px;
-            font-size: 1rem;
+            margin: 0 0 8px;
+            font-size: 1.1rem;
             font-weight: 700;
-            color: #333;
+            color: #222;
+        }
+
+        .address-card .address-lines {
+            margin-top: auto;
         }
 
         .address-card p {
             margin: 0;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             color: #666;
-            line-height: 1.5;
+            line-height: 1.6;
+            word-break: break-word;
         }
 
         /* Checkbox Styling */
@@ -585,7 +552,10 @@
                             <span style="font-weight: 700; color: var(--primary); font-size: 1rem;">Use a saved address</span>
                         </label>
                         
-                        <span class="section-label">CHOOSE ANY ONE ADDRESS</span>
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                            <span class="section-label" style="margin-bottom: 0;">CHOOSE FROM SAVED ADDRESSES</span>
+                            <span style="font-size: 0.75rem; color: #999; font-weight: 600;">SCROLL TO VIEW ALL <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i></span>
+                        </div>
                         
                         <div class="saved-addresses-scroll" id="addressScroller">
                             @foreach ($addresses as $index => $addr)
@@ -593,9 +563,11 @@
                                     <div class="check-icon"><i class="fas fa-check-circle"></i></div>
                                     <span class="address-badge">{{ $addr->type ?? 'STANDARD ADDRESS' }}</span>
                                     <h5>{{ $addr->name ?? $user->name }}</h5>
-                                    <p>{{ $addr->address_line1 }}</p>
-                                    <p>{{ $addr->address_line2 }}</p>
-                                    <p>{{ $addr->city }}, {{ $addr->postal_code }}</p>
+                                    <div class="address-lines">
+                                        <p>{{ $addr->address_line1 }}</p>
+                                        <p>{{ $addr->address_line2 }}</p>
+                                        <p>{{ $addr->city }}, {{ $addr->state }} - {{ $addr->postal_code }}</p>
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
@@ -636,16 +608,42 @@
                         <div>
                             <label class="form-label">STATE <span style="color: red;">*</span></label>
                             <select name="state" id="state" required class="form-control">
-                                <option value="" disabled selected>Select State</option>
-                                <option value="Tamil Nadu">Tamil Nadu</option>
-                                <option value="Puducherry">Puducherry</option>
-                                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                <option value="Karnataka">Karnataka</option>
-                                <option value="Kerala">Kerala</option>
-                                <option value="Maharashtra">Maharashtra</option>
-                                <option value="Gujarat">Gujarat</option>
-                                <option value="Delhi">Delhi</option>
-                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Andaman and Nicobar Islands" {{ old('state') == 'Andaman and Nicobar Islands' ? 'selected' : '' }}>Andaman and Nicobar Islands</option>
+                                <option value="Andhra Pradesh" {{ old('state') == 'Andhra Pradesh' ? 'selected' : '' }}>Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh" {{ old('state') == 'Arunachal Pradesh' ? 'selected' : '' }}>Arunachal Pradesh</option>
+                                <option value="Assam" {{ old('state') == 'Assam' ? 'selected' : '' }}>Assam</option>
+                                <option value="Bihar" {{ old('state') == 'Bihar' ? 'selected' : '' }}>Bihar</option>
+                                <option value="Chandigarh" {{ old('state') == 'Chandigarh' ? 'selected' : '' }}>Chandigarh</option>
+                                <option value="Chhattisgarh" {{ old('state') == 'Chhattisgarh' ? 'selected' : '' }}>Chhattisgarh</option>
+                                <option value="Dadra and Nagar Haveli and Daman and Diu" {{ old('state') == 'Dadra and Nagar Haveli and Daman and Diu' ? 'selected' : '' }}>Dadra and Nagar Haveli and Daman and Diu</option>
+                                <option value="Delhi" {{ old('state') == 'Delhi' ? 'selected' : '' }}>Delhi</option>
+                                <option value="Goa" {{ old('state') == 'Goa' ? 'selected' : '' }}>Goa</option>
+                                <option value="Gujarat" {{ old('state') == 'Gujarat' ? 'selected' : '' }}>Gujarat</option>
+                                <option value="Haryana" {{ old('state') == 'Haryana' ? 'selected' : '' }}>Haryana</option>
+                                <option value="Himachal Pradesh" {{ old('state') == 'Himachal Pradesh' ? 'selected' : '' }}>Himachal Pradesh</option>
+                                <option value="Jammu and Kashmir" {{ old('state') == 'Jammu and Kashmir' ? 'selected' : '' }}>Jammu and Kashmir</option>
+                                <option value="Jharkhand" {{ old('state') == 'Jharkhand' ? 'selected' : '' }}>Jharkhand</option>
+                                <option value="Karnataka" {{ old('state') == 'Karnataka' ? 'selected' : '' }}>Karnataka</option>
+                                <option value="Kerala" {{ old('state') == 'Kerala' ? 'selected' : '' }}>Kerala</option>
+                                <option value="Ladakh" {{ old('state') == 'Ladakh' ? 'selected' : '' }}>Ladakh</option>
+                                <option value="Lakshadweep" {{ old('state') == 'Lakshadweep' ? 'selected' : '' }}>Lakshadweep</option>
+                                <option value="Madhya Pradesh" {{ old('state') == 'Madhya Pradesh' ? 'selected' : '' }}>Madhya Pradesh</option>
+                                <option value="Maharashtra" {{ old('state') == 'Maharashtra' ? 'selected' : '' }}>Maharashtra</option>
+                                <option value="Manipur" {{ old('state') == 'Manipur' ? 'selected' : '' }}>Manipur</option>
+                                <option value="Meghalaya" {{ old('state') == 'Meghalaya' ? 'selected' : '' }}>Meghalaya</option>
+                                <option value="Mizoram" {{ old('state') == 'Mizoram' ? 'selected' : '' }}>Mizoram</option>
+                                <option value="Nagaland" {{ old('state') == 'Nagaland' ? 'selected' : '' }}>Nagaland</option>
+                                <option value="Odisha" {{ old('state') == 'Odisha' ? 'selected' : '' }}>Odisha</option>
+                                <option value="Puducherry" {{ old('state') == 'Puducherry' ? 'selected' : '' }}>Puducherry</option>
+                                <option value="Punjab" {{ old('state') == 'Punjab' ? 'selected' : '' }}>Punjab</option>
+                                <option value="Rajasthan" {{ old('state') == 'Rajasthan' ? 'selected' : '' }}>Rajasthan</option>
+                                <option value="Sikkim" {{ old('state') == 'Sikkim' ? 'selected' : '' }}>Sikkim</option>
+                                <option value="Tamil Nadu" {{ old('state') == 'Tamil Nadu' ? 'selected' : '' }}>Tamil Nadu</option>
+                                <option value="Telangana" {{ old('state') == 'Telangana' ? 'selected' : '' }}>Telangana</option>
+                                <option value="Tripura" {{ old('state') == 'Tripura' ? 'selected' : '' }}>Tripura</option>
+                                <option value="Uttar Pradesh" {{ old('state') == 'Uttar Pradesh' ? 'selected' : '' }}>Uttar Pradesh</option>
+                                <option value="Uttarakhand" {{ old('state') == 'Uttarakhand' ? 'selected' : '' }}>Uttarakhand</option>
+                                <option value="West Bengal" {{ old('state') == 'West Bengal' ? 'selected' : '' }}>West Bengal</option>
                                 <!-- Other states can be added here -->
                             </select>
                         </div>
@@ -892,43 +890,11 @@
             if (sameAsShipping && billingNotice) {
                 sameAsShipping.addEventListener('change', function() {
                     billingNotice.style.display = this.checked ? 'flex' : 'none';
+                    if (!this.checked) {
+                        // In a real app, you might show another form here.
+                        // For now, we follow the UI request which just shows a notice.
+                    }
                 });
-            }
-
-            // Custom Scroll Indicator for Addresses
-            const scroller = document.getElementById('addressScroller');
-            const indicator = document.getElementById('scrollIndicator');
-            
-                    const addressCount = scroller.querySelectorAll('.address-card').length;
-                    const isMobile = window.innerWidth < 768;
-                    const isTablet = window.innerWidth >= 768 && window.innerWidth <= 1024;
-                    
-                    let shouldShow = false;
-                    if (isMobile) {
-                        shouldShow = addressCount > 1;
-                    } else if (isTablet) {
-                        shouldShow = addressCount > 2;
-                    } else {
-                        shouldShow = scrollWidth > clientWidth;
-                    }
-
-                    if (shouldShow && scrollWidth > clientWidth) {
-                        indicator.parentElement.style.display = 'block';
-                        const ratio = clientWidth / scrollWidth;
-                        indicator.style.width = (ratio * 100) + '%';
-                        
-                        const maxScroll = scrollWidth - clientWidth;
-                        const percentage = scrollLeft / maxScroll;
-                        const maxLeft = 100 - (ratio * 100);
-                        indicator.style.left = (percentage * maxLeft) + '%';
-                    } else {
-                        indicator.parentElement.style.display = 'none';
-                    }
-
-            if (scroller) {
-                scroller.addEventListener('scroll', updateIndicator);
-                window.addEventListener('resize', updateIndicator);
-                setTimeout(updateIndicator, 300); // Wait for rendering
             }
 
             // Recalculate on state change
@@ -974,12 +940,4 @@
             togglePaymentUI('cod');
         });
     </script>
-    <style>
-        .address-option:hover {
-            border-color: #c2185b !important;
-            background: #fff9fb !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(194, 24, 91, 0.08);
-        }
-    </style>
 @endsection

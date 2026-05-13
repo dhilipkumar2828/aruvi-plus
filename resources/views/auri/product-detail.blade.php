@@ -403,7 +403,7 @@
                         @endif
                     </div>
                     <div class="main-img-luxury">
-                        <img src="{{ $main_img ?: 'https://via.placeholder.com/500?text=' . urlencode($product->name) }}"
+                        <img src="{{ $main_img ?: 'https://placehold.jp/500?text=' . urlencode($product->name) }}"
                             id="main-product-img-luxury" alt="{{ $product->name }}">
 
                         <div class="wishlist-overlay-badge-detail"

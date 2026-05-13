@@ -839,7 +839,7 @@
                                         @if($img)
                                             <img src="{{ $img }}" alt="{{ $item['name'] }}">
                                         @else
-                                            <img src="https://via.placeholder.com/100" alt="{{ $item['name'] }}">
+                                            <img src="https://placehold.jp/100" alt="{{ $item['name'] }}">
                                         @endif
                                     </a>
                                 </div>
