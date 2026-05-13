@@ -3,13 +3,46 @@
 @section('title', 'FAQ - Auvri Plus | Frequently Asked Questions')
 @section('meta_description', 'Find answers to common questions about our Ayurvedic products, shipping, and wellness practices.')
 
+@section('extra_css')
+    <style>
+        @media (max-width: 768px) {
+            .faq-hero {
+                padding: 120px 20px 60px !important;
+                min-height: 250px !important;
+            }
+            .faq-hero h1 {
+                font-size: 2.2rem !important;
+            }
+            .faq-hero p {
+                font-size: 0.95rem !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .faq-hero {
+                padding: 100px 15px 50px !important;
+                min-height: 200px !important;
+            }
+            .faq-hero h1 {
+                font-size: 2rem !important;
+            }
+            .faq-hero p {
+                font-size: 0.85rem !important;
+                margin-top: 10px !important;
+            }
+            .faq-hero .sub-title {
+                font-size: 0.75rem !important;
+            }
+        }
+    </style>
+@endsection
+
 @section('content')
     <!-- FAQ Hero -->
     <section class="faq-hero" style="background-image: linear-gradient(rgba(0, 66, 0, 0.6), rgba(0, 66, 0, 0.6)), url('{{ asset('auri-images/headers/faq_v2.jpg') }}'); background-size: cover; background-position: center; min-height: 300px; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff;">
         <div class="container hero-inner">
             <span class="sub-title" style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; opacity: 0.8; display: block; margin-bottom: 10px;">How can we help?</span>
-            <h1 class="sec-title" style="   font-size: 3.5rem; line-height: 1.2;">Frequently Asked Questions</h1>
-            <p class="p-text" style="max-width: 800px; margin: 15px auto 0; opacity: 0.9; font-size: 1.1rem;">Find answers to common questions about our products, shipping, and Ayurvedic practices.</p>
+            <h1 class="sec-title" style="   font-size: 2.8rem; line-height: 1.2;">Frequently Asked Questions</h1>
+            <p class="p-text" style="max-width: 800px; margin: 15px auto 0; opacity: 0.9; font-size: 1rem;">Find answers to common questions about our products, shipping, and Ayurvedic practices.</p>
         </div>
     </section>
 
