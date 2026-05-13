@@ -2,6 +2,20 @@
     <a href="{{ route('product.show', $product->slug) }}" class="product-card-link"></a>
     
     <div class="p-img-wrap">
+        <a href="{{ route('product.show', $product->slug) }}">
+            @php
+                $img_path = $product->primary_image;
+                if ($img_path && !str_starts_with($img_path, 'http') && !str_starts_with($img_path, '/')) {
+                    $img_path = asset($img_path);
+                }
+            @endphp
+            @if($img_path)
+                <img src="{{ $img_path }}" alt="{{ $product->name }}" onerror="this.src='https://via.placeholder.com/300?text=Auvri+Product'">
+            @else
+                <img src="https://via.placeholder.com/300?text={{ urlencode($product->name) }}" alt="{{ $product->name }}">
+            @endif
+        </a>
+        
         <!-- Wishlist Overlay -->
         @php
             $isInWishlist = Auth::check() && Auth::user()->wishlist->contains('product_id', $product->id);

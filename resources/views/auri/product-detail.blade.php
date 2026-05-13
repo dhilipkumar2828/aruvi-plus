@@ -701,59 +701,8 @@
                                 class="fas fa-long-arrow-alt-right"></i></a>
                     </div>
                     <div class="product-grid">
-<<<<<<< HEAD
-                        @foreach($relatedProducts as $related)
-                            <div class="product-card">
-                                <div class="p-img-wrap">
-                                    <a href="{{ route('product.show', $related->slug) }}">
-                                        @php
-                                            $rel_img = $related->primary_image;
-                                            if ($rel_img && !str_starts_with($rel_img, 'http') && !str_starts_with($rel_img, '/')) {
-                                                $rel_img = asset($rel_img);
-                                            }
-                                        @endphp
-                                        @if($rel_img)
-                                            <img src="{{ $rel_img }}" alt="{{ $related->name }}"
-                                                onerror="this.src='https://placehold.jp/300'">
-                                        @else
-                                            <img src="https://placehold.jp/300?text={{ urlencode($related->name) }}"
-                                                alt="{{ $related->name }}">
-                                        @endif
-                                    </a>
-                                    <!-- Wishlist Overlay -->
-                                    @php
-                                        $isRelInWishlist = Auth::check() && Auth::user()->wishlist->contains('product_id', $related->id);
-                                    @endphp
-                                    <form action="{{ route('wishlist.toggle') }}" method="POST" class="wishlist-overlay-form"
-                                        style="position: absolute; top: 15px; right: 15px; z-index: 5;">
-                                        @csrf
-                                        <input type="hidden" name="product_id" value="{{ $related->id }}">
-                                        <button type="submit"
-                                            style="width: 35px; height: 35px; border-radius: 50%; background: #fff; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; color: {{ $isRelInWishlist ? '#d4145a' : 'var(--primary)' }}; transition: all 0.3s ease; font-size: 0.9rem;">
-                                            <i class="{{ $isRelInWishlist ? 'fas' : 'far' }} fa-heart"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                                <div class="p-info">
-                                    <h4 class="p-title">{{ $related->name }}</h4>
-                                    <div class="p-bot">
-                                        <span class="p-price">₹{{ number_format($related->price) }}</span>
-                                        <form action="{{ route('cart.add') }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            <input type="hidden" name="product_id" value="{{ $related->id }}">
-                                            <input type="hidden" name="quantity" value="1">
-                                            <button type="submit" class="add-btn-pill" title="Add to Cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                <span>Add</span>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-=======
                         @foreach($relatedProducts as $product)
                             @include('auri.partials.product-card', ['product' => $product, 'hideQuickView' => true])
->>>>>>> 37a4d91 (feat: implement full-stack frontend structure with custom product cards, layouts, and user dashboard views)
                         @endforeach
                     </div>
                 </div>
