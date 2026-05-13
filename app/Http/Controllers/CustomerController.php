@@ -76,7 +76,8 @@ class CustomerController extends Controller
     public function address()
     {
         $user = Auth::user();
-        return view('customer.address', compact('user'));
+        $addresses = $user->addresses()->orderByDesc('is_default')->get();
+        return view('customer.address', compact('user', 'addresses'));
     }
 
     public function updateAddress(Request $request)

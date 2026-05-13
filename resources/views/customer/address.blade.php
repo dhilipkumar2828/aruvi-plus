@@ -32,49 +32,34 @@
                         </div>
 
                         <div class="address-cards-grid">
-                            <!-- Billing Address -->
-                            {{-- <div class="premium-address-card">
-                                <div class="card-type-badge"><i class="fas fa-file-invoice"></i> Billing</div>
+                            @forelse($addresses as $address)
+                            <div class="premium-address-card {{ $address->is_default ? 'default-card' : '' }}">
+                                <div class="card-type-badge">
+                                    <i class="fas {{ $address->is_default ? 'fa-check-circle' : 'fa-truck' }}"></i> 
+                                    {{ $address->is_default ? 'DEFAULT SHIPPING' : 'SAVED ADDRESS' }}
+                                </div>
                                 <div class="address-details">
-                                    @if($user->address_line1)
-                                    <h4 class="recipient-name">{{ $user->name }}</h4>
-                                    <p class="phone-number"><i class="fas fa-phone-alt"></i> {{ $user->phone }}</p>
+                                    <h4 class="recipient-name">{{ $address->name ?? $user->name }}</h4>
+                                    <p class="phone-number"><i class="fas fa-phone-alt"></i> {{ $address->phone }}</p>
                                     <p class="full-address">
-                                        {{ $user->address_line1 }}<br>
-                                        @if($user->address_line2) {{ $user->address_line2 }}<br> @endif
-                                        {{ $user->city }}, {{ $user->state }} - {{ $user->postal_code }}<br>
-                                        {{ $user->country }}
+                                        {{ $address->address_line1 }}<br>
+                                        @if($address->address_line2) {{ $address->address_line2 }}<br> @endif
+                                        {{ $address->city }}, {{ $address->state }} - {{ $address->postal_code }}<br>
+                                        {{ $address->country }}
                                     </p>
-                                    @else
-                                    <p class="no-address">No billing address set yet.</p>
-                                    @endif
                                 </div>
-                                <button onclick="toggleAddressForm()" class="edit-btn">
-                                    <i class="fas fa-edit"></i> Edit Address
-                                </button>
-                            </div> --}}
-
-                            <!-- Shipping Address -->
-                            <div class="premium-address-card">
-                                <div class="card-type-badge"><i class="fas fa-truck"></i> Shipping</div>
-                                <div class="address-details">
-                                    @if($user->address_line1)
-                                        <h4 class="recipient-name">{{ $user->name }}</h4>
-                                        <p class="phone-number"><i class="fas fa-phone-alt"></i> {{ $user->phone }}</p>
-                                        <p class="full-address">
-                                            {{ $user->address_line1 }}<br>
-                                            @if($user->address_line2) {{ $user->address_line2 }}<br> @endif
-                                            {{ $user->city }}, {{ $user->state }} - {{ $user->postal_code }}<br>
-                                            {{ $user->country }}
-                                        </p>
-                                    @else
-                                        <p class="no-address">No shipping address set yet.</p>
-                                    @endif
+                                <div class="card-actions">
+                                    <button onclick="editAddress({{ $address->toJson() }})" class="edit-btn">
+                                        <i class="fas fa-edit"></i> Edit Address
+                                    </button>
                                 </div>
-                                <button onclick="toggleAddressForm()" class="edit-btn">
-                                    <i class="fas fa-edit"></i> Edit Address
-                                </button>
                             </div>
+                            @empty
+                            <div class="premium-address-card" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                                <p class="no-address">No addresses saved yet.</p>
+                                <button onclick="toggleAddressForm()" class="btn btn-primary mt-3">Add Your First Address</button>
+                            </div>
+                            @endforelse
                         </div>
 
                         <!-- Edit Address Form (Hidden by default) -->
@@ -148,9 +133,45 @@
                                         <label>State <span>*</span></label>
                                         <div class="input-with-icon">
                                             <i class="fas fa-map-marker-alt"></i>
-                                            <input type="text" name="state" value="{{ old('state', $user->state) }}"
-                                                placeholder="State" class="@error('state') is-invalid @enderror"
-                                                oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
+                                            <select name="state" class="form-control @error('state') is-invalid @enderror" style="padding-left: 55px !important;">
+                                                <option value="">Select State</option>
+                                                <option value="Andaman and Nicobar Islands" {{ old('state', $user->state) == 'Andaman and Nicobar Islands' ? 'selected' : '' }}>Andaman and Nicobar Islands</option>
+                                                <option value="Andhra Pradesh" {{ old('state', $user->state) == 'Andhra Pradesh' ? 'selected' : '' }}>Andhra Pradesh</option>
+                                                <option value="Arunachal Pradesh" {{ old('state', $user->state) == 'Arunachal Pradesh' ? 'selected' : '' }}>Arunachal Pradesh</option>
+                                                <option value="Assam" {{ old('state', $user->state) == 'Assam' ? 'selected' : '' }}>Assam</option>
+                                                <option value="Bihar" {{ old('state', $user->state) == 'Bihar' ? 'selected' : '' }}>Bihar</option>
+                                                <option value="Chandigarh" {{ old('state', $user->state) == 'Chandigarh' ? 'selected' : '' }}>Chandigarh</option>
+                                                <option value="Chhattisgarh" {{ old('state', $user->state) == 'Chhattisgarh' ? 'selected' : '' }}>Chhattisgarh</option>
+                                                <option value="Dadra and Nagar Haveli and Daman and Diu" {{ old('state', $user->state) == 'Dadra and Nagar Haveli and Daman and Diu' ? 'selected' : '' }}>Dadra and Nagar Haveli and Daman and Diu</option>
+                                                <option value="Delhi" {{ old('state', $user->state) == 'Delhi' ? 'selected' : '' }}>Delhi</option>
+                                                <option value="Goa" {{ old('state', $user->state) == 'Goa' ? 'selected' : '' }}>Goa</option>
+                                                <option value="Gujarat" {{ old('state', $user->state) == 'Gujarat' ? 'selected' : '' }}>Gujarat</option>
+                                                <option value="Haryana" {{ old('state', $user->state) == 'Haryana' ? 'selected' : '' }}>Haryana</option>
+                                                <option value="Himachal Pradesh" {{ old('state', $user->state) == 'Himachal Pradesh' ? 'selected' : '' }}>Himachal Pradesh</option>
+                                                <option value="Jammu and Kashmir" {{ old('state', $user->state) == 'Jammu and Kashmir' ? 'selected' : '' }}>Jammu and Kashmir</option>
+                                                <option value="Jharkhand" {{ old('state', $user->state) == 'Jharkhand' ? 'selected' : '' }}>Jharkhand</option>
+                                                <option value="Karnataka" {{ old('state', $user->state) == 'Karnataka' ? 'selected' : '' }}>Karnataka</option>
+                                                <option value="Kerala" {{ old('state', $user->state) == 'Kerala' ? 'selected' : '' }}>Kerala</option>
+                                                <option value="Ladakh" {{ old('state', $user->state) == 'Ladakh' ? 'selected' : '' }}>Ladakh</option>
+                                                <option value="Lakshadweep" {{ old('state', $user->state) == 'Lakshadweep' ? 'selected' : '' }}>Lakshadweep</option>
+                                                <option value="Madhya Pradesh" {{ old('state', $user->state) == 'Madhya Pradesh' ? 'selected' : '' }}>Madhya Pradesh</option>
+                                                <option value="Maharashtra" {{ old('state', $user->state) == 'Maharashtra' ? 'selected' : '' }}>Maharashtra</option>
+                                                <option value="Manipur" {{ old('state', $user->state) == 'Manipur' ? 'selected' : '' }}>Manipur</option>
+                                                <option value="Meghalaya" {{ old('state', $user->state) == 'Meghalaya' ? 'selected' : '' }}>Meghalaya</option>
+                                                <option value="Mizoram" {{ old('state', $user->state) == 'Mizoram' ? 'selected' : '' }}>Mizoram</option>
+                                                <option value="Nagaland" {{ old('state', $user->state) == 'Nagaland' ? 'selected' : '' }}>Nagaland</option>
+                                                <option value="Odisha" {{ old('state', $user->state) == 'Odisha' ? 'selected' : '' }}>Odisha</option>
+                                                <option value="Puducherry" {{ old('state', $user->state) == 'Puducherry' ? 'selected' : '' }}>Puducherry</option>
+                                                <option value="Punjab" {{ old('state', $user->state) == 'Punjab' ? 'selected' : '' }}>Punjab</option>
+                                                <option value="Rajasthan" {{ old('state', $user->state) == 'Rajasthan' ? 'selected' : '' }}>Rajasthan</option>
+                                                <option value="Sikkim" {{ old('state', $user->state) == 'Sikkim' ? 'selected' : '' }}>Sikkim</option>
+                                                <option value="Tamil Nadu" {{ old('state', $user->state) == 'Tamil Nadu' ? 'selected' : '' }}>Tamil Nadu</option>
+                                                <option value="Telangana" {{ old('state', $user->state) == 'Telangana' ? 'selected' : '' }}>Telangana</option>
+                                                <option value="Tripura" {{ old('state', $user->state) == 'Tripura' ? 'selected' : '' }}>Tripura</option>
+                                                <option value="Uttar Pradesh" {{ old('state', $user->state) == 'Uttar Pradesh' ? 'selected' : '' }}>Uttar Pradesh</option>
+                                                <option value="Uttarakhand" {{ old('state', $user->state) == 'Uttarakhand' ? 'selected' : '' }}>Uttarakhand</option>
+                                                <option value="West Bengal" {{ old('state', $user->state) == 'West Bengal' ? 'selected' : '' }}>West Bengal</option>
+                                            </select>
                                         </div>
                                         @error('state') <span class="error-msg">{{ $message }}</span> @enderror
                                     </div>
@@ -570,6 +591,36 @@
             border-color: var(--primary);
         }
 
+        .default-card {
+            border: 2px solid var(--primary) !important;
+            background: #fff !important;
+            box-shadow: 0 10px 25px rgba(0, 66, 0, 0.05);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .set-default-btn {
+            flex: 1;
+            padding: 14px;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            color: #666;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .set-default-btn:hover {
+            background: #e0e0e0;
+            color: #333;
+        }
+
         /* Form Styling - FIXED ALIGNMENT */
         .edit-address-form-wrapper {
             background: #fcfcfc;
@@ -827,6 +878,8 @@
 
         function toggleAddressForm() {
             const form = document.getElementById('edit-address-container');
+            const title = document.querySelector('.form-title');
+            
             if (form.style.display === 'none') {
                 $(form).fadeIn();
                 setTimeout(() => {
@@ -835,6 +888,28 @@
             } else {
                 $(form).fadeOut();
             }
+        }
+
+        function editAddress(address) {
+            const form = document.getElementById('edit-address-container');
+            const title = document.querySelector('.form-title');
+            
+            // Populate fields
+            document.querySelector('input[name="phone"]').value = address.phone;
+            document.querySelector('input[name="country"]').value = address.country;
+            document.querySelector('input[name="address_line1"]').value = address.address_line1;
+            document.querySelector('input[name="address_line2"]').value = address.address_line2 || '';
+            document.querySelector('input[name="city"]').value = address.city;
+            document.querySelector('select[name="state"]').value = address.state;
+            document.querySelector('input[name="postal_code"]').value = address.postal_code;
+            
+            title.innerText = 'Update Address Details';
+            
+            if (form.style.display === 'none') {
+                $(form).fadeIn();
+            }
+            
+            form.scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 @endsection
