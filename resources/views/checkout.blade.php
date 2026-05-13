@@ -3,7 +3,7 @@
 @section('title', 'Secure Checkout | Auvri Plus')
 
 @section('extra_css')
-    <style>
+     <style>
         :root {
             --primary: #004200;
             --primary-rgb: 0, 66, 0;
@@ -251,7 +251,7 @@
                 display: none !important; /* Hide native scrollbar */
             }
             .scroll-indicator-container {
-                display: block !important;
+                display: none;
                 height: 4px;
                 background: #f0f0f0;
                 border-radius: 10px;
@@ -599,7 +599,7 @@
                                 </div>
                             @endforeach
                         </div>
-                        <div class="scroll-indicator-container">
+                         <div class="scroll-indicator-container">
                             <div class="scroll-indicator-bar" id="scrollIndicator"></div>
                         </div>
                     </div>
@@ -740,7 +740,7 @@
                                 </div>
 
                                 <div class="summary-row">
-                                    <span style="color: #777; font-size: 0.9rem;">Taxable Value</span>
+                                    <span style="color: #333; font-weight: 700; font-size: 0.95rem;">Taxable Value</span>
                                     <strong id="summary-taxable-value" style="color: #333; font-weight: 700;">{{ format_inr($taxable_value) }}</strong>
                                 </div>
 
@@ -753,10 +753,32 @@
 
                         <div class="summary-total" style="background: #fff5f8; border: 1px solid #ffebeb; border-radius: 12px; padding: 15px 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
                             <span style="font-size: 1.2rem; font-weight: 800; color: #b0185e;">Total</span>
-                            <div style="font-size: 1.6rem; font-weight: 900; color: #b0185e;" id="summary-total">₹{{ number_format($total, 0) }}</div>
+                            <div style="font-size: 2rem; font-weight: 900; color: #b0185e;" id="summary-total">₹{{ number_format($total, 0) }}</div>
                         </div>
 
-                        <button type="submit" form="checkoutForm" class="btn-premium btn-complete-order" style="width: 100%; padding: 18px; border-radius: 12px; font-weight: 800; font-size: 1rem; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--primary); color: white; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0, 66, 0, 0.15);">
+                        <div style="margin-bottom: 25px;">
+                            <span class="section-label">SELECT PAYMENT METHOD</span>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <label class="custom-check-container" style="background: #fdfdfd; border: 1.5px solid #eee; padding: 15px; border-radius: 12px; transition: 0.3s;" id="label-cod">
+                                    <input type="radio" name="payment_method" value="Cash On Delivery" form="checkoutForm" checked onclick="togglePaymentUI('cod')">
+                                    <span class="checkmark" style="border-radius: 50%;"></span>
+                                    <div style="display: flex; flex-direction: column; gap: 2px;">
+                                        <span style="font-weight: 700; color: #333;">Cash On Delivery</span>
+                                        <span style="font-size: 0.75rem; color: #888;">Pay when you receive the order</span>
+                                    </div>
+                                </label>
+                                <label class="custom-check-container" style="background: #fdfdfd; border: 1.5px solid #eee; padding: 15px; border-radius: 12px; transition: 0.3s;" id="label-online">
+                                    <input type="radio" name="payment_method" value="Online Payment" form="checkoutForm" onclick="togglePaymentUI('online')">
+                                    <span class="checkmark" style="border-radius: 50%;"></span>
+                                    <div style="display: flex; flex-direction: column; gap: 2px;">
+                                        <span style="font-weight: 700; color: #333;">PhonePe</span>
+                                        <span style="font-size: 0.75rem; color: #888;">Pay securely via UPI, Cards, or NetBanking</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" form="checkoutForm" class="btn-premium btn-complete-order" id="submit-btn" style="width: 100%; padding: 18px; border-radius: 12px; font-weight: 800; font-size: 1rem; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--primary); color: white; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0, 66, 0, 0.15);">
                             PLACE ORDER NOW <i class="fas fa-check-circle"></i>
                         </button>
 
@@ -877,13 +899,20 @@
             const scroller = document.getElementById('addressScroller');
             const indicator = document.getElementById('scrollIndicator');
             
-            function updateIndicator() {
-                if (scroller && indicator) {
-                    const scrollWidth = scroller.scrollWidth;
-                    const clientWidth = scroller.clientWidth;
-                    const scrollLeft = scroller.scrollLeft;
+                    const addressCount = scroller.querySelectorAll('.address-card').length;
+                    const isMobile = window.innerWidth < 768;
+                    const isTablet = window.innerWidth >= 768 && window.innerWidth <= 1024;
                     
-                    if (scrollWidth > clientWidth) {
+                    let shouldShow = false;
+                    if (isMobile) {
+                        shouldShow = addressCount > 1;
+                    } else if (isTablet) {
+                        shouldShow = addressCount > 2;
+                    } else {
+                        shouldShow = scrollWidth > clientWidth;
+                    }
+
+                    if (shouldShow && scrollWidth > clientWidth) {
                         indicator.parentElement.style.display = 'block';
                         const ratio = clientWidth / scrollWidth;
                         indicator.style.width = (ratio * 100) + '%';
@@ -895,8 +924,6 @@
                     } else {
                         indicator.parentElement.style.display = 'none';
                     }
-                }
-            }
 
             if (scroller) {
                 scroller.addEventListener('scroll', updateIndicator);
@@ -921,6 +948,30 @@
                     }
                 });
             }
+
+            // Payment Method UI
+            window.togglePaymentUI = function(method) {
+                const codLabel = document.getElementById('label-cod');
+                const onlineLabel = document.getElementById('label-online');
+                const submitBtn = document.getElementById('submit-btn');
+
+                if (method === 'cod') {
+                    codLabel.style.borderColor = 'var(--primary)';
+                    codLabel.style.background = '#f9fcf9';
+                    onlineLabel.style.borderColor = '#eee';
+                    onlineLabel.style.background = '#fdfdfd';
+                    submitBtn.innerHTML = 'PLACE ORDER NOW <i class="fas fa-check-circle"></i>';
+                } else {
+                    onlineLabel.style.borderColor = 'var(--primary)';
+                    onlineLabel.style.background = '#f9fcf9';
+                    codLabel.style.borderColor = '#eee';
+                    codLabel.style.background = '#fdfdfd';
+                    submitBtn.innerHTML = 'PROCEED TO PAYMENT <i class="fas fa-arrow-right"></i>';
+                }
+            };
+            
+            // Initial call to set UI
+            togglePaymentUI('cod');
         });
     </script>
     <style>
