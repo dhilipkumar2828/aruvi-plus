@@ -17,6 +17,7 @@
             background-color: var(--bg-light);
             padding-bottom: 30px;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* Hero Banner */
@@ -45,11 +46,6 @@
             align-items: start;
         }
 
-        @media (max-width: 992px) {
-            .checkout-grid {
-                grid-template-columns: 1fr;
-            }
-        }
 
         /* Cards */
         .checkout-card {
@@ -119,14 +115,6 @@
             grid-template-columns: 1fr 1.5fr 1fr;
         }
 
-        @media (max-width: 576px) {
-            .form-group-grid, .three-col {
-                grid-template-columns: 1fr;
-            }
-            .container {
-                width: 100% !important;
-            }
-        }
 
         /* Checkbox Fix */
         .custom-checkbox-wrapper {
@@ -214,126 +202,6 @@
         }
 
         /* Responsive Improvements */
-        @media (max-width: 480px) {
-            .checkout-hero {
-                padding: 120px 15px 60px !important;
-            }
-
-            .checkout-hero h1 {
-                font-size: 1.8rem !important;
-            }
-
-            .checkout-hero p {
-                font-size: 0.8rem !important;
-                line-height: 1.5;
-            }
-
-            .checkout-card, .summary-card {
-                padding: 20px 12px !important;
-                border-radius: 16px !important;
-            }
-
-            .checkout-title {
-                font-size: 22px !important;
-                margin-bottom: 20px !important;
-            }
-            .section-label {
-                font-size: 14px !important;
-                margin-bottom: 12px !important;
-            }
-            .saved-addresses-container {
-                padding: 15px 12px !important;
-                margin-bottom: 25px !important;
-            }
-
-            .form-control {
-                padding: 12px 15px !important;
-                font-size: 0.9rem !important;
-            }
-
-            .summary-total {
-                padding: 15px 12px !important;
-                flex-direction: row !important;
-                justify-content: space-between !important;
-                align-items: center !important;
-                text-align: left !important;
-            }
-
-            .summary-total span {
-                font-size: 1.2rem !important;
-            }
-
-            #summary-total {
-                font-size: 1.5rem !important;
-            }
-
-            .btn-complete-order {
-                padding: 16px !important;
-                font-size: 0.9rem !important;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .container {
-                padding: 0 12px !important;
-            }
-            .checkout-hero {
-                padding: 100px 12px 40px !important;
-            }
-            .checkout-hero h1 {
-                font-size: 1.8rem !important;
-            }
-            .checkout-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 20px !important;
-                width: 100% !important;
-                margin: 0 !important;
-            }
-            .checkout-card, .summary-card {
-                padding: 20px 12px !important;
-                border-radius: 16px !important;
-                width: 100% !important;
-                margin: 0 !important;
-                box-sizing: border-box !important;
-            }
-            .checkout-title {
-                font-size: 20px !important;
-            }
-            .section-label {
-                font-size: 14px !important;
-            }
-            .form-label {
-                font-size: 0.75rem !important;
-            }
-            .form-control {
-                padding: 10px !important;
-                font-size: 0.9rem !important;
-            }
-            .summary-total {
-                padding: 12px !important;
-            }
-            #summary-total {
-                font-size: 1.5rem !important;
-            }
-            .btn-complete-order {
-                padding: 16px !important;
-                font-size: 1rem !important;
-                margin-bottom: 5px !important;
-            }
-            .address-card p {
-                font-size: 0.85rem !important;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .address-card {
-                flex: 0 0 95% !important;
-            }
-            .address-card p {
-                font-size: 13px !important;
-            }
-        }
 
         /* Saved Address Horizontal List */
         .saved-addresses-container {
@@ -371,7 +239,7 @@
         }
 
         .address-card {
-            flex: 0 0 calc(65% - 15px);
+            flex: 0 0 calc(50% - 10px);
             min-width: 180px;
             background: #fff;
             border: 2px solid #eee;
@@ -511,6 +379,135 @@
             text-overflow: ellipsis !important;
             line-height: 1.4 !important;
         }
+
+        /* Utility to hide scroll on desktop when 2 cards fit */
+        @media (min-width: 769px) {
+            .no-scroll-desktop {
+                overflow-x: hidden !important;
+            }
+            .d-md-none-important {
+                display: none !important;
+            }
+        }
+        /* Responsive Improvements - Moved to end for proper override */
+        @media (max-width: 992px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .checkout-card, .summary-card {
+                max-width: 100% !important;
+                width: 100% !important;
+                position: static !important;
+                margin-top: 20px;
+                box-sizing: border-box !important;
+                box-shadow: 0 10px 30px rgba(0, 66, 0, 0.05) !important;
+                overflow: hidden;
+            }
+            /* Tablet: Show 2 cards */
+            .address-card {
+                flex: 0 0 calc(50% - 10px) !important;
+            }
+            .saved-addresses-container {
+                max-width: 100% !important;
+                padding: 20px 15px !important;
+            }
+            .no-scroll {
+                overflow-x: hidden !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px !important;
+            }
+            .form-group-grid, .three-col {
+                grid-template-columns: 1fr !important;
+                gap: 15px;
+            }
+            .checkout-hero {
+                padding: 100px 15px 50px !important;
+            }
+            .checkout-hero h1 {
+                font-size: 2.2rem !important;
+            }
+            .checkout-card, .summary-card {
+                padding: 25px 20px !important;
+                border-radius: 20px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                box-shadow: 0 8px 25px rgba(0, 66, 0, 0.05) !important;
+            }
+            .checkout-title {
+                font-size: 1.5rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .checkout-hero h1 {
+                font-size: 1.8rem !important;
+            }
+            .checkout-hero p {
+                font-size: 0.85rem !important;
+                padding: 0 10px;
+            }
+            .checkout-card, .summary-card {
+                padding: 20px 15px !important;
+                border-radius: 16px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                box-shadow: 0 10px 30px rgba(0, 66, 0, 0.05) !important;
+            }
+            .form-group-grid {
+                gap: 15px;
+            }
+            .summary-total {
+                padding: 15px 12px !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+            }
+            .total-value {
+                font-size: 1.5rem !important;
+            }
+            #summary-total {
+                font-size: 1.6rem !important;
+            }
+            .btn-complete-order {
+                padding: 15px !important;
+                font-size: 1rem !important;
+            }
+            .saved-addresses-container {
+                padding: 15px !important;
+            }
+            /* Mobile: Show 1 card */
+            .address-card {
+                flex: 0 0 100% !important;
+            }
+            .address-header-wrapper {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 8px !important;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 12px !important;
+            }
+            .checkout-card, .summary-card {
+                padding: 15px 12px !important;
+            }
+            .address-card {
+                flex: 0 0 100% !important;
+            }
+            .total-value, #summary-total {
+                font-size: 1.4rem !important;
+            }
+        }
     </style>
 @endsection
 
@@ -552,12 +549,13 @@
                             <span style="font-weight: 700; color: var(--primary); font-size: 1rem;">Use a saved address</span>
                         </label>
                         
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                        <div class="address-header-wrapper" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
                             <span class="section-label" style="margin-bottom: 0;">CHOOSE FROM SAVED ADDRESSES</span>
-                            <span style="font-size: 0.75rem; color: #999; font-weight: 600;">SCROLL TO VIEW ALL <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i></span>
+                            @php $addrCount = $addresses->count(); @endphp
+                            <span class="scroll-instruction {{ $addrCount <= 1 ? 'd-none' : ($addrCount <= 2 ? 'd-md-none-important' : '') }}" style="font-size: 0.75rem; color: #999; font-weight: 600;">SCROLL TO VIEW ALL <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i></span>
                         </div>
                         
-                        <div class="saved-addresses-scroll" id="addressScroller">
+                        <div class="saved-addresses-scroll {{ $addrCount <= 1 ? 'no-scroll' : ($addrCount <= 2 ? 'no-scroll-desktop' : '') }}" id="addressScroller">
                             @foreach ($addresses as $index => $addr)
                                 <div class="address-card {{ $addr->is_default ? 'active' : '' }}" onclick="selectStoredAddress({{ $index }}, this)">
                                     <div class="check-icon"><i class="fas fa-check-circle"></i></div>
@@ -571,7 +569,7 @@
                                 </div>
                             @endforeach
                         </div>
-                         <div class="scroll-indicator-container">
+                         <div class="scroll-indicator-container {{ $addrCount <= 1 ? 'd-none' : ($addrCount <= 2 ? 'd-md-none-important' : '') }}">
                             <div class="scroll-indicator-bar" id="scrollIndicator"></div>
                         </div>
                     </div>

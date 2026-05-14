@@ -315,7 +315,7 @@
         .status-shipped { background: #e3f2fd; color: #1976d2; }
         .status-cancelled { background: #ffebee; color: #d32f2f; }
 
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
             .luxury-order-grid {
                 grid-template-columns: 1fr;
             }
@@ -438,6 +438,10 @@
                 width: 100% !important;
                 max-width: 100% !important;
             }
+
+            nav{
+                padding-top: 25px !important;
+            }
         }
 
         @media (max-width: 991px) {
@@ -447,6 +451,14 @@
 
             .account-title {
                 font-size: 32px;
+            }
+
+            .sidebar-nav {
+                padding-top: 15px !important;
+            }
+
+            nav{
+                padding-top: 25px !important;
             }
         }
 
@@ -507,28 +519,60 @@
             .luxury-pagination{
                 margin-top: 0px;
             }
+
+            nav{
+                padding-top: 15px !important;
+            }
         }
 
         @media (max-width: 320px) {
+            .luxury-account-page .container {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+
+            .account-title {
+                font-size: 24px !important;
+            }
+
+            .section-card {
+                padding: 15px !important;
+            }
+
             .section-header-flex {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 15px;
+                gap: 12px;
             }
 
-            .luxury-pagination{
-                margin-top: 0px;
+            .luxury-pagination .pagination {
+                gap: 5px !important;
+            }
+
+            .luxury-pagination .page-link {
+                width: 36px !important;
+                height: 36px !important;
+                font-size: 13px !important;
             }
 
             .order-card-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 12px;
+                gap: 10px;
+                padding: 15px !important;
+            }
+
+            .order-card-body, .order-card-footer {
+                padding: 15px !important;
             }
             
             .order-number {
                 word-break: break-all;
-                font-size: 15px !important;
+                font-size: 14px !important;
+            }
+
+            .info-item .price {
+                font-size: 14px !important;
             }
         }
     </style>

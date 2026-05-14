@@ -960,6 +960,7 @@ nav {
   display: flex;
   justify-content: center;
   gap: 50px;
+  padding-bottom: 20px;
   border-bottom: 1px solid var(--beige-soft);
   margin-bottom: 30px;
 }
@@ -4730,6 +4731,31 @@ body {
   
   .product-scroll-grid .premium-product-card {
     flex: 0 0 260px;
+  }
+}
+@media (max-width: 480px) {
+  .trust-lx-sec .lx-trust-item {
+    font-size: 1rem !important;
+    gap: 8px !important;
+  }
+  .trust-lx-se1c .lx-trust-item span {
+    font-size: 0.8rem !important;
+  }
+  .trust-lx-sec .lx-trust-item i {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .trust-lx-sec .lx-trust-item {
+    font-size: 0.9rem !important;
+    gap: 8px !important;
+  }
+  .trust-lx-se1c .lx-trust-item span {
+    font-size: 0.9rem !important;
+  }
+  .trust-lx-sec .lx-trust-item i {
+    font-size: 0.9rem !important;
   }
 }
 
